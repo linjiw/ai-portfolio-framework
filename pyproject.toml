@@ -1,0 +1,32 @@
+[project]
+name = "ai-portfolio-framework"
+version = "0.1.0"
+description = "Standalone trusted-execution AI portfolio dashboard and paper portfolio tracker."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.9.4",
+    "pandas>=2.2.3",
+    "yfinance>=0.2.54",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.4",
+    "ruff>=0.9.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ai_portfolio_framework"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
