@@ -416,7 +416,9 @@ a:hover {
 .signal-grid,
 .question-grid,
 .source-list,
-.claim-list {
+.claim-list,
+.decision-grid,
+.decision-gate-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
@@ -427,7 +429,8 @@ a:hover {
 .signal-card,
 .question-card,
 .source-card,
-.claim-card {
+.claim-card,
+.decision-card {
   padding: 16px;
   background: var(--panel);
   border: 1px solid var(--line);
@@ -470,10 +473,53 @@ a:hover {
 .signal-card p,
 .question-card p,
 .source-card p,
-.claim-card p {
+.claim-card p,
+.decision-card p {
   margin-top: 10px;
   color: var(--muted);
   font-size: 14px;
+  line-height: 1.45;
+}
+
+.decision-overview {
+  padding: 18px;
+}
+
+.decision-thesis {
+  max-width: 980px;
+  margin-top: 10px;
+  color: #27332f;
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.decision-rules {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.decision-rules div {
+  min-width: 0;
+  padding: 12px;
+  background: #f8faf8;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.decision-rules strong {
+  display: block;
+  color: var(--accent-dark);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.decision-rules span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
   line-height: 1.45;
 }
 
@@ -694,6 +740,9 @@ a:hover {
   .question-grid,
   .source-list,
   .claim-list,
+  .decision-grid,
+  .decision-gate-grid,
+  .decision-rules,
   .portfolio-kpis,
   .portfolio-plot-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -726,6 +775,9 @@ a:hover {
   .question-grid,
   .source-list,
   .claim-list,
+  .decision-grid,
+  .decision-gate-grid,
+  .decision-rules,
   .portfolio-kpis,
   .portfolio-plot-grid,
   .research-row {

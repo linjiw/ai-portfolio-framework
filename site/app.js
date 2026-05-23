@@ -55,6 +55,7 @@ function init() {
   setupTabs();
   setupFilters();
   renderPortfolio("All");
+  renderDecisionProcess();
   renderControlRights();
   renderSignals();
   renderResearch();
@@ -160,6 +161,45 @@ function renderHoldingCard(holding) {
       <div class="source-links">${sources}</div>
     </article>
   `;
+}
+
+function renderDecisionProcess() {
+  const process = data.decisionProcess || {};
+  const overview = document.getElementById("decisionOverview");
+  overview.innerHTML = `
+    <p class="section-label">Decision thesis</p>
+    <p class="decision-thesis">${escapeHtml(process.thesis || data.summary)}</p>
+    <div class="decision-rules">
+      ${(process.rules || [])
+        .map((rule, index) => `<div><strong>${index + 1}</strong><span>${escapeHtml(rule)}</span></div>`)
+        .join("")}
+    </div>
+  `;
+
+  document.getElementById("decisionGrid").innerHTML = (process.choiceRationale || [])
+    .map(
+      (item) => `
+        <article class="decision-card">
+          <div class="card-head">
+            <h3>${escapeHtml(item.label)}</h3>
+            <div class="weight">${escapeHtml(item.weight)}</div>
+          </div>
+          <p>${escapeHtml(item.text)}</p>
+        </article>
+      `
+    )
+    .join("");
+
+  document.getElementById("decisionGateGrid").innerHTML = (process.gates || [])
+    .map(
+      (gate) => `
+        <article class="decision-card">
+          <p class="section-label">${escapeHtml(gate.label)}</p>
+          <p>${escapeHtml(gate.text)}</p>
+        </article>
+      `
+    )
+    .join("");
 }
 
 function renderControlRights() {

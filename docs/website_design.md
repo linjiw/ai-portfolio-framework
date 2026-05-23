@@ -62,11 +62,12 @@ The first screen is the usable dashboard, not a landing page. It starts with:
 - Investable row count.
 - Research-only disclaimer.
 
-The navigation has five views:
+The navigation has six views:
 
 | View | Purpose |
 | --- | --- |
 | Portfolio | Holdings, weights, thesis, evidence, risks, watch item, source links |
+| Decision process | Why the allocation exists, how sizing works, and which gates can change it |
 | Control rights | Overlapping exposure bars and allocation buckets |
 | Signals | Systematic-discretionary plateau and watchlist signals |
 | Research notes | Compressed stock-by-stock story for written review |
@@ -87,6 +88,7 @@ Top-level fields:
   title: "...",
   subtitle: "...",
   summary: "...",
+  decisionProcess: {...},
   allocation: [...],
   exposures: [...],
   monitoringQuestions: [...],
@@ -144,6 +146,8 @@ Current invariants verified locally:
 
 - Holdings count: 14
 - Total weight: 100
+- Decision-process choice buckets: 4
+- Decision gates: 4
 - Source count: 31
 - Claim count: 15
 - Missing source IDs: 0

@@ -11,6 +11,15 @@ site/index.html
 The site has no build step. Research content lives in `research-data.js`; layout
 and interaction live in `styles.css` and `app.js`.
 
+Published Pages target:
+
+```text
+https://linjiw.github.io/ai-portfolio-framework/
+```
+
+The dashboard includes the portfolio, decision process, control-right map,
+signals, research notes, and source provenance.
+
 The personal performance panel reads generated `portfolio-data.json`. Generate
 it from the repo root:
 

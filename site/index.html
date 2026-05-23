@@ -58,6 +58,17 @@
         </button>
         <button
           class="tab"
+          id="tab-decision"
+          role="tab"
+          data-view="decision"
+          aria-controls="view-decision"
+          aria-selected="false"
+          tabindex="-1"
+        >
+          Decision process
+        </button>
+        <button
+          class="tab"
           id="tab-control"
           role="tab"
           data-view="control"
@@ -143,6 +154,26 @@
           </div>
         </div>
         <div class="holdings-grid" id="holdingsGrid"></div>
+      </section>
+
+      <section class="view" id="view-decision" role="tabpanel" aria-labelledby="tab-decision" hidden>
+        <div class="section-head">
+          <div>
+            <p class="section-label">Portfolio logic</p>
+            <h2>Why these choices, and how they change</h2>
+          </div>
+          <p class="muted">The framework separates structural thesis, evidence, sizing, and review triggers.</p>
+        </div>
+        <section class="panel decision-overview" id="decisionOverview"></section>
+        <div class="decision-grid" id="decisionGrid"></div>
+        <div class="section-head claims-head">
+          <div>
+            <p class="section-label">Review discipline</p>
+            <h2>Decision gates</h2>
+          </div>
+          <p class="muted">Signals are review prompts, not automatic trade orders.</p>
+        </div>
+        <div class="decision-gate-grid" id="decisionGateGrid"></div>
       </section>
 
       <section class="view" id="view-control" role="tabpanel" aria-labelledby="tab-control" hidden>

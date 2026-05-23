@@ -1,12 +1,71 @@
 window.AI_FRAMEWORK_DATA = {
-  asOf: "2026-05-22",
+  asOf: "2026-05-23",
   dataDate: "2026-05-21",
-  reviewDate: "2026-05-22",
+  reviewDate: "2026-05-23",
   title: "Trusted Execution of Intelligence",
   subtitle:
     "A control-rights portfolio and review system for agentic AI infrastructure.",
   summary:
     "The framework treats intelligence as becoming abundant and trusted execution as the scarce economic layer. Positions express control over capacity, cost, authority, outcome verification, physical AI optionality, and dry powder.",
+  decisionProcess: {
+    thesis:
+      "The portfolio is a public paper test of one question: if intelligence keeps getting cheaper, which public companies control the trusted execution layer around it?",
+    choiceRationale: [
+      {
+        label: "Core compounders",
+        weight: "57%",
+        text:
+          "Microsoft, Google, and Broadcom receive the largest allocation because they can combine model capacity, enterprise authority, workflow distribution, and custom AI infrastructure."
+      },
+      {
+        label: "Bottleneck cyclicals",
+        weight: "18%",
+        text:
+          "SK hynix, NVIDIA, and TSMC express physical constraints in HBM, accelerators, foundry, packaging, and AI factory architecture. They are sized below the core because the cycle risk is higher."
+      },
+      {
+        label: "Vertical verifiers",
+        weight: "8%",
+        text:
+          "MSCI, Moody's, S&P Global, and Veeva are small positions because they test whether trusted data, ratings, regulated workflow, and domain verification become outcome-control assets."
+      },
+      {
+        label: "Optionality and infrastructure",
+        weight: "17%",
+        text:
+          "Teradyne covers semiconductor test and physical-AI optionality, while Constellation, Vertiv, and cash cover power, thermal, and regime-change risk."
+      }
+    ],
+    rules: [
+      "Start from control rights, not ticker popularity: capacity, cost, authority, outcome verification, physical AI, and dry powder.",
+      "Require every holding to have a thesis, evidence, risks, a watch item, and a falsifier before it earns a target weight.",
+      "Size positions by framework role, conviction, cyclicality, evidence quality, and downside path; cash is an explicit risk-control asset.",
+      "Use signals to create review work, not automatic trades. Capability, cost, and trust plateau alerts must be reviewed before any rebalance.",
+      "Update market prices daily, review indicators monthly, refresh control-right scores quarterly, and keep the paper portfolio auditable."
+    ],
+    gates: [
+      {
+        label: "Capability gate",
+        text:
+          "If long-horizon agent progress stalls, the portfolio shifts from expansion assumptions to framework review."
+      },
+      {
+        label: "Economics gate",
+        text:
+          "If verified-task cost stops improving after accounting for quality, latency, and human review minutes, cost-control exposure needs reassessment."
+      },
+      {
+        label: "Trust gate",
+        text:
+          "If enterprise agents do not gain governed write and execute permission, authority and outcome-control positions lose part of their premise."
+      },
+      {
+        label: "Valuation gate",
+        text:
+          "If the thesis is intact but valuations reset, cash can be deployed manually into the strongest control-right gaps."
+      }
+    ]
+  },
   allocation: [
     { label: "Core compounders", value: 57 },
     { label: "Bottleneck cyclicals", value: 18 },
