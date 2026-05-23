@@ -1,0 +1,48 @@
+sources:
+  - id: yfinance
+    label: Yahoo Finance via yfinance
+    tier: market_data
+    cadence: daily
+    update_mode: automated
+    status_policy: research_only
+    notes: Unofficial research-only price source. Avoid treating it as licensed real-time market data.
+
+  - id: local_calculation
+    label: Local portfolio calculation
+    tier: system
+    cadence: daily
+    update_mode: automated
+    status_policy: auditable
+    notes: Calculated from versioned lots, target weights, prices, and FX.
+
+  - id: sec_edgar
+    label: SEC EDGAR APIs and RSS
+    tier: filings
+    cadence: weekly_or_quarterly
+    update_mode: planned
+    status_policy: primary_source
+    notes: Free official source for US issuer filings and XBRL facts.
+
+  - id: company_ir
+    label: Company IR and press releases
+    tier: primary_company
+    cadence: weekly_or_quarterly
+    update_mode: manual
+    status_policy: primary_source
+    notes: Cleanest source for earnings releases, product launches, and management commentary.
+
+  - id: fred
+    label: FRED macro data
+    tier: macro
+    cadence: weekly
+    update_mode: planned
+    status_policy: api_key_required
+    notes: Good fit for rates, inflation, industrial production, and credit proxies.
+
+  - id: news_rss
+    label: News RSS and GDELT-style monitoring
+    tier: news
+    cadence: weekly
+    update_mode: planned
+    status_policy: weak_signal
+    notes: Useful for event discovery, not for uncited thesis changes.

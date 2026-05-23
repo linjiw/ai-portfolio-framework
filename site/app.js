@@ -62,6 +62,7 @@ function init() {
   renderSources();
   renderClaims();
   loadPortfolioPerformance();
+  loadResearchMonitor();
 }
 
 function setupTabs() {
@@ -359,6 +360,163 @@ function renderPortfolioPerformanceMissing() {
   status.className = "portfolio-status muted";
   status.textContent =
     "No portfolio ledger found yet. The daily GitHub workflow generates this $1,000 tracker from the versioned lot seed.";
+}
+
+async function loadResearchMonitor() {
+  try {
+    const response = await fetch("./research-monitor-data.json", { cache: "no-store" });
+    if (!response.ok) {
+      renderResearchMonitorMissing();
+      return;
+    }
+    const monitor = await response.json();
+    renderResearchMonitor(monitor);
+  } catch {
+    renderResearchMonitorMissing();
+  }
+}
+
+function renderResearchMonitorMissing() {
+  const status = document.getElementById("monitorStatus");
+  status.className = "monitor-status muted";
+  status.textContent =
+    "No research monitor data found yet. Run the portfolio refresh to generate deterministic alerts and source health.";
+}
+
+function renderResearchMonitor(monitor) {
+  const status = document.getElementById("monitorStatus");
+  const summary = monitor.summary || {};
+  status.className = "monitor-status ready";
+  status.textContent = `Generated ${escapeHtml(monitor.generatedAtUtc)}. LLM phase: ${escapeHtml(
+    monitor.principles?.llm_phase || "disabled"
+  )}.`;
+
+  const kpis = document.getElementById("monitorKpis");
+  kpis.hidden = false;
+  const alertCounts = summary.alert_counts || {};
+  kpis.innerHTML = [
+    ["Highest alert", summary.highest_alert || "green", severityClass(summary.highest_alert)],
+    ["Review queue", summary.review_queue_count ?? 0, ""],
+    ["Yellow alerts", alertCounts.yellow ?? 0, ""],
+    ["Red alerts", alertCounts.red ?? 0, ""],
+    ["Sources", summary.source_count ?? 0, ""],
+    ["Source issues", summary.source_issues ?? 0, ""]
+  ]
+    .map(
+      ([label, value, tone]) => `
+        <div class="monitor-kpi">
+          <span>${escapeHtml(label)}</span>
+          <strong class="${escapeHtml(tone)}">${escapeHtml(value)}</strong>
+        </div>
+      `
+    )
+    .join("");
+
+  renderMonitorAlerts(monitor.alerts || []);
+  renderMonitorHoldings(monitor.holdings || []);
+  renderSourceHealth(monitor.sourceHealth || []);
+}
+
+function renderMonitorAlerts(alerts) {
+  const alertList = document.getElementById("alertList");
+  if (!alerts.length) {
+    alertList.innerHTML = `<div class="empty-monitor">No deterministic alerts currently triggered.</div>`;
+    return;
+  }
+  alertList.innerHTML = alerts
+    .map(
+      (alert) => `
+        <article class="alert-card">
+          <span class="severity ${severityClass(alert.level)}">${escapeHtml(alert.level)}</span>
+          <h3>${escapeHtml(alert.ticker)} | ${escapeHtml(alert.rule_id)}</h3>
+          <p>${escapeHtml(alert.message)}</p>
+          <div class="meta-row">
+            <span>Category: ${escapeHtml(alert.category)}</span>
+            <span>Review: ${alert.requires_human_review ? "Required" : "Not required"}</span>
+            <span>Date: ${escapeHtml(alert.date)}</span>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function renderMonitorHoldings(holdings) {
+  document.getElementById("monitorGrid").innerHTML = holdings
+    .map(
+      (holding) => `
+        <article class="monitor-card">
+          <div class="card-head">
+            <div>
+              <div class="ticker">${escapeHtml(holding.ticker)}</div>
+              <div class="name">${escapeHtml(holding.name)}</div>
+            </div>
+            <span class="severity ${severityClass(holding.status)}">${escapeHtml(holding.status)}</span>
+          </div>
+          <p>${escapeHtml(holding.core_question)}</p>
+          <div class="meta-row">
+            <span>Target: ${Number(holding.target_weight || 0).toFixed(2)}%</span>
+            <span>Current: ${
+              holding.current_weight === null ? "n/a" : Number(holding.current_weight || 0).toFixed(2)
+            }%</span>
+            <span>Drift: ${Number(holding.weight_drift_pct_points || 0).toFixed(2)} pp</span>
+          </div>
+          <div class="metric-list">
+            ${(holding.top_metrics || [])
+              .map(
+                (metric) => `
+                  <div>
+                    <strong>${escapeHtml(metric.name)}</strong>
+                    <span>${escapeHtml(metric.cadence)} | ${escapeHtml(metric.source)}</span>
+                  </div>
+                `
+              )
+              .join("")}
+          </div>
+          <p class="muted">Watch: ${escapeHtml(holding.watch_rule)}</p>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function renderSourceHealth(sources) {
+  if (!sources.length) {
+    document.getElementById("sourceHealthWrap").innerHTML =
+      `<div class="empty-monitor">No source-health records found.</div>`;
+    return;
+  }
+  document.getElementById("sourceHealthWrap").innerHTML = `
+    <table class="source-health-table">
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Status</th>
+          <th>Cadence</th>
+          <th>Last update</th>
+          <th>Boundary</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${sources
+          .map(
+            (source) => `
+              <tr>
+                <td>
+                  <strong>${escapeHtml(source.label)}</strong>
+                  <span>${escapeHtml(source.tier)}</span>
+                </td>
+                <td><span class="severity ${severityClass(source.status)}">${escapeHtml(source.status)}</span></td>
+                <td>${escapeHtml(source.cadence)}</td>
+                <td>${escapeHtml(source.last_update || "not automated")}</td>
+                <td>${escapeHtml(source.status_policy)}</td>
+              </tr>
+            `
+          )
+          .join("")}
+      </tbody>
+    </table>
+  `;
 }
 
 function renderPortfolioPerformance(portfolio) {

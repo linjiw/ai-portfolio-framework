@@ -33,6 +33,10 @@ uv run python -m scripts.build_site
 uv run python -m scripts.validate_site --site-dir public --require-portfolio
 ```
 
+`scripts.update_portfolio` also refreshes the deterministic research monitor
+JSON after writing the portfolio data. `scripts.build_site` rebuilds the monitor
+inside the Pages artifact as a deploy-time safety check.
+
 Portfolio pricing uses Yahoo Finance directly in the standalone package.
 `000660.KS` is priced in KRW and converted to USD with `KRW=X`. The `CASH` row
 stays fixed at USD cash. Weekend and holiday runs use the latest available close
@@ -40,11 +44,12 @@ at or before the run date.
 
 ## Generated Site Files
 
-These files are generated and gitignored locally, then included in the Pages
-artifact:
+These generated files are included in the Pages artifact:
 
 ```text
 site/portfolio-data.json
+site/research-monitor-data.json
+data/generated/dashboard_data.json
 site/portfolio/portfolio-value.png
 site/portfolio/portfolio-allocation.png
 ```
@@ -53,6 +58,7 @@ The public dashboard reads the generated JSON from the same GitHub Pages site:
 
 ```text
 portfolio-data.json
+research-monitor-data.json
 ```
 
 ## Manual Commands

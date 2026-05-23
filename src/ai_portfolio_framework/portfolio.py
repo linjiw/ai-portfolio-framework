@@ -170,6 +170,9 @@ def update_portfolio(
         plot_paths=plot_paths,
     )
     write_json(site_data_path, site_data)
+    from ai_portfolio_framework.research_monitor import build_research_monitor_data
+
+    build_research_monitor_data(portfolio_data=site_data)
     return site_data
 
 

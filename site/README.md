@@ -18,15 +18,19 @@ https://linjiw.github.io/ai-portfolio-framework/
 ```
 
 The dashboard includes the portfolio, decision process, control-right map,
-signals, research notes, and source provenance.
+research monitor, signals, research notes, and source provenance.
 
 The personal performance panel reads generated `portfolio-data.json`. Generate
 it from the repo root:
 
 ```bash
 uv run python -m scripts.update_portfolio
+uv run python -m scripts.build_research_monitor
 uv run python -m scripts.build_site
 ```
+
+The monitor is intentionally rules-first: it reads config YAML, emits
+`research-monitor-data.json`, and keeps LLMs out of the portfolio-action path.
 
 The daily GitHub workflow publishes the generated portfolio JSON and plot images
 to GitHub Pages.

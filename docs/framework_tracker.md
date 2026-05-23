@@ -49,6 +49,7 @@ data/manual/ai_framework_holdings.csv
 
 ```bash
 uv run python -m scripts.update_portfolio
+uv run python -m scripts.build_research_monitor
 uv run python -m scripts.build_site
 uv run python -m scripts.validate_site --site-dir public --require-portfolio
 ```
@@ -58,6 +59,8 @@ Outputs:
 ```bash
 public/
 site/portfolio-data.json
+site/research-monitor-data.json
+data/generated/dashboard_data.json
 data/portfolio/ai_portfolio_summary.csv
 data/portfolio/ai_portfolio_snapshots.csv
 ```

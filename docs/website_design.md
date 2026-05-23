@@ -43,12 +43,18 @@ Related QA artifacts:
 
 Related framework data and reports:
 
+- `config/holdings.yml`
+- `config/metrics_catalog.yml`
+- `config/alert_rules.yml`
+- `config/sources.yml`
 - `data/manual/ai_framework_holdings.csv`
 - `data/manual/ai_framework_indicators.csv`
 - `data/manual/ai_framework_predictions.csv`
 - `data/manual/ai_framework_scenarios.csv`
 - `data/manual/ai_control_right_scores.csv`
 - `site/portfolio-data.json`
+- `site/research-monitor-data.json`
+- `data/generated/dashboard_data.json`
 - `data/portfolio/ai_portfolio_summary.csv`
 - `data/portfolio/ai_portfolio_snapshots.csv`
 
@@ -62,12 +68,13 @@ The first screen is the usable dashboard, not a landing page. It starts with:
 - Investable row count.
 - Research-only disclaimer.
 
-The navigation has six views:
+The navigation has seven views:
 
 | View | Purpose |
 | --- | --- |
 | Portfolio | Holdings, weights, thesis, evidence, risks, watch item, source links |
 | Decision process | Why the allocation exists, how sizing works, and which gates can change it |
+| Monitor | Deterministic alert output, metric dictionary, and source-health boundaries |
 | Control rights | Overlapping exposure bars and allocation buckets |
 | Signals | Systematic-discretionary plateau and watchlist signals |
 | Research notes | Compressed stock-by-stock story for written review |
@@ -96,6 +103,27 @@ Top-level fields:
   claims: [...],
   holdings: [...],
   sources: {...}
+}
+```
+
+The deterministic research monitor is generated as JSON at
+`site/research-monitor-data.json`. It is intentionally separate from
+`research-data.js` so GitHub Actions can update rule outputs without rewriting
+the thesis source file.
+
+Monitor top-level fields:
+
+```js
+{
+  schemaVersion: 1,
+  generatedAtUtc: "...",
+  asOfDate: "...",
+  principles: {...},
+  summary: {...},
+  alerts: [...],
+  sourceHealth: [...],
+  holdings: [...],
+  metricCatalog: [...]
 }
 ```
 
@@ -148,6 +176,8 @@ Current invariants verified locally:
 - Total weight: 100
 - Decision-process choice buckets: 4
 - Decision gates: 4
+- Research monitor holdings: 14
+- Research monitor source-health rows: 6
 - Source count: 31
 - Claim count: 15
 - Missing source IDs: 0
@@ -386,6 +416,7 @@ Commands run:
 node --check site/app.js
 node --check site/research-data.js
 uv run python -m scripts.update_portfolio
+uv run python -m scripts.build_research_monitor
 uv run python -m scripts.build_site
 uv run python -m scripts.validate_site --site-dir public --require-portfolio
 uv run ruff check .

@@ -13,6 +13,7 @@ from zoneinfo import ZoneInfo
 import pandas as pd
 
 from ai_portfolio_framework.config import MANUAL_DIR, PUBLIC_DIR, SITE_DIR, display_path
+from ai_portfolio_framework.research_monitor import build_research_monitor_data
 
 
 def main() -> None:
@@ -51,6 +52,11 @@ def build_site(
     shutil.copytree(site_source_dir, output_dir)
 
     stamp_research_data(output_dir / "research-data.js", data_date, review_date)
+    build_research_monitor_data(
+        portfolio_data_path=output_dir / "portfolio-data.json",
+        output_path=output_dir / "research-monitor-data.json",
+        generated_output_path=None,
+    )
     write_refresh_manifest(output_dir, site_source_dir, data_date, review_date)
     (output_dir / ".nojekyll").write_text("", encoding="utf-8")
 

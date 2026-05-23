@@ -418,7 +418,9 @@ a:hover {
 .source-list,
 .claim-list,
 .decision-grid,
-.decision-gate-grid {
+.decision-gate-grid,
+.monitor-grid,
+.alert-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
@@ -430,7 +432,9 @@ a:hover {
 .question-card,
 .source-card,
 .claim-card,
-.decision-card {
+.decision-card,
+.monitor-card,
+.alert-card {
   padding: 16px;
   background: var(--panel);
   border: 1px solid var(--line);
@@ -453,28 +457,46 @@ a:hover {
   font-weight: 800;
 }
 
-.severity.high {
+.severity.high,
+.severity.red {
   color: var(--red);
   background: var(--red-soft);
 }
 
-.severity.medium {
+.severity.medium,
+.severity.yellow {
   color: var(--amber);
   background: var(--amber-soft);
 }
 
 .severity.info,
 .severity.watch,
-.severity.data-gap {
+.severity.data-gap,
+.severity.green,
+.severity.ok {
   color: var(--accent-dark);
   background: var(--green-soft);
+}
+
+.severity.gray,
+.severity.warning {
+  color: var(--muted);
+  background: #eef1ec;
+}
+
+.severity.manual,
+.severity.planned {
+  color: var(--amber);
+  background: var(--amber-soft);
 }
 
 .signal-card p,
 .question-card p,
 .source-card p,
 .claim-card p,
-.decision-card p {
+.decision-card p,
+.monitor-card p,
+.alert-card p {
   margin-top: 10px;
   color: var(--muted);
   font-size: 14px;
@@ -566,6 +588,10 @@ a:hover {
   padding: 18px;
 }
 
+.monitor-panel {
+  padding: 18px;
+}
+
 .performance-head {
   margin-top: 0;
 }
@@ -585,14 +611,30 @@ a:hover {
   background: var(--green-soft);
 }
 
-.portfolio-kpis {
+.monitor-status {
+  padding: 12px 14px;
+  background: #f8faf8;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.monitor-status.ready {
+  color: var(--accent-dark);
+  background: var(--green-soft);
+}
+
+.portfolio-kpis,
+.monitor-kpis {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 10px;
   margin-top: 14px;
 }
 
-.portfolio-kpi {
+.portfolio-kpi,
+.monitor-kpi {
   min-width: 0;
   padding: 12px;
   background: #f8faf8;
@@ -600,18 +642,98 @@ a:hover {
   border-radius: 8px;
 }
 
-.portfolio-kpi span {
+.portfolio-kpi span,
+.monitor-kpi span {
   display: block;
   color: var(--muted);
   font-size: 12px;
 }
 
-.portfolio-kpi strong {
+.portfolio-kpi strong,
+.monitor-kpi strong {
   display: block;
   margin-top: 6px;
   font-size: 22px;
   line-height: 1.1;
   overflow-wrap: anywhere;
+}
+
+.metric-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.metric-list div {
+  padding: 10px;
+  background: #f8faf8;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.metric-list strong,
+.metric-list span {
+  display: block;
+}
+
+.metric-list strong {
+  font-size: 13px;
+}
+
+.metric-list span {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.source-health-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.source-health-table {
+  width: 100%;
+  min-width: 820px;
+  border-collapse: collapse;
+  background: var(--panel);
+  font-size: 14px;
+}
+
+.source-health-table th,
+.source-health-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.source-health-table th {
+  color: var(--muted);
+  background: #f8faf8;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.source-health-table td span {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.source-health-table td .severity {
+  display: inline-block;
+  margin-top: 0;
+}
+
+.empty-monitor {
+  padding: 18px;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
 }
 
 .positive {
@@ -743,7 +865,10 @@ a:hover {
   .decision-grid,
   .decision-gate-grid,
   .decision-rules,
+  .monitor-grid,
+  .alert-list,
   .portfolio-kpis,
+  .monitor-kpis,
   .portfolio-plot-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -778,7 +903,10 @@ a:hover {
   .decision-grid,
   .decision-gate-grid,
   .decision-rules,
+  .monitor-grid,
+  .alert-list,
   .portfolio-kpis,
+  .monitor-kpis,
   .portfolio-plot-grid,
   .research-row {
     grid-template-columns: 1fr;

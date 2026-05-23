@@ -69,6 +69,17 @@
         </button>
         <button
           class="tab"
+          id="tab-monitor"
+          role="tab"
+          data-view="monitor"
+          aria-controls="view-monitor"
+          aria-selected="false"
+          tabindex="-1"
+        >
+          Monitor
+        </button>
+        <button
+          class="tab"
           id="tab-control"
           role="tab"
           data-view="control"
@@ -174,6 +185,44 @@
           <p class="muted">Signals are review prompts, not automatic trade orders.</p>
         </div>
         <div class="decision-gate-grid" id="decisionGateGrid"></div>
+      </section>
+
+      <section class="view" id="view-monitor" role="tabpanel" aria-labelledby="tab-monitor" hidden>
+        <div class="section-head">
+          <div>
+            <p class="section-label">Research monitor</p>
+            <h2>Rules before LLMs</h2>
+          </div>
+          <p class="muted">Deterministic data, source health, watch items, and review boundaries.</p>
+        </div>
+        <section class="panel monitor-panel">
+          <div class="monitor-status" id="monitorStatus">Checking research monitor data...</div>
+          <div class="monitor-kpis" id="monitorKpis" hidden></div>
+        </section>
+        <div class="section-head claims-head">
+          <div>
+            <p class="section-label">Alert center</p>
+            <h2>Current rule outputs</h2>
+          </div>
+          <p class="muted">Red means thesis review, not automatic trading.</p>
+        </div>
+        <div class="alert-list" id="alertList"></div>
+        <div class="section-head claims-head">
+          <div>
+            <p class="section-label">Metric dictionary</p>
+            <h2>Core questions by holding</h2>
+          </div>
+          <p class="muted">Each watch item is mapped to a small set of monitored metrics.</p>
+        </div>
+        <div class="monitor-grid" id="monitorGrid"></div>
+        <div class="section-head claims-head">
+          <div>
+            <p class="section-label">Source health</p>
+            <h2>Data-source boundary</h2>
+          </div>
+          <p class="muted">Unavailable feeds are surfaced as planned or manual instead of hidden.</p>
+        </div>
+        <div class="source-health-wrap" id="sourceHealthWrap"></div>
       </section>
 
       <section class="view" id="view-control" role="tabpanel" aria-labelledby="tab-control" hidden>

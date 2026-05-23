@@ -1,0 +1,355 @@
+MSFT:
+  core_question: Can Microsoft become the enterprise authority-control layer for governed agents?
+  metrics:
+    - id: azure_growth
+      name: Azure growth
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: up
+    - id: agent_governance_evidence
+      name: Agent governance and write-permission evidence
+      type: qualitative
+      cadence: monthly
+      source: filings_news_product_docs
+      direction: stronger
+    - id: security_attach
+      name: Security and identity attach evidence
+      type: fundamental_or_qualitative
+      cadence: quarterly
+      source: earnings_release_and_security_blog
+      direction: stronger
+  watch_rule: No fresh evidence on production write-permission adoption.
+  falsifier:
+    - Enterprise agents remain draft-only and fail to gain production write permissions.
+
+GOOGL:
+  core_question: Can Google turn TPU, DeepMind, Cloud, Search, and Workspace into a cost advantage?
+  metrics:
+    - id: google_cloud_revenue_margin
+      name: Google Cloud revenue and margin
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: up
+    - id: tpu_product_evidence
+      name: TPU and Ironwood product evidence
+      type: qualitative
+      cadence: monthly
+      source: company_blog_and_cloud_docs
+      direction: stronger
+    - id: search_pressure
+      name: Search disruption pressure
+      type: qualitative
+      cadence: monthly
+      source: filings_news_product_docs
+      direction: lower
+  watch_rule: Cloud margin fails to show TPU or capex leverage.
+  falsifier:
+    - Search economics weaken while TPU differentiation fails to offset capex pressure.
+
+AVGO:
+  core_question: Can Broadcom keep scaling hyperscaler ASIC and networking exposure?
+  metrics:
+    - id: ai_semiconductor_revenue
+      name: AI semiconductor revenue
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: up
+    - id: customer_concentration
+      name: Customer concentration clues
+      type: qualitative
+      cadence: quarterly
+      source: filings_and_transcripts
+      direction: lower
+    - id: networking_attach
+      name: Networking attach evidence
+      type: qualitative
+      cadence: quarterly
+      source: earnings_transcript
+      direction: stronger
+  watch_rule: AI semiconductor growth depends on too few customers.
+  falsifier:
+    - Custom silicon wins do not translate into durable networking or platform pull-through.
+
+TSM:
+  core_question: Does leading-edge foundry plus advanced packaging remain the AI silicon chokepoint?
+  metrics:
+    - id: hpc_revenue_mix
+      name: HPC revenue mix
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: up
+    - id: gross_margin
+      name: Gross margin
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: stable_or_up
+    - id: advanced_packaging_commentary
+      name: CoWoS and advanced packaging commentary
+      type: qualitative
+      cadence: quarterly
+      source: earnings_transcript
+      direction: stronger
+  watch_rule: Overseas fab cost or packaging constraints pressure margin quality.
+  falsifier:
+    - Advanced packaging no longer constrains AI silicon supply or margin quality degrades structurally.
+
+NVDA:
+  core_question: Is NVIDIA still the AI factory operating layer rather than only a GPU vendor?
+  metrics:
+    - id: data_center_revenue_growth
+      name: Data center revenue growth
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: up
+    - id: gross_margin
+      name: Gross margin
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: stable_or_up
+    - id: networking_attach
+      name: Networking and rack-scale attach evidence
+      type: qualitative
+      cadence: quarterly
+      source: earnings_transcript_and_product_docs
+      direction: stronger
+    - id: custom_silicon_bypass
+      name: Custom silicon bypass pressure
+      type: qualitative
+      cadence: monthly
+      source: filings_news_product_docs
+      direction: lower
+  watch_rule: Custom silicon bypass pressure rises without offsetting platform pull-through.
+  falsifier:
+    - Rubin racks ship, but networking attach, software pull-through, and margins compress sharply.
+
+"000660.KS":
+  core_question: Does SK Hynix maintain HBM leadership into the Vera Rubin generation?
+  metrics:
+    - id: hbm_revenue_commentary
+      name: HBM revenue and management commentary
+      type: fundamental_or_qualitative
+      cadence: quarterly
+      source: earnings_release
+      direction: stronger
+    - id: nvidia_qualification
+      name: NVIDIA qualification and shipment evidence
+      type: qualitative
+      cadence: monthly
+      source: company_ir_and_news
+      direction: stronger
+    - id: samsung_micron_share_risk
+      name: Samsung and Micron share risk
+      type: qualitative
+      cadence: monthly
+      source: industry_news
+      direction: lower
+  watch_rule: Samsung or Micron narrows the HBM qualification and shipment gap.
+  falsifier:
+    - SK Hynix loses HBM leadership or NVIDIA qualification leverage into Rubin.
+
+CEG:
+  core_question: Does data-center power scarcity convert into earnings and contracted growth?
+  metrics:
+    - id: ppa_announcements
+      name: Data-center PPA announcements
+      type: qualitative
+      cadence: monthly
+      source: company_ir_and_news
+      direction: stronger
+    - id: pjm_interconnection
+      name: PJM interconnection updates
+      type: regulatory
+      cadence: quarterly
+      source: pjm_public_data
+      direction: faster
+    - id: power_price_commentary
+      name: Power price and node-level commentary
+      type: qualitative
+      cadence: quarterly
+      source: earnings_transcript
+      direction: stronger
+  watch_rule: Interconnection delays prevent power scarcity from reaching realized economics.
+  falsifier:
+    - Contracted data-center demand fails to overcome grid, regulatory, or interconnection constraints.
+
+VRT:
+  core_question: Does AI data-center power and cooling capex keep translating into orders and backlog?
+  metrics:
+    - id: orders
+      name: Orders
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: up
+    - id: backlog
+      name: Backlog
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: up
+    - id: liquid_cooling_commentary
+      name: Liquid cooling commentary
+      type: qualitative
+      cadence: quarterly
+      source: earnings_transcript_and_company_ir
+      direction: stronger
+  watch_rule: Orders or backlog slow while AI capex narratives remain strong.
+  falsifier:
+    - AI data-center capex fails to convert into durable Vertiv orders, backlog, or margins.
+
+MSCI:
+  core_question: Can MSCI data and risk models become AI workflow verification infrastructure?
+  metrics:
+    - id: recurring_subscription_growth
+      name: Recurring subscription growth
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: up
+    - id: retention
+      name: Retention
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: stable_or_up
+    - id: ai_product_evidence
+      name: AI product evidence
+      type: qualitative
+      cadence: quarterly
+      source: company_ir_and_product_docs
+      direction: stronger
+  watch_rule: AI remains a product feature without measurable workflow adoption.
+  falsifier:
+    - Trusted data and risk workflows do not become outcome-verification revenue.
+
+MCO:
+  core_question: Does AI strengthen Moody's credit-risk workflow rather than commoditize it?
+  metrics:
+    - id: analytics_revenue
+      name: Analytics revenue
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: up
+    - id: research_assistant_adoption
+      name: Research Assistant adoption mentions
+      type: qualitative
+      cadence: quarterly
+      source: company_ir_and_product_docs
+      direction: stronger
+    - id: ratings_cycle
+      name: Ratings cycle
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: stable_or_up
+  watch_rule: AI assistant evidence stays marketing-only while credit cycle weakens.
+  falsifier:
+    - AI does not improve Moody's analytics or ratings workflow economics.
+
+SPGI:
+  core_question: Can Kensho and trusted data embed S&P Global inside LLM workflows?
+  metrics:
+    - id: market_intelligence_growth
+      name: Market Intelligence growth
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: up
+    - id: kensho_api_mcp_mentions
+      name: Kensho API and MCP mentions
+      type: qualitative
+      cadence: quarterly
+      source: company_ir_and_product_docs
+      direction: stronger
+    - id: data_licensing_evidence
+      name: Data licensing evidence
+      type: qualitative
+      cadence: quarterly
+      source: filings_news_product_docs
+      direction: stronger
+  watch_rule: Kensho and trusted-data products do not show workflow integration evidence.
+  falsifier:
+    - LLM workflow adoption bypasses S&P Global's data and ratings franchises.
+
+VEEV:
+  core_question: Does regulated workflow AI become real production adoption in life sciences?
+  metrics:
+    - id: vault_growth
+      name: Vault growth
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: up
+    - id: crm_migration
+      name: CRM migration progress
+      type: fundamental_or_qualitative
+      cadence: quarterly
+      source: earnings_transcript
+      direction: stronger
+    - id: ai_agents_rollout
+      name: AI Agents rollout evidence
+      type: qualitative
+      cadence: quarterly
+      source: company_ir_and_product_docs
+      direction: stronger
+  watch_rule: AI Agents remain roadmap-only or show low regulated-workflow usage.
+  falsifier:
+    - Regulated customers do not adopt Veeva AI in production workflows.
+
+TER:
+  core_question: Is AI semiconductor test strong enough while robotics keeps option value?
+  metrics:
+    - id: semiconductor_test_revenue
+      name: Semiconductor test revenue and bookings
+      type: fundamental
+      cadence: quarterly
+      source: earnings_release
+      direction: up
+    - id: ai_revenue_commentary
+      name: AI-related revenue commentary
+      type: qualitative
+      cadence: quarterly
+      source: earnings_transcript
+      direction: stronger
+    - id: robotics_revenue
+      name: Robotics revenue and factory automation deals
+      type: fundamental_or_qualitative
+      cadence: quarterly
+      source: earnings_release_and_company_ir
+      direction: stronger
+  watch_rule: Semiconductor test demand digests before robotics becomes material.
+  falsifier:
+    - AI semiconductor-test demand normalizes before robotics optionality can matter.
+
+CASH:
+  core_question: Does cash still have risk-control option value?
+  metrics:
+    - id: portfolio_drawdown
+      name: Portfolio drawdown
+      type: market
+      cadence: daily
+      source: local_calculation
+      direction: lower
+    - id: alert_count
+      name: Alert count
+      type: system
+      cadence: daily
+      source: local_calculation
+      direction: lower
+    - id: cash_drag
+      name: Cash drag
+      type: market
+      cadence: monthly
+      source: local_calculation
+      direction: lower
+  watch_rule: Cash drag becomes the main portfolio error while thesis evidence remains strong.
+  falsifier:
+    - Cash no longer provides useful option value against drawdown, valuation, or framework risk.

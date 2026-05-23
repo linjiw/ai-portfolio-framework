@@ -20,8 +20,10 @@ refresh prices, validate the artifact, run tests, and deploy Pages from one audi
 ## Structure
 
 - `site/`: static website served by GitHub Pages.
+- `config/`: deterministic holdings, metric dictionary, alert rules, and source definitions.
 - `data/manual/`: versioned framework inputs and initial portfolio lot seed.
 - `data/portfolio/`: daily portfolio history committed by the workflow.
+- `data/generated/`: generated research-monitor JSON for audit/reuse.
 - `src/ai_portfolio_framework/`: standalone refresh, build, and validation code.
 - `docs/`: design, methodology, and decision-process notes.
 - `.github/workflows/daily-pages.yml`: scheduled morning refresh and Pages deploy.
@@ -45,11 +47,29 @@ Current sizing reflects five roles:
 Signals are review prompts, not automatic trades. Capability, economics, trust, and valuation
 gates are documented in `docs/decision_process.md` and surfaced on the website.
 
+## Research Monitor
+
+The first automation layer is deliberately rules-based and does not use an LLM. The monitor reads:
+
+- `config/holdings.yml`
+- `config/metrics_catalog.yml`
+- `config/alert_rules.yml`
+- `config/sources.yml`
+
+It writes:
+
+- `site/research-monitor-data.json` for the website.
+- `data/generated/dashboard_data.json` for audit and downstream reuse.
+
+LLMs belong in a later phase as evidence extractors for filings, transcripts, and official
+documents. They should produce draft evidence notes, not portfolio actions.
+
 ## Local Commands
 
 ```bash
 uv sync --extra dev
 uv run python -m scripts.update_portfolio
+uv run python -m scripts.build_research_monitor
 uv run python -m scripts.build_site
 uv run python -m scripts.validate_site --site-dir public --require-portfolio
 uv run ruff check .

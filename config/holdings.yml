@@ -1,0 +1,146 @@
+portfolio:
+  name: trusted_execution_of_intelligence
+  base_currency: USD
+  cash_policy_weight: 0.10
+  thesis: trusted_execution
+
+holdings:
+  - ticker: MSFT
+    name: Microsoft
+    target_weight: 0.18
+    min_weight: 0.14
+    max_weight: 0.22
+    bucket: Core compounders
+    layers: [Authority, Outcome]
+    conviction: A
+    review_frequency: quarterly
+
+  - ticker: GOOGL
+    name: Alphabet
+    target_weight: 0.15
+    min_weight: 0.11
+    max_weight: 0.19
+    bucket: Core compounders
+    layers: [Capacity, Cost, Authority, Outcome]
+    conviction: A-
+    review_frequency: quarterly
+
+  - ticker: AVGO
+    name: Broadcom
+    target_weight: 0.10
+    min_weight: 0.07
+    max_weight: 0.13
+    bucket: Core compounders
+    layers: [Capacity, Cost]
+    conviction: A-
+    review_frequency: quarterly
+
+  - ticker: TSM
+    name: TSMC
+    target_weight: 0.07
+    min_weight: 0.05
+    max_weight: 0.10
+    bucket: Core compounders
+    layers: [Capacity]
+    conviction: B+
+    review_frequency: quarterly
+
+  - ticker: NVDA
+    name: NVIDIA
+    target_weight: 0.07
+    min_weight: 0.05
+    max_weight: 0.09
+    bucket: Core compounders
+    layers: [Capacity, Cost]
+    conviction: B+
+    review_frequency: quarterly
+
+  - ticker: 000660.KS
+    name: SK Hynix
+    target_weight: 0.08
+    min_weight: 0.05
+    max_weight: 0.11
+    bucket: Bottleneck cyclicals
+    layers: [Capacity]
+    conviction: B+
+    review_frequency: quarterly
+
+  - ticker: CEG
+    name: Constellation Energy
+    target_weight: 0.05
+    min_weight: 0.03
+    max_weight: 0.07
+    bucket: Bottleneck cyclicals
+    layers: [Capacity]
+    conviction: B
+    review_frequency: quarterly
+
+  - ticker: VRT
+    name: Vertiv
+    target_weight: 0.05
+    min_weight: 0.03
+    max_weight: 0.08
+    bucket: Bottleneck cyclicals
+    layers: [Capacity]
+    conviction: B
+    review_frequency: quarterly
+
+  - ticker: MSCI
+    name: MSCI
+    target_weight: 0.02
+    min_weight: 0.01
+    max_weight: 0.03
+    bucket: Vertical verifier basket
+    layers: [Outcome]
+    conviction: B
+    review_frequency: quarterly
+
+  - ticker: MCO
+    name: Moody's
+    target_weight: 0.02
+    min_weight: 0.01
+    max_weight: 0.03
+    bucket: Vertical verifier basket
+    layers: [Outcome]
+    conviction: B
+    review_frequency: quarterly
+
+  - ticker: SPGI
+    name: S&P Global
+    target_weight: 0.02
+    min_weight: 0.01
+    max_weight: 0.03
+    bucket: Vertical verifier basket
+    layers: [Outcome]
+    conviction: B
+    review_frequency: quarterly
+
+  - ticker: VEEV
+    name: Veeva Systems
+    target_weight: 0.02
+    min_weight: 0.01
+    max_weight: 0.03
+    bucket: Vertical verifier basket
+    layers: [Outcome]
+    conviction: B
+    review_frequency: quarterly
+
+  - ticker: TER
+    name: Teradyne
+    target_weight: 0.07
+    min_weight: 0.04
+    max_weight: 0.10
+    bucket: Asymmetric optionality
+    layers: [Capacity, Physical AI]
+    conviction: B
+    review_frequency: quarterly
+
+  - ticker: CASH
+    name: Cash
+    target_weight: 0.10
+    min_weight: 0.05
+    max_weight: 0.20
+    bucket: Dry powder
+    layers: [Risk control]
+    conviction: Policy
+    review_frequency: monthly

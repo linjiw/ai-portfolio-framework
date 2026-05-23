@@ -45,6 +45,10 @@ def validate_site(site_dir: Path, *, require_portfolio: bool = False) -> list[st
     portfolio_path = site_dir / "portfolio-data.json"
     if require_portfolio or portfolio_path.exists():
         errors.extend(validate_portfolio_json(site_dir, portfolio_path))
+
+    monitor_path = site_dir / "research-monitor-data.json"
+    if require_portfolio or monitor_path.exists():
+        errors.extend(validate_research_monitor_json(site_dir, monitor_path))
     return errors
 
 
@@ -126,6 +130,39 @@ def validate_portfolio_json(site_dir: Path, portfolio_path: Path) -> list[str]:
         clean_path = str(plot_path).removeprefix("./")
         if not (site_dir / clean_path).exists():
             errors.append(f"portfolio plot {label} is missing: {plot_path}")
+    return errors
+
+
+def validate_research_monitor_json(site_dir: Path, monitor_path: Path) -> list[str]:
+    if not monitor_path.exists():
+        return [f"research-monitor-data.json is required but missing in {site_dir}"]
+
+    errors: list[str] = []
+    try:
+        monitor = json.loads(monitor_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        return [f"research-monitor-data.json is invalid JSON: {exc}"]
+
+    for field in ("schemaVersion", "summary", "alerts", "sourceHealth", "holdings"):
+        if field not in monitor:
+            errors.append(f"research-monitor-data.json missing required field: {field}")
+    if monitor.get("schemaVersion") != 1:
+        errors.append(
+            f"research monitor schemaVersion must be 1, got {monitor.get('schemaVersion')}"
+        )
+    holding_count = len(monitor.get("holdings", []))
+    if holding_count != 14:
+        errors.append(f"research monitor holdings must have 14 rows, got {holding_count}")
+    if not monitor.get("sourceHealth"):
+        errors.append("research monitor sourceHealth must not be empty")
+
+    valid_levels = {"green", "blue", "gray", "yellow", "red"}
+    highest = monitor.get("summary", {}).get("highest_alert")
+    if highest not in valid_levels:
+        errors.append(f"research monitor highest_alert has invalid level: {highest}")
+    for alert in monitor.get("alerts", []):
+        if alert.get("level") not in valid_levels:
+            errors.append(f"research monitor alert has invalid level: {alert}")
     return errors
 
 

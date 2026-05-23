@@ -5,7 +5,9 @@ from __future__ import annotations
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+CONFIG_DIR = PROJECT_ROOT / "config"
 DATA_DIR = PROJECT_ROOT / "data"
+GENERATED_DATA_DIR = DATA_DIR / "generated"
 MANUAL_DIR = DATA_DIR / "manual"
 PORTFOLIO_DATA_DIR = DATA_DIR / "portfolio"
 REPORTS_DIR = PROJECT_ROOT / "reports"
@@ -16,7 +18,15 @@ PUBLIC_DIR = PROJECT_ROOT / "public"
 def ensure_directories() -> None:
     """Create the directories used by generated portfolio artifacts."""
 
-    for path in (DATA_DIR, MANUAL_DIR, PORTFOLIO_DATA_DIR, REPORTS_DIR, SITE_DIR):
+    for path in (
+        CONFIG_DIR,
+        DATA_DIR,
+        GENERATED_DATA_DIR,
+        MANUAL_DIR,
+        PORTFOLIO_DATA_DIR,
+        REPORTS_DIR,
+        SITE_DIR,
+    ):
         path.mkdir(parents=True, exist_ok=True)
 
 

@@ -1,0 +1,39 @@
+rules:
+  - id: stale_price
+    category: data
+    level: yellow
+    threshold_days: 3
+    message: Price data is stale; do not trust portfolio value.
+    requires_human_review: false
+
+  - id: missing_price
+    category: data
+    level: red
+    message: Price data is missing for an active holding.
+    requires_human_review: true
+
+  - id: weight_drift
+    category: market
+    level: yellow
+    threshold_pct_points: 3.0
+    message: Weight drift exceeds 3 percentage points.
+    requires_human_review: false
+
+  - id: portfolio_drawdown_watch
+    category: market
+    level: yellow
+    lookback_days: 20
+    threshold_pct: -12.0
+    message: Portfolio drawdown exceeds 12%; review whether thesis changed.
+    requires_human_review: true
+
+  - id: qualitative_baseline_needed
+    category: thesis
+    level: gray
+    message: Qualitative metric exists but has no automated evidence feed yet.
+    requires_human_review: false
+
+falsifier_policy:
+  level: red
+  message: A red falsifier alert means the thesis must be rewritten or downgraded before any trade decision.
+  requires_human_review: true
