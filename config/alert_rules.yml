@@ -15,8 +15,8 @@ rules:
   - id: weight_drift
     category: market
     level: yellow
-    threshold_pct_points: 3.0
-    message: Weight drift exceeds 3 percentage points.
+    threshold_relative_pct: 15.0
+    message: Weight drift exceeds 15% relative to target weight.
     requires_human_review: false
 
   - id: portfolio_drawdown_watch

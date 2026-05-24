@@ -143,7 +143,14 @@ def validate_research_monitor_json(site_dir: Path, monitor_path: Path) -> list[s
     except json.JSONDecodeError as exc:
         return [f"research-monitor-data.json is invalid JSON: {exc}"]
 
-    for field in ("schemaVersion", "summary", "alerts", "sourceHealth", "holdings"):
+    for field in (
+        "schemaVersion",
+        "summary",
+        "alerts",
+        "reviewQueue",
+        "sourceHealth",
+        "holdings",
+    ):
         if field not in monitor:
             errors.append(f"research-monitor-data.json missing required field: {field}")
     if monitor.get("schemaVersion") != 1:
@@ -157,12 +164,16 @@ def validate_research_monitor_json(site_dir: Path, monitor_path: Path) -> list[s
         errors.append("research monitor sourceHealth must not be empty")
 
     valid_levels = {"green", "blue", "gray", "yellow", "red"}
+    valid_source_statuses = {"healthy", "manual_expected", "planned", "stale", "broken"}
     highest = monitor.get("summary", {}).get("highest_alert")
     if highest not in valid_levels:
         errors.append(f"research monitor highest_alert has invalid level: {highest}")
     for alert in monitor.get("alerts", []):
         if alert.get("level") not in valid_levels:
             errors.append(f"research monitor alert has invalid level: {alert}")
+    for source in monitor.get("sourceHealth", []):
+        if source.get("status") not in valid_source_statuses:
+            errors.append(f"research monitor source has invalid status: {source}")
     return errors
 
 

@@ -27,8 +27,13 @@
           <strong>100%</strong>
           <p>Cash included as explicit risk-control reserve.</p>
         </div>
+        <div class="panel metric-panel" id="ruleAlertPanel">
+          <span>Rule alert</span>
+          <strong id="ruleAlertValue">--</strong>
+          <p id="ruleAlertNote">Waiting for deterministic monitor output.</p>
+        </div>
         <div class="panel metric-panel warning">
-          <span>Highest current alert</span>
+          <span>Framework bottleneck</span>
           <strong>Trust</strong>
           <p>Human review and write-permission evidence remain the gating questions.</p>
         </div>
@@ -199,6 +204,14 @@
           <div class="monitor-status" id="monitorStatus">Checking research monitor data...</div>
           <div class="monitor-kpis" id="monitorKpis" hidden></div>
         </section>
+        <div class="section-head claims-head">
+          <div>
+            <p class="section-label">Review queue</p>
+            <h2>Next research actions</h2>
+          </div>
+          <p class="muted">Generated from next actions and human-review alerts.</p>
+        </div>
+        <div class="review-queue" id="reviewQueue"></div>
         <div class="section-head claims-head">
           <div>
             <p class="section-label">Alert center</p>

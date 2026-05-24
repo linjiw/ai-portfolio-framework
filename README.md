@@ -55,11 +55,16 @@ The first automation layer is deliberately rules-based and does not use an LLM. 
 - `config/metrics_catalog.yml`
 - `config/alert_rules.yml`
 - `config/sources.yml`
+- `data/decision_log.yml`
 
 It writes:
 
 - `site/research-monitor-data.json` for the website.
 - `data/generated/dashboard_data.json` for audit and downstream reuse.
+
+The monitor now separates `rule_alert` from the framework bottleneck, classifies source health as
+`healthy`, `manual_expected`, `planned`, `stale`, or `broken`, and generates a review queue from
+holding-level `next_action` records plus any human-review alerts.
 
 LLMs belong in a later phase as evidence extractors for filings, transcripts, and official
 documents. They should produce draft evidence notes, not portfolio actions.

@@ -21,11 +21,14 @@ HOLDINGS_CONFIG_PATH = CONFIG_DIR / "holdings.yml"
 METRICS_CATALOG_PATH = CONFIG_DIR / "metrics_catalog.yml"
 ALERT_RULES_PATH = CONFIG_DIR / "alert_rules.yml"
 SOURCES_CONFIG_PATH = CONFIG_DIR / "sources.yml"
+DECISION_LOG_PATH = GENERATED_DATA_DIR.parent / "decision_log.yml"
 SITE_PORTFOLIO_DATA_PATH = SITE_DIR / "portfolio-data.json"
 SITE_MONITOR_DATA_PATH = SITE_DIR / "research-monitor-data.json"
 GENERATED_MONITOR_DATA_PATH = GENERATED_DATA_DIR / "dashboard_data.json"
 
 LEVEL_RANK = {"green": 0, "blue": 1, "gray": 1, "yellow": 2, "red": 3}
+SOURCE_STATUS_ORDER = ("healthy", "manual_expected", "planned", "stale", "broken")
+PRIORITY_RANK = {"high": 0, "medium": 1, "low": 2}
 
 
 def main() -> None:
@@ -53,6 +56,7 @@ def build_research_monitor_data(
     metrics_catalog_path: Path = METRICS_CATALOG_PATH,
     alert_rules_path: Path = ALERT_RULES_PATH,
     sources_config_path: Path = SOURCES_CONFIG_PATH,
+    decision_log_path: Path = DECISION_LOG_PATH,
     portfolio_data_path: Path = SITE_PORTFOLIO_DATA_PATH,
     output_path: Path = SITE_MONITOR_DATA_PATH,
     generated_output_path: Path | None = GENERATED_MONITOR_DATA_PATH,
@@ -65,6 +69,7 @@ def build_research_monitor_data(
     metrics_catalog = load_yaml(metrics_catalog_path)
     alert_rules = load_yaml(alert_rules_path)
     sources_config = load_yaml(sources_config_path)
+    decision_log = load_yaml_list(decision_log_path)
     portfolio_data = portfolio_data or load_json(portfolio_data_path)
 
     as_of_date = date.fromisoformat(portfolio_data.get("asOfDate", today_utc()))
@@ -87,7 +92,7 @@ def build_research_monitor_data(
             rules_by_id=rules_by_id,
         )
         alerts.extend(holding_alerts)
-        metrics = catalog_entry.get("metrics", [])
+        metrics = [normalize_metric(metric) for metric in catalog_entry.get("metrics", [])]
         monitored_holdings.append(
             {
                 "ticker": ticker,
@@ -102,6 +107,7 @@ def build_research_monitor_data(
                 "top_metrics": metrics[:4],
                 "watch_rule": catalog_entry.get("watch_rule", ""),
                 "falsifier": catalog_entry.get("falsifier", []),
+                "next_action": normalize_next_action(ticker, catalog_entry.get("next_action")),
                 "alert_count": len(holding_alerts),
             }
         )
@@ -120,6 +126,10 @@ def build_research_monitor_data(
         as_of_date=as_of_date,
         stale_days=int(rules_by_id.get("stale_price", {}).get("threshold_days", 3)),
     )
+    review_queue = build_review_queue(monitored_holdings, alerts)
+    source_status_counts = count_source_statuses(source_health)
+    source_issues = source_status_counts["stale"] + source_status_counts["broken"]
+    highest_rule_alert = highest_level(alerts)
     payload = {
         "schemaVersion": 1,
         "generatedAtUtc": utc_iso(),
@@ -130,16 +140,21 @@ def build_research_monitor_data(
             "red_alert_policy": alert_rules.get("falsifier_policy", {}).get("message", ""),
         },
         "summary": {
-            "highest_alert": highest_level(alerts),
+            "highest_alert": highest_rule_alert,
+            "rule_alert": highest_rule_alert,
+            "framework_bottleneck": "Trust / write-permission evidence",
             "alert_counts": count_levels(alerts),
-            "review_queue_count": sum(1 for alert in alerts if alert["requires_human_review"]),
+            "review_queue_count": len(review_queue),
             "source_count": len(source_health),
-            "source_issues": sum(1 for source in source_health if source["status"] != "ok"),
+            "source_issues": source_issues,
+            "source_status_counts": source_status_counts,
         },
         "alerts": alerts,
+        "reviewQueue": review_queue,
         "sourceHealth": source_health,
         "holdings": monitored_holdings,
         "metricCatalog": compact_metric_catalog(metrics_catalog),
+        "decisionLog": decision_log[-10:],
     }
     write_json(output_path, payload)
     if generated_output_path:
@@ -185,14 +200,22 @@ def evaluate_holding_alerts(
 
     drift_rule = rules_by_id.get("weight_drift", {})
     drift = weight_drift(holding, portfolio_row, portfolio_total)
-    if abs(drift) > float(drift_rule.get("threshold_pct_points", 3.0)):
+    target_weight = normalize_weight(holding["target_weight"])
+    relative_drift = pct(abs(drift), target_weight)
+    if relative_drift > float(drift_rule.get("threshold_relative_pct", 15.0)):
         alerts.append(
             make_alert(
                 as_of_date=as_of_date,
                 ticker=ticker,
                 rule=drift_rule,
-                message=f"{ticker}: weight drift is {drift:.2f} percentage points.",
-                metadata={"weight_drift_pct_points": round(drift, 4)},
+                message=(
+                    f"{ticker}: weight drift is {drift:.2f} percentage points "
+                    f"({relative_drift:.1f}% relative to target)."
+                ),
+                metadata={
+                    "weight_drift_pct_points": round(drift, 4),
+                    "weight_drift_relative_pct": round(relative_drift, 4),
+                },
             )
         )
     return alerts
@@ -245,13 +268,13 @@ def build_source_health(
         if source_id == "yfinance":
             last_update = latest_price_date.isoformat() if latest_price_date else None
             age = (as_of_date - latest_price_date).days if latest_price_date else None
-            status = "ok" if age is not None and age <= stale_days else "warning"
+            status = "healthy" if age is not None and age <= stale_days else "stale"
         elif source_id == "local_calculation":
             last_update = portfolio_updated.isoformat() if portfolio_updated else None
             age = (as_of_date - portfolio_updated).days if portfolio_updated else None
-            status = "ok" if age is not None and age <= 1 else "warning"
+            status = "healthy" if age is not None and age <= 1 else "stale"
         elif source.get("update_mode") == "manual":
-            status = "manual"
+            status = "manual_expected"
         elif source.get("update_mode") == "planned":
             status = "planned"
         rows.append(
@@ -297,12 +320,80 @@ def compact_metric_catalog(metrics_catalog: dict[str, Any]) -> list[dict[str, An
             "ticker": ticker,
             "core_question": entry.get("core_question", ""),
             "metric_count": len(entry.get("metrics", [])),
-            "metrics": entry.get("metrics", []),
+            "metrics": [normalize_metric(metric) for metric in entry.get("metrics", [])],
             "watch_rule": entry.get("watch_rule", ""),
             "falsifier": entry.get("falsifier", []),
+            "next_action": normalize_next_action(ticker, entry.get("next_action")),
         }
         for ticker, entry in metrics_catalog.items()
     ]
+
+
+def normalize_metric(metric: dict[str, Any]) -> dict[str, Any]:
+    evidence_state = metric.get("evidence_state", {})
+    return {
+        **metric,
+        "evidence_state": {
+            "state": evidence_state.get("state", metric.get("state", "unknown")),
+            "confidence": evidence_state.get("confidence", metric.get("confidence", "unknown")),
+            "last_evidence_date": evidence_state.get(
+                "last_evidence_date", metric.get("last_evidence_date")
+            ),
+        },
+    }
+
+
+def normalize_next_action(ticker: str, next_action: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not next_action:
+        return None
+    return {
+        "ticker": ticker,
+        "type": next_action.get("type", "evidence_check"),
+        "priority": next_action.get("priority", "medium"),
+        "due": str(next_action.get("due", "")),
+        "question": next_action.get("question", ""),
+        "success_condition": next_action.get("success_condition", ""),
+    }
+
+
+def build_review_queue(
+    holdings: list[dict[str, Any]],
+    alerts: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    queue = []
+    for alert in alerts:
+        if not alert.get("requires_human_review"):
+            continue
+        queue.append(
+            {
+                "ticker": alert["ticker"],
+                "type": "alert_review",
+                "priority": "high" if alert["level"] == "red" else "medium",
+                "due": alert["date"],
+                "question": alert["message"],
+                "success_condition": "Human reviewer accepts, rejects, or rewrites the alert.",
+                "source": "alert",
+            }
+        )
+    for holding in holdings:
+        action = holding.get("next_action")
+        if action:
+            queue.append({**action, "source": "next_action"})
+    return sorted(
+        queue,
+        key=lambda item: (
+            PRIORITY_RANK.get(item.get("priority", "medium"), 1),
+            item.get("due") or "9999-12-31",
+            item.get("ticker", ""),
+        ),
+    )
+
+
+def count_source_statuses(source_health: list[dict[str, Any]]) -> dict[str, int]:
+    return {
+        status: sum(1 for source in source_health if source.get("status") == status)
+        for status in SOURCE_STATUS_ORDER
+    }
 
 
 def current_weight(portfolio_row: dict[str, Any] | None, portfolio_total: float) -> float | None:
@@ -347,6 +438,15 @@ def load_yaml(path: Path) -> dict[str, Any]:
     return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
 
 
+def load_yaml_list(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    value = yaml.safe_load(path.read_text(encoding="utf-8")) or []
+    if not isinstance(value, list):
+        raise ValueError(f"Expected YAML list: {path}")
+    return value
+
+
 def load_json(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
@@ -355,7 +455,10 @@ def load_json(path: Path) -> dict[str, Any]:
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    path.write_text(
+        json.dumps(payload, indent=2, sort_keys=True, default=str) + "\n",
+        encoding="utf-8",
+    )
 
 
 def parse_utc_date(value: Any) -> date | None:

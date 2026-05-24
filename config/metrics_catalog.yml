@@ -20,6 +20,12 @@ MSFT:
       source: earnings_release_and_security_blog
       direction: stronger
   watch_rule: No fresh evidence on production write-permission adoption.
+  next_action:
+    type: evidence_check
+    priority: high
+    due: 2026-08-22
+    question: Look for evidence of Agent 365 production write-permission adoption.
+    success_condition: Official disclosure, customer case study, or product documentation shows agents executing governed production actions.
   falsifier:
     - Enterprise agents remain draft-only and fail to gain production write permissions.
 
@@ -45,6 +51,12 @@ GOOGL:
       source: filings_news_product_docs
       direction: lower
   watch_rule: Cloud margin fails to show TPU or capex leverage.
+  next_action:
+    type: quarterly_review
+    priority: high
+    due: 2026-08-22
+    question: Check whether TPU and capex advantage appears in Cloud margin or AI revenue quality.
+    success_condition: Cloud margin, product disclosure, or customer evidence supports TPU-driven cost leverage.
   falsifier:
     - Search economics weaken while TPU differentiation fails to offset capex pressure.
 
@@ -70,6 +82,12 @@ AVGO:
       source: earnings_transcript
       direction: stronger
   watch_rule: AI semiconductor growth depends on too few customers.
+  next_action:
+    type: quarterly_review
+    priority: medium
+    due: 2026-08-22
+    question: Check whether AI semiconductor growth is broadening beyond a small customer set.
+    success_condition: Management discloses durable ASIC or networking demand across multiple hyperscalers.
   falsifier:
     - Custom silicon wins do not translate into durable networking or platform pull-through.
 
@@ -95,6 +113,12 @@ TSM:
       source: earnings_transcript
       direction: stronger
   watch_rule: Overseas fab cost or packaging constraints pressure margin quality.
+  next_action:
+    type: quarterly_review
+    priority: medium
+    due: 2026-08-22
+    question: Review whether advanced packaging and leading-edge demand still support margin quality.
+    success_condition: HPC mix, margin, and packaging commentary remain thesis-supportive.
   falsifier:
     - Advanced packaging no longer constrains AI silicon supply or margin quality degrades structurally.
 
@@ -126,6 +150,12 @@ NVDA:
       source: filings_news_product_docs
       direction: lower
   watch_rule: Custom silicon bypass pressure rises without offsetting platform pull-through.
+  next_action:
+    type: evidence_check
+    priority: high
+    due: 2026-08-22
+    question: Track networking attach, rack-scale platform evidence, and margin durability.
+    success_condition: Rubin or Blackwell platform evidence shows durable networking/software pull-through.
   falsifier:
     - Rubin racks ship, but networking attach, software pull-through, and margins compress sharply.
 
@@ -151,6 +181,12 @@ NVDA:
       source: industry_news
       direction: lower
   watch_rule: Samsung or Micron narrows the HBM qualification and shipment gap.
+  next_action:
+    type: evidence_check
+    priority: high
+    due: 2026-08-22
+    question: Track HBM qualification and shipment evidence into the Vera Rubin generation.
+    success_condition: Company or customer evidence supports continued HBM leadership and shipment leverage.
   falsifier:
     - SK Hynix loses HBM leadership or NVIDIA qualification leverage into Rubin.
 
@@ -176,6 +212,12 @@ CEG:
       source: earnings_transcript
       direction: stronger
   watch_rule: Interconnection delays prevent power scarcity from reaching realized economics.
+  next_action:
+    type: evidence_check
+    priority: high
+    due: 2026-08-22
+    question: Track PJM and interconnection conversion from data-center demand into realizable economics.
+    success_condition: Regulatory, PJM, or company evidence shows improved path from demand to contracted power economics.
   falsifier:
     - Contracted data-center demand fails to overcome grid, regulatory, or interconnection constraints.
 
@@ -201,6 +243,12 @@ VRT:
       source: earnings_transcript_and_company_ir
       direction: stronger
   watch_rule: Orders or backlog slow while AI capex narratives remain strong.
+  next_action:
+    type: quarterly_review
+    priority: medium
+    due: 2026-08-22
+    question: Check whether AI power and cooling capex is still visible in orders, backlog, and liquid-cooling commentary.
+    success_condition: Orders, backlog, and cooling commentary remain aligned with AI data-center demand.
   falsifier:
     - AI data-center capex fails to convert into durable Vertiv orders, backlog, or margins.
 
@@ -226,6 +274,12 @@ MSCI:
       source: company_ir_and_product_docs
       direction: stronger
   watch_rule: AI remains a product feature without measurable workflow adoption.
+  next_action:
+    type: quarterly_review
+    priority: low
+    due: 2026-08-22
+    question: Look for evidence that MSCI risk and data products are becoming AI workflow verification assets.
+    success_condition: Product, retention, or revenue evidence links AI workflow adoption to trusted data demand.
   falsifier:
     - Trusted data and risk workflows do not become outcome-verification revenue.
 
@@ -251,6 +305,12 @@ MCO:
       source: earnings_release
       direction: stable_or_up
   watch_rule: AI assistant evidence stays marketing-only while credit cycle weakens.
+  next_action:
+    type: quarterly_review
+    priority: low
+    due: 2026-08-22
+    question: Check whether Moody's AI tools improve analytics workflow adoption or credit-risk research quality.
+    success_condition: Analytics growth, retention, or product evidence shows AI-enhanced workflow value.
   falsifier:
     - AI does not improve Moody's analytics or ratings workflow economics.
 
@@ -276,6 +336,12 @@ SPGI:
       source: filings_news_product_docs
       direction: stronger
   watch_rule: Kensho and trusted-data products do not show workflow integration evidence.
+  next_action:
+    type: quarterly_review
+    priority: low
+    due: 2026-08-22
+    question: Look for Kensho API, MCP, or data-licensing evidence inside LLM workflows.
+    success_condition: Product or customer evidence shows trusted S&P data embedded in AI workflows.
   falsifier:
     - LLM workflow adoption bypasses S&P Global's data and ratings franchises.
 
@@ -301,6 +367,12 @@ VEEV:
       source: company_ir_and_product_docs
       direction: stronger
   watch_rule: AI Agents remain roadmap-only or show low regulated-workflow usage.
+  next_action:
+    type: evidence_check
+    priority: medium
+    due: 2026-08-22
+    question: Track whether Veeva AI Agents move from roadmap to regulated production workflow usage.
+    success_condition: Official rollout, customer, or product evidence shows AI Agents used in regulated workflows.
   falsifier:
     - Regulated customers do not adopt Veeva AI in production workflows.
 
@@ -326,6 +398,12 @@ TER:
       source: earnings_release_and_company_ir
       direction: stronger
   watch_rule: Semiconductor test demand digests before robotics becomes material.
+  next_action:
+    type: quarterly_review
+    priority: medium
+    due: 2026-08-22
+    question: Check whether semiconductor test demand remains strong enough while robotics option value develops.
+    success_condition: Semitest bookings, AI revenue commentary, or robotics deal evidence supports the blended thesis.
   falsifier:
     - AI semiconductor-test demand normalizes before robotics optionality can matter.
 
@@ -351,5 +429,11 @@ CASH:
       source: local_calculation
       direction: lower
   watch_rule: Cash drag becomes the main portfolio error while thesis evidence remains strong.
+  next_action:
+    type: weight_review
+    priority: medium
+    due: 2026-08-22
+    question: Review whether cash still has option value versus current alerts, drawdown, and valuation resets.
+    success_condition: Cash remains useful against drawdown, valuation, source-health, or framework uncertainty.
   falsifier:
     - Cash no longer provides useful option value against drawdown, valuation, or framework risk.

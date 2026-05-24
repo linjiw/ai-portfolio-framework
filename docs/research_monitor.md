@@ -21,6 +21,7 @@ config/holdings.yml
 config/metrics_catalog.yml
 config/alert_rules.yml
 config/sources.yml
+data/decision_log.yml
 ```
 
 `holdings.yml`
@@ -38,6 +39,10 @@ config/sources.yml
 : Source-health definitions. Automated sources are checked against timestamps;
   planned and manual feeds are intentionally visible.
 
+`data/decision_log.yml`
+: Human review decisions. The monitor includes recent decisions in the generated
+  JSON, but it never changes weights or conviction automatically.
+
 ## Outputs
 
 ```text
@@ -47,6 +52,47 @@ data/generated/dashboard_data.json
 
 The website reads `site/research-monitor-data.json` from the same static Pages
 artifact as the portfolio tracker.
+
+## Tier 0.5 State
+
+The monitor now treats source health as a taxonomy rather than a single issue
+count:
+
+```text
+healthy
+manual_expected
+planned
+stale
+broken
+```
+
+Only `stale` and `broken` count as source issues. `manual_expected` and
+`planned` are transparency states.
+
+Each holding can define a `next_action`:
+
+```yaml
+next_action:
+  type: evidence_check
+  priority: high
+  due: 2026-08-22
+  question: Look for evidence of production write-permission adoption.
+  success_condition: Official disclosure, customer case study, or product documentation shows governed production actions.
+```
+
+Generated `reviewQueue` entries come from these next actions plus any alerts
+that require human review.
+
+Metric records include an evidence state. If a metric has no explicit state yet,
+the generator emits:
+
+```json
+{
+  "state": "unknown",
+  "confidence": "unknown",
+  "last_evidence_date": null
+}
+```
 
 ## LLM Boundary
 

@@ -1,0 +1,23 @@
+- date: 2026-05-23
+  ticker: FRAMEWORK
+  decision_type: system_design
+  previous_status: portfolio_tracker
+  new_status: deterministic_research_monitor
+  summary: Added a rules-first research monitor with source health, metric catalog, and LLM governance boundary.
+  changed_weight: false
+  changed_conviction: false
+  reviewer: human
+  source_refs:
+    - docs/research_monitor.md
+
+- date: 2026-05-23
+  ticker: MSFT
+  decision_type: thesis_review
+  previous_status: watch
+  new_status: watch
+  summary: Agent governance evidence improved, but production write-permission evidence remains insufficient.
+  changed_weight: false
+  changed_conviction: false
+  reviewer: human
+  source_refs:
+    - msft-agent365

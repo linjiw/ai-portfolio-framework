@@ -75,7 +75,7 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
                     "id": "weight_drift",
                     "category": "market",
                     "level": "yellow",
-                    "threshold_pct_points": 3.0,
+                    "threshold_relative_pct": 15.0,
                     "message": "Weight drift",
                 },
                 {
@@ -144,4 +144,5 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
     rule_ids = {alert["rule_id"] for alert in payload["alerts"]}
     assert {"stale_price", "weight_drift"} <= rule_ids
     assert payload["summary"]["highest_alert"] == "yellow"
+    assert payload["summary"]["source_status_counts"]["stale"] == 1
     assert output_path.exists()

@@ -109,7 +109,7 @@ main {
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.8fr) repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.55fr) repeat(4, minmax(0, 1fr));
   gap: 14px;
 }
 
@@ -155,6 +155,21 @@ main {
 
 .metric-panel.warning strong {
   color: var(--amber);
+}
+
+.metric-panel strong.green,
+.metric-panel strong.healthy {
+  color: var(--accent-dark);
+}
+
+.metric-panel strong.yellow,
+.metric-panel strong.medium {
+  color: var(--amber);
+}
+
+.metric-panel strong.red,
+.metric-panel strong.high {
+  color: var(--red);
 }
 
 .metric-panel p {
@@ -420,7 +435,8 @@ a:hover {
 .decision-grid,
 .decision-gate-grid,
 .monitor-grid,
-.alert-list {
+.alert-list,
+.review-queue {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
@@ -434,7 +450,8 @@ a:hover {
 .claim-card,
 .decision-card,
 .monitor-card,
-.alert-card {
+.alert-card,
+.review-card {
   padding: 16px;
   background: var(--panel);
   border: 1px solid var(--line);
@@ -479,15 +496,28 @@ a:hover {
 }
 
 .severity.gray,
-.severity.warning {
+.severity.warning,
+.severity.low {
   color: var(--muted);
   background: #eef1ec;
 }
 
 .severity.manual,
-.severity.planned {
+.severity.planned,
+.severity.manual_expected {
   color: var(--amber);
   background: var(--amber-soft);
+}
+
+.severity.healthy {
+  color: var(--accent-dark);
+  background: var(--green-soft);
+}
+
+.severity.stale,
+.severity.broken {
+  color: var(--red);
+  background: var(--red-soft);
 }
 
 .signal-card p,
@@ -496,11 +526,29 @@ a:hover {
 .claim-card p,
 .decision-card p,
 .monitor-card p,
-.alert-card p {
+.alert-card p,
+.review-card p {
   margin-top: 10px;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.45;
+}
+
+.review-card {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 12px;
+}
+
+.review-rank {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  color: #ffffff;
+  background: var(--accent-dark);
+  border-radius: 999px;
+  font-weight: 800;
 }
 
 .decision-overview {
@@ -867,6 +915,7 @@ a:hover {
   .decision-rules,
   .monitor-grid,
   .alert-list,
+  .review-queue,
   .portfolio-kpis,
   .monitor-kpis,
   .portfolio-plot-grid {
@@ -905,6 +954,7 @@ a:hover {
   .decision-rules,
   .monitor-grid,
   .alert-list,
+  .review-queue,
   .portfolio-kpis,
   .monitor-kpis,
   .portfolio-plot-grid,

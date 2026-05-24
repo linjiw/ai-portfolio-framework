@@ -121,9 +121,11 @@ Monitor top-level fields:
   principles: {...},
   summary: {...},
   alerts: [...],
+  reviewQueue: [...],
   sourceHealth: [...],
   holdings: [...],
-  metricCatalog: [...]
+  metricCatalog: [...],
+  decisionLog: [...]
 }
 ```
 
@@ -178,6 +180,7 @@ Current invariants verified locally:
 - Decision gates: 4
 - Research monitor holdings: 14
 - Research monitor source-health rows: 6
+- Research monitor review queue rows: 14
 - Source count: 31
 - Claim count: 15
 - Missing source IDs: 0

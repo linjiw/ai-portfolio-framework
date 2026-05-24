@@ -386,6 +386,13 @@ function renderResearchMonitorMissing() {
 function renderResearchMonitor(monitor) {
   const status = document.getElementById("monitorStatus");
   const summary = monitor.summary || {};
+  const ruleAlert = summary.rule_alert || summary.highest_alert || "green";
+  document.getElementById("ruleAlertValue").textContent = ruleAlert;
+  document.getElementById("ruleAlertValue").className = severityClass(ruleAlert);
+  document.getElementById("ruleAlertNote").textContent =
+    ruleAlert === "green"
+      ? "No deterministic alert currently triggered."
+      : "Deterministic monitor has a rule output to review.";
   status.className = "monitor-status ready";
   status.textContent = `Generated ${escapeHtml(monitor.generatedAtUtc)}. LLM phase: ${escapeHtml(
     monitor.principles?.llm_phase || "disabled"
@@ -394,13 +401,14 @@ function renderResearchMonitor(monitor) {
   const kpis = document.getElementById("monitorKpis");
   kpis.hidden = false;
   const alertCounts = summary.alert_counts || {};
+  const sourceCounts = summary.source_status_counts || {};
   kpis.innerHTML = [
-    ["Highest alert", summary.highest_alert || "green", severityClass(summary.highest_alert)],
+    ["Rule alert", ruleAlert, severityClass(ruleAlert)],
     ["Review queue", summary.review_queue_count ?? 0, ""],
     ["Yellow alerts", alertCounts.yellow ?? 0, ""],
     ["Red alerts", alertCounts.red ?? 0, ""],
-    ["Sources", summary.source_count ?? 0, ""],
-    ["Source issues", summary.source_issues ?? 0, ""]
+    ["Healthy sources", sourceCounts.healthy ?? 0, ""],
+    ["Stale/broken", summary.source_issues ?? 0, ""]
   ]
     .map(
       ([label, value, tone]) => `
@@ -413,8 +421,38 @@ function renderResearchMonitor(monitor) {
     .join("");
 
   renderMonitorAlerts(monitor.alerts || []);
+  renderReviewQueue(monitor.reviewQueue || []);
   renderMonitorHoldings(monitor.holdings || []);
   renderSourceHealth(monitor.sourceHealth || []);
+}
+
+function renderReviewQueue(queue) {
+  const reviewQueue = document.getElementById("reviewQueue");
+  if (!queue.length) {
+    reviewQueue.innerHTML = `<div class="empty-monitor">No review actions currently queued.</div>`;
+    return;
+  }
+  reviewQueue.innerHTML = queue
+    .map(
+      (item, index) => `
+        <article class="review-card">
+          <div class="review-rank">${index + 1}</div>
+          <div>
+            <div class="card-head">
+              <h3>${escapeHtml(item.ticker)} | ${escapeHtml(item.type)}</h3>
+              <span class="severity ${severityClass(item.priority)}">${escapeHtml(item.priority)}</span>
+            </div>
+            <p>${escapeHtml(item.question)}</p>
+            <div class="meta-row">
+              <span>Due: ${escapeHtml(item.due || "unscheduled")}</span>
+              <span>Source: ${escapeHtml(item.source)}</span>
+            </div>
+            <p class="muted">${escapeHtml(item.success_condition)}</p>
+          </div>
+        </article>
+      `
+    )
+    .join("");
 }
 
 function renderMonitorAlerts(alerts) {
@@ -468,6 +506,9 @@ function renderMonitorHoldings(holdings) {
                   <div>
                     <strong>${escapeHtml(metric.name)}</strong>
                     <span>${escapeHtml(metric.cadence)} | ${escapeHtml(metric.source)}</span>
+                    <span>State: ${escapeHtml(metric.evidence_state?.state)} | Confidence: ${escapeHtml(
+                      metric.evidence_state?.confidence
+                    )}</span>
                   </div>
                 `
               )

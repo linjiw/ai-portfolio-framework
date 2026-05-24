@@ -29,8 +29,9 @@ uv run python -m scripts.build_research_monitor
 uv run python -m scripts.build_site
 ```
 
-The monitor is intentionally rules-first: it reads config YAML, emits
-`research-monitor-data.json`, and keeps LLMs out of the portfolio-action path.
+The monitor is intentionally rules-first: it reads config YAML plus
+`data/decision_log.yml`, emits `research-monitor-data.json`, generates a review
+queue, and keeps LLMs out of the portfolio-action path.
 
 The daily GitHub workflow publishes the generated portfolio JSON and plot images
 to GitHub Pages.
