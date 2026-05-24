@@ -4,11 +4,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 import pandas as pd
+import yaml
 
-from ai_portfolio_framework.config import MANUAL_DIR, SITE_DIR
+from ai_portfolio_framework.config import CONFIG_DIR, MANUAL_DIR, SITE_DIR
+
+WATCHLIST_RULES_PATH = CONFIG_DIR / "watchlist_rules.yml"
 
 
 def main() -> None:
@@ -48,6 +52,7 @@ def validate_site(site_dir: Path, *, require_portfolio: bool = False) -> list[st
             errors.append("research-data.js watchlist must distinguish non-holding candidates")
         if "portfolio_holding_watch" not in research_text:
             errors.append("research-data.js watchlist must distinguish existing holding watches")
+        errors.extend(validate_watchlist_rules(research_text))
 
     errors.extend(validate_manual_holdings())
 
@@ -95,6 +100,65 @@ def validate_manual_holdings() -> list[str]:
     weight_total = float(pd.to_numeric(holdings["target_weight"]).sum())
     if abs(weight_total - 100.0) > 0.0001:
         errors.append(f"manual holding weights must sum to 100, got {weight_total}")
+    return errors
+
+
+def validate_watchlist_rules(research_text: str) -> list[str]:
+    if not WATCHLIST_RULES_PATH.exists():
+        return [f"missing watchlist rules config: {WATCHLIST_RULES_PATH}"]
+
+    errors: list[str] = []
+    payload = yaml.safe_load(WATCHLIST_RULES_PATH.read_text(encoding="utf-8")) or {}
+    if payload.get("schema_version") != 1:
+        errors.append(
+            f"watchlist_rules schema_version must be 1, got {payload.get('schema_version')}"
+        )
+
+    holdings = pd.read_csv(MANUAL_DIR / "ai_framework_holdings.csv")
+    holding_tickers = set(holdings["ticker"])
+    rules = payload.get("rules", {})
+    if "MU" not in rules:
+        errors.append("watchlist_rules must include MU")
+    if "000660.KS" not in rules:
+        errors.append("watchlist_rules must include 000660.KS")
+
+    allowed_states = set(payload.get("policy", {}).get("allowed_review_states", []))
+    if not allowed_states:
+        errors.append("watchlist_rules policy must define allowed_review_states")
+    watchlist_match = re.search(r"\n  watchlist: \{(?P<body>.*?)\n  claims:", research_text, re.S)
+    watchlist_text = watchlist_match.group("body").lower() if watchlist_match else ""
+    if re.search(r"\b(winner|buy|sell|automatic_rebalance)\b", watchlist_text):
+        errors.append("watchlist content must not emit winner/buy/sell language")
+
+    for ticker, rule in rules.items():
+        status = rule.get("status")
+        if status == "watchlist_only" and ticker in holding_tickers:
+            errors.append(f"watchlist-only ticker must not be a holding: {ticker}")
+        if status == "holding_watch" and ticker not in holding_tickers:
+            errors.append(f"holding-watch ticker must exist in holdings: {ticker}")
+        if f'ticker: "{ticker}"' not in research_text:
+            errors.append(f"research-data.js missing watchlist ticker from rules: {ticker}")
+        gate = rule.get("promotion_gate") or rule.get("thesis_gate") or {}
+        if gate.get("requires_decision_log") is not True:
+            errors.append(f"watchlist gate must require decision log: {ticker}")
+        if not gate.get("possible_outcomes"):
+            errors.append(f"watchlist gate missing possible outcomes: {ticker}")
+        if status == "watchlist_only" and not gate.get("disallowed_triggers"):
+            errors.append(f"watchlist-only gate missing disallowed triggers: {ticker}")
+
+    for gate in payload.get("comparison_gates", []):
+        gate_id = gate.get("id")
+        state = gate.get("review_state")
+        action = gate.get("action")
+        if state not in allowed_states:
+            errors.append(f"comparison gate {gate_id} has invalid review_state: {state}")
+        if action != "review_only":
+            errors.append(f"comparison gate {gate_id} action must be review_only, got {action}")
+        for field in ("question", "required_evidence_type", "current_read", "review_trigger"):
+            if not gate.get(field):
+                errors.append(f"comparison gate {gate_id} missing {field}")
+        if gate_id and str(gate_id) not in research_text:
+            errors.append(f"research-data.js missing comparison gate: {gate_id}")
     return errors
 
 

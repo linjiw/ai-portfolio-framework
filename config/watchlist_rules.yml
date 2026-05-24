@@ -1,0 +1,94 @@
+schema_version: 1
+
+policy:
+  purpose: Define promotion and replacement gates for research watchlist entries.
+  boundary: Watchlist entries create review work only; they do not create holdings, target weights, conviction changes, or trade instructions.
+  promotion_requires_decision_log: true
+  replacement_requires_decision_log: true
+  allowed_review_states:
+    - insufficient_evidence
+    - advantage_current_holding
+    - challenger_gap_closing
+    - review_required
+  disallowed_outputs:
+    - winner
+    - buy
+    - sell
+    - automatic_rebalance
+
+rules:
+  MU:
+    status: watchlist_only
+    compare_to: "000660.KS"
+    theme: memory_hbm
+    relationship: comparator_possible_hbm_challenger
+    promotion_gate:
+      requires_decision_log: true
+      required_evidence:
+        - nvidia_or_major_accelerator_qualification
+        - hbm4_or_hbm4e_volume_supply_evidence
+        - margin_or_mix_evidence
+        - capex_and_supply_discipline_evidence
+      disallowed_triggers:
+        - unsourced_market_share_claim
+        - short_term_price_move
+        - valuation_only_argument
+      possible_outcomes:
+        - remain_watchlist
+        - intensify_review
+        - open_weight_review
+        - open_replacement_review
+
+  "000660.KS":
+    status: holding_watch
+    compare_to: MU
+    theme: memory_hbm
+    relationship: current_holding_under_hbm_leadership_review
+    thesis_gate:
+      requires_decision_log: true
+      maintain_if:
+        - leadership_evidence_still_primary_sourced
+        - qualification_evidence_not_falling_behind
+        - hbm_cycle_economics_remain_supportive
+      review_if:
+        - mu_or_samsung_source_linked_gap_closes
+        - pricing_power_normalizes
+        - nvidia_qualification_edge_weakens
+      possible_outcomes:
+        - maintain_holding_watch
+        - intensify_review
+        - open_weight_review
+        - open_replacement_review
+
+comparison_gates:
+  - id: qualification
+    question: Who has source-linked accelerator qualification evidence?
+    review_state: advantage_current_holding
+    required_evidence_type: primary_customer_or_company_source
+    current_read: SK Hynix has stronger current primary-source HBM4 readiness evidence; MU needs clearer customer/platform qualification evidence.
+    review_trigger: MU or Samsung closes the source-linked qualification gap for Rubin-generation HBM.
+    action: review_only
+
+  - id: supply
+    question: Who can supply next-gen HBM at meaningful scale?
+    review_state: insufficient_evidence
+    required_evidence_type: company_ir_or_customer_disclosure
+    current_read: Both companies have strong supply narratives, but comparable volume and customer-allocation evidence remains incomplete.
+    review_trigger: Primary-source shipment or allocation evidence shows MU capacity is becoming a credible substitute for SK Hynix exposure.
+    action: review_only
+
+  - id: economics
+    question: Does HBM mix improve margin quality rather than only revenue growth?
+    review_state: challenger_gap_closing
+    required_evidence_type: earnings_release_or_transcript
+    current_read: MU's gross-margin guide is a near-term test; SK Hynix already shows exceptional profitability but must prove durability.
+    review_trigger: MU margin/mix evidence improves while SK Hynix pricing-power language deteriorates.
+    action: review_only
+
+  - id: cycle_risk
+    question: Is the thesis durable through memory pricing normalization?
+    review_state: insufficient_evidence
+    required_evidence_type: quarterly_results_guidance_and_capex_disclosure
+    current_read: The framework still treats both names as memory-cycle exposed until contracted demand and capex discipline are better sourced.
+    review_trigger: Evidence shows either company can preserve HBM economics through normalized DRAM/NAND pricing.
+    action: review_only

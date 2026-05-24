@@ -320,6 +320,7 @@ function renderWatchlist() {
       <p class="section-label">${escapeHtml(watchlist.stage || "Watchlist")}</p>
       <h3>${escapeHtml(watchlist.objective || "Research candidates")}</h3>
       <p>${escapeHtml(watchlist.policy || "")}</p>
+      <p class="watchlist-boundary">${escapeHtml(watchlist.boundaryNote || "")}</p>
     </div>
     <div class="watchlist-kpis">
       <div>
@@ -342,22 +343,21 @@ function renderWatchlist() {
   `;
 
   grid.innerHTML = items.map(renderWatchlistCard).join("");
-  comparison.innerHTML = (watchlist.comparison || [])
+  comparison.innerHTML = (watchlist.comparisonGates || [])
     .map(
-      (row) => `
-        <article class="comparison-card">
-          <p class="section-label">${escapeHtml(row.dimension)}</p>
-          <div class="comparison-columns">
-            <div>
-              <strong>MU</strong>
-              <p>${escapeHtml(row.micron)}</p>
-            </div>
-            <div>
-              <strong>SK Hynix</strong>
-              <p>${escapeHtml(row.skHynix)}</p>
-            </div>
+      (gate) => `
+        <article class="comparison-card gate-card">
+          <div class="card-head">
+            <p class="section-label">${escapeHtml(gate.id)}</p>
+            <span class="severity ${severityClass(gate.reviewState)}">${escapeHtml(gate.reviewState)}</span>
           </div>
-          <p class="muted">Decision use: ${escapeHtml(row.decisionUse)}</p>
+          <h3>${escapeHtml(gate.question)}</h3>
+          <div class="meta-row">
+            <span>Evidence: ${escapeHtml(gate.requiredEvidenceType)}</span>
+            <span>Action: ${escapeHtml(gate.action)}</span>
+          </div>
+          <p>${escapeHtml(gate.currentRead)}</p>
+          <p class="muted">Review trigger: ${escapeHtml(gate.reviewTrigger)}</p>
         </article>
       `
     )
@@ -404,6 +404,20 @@ function renderWatchlistCard(item) {
       `
     )
     .join("");
+  const promotionGate = item.promotionGate || {};
+  const requiredEvidence = (promotionGate.requiredEvidence || [])
+    .map((entry) => `<li>${escapeHtml(entry)}</li>`)
+    .join("");
+  const disallowedTriggers = (
+    promotionGate.disallowedTriggers ||
+    promotionGate.reviewTriggers ||
+    []
+  )
+    .map((entry) => `<li>${escapeHtml(entry)}</li>`)
+    .join("");
+  const outcomes = (promotionGate.possibleOutcomes || [])
+    .map((entry) => `<span>${escapeHtml(entry)}</span>`)
+    .join("");
   return `
     <article class="watchlist-card">
       <div class="card-head">
@@ -415,8 +429,10 @@ function renderWatchlistCard(item) {
       </div>
       <div class="bucket">${escapeHtml(item.role)} | Priority ${escapeHtml(item.priority)}</div>
       <div class="meta-row">
+        <span>Relationship: ${escapeHtml(item.relationship)}</span>
         <span>Review: ${escapeHtml(item.nextReviewDue)}</span>
         <span>Boundary: ${escapeHtml(item.decisionBoundary)}</span>
+        <span>Action: ${escapeHtml(item.actionBoundary)}</span>
       </div>
       <p class="thesis">${escapeHtml(item.coreQuestion)}</p>
       <p>${escapeHtml(item.thesisToTest)}</p>
@@ -441,6 +457,23 @@ function renderWatchlistCard(item) {
         <div class="card-section-title">Next action</div>
         <p>${escapeHtml(item.nextAction?.question || "")}</p>
         <p class="muted">${escapeHtml(item.nextAction?.successCondition || "")}</p>
+      </div>
+      <div class="watchlist-section promotion-gate">
+        <div class="card-section-title">Promotion / replacement gate</div>
+        <p class="muted">Decision log required: ${
+          promotionGate.requiresDecisionLog ? "yes" : "not configured"
+        }</p>
+        <div class="gate-columns">
+          <div>
+            <strong>Required evidence</strong>
+            <ul>${requiredEvidence}</ul>
+          </div>
+          <div>
+            <strong>${promotionGate.disallowedTriggers ? "Disallowed triggers" : "Review triggers"}</strong>
+            <ul>${disallowedTriggers}</ul>
+          </div>
+        </div>
+        <div class="gate-outcomes">${outcomes}</div>
       </div>
       <div class="watchlist-section">
         <div class="card-section-title">Decision process</div>

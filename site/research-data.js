@@ -225,6 +225,8 @@ window.AI_FRAMEWORK_DATA = {
     policy:
       "Watchlist entries create evidence, valuation, filing, and bear-case review work only. They cannot add a position, alter target weights, or change conviction without a later human decision log.",
     boundary: "human review only",
+    boundaryNote:
+      "Research-only watchlist. Not included in target weights, portfolio returns, conviction coverage, or automatic rebalance logic.",
     items: [
       {
         ticker: "MU",
@@ -232,9 +234,11 @@ window.AI_FRAMEWORK_DATA = {
         status: "watchlist_not_position",
         statusLabel: "watchlist only",
         role: "HBM re-rating candidate",
+        relationship: "Comparator / possible HBM challenger",
         priority: "high",
         nextReviewDue: "2026-06-24",
         decisionBoundary: "No position change from watchlist data",
+        actionBoundary: "research_only / no_weight_change",
         coreQuestion:
           "Is Micron becoming a contracted AI-memory supplier, or is the market simply annualizing a peak memory cycle?",
         thesisToTest:
@@ -321,6 +325,26 @@ window.AI_FRAMEWORK_DATA = {
           successCondition:
             "Primary-source earnings materials can map each watch metric to confirming, watching, deteriorating, or unknown."
         },
+        promotionGate: {
+          requiresDecisionLog: true,
+          requiredEvidence: [
+            "NVIDIA or major accelerator qualification",
+            "HBM4 or HBM4E volume supply evidence",
+            "Margin or mix evidence",
+            "Capex and supply discipline evidence"
+          ],
+          disallowedTriggers: [
+            "Unsourced market-share claim",
+            "Short-term price move",
+            "Valuation-only argument"
+          ],
+          possibleOutcomes: [
+            "remain_watchlist",
+            "intensify_review",
+            "open_weight_review",
+            "open_replacement_review"
+          ]
+        },
         decisionProcess: [
           {
             step: "Evidence first",
@@ -352,9 +376,11 @@ window.AI_FRAMEWORK_DATA = {
         status: "portfolio_holding_watch",
         statusLabel: "holding watch",
         role: "Existing HBM bottleneck holding",
+        relationship: "Current holding under HBM leadership review",
         priority: "high",
         nextReviewDue: "2026-08-22",
         decisionBoundary: "No target-weight change; review state only",
+        actionBoundary: "research_only / no_automatic_trim",
         coreQuestion:
           "Does SK Hynix retain HBM leadership as HBM4, High-NA EUV, and Samsung/Micron qualification pressure evolve?",
         thesisToTest:
@@ -441,6 +467,25 @@ window.AI_FRAMEWORK_DATA = {
           successCondition:
             "The review can explain whether SK Hynix still has the best risk-adjusted HBM exposure in the framework."
         },
+        promotionGate: {
+          requiresDecisionLog: true,
+          requiredEvidence: [
+            "Leadership evidence remains primary-sourced",
+            "Qualification evidence is not falling behind",
+            "HBM-cycle economics remain supportive"
+          ],
+          reviewTriggers: [
+            "MU or Samsung source-linked gap closes",
+            "Pricing power normalizes",
+            "NVIDIA qualification edge weakens"
+          ],
+          possibleOutcomes: [
+            "maintain_holding_watch",
+            "intensify_review",
+            "open_weight_review",
+            "open_replacement_review"
+          ]
+        },
         decisionProcess: [
           {
             step: "Separate holding from thesis",
@@ -467,42 +512,50 @@ window.AI_FRAMEWORK_DATA = {
         ]
       }
     ],
-    comparison: [
+    comparisonGates: [
       {
-        dimension: "Framework role",
-        micron:
-          "Candidate for a new memory re-rating sleeve if SCAs and HBM4E customization make earnings less cyclical.",
-        skHynix:
-          "Existing bottleneck-cyclical holding that already expresses HBM leadership inside the portfolio.",
-        decisionUse:
-          "MU must improve portfolio evidence quality or asymmetry beyond what SK Hynix already provides."
+        id: "qualification",
+        question: "Who has source-linked accelerator qualification evidence?",
+        reviewState: "advantage_current_holding",
+        requiredEvidenceType: "primary_customer_or_company_source",
+        currentRead:
+          "SK Hynix has stronger current primary-source HBM4 readiness evidence; MU needs clearer customer/platform qualification evidence.",
+        reviewTrigger:
+          "MU or Samsung closes the source-linked qualification gap for Rubin-generation HBM.",
+        action: "review_only"
       },
       {
-        dimension: "Evidence quality",
-        micron:
-          "Strong official Q2 materials, but HBM revenue mix and SCA economics still need sharper disclosure.",
-        skHynix:
-          "Official releases support HBM4 readiness, record results, and High-NA EUV adoption, but customer-share detail remains limited.",
-        decisionUse:
-          "Prefer primary-source evidence over conference-note summaries before updating thesis status."
+        id: "supply",
+        question: "Who can supply next-gen HBM at meaningful scale?",
+        reviewState: "insufficient_evidence",
+        requiredEvidenceType: "company_ir_or_customer_disclosure",
+        currentRead:
+          "Both companies have strong supply narratives, but comparable volume and customer-allocation evidence remains incomplete.",
+        reviewTrigger:
+          "Primary-source shipment or allocation evidence shows MU capacity is becoming a credible substitute for SK Hynix exposure.",
+        action: "review_only"
       },
       {
-        dimension: "Main falsifier",
-        micron:
-          "Cycle peak: margin guide fails, SCAs do not multiply, or capex expands faster than durable contracted demand.",
-        skHynix:
-          "Leadership erosion: Samsung or Micron wins material HBM4/HBM4E share and margin durability weakens.",
-        decisionUse:
-          "The two names should be reviewed as substitutes before adding any memory beta."
+        id: "economics",
+        question: "Does HBM mix improve margin quality rather than only revenue growth?",
+        reviewState: "challenger_gap_closing",
+        requiredEvidenceType: "earnings_release_or_transcript",
+        currentRead:
+          "MU's gross-margin guide is a near-term test; SK Hynix already shows exceptional profitability but must prove durability.",
+        reviewTrigger:
+          "MU margin/mix evidence improves while SK Hynix pricing-power language deteriorates.",
+        action: "review_only"
       },
       {
-        dimension: "Valuation discipline",
-        micron:
-          "Requires a sourced valuation snapshot before any framework weight discussion because sentiment has moved quickly.",
-        skHynix:
-          "Already sized as a cyclical bottleneck holding; valuation changes should affect review language before weight.",
-        decisionUse:
-          "Do not let HBM excitement bypass the valuation gate."
+        id: "cycle_risk",
+        question: "Is the thesis durable through memory pricing normalization?",
+        reviewState: "insufficient_evidence",
+        requiredEvidenceType: "quarterly_results_guidance_and_capex_disclosure",
+        currentRead:
+          "The framework still treats both names as memory-cycle exposed until contracted demand and capex discipline are better sourced.",
+        reviewTrigger:
+          "Evidence shows either company can preserve HBM economics through normalized DRAM/NAND pricing.",
+        action: "review_only"
       }
     ]
   },

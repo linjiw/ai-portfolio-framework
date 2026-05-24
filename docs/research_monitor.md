@@ -23,6 +23,7 @@ config/alert_rules.yml
 config/sources.yml
 config/source_rules.yml
 config/sec_companies.yml
+config/watchlist_rules.yml
 config/risk_factors.yml
 config/falsifier_thresholds.yml
 config/bear_cases.yml
@@ -55,6 +56,12 @@ data/thesis_changelog.yml
 `sec_companies.yml`
 : CIKs, tracked SEC forms, review-relevant forms, and last-reviewed dates for
   US-listed holdings and ADRs.
+
+`watchlist_rules.yml`
+: Promotion and replacement gates for research watchlist entries. These gates
+  define required evidence, disallowed triggers, allowed review states, and
+  decision-log requirements before a watchlist item can open a holding or
+  replacement review.
 
 `risk_factors.yml`
 : Portfolio-level risk overlays that cut across thesis buckets. The first
@@ -156,6 +163,26 @@ only a queue-ordering tool; it is not a portfolio action.
 Provenance coverage is generated separately. It counts material evidence bullets
 in `site/research-data.js`, claim-linked coverage, evidence-log source linkage,
 and weak-source records that need stronger primary-source support.
+
+## Watchlist Boundary
+
+A watchlist company can have sources, SEC filings, watch metrics, evidence gaps,
+bear cases, promotion gates, replacement gates, and comparison logic.
+
+A watchlist company cannot:
+
+- contribute to portfolio target weight,
+- change current holding conviction,
+- trigger automatic rebalance,
+- appear in portfolio performance tables,
+- resolve or trigger holding falsifiers without human review.
+
+Promotion from watchlist to holding requires a `decision_log.yml` entry and an
+explicit weight or conviction review. Replacement review also requires a
+decision-log entry. Comparison gates must emit review states such as
+`insufficient_evidence`, `advantage_current_holding`, `challenger_gap_closing`,
+or `review_required`; they must not emit a winner, buy, sell, or automatic
+rebalance instruction.
 
 ## Tier 0.8 State
 

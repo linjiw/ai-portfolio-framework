@@ -128,7 +128,10 @@ Top-level fields:
 as `MU` and existing holdings under special review such as `000660.KS`, but it
 cannot alter `holdings`, target weights, conviction, or portfolio actions.
 Watchlist rows must carry a decision boundary, source IDs, watch metrics,
-evidence gaps, bear case, falsifier, next action, and comparison notes.
+evidence gaps, bear case, falsifier, next action, promotion/replacement gate,
+and comparison-gate review states. The comparison gate emits
+`insufficient_evidence`, `advantage_current_holding`, `challenger_gap_closing`,
+or `review_required`; it does not emit a winner.
 
 The deterministic research monitor is generated as JSON at
 `site/research-monitor-data.json`. It is intentionally separate from

@@ -80,7 +80,9 @@ signal generation remain out of scope.
   non-holding candidate; SK Hynix is an existing holding under special review.
   The watchlist records evidence gaps, bear cases, source links, and next
   actions only. It does not add positions, change target weights, or change
-  conviction.
+  conviction. Promotion and replacement gates live in
+  `config/watchlist_rules.yml`; they emit review states only, not winners or
+  portfolio actions.
 
 `mispricing_research`
 : Identifies areas where the framework says a control right may matter but the
