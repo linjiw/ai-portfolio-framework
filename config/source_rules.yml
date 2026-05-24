@@ -14,3 +14,30 @@ link_health:
   primary_support_required:
     - source_id: ceg-tmi-pjm
       reason: CEG TMI/PJM timing claim should be supplemented with PJM, company, or regulatory primary support.
+  source_maintenance:
+    ceg-tmi-pjm:
+      quality: weak_source
+      fallback_required: true
+      preferred_primary_types:
+        - PJM
+        - company_filing
+        - regulatory_filing
+        - operator_data
+      archive_url: null
+      replacement_source_id: null
+    broadcom-q1-2026:
+      quality: accepted
+      archive_recommended: true
+      fallback_required: false
+    broadcom-openai:
+      quality: accepted
+      archive_recommended: true
+      fallback_required: false
+    broadcom-meta:
+      quality: accepted
+      archive_recommended: true
+      fallback_required: false
+    msci-q1-2026:
+      quality: accepted
+      archive_recommended: true
+      fallback_required: false

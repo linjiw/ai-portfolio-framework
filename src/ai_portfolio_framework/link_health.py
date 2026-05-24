@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import UTC, datetime
 from pathlib import Path
@@ -21,7 +20,7 @@ from ai_portfolio_framework.config import (
     SITE_DIR,
     ensure_directories,
 )
-from ai_portfolio_framework.research_monitor import source_labels_by_id
+from ai_portfolio_framework.provenance import source_labels_by_id, source_urls_by_id
 
 RESEARCH_DATA_PATH = SITE_DIR / "research-data.js"
 SOURCE_RULES_CONFIG_PATH = CONFIG_DIR / "source_rules.yml"
@@ -78,6 +77,10 @@ def build_link_health_snapshot(
         for item in rules.get("primary_support_required", [])
         if item.get("source_id")
     }
+    source_maintenance = {
+        str(source_id): maintenance
+        for source_id, maintenance in rules.get("source_maintenance", {}).items()
+    }
     weak_terms = tuple(str(term).lower() for term in rules.get("weak_source_terms", []))
     check = checker or check_source_url
 
@@ -91,6 +94,7 @@ def build_link_health_snapshot(
                 timeout=timeout,
                 weak_terms=weak_terms,
                 primary_support_required=primary_support_required,
+                source_maintenance=source_maintenance,
                 checker=check,
             ): source
             for source in sources
@@ -126,27 +130,44 @@ def build_source_record(
     timeout: float,
     weak_terms: tuple[str, ...],
     primary_support_required: dict[str, str],
+    source_maintenance: dict[str, dict[str, Any]],
     checker: Any,
 ) -> dict[str, Any]:
     result = checker(source["url"], timeout)
     explicit_reason = primary_support_required.get(source["source_id"])
+    maintenance = source_maintenance.get(source["source_id"], {})
     weak_by_label = any(
         term in f"{source['source_id']} {source['label']}".lower() for term in weak_terms
     )
-    source_quality_status = "weak_source" if explicit_reason or weak_by_label else "accepted"
+    source_quality_status = maintenance.get(
+        "quality",
+        "weak_source" if explicit_reason or weak_by_label else "accepted",
+    )
     quality_reason = explicit_reason or (
         "Secondary or syndicated source" if weak_by_label else ""
+    )
+    link_status = result["link_status"]
+    fallback_required = bool(maintenance.get("fallback_required", False)) or (
+        source_quality_status == "weak_source"
+    )
+    archive_recommended = bool(maintenance.get("archive_recommended", False)) or (
+        link_status in {"forbidden", "timeout"}
     )
     return {
         "source_id": source["source_id"],
         "label": source["label"],
         "url": source["url"],
-        "link_status": result["link_status"],
+        "link_status": link_status,
         "http_status": result.get("http_status"),
         "final_url": result.get("final_url"),
         "source_quality_status": source_quality_status,
-        "primary_support_required": source_quality_status == "weak_source",
+        "primary_support_required": fallback_required,
         "quality_reason": quality_reason,
+        "fallback_required": fallback_required,
+        "preferred_primary_types": maintenance.get("preferred_primary_types", []),
+        "archive_recommended": archive_recommended,
+        "archive_url": maintenance.get("archive_url"),
+        "replacement_source_id": maintenance.get("replacement_source_id"),
         "last_checked_at": checked_at.isoformat().replace("+00:00", "Z"),
     }
 
@@ -252,20 +273,6 @@ def parse_sources(research_data_path: Path) -> list[dict[str, str]]:
         for source_id, label in labels.items()
         if urls.get(source_id)
     ]
-
-
-def source_urls_by_id(text: str) -> dict[str, str]:
-    urls: dict[str, str] = {}
-    pattern = (
-        r'"([^"]+)": \{\s*label: "(?:\\.|[^"\\])*",\s*url: "((?:\\.|[^"\\])*)"'
-    )
-    for source_id, url in re.findall(pattern, text):
-        urls[source_id] = decode_js_string(url)
-    return urls
-
-
-def decode_js_string(value: str) -> str:
-    return value.replace('\\"', '"').replace("\\/", "/")
 
 
 def append_history(path: Path, payload: dict[str, Any], *, history_limit: int) -> None:

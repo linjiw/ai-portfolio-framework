@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any
 
 import yaml
 
+from ai_portfolio_framework import provenance as provenance_tools
 from ai_portfolio_framework.config import (
     CONFIG_DIR,
     GENERATED_DATA_DIR,
@@ -195,7 +195,7 @@ def build_research_monitor_data(
         as_of_date=as_of_date,
     )
     evidence_coverage = build_evidence_coverage(monitored_holdings)
-    provenance_coverage = build_provenance_coverage(
+    provenance_coverage = provenance_tools.build_provenance_coverage(
         research_data_path=research_data_path,
         evidence_log=evidence_log,
     )
@@ -593,6 +593,7 @@ def build_filing_review_queue(
             ticker=ticker,
         )
         score["score"] += 20
+        score["scoreBreakdown"]["filingEvent"] += 20
         score["score_reasons"].extend(
             reason
             for reason in ("official SEC filing", company.get("reason", ""))
@@ -612,18 +613,32 @@ def score_review_item(
     ticker: str,
     risk_profile: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    score = PRIORITY_SCORE.get(priority, 40)
+    breakdown = {
+        "priority": PRIORITY_SCORE.get(priority, 40),
+        "dueDate": 0,
+        "alert": 0,
+        "evidenceState": 0,
+        "requiresReview": 0,
+        "riskOverlay": 0,
+        "frameworkBottleneck": 0,
+        "sourceWeakness": 0,
+        "filingEvent": 0,
+    }
+    score = breakdown["priority"]
     reasons = [f"{priority} priority"]
     if alert_level == "red":
-        score += 50
+        breakdown["alert"] = 50
+        score += breakdown["alert"]
         reasons.append("red alert")
     elif alert_level == "yellow":
-        score += 25
+        breakdown["alert"] = 25
+        score += breakdown["alert"]
         reasons.append("yellow alert")
 
     urgency_score = due_date_score(due, as_of_date)
     if urgency_score:
-        score += urgency_score
+        breakdown["dueDate"] = urgency_score
+        score += breakdown["dueDate"]
         reasons.append("due date approaching")
 
     evidence_state = None
@@ -631,27 +646,33 @@ def score_review_item(
         evidence_state = metric.get("evidence_state", {})
         state = evidence_state.get("state", "unknown")
         state_score = EVIDENCE_STATE_SCORE.get(state, 0)
-        score += state_score
+        breakdown["evidenceState"] = state_score
+        score += breakdown["evidenceState"]
         if state_score:
             reasons.append(f"{state} evidence")
         if evidence_state.get("requires_review"):
-            score += 10
+            breakdown["requiresReview"] = 10
+            score += breakdown["requiresReview"]
             reasons.append("evidence requires review")
 
     if ticker == "MSFT":
-        score += 10
+        breakdown["frameworkBottleneck"] = 10
+        score += breakdown["frameworkBottleneck"]
         reasons.append("framework trust bottleneck")
 
     capex_profile = (risk_profile or {}).get("hyperscaler_capex_cycle", {})
     if capex_profile.get("category") == "direct":
+        breakdown["riskOverlay"] += 8
         score += 8
         reasons.append("direct capex-cycle exposure")
     if capex_profile.get("sensitivity") == "high":
+        breakdown["riskOverlay"] += 5
         score += 5
         reasons.append("high cycle sensitivity")
 
     return {
         "score": score,
+        "scoreBreakdown": breakdown,
         "score_reasons": reasons,
         "evidence_state": evidence_state,
     }
@@ -840,139 +861,6 @@ def coverage_count(index: dict[str, Any], tickers: list[str]) -> int:
 
 def coverage_ratio(index: dict[str, Any], tickers: list[str]) -> float:
     return round(coverage_count(index, tickers) / len(tickers), 4) if tickers else 0.0
-
-
-def build_provenance_coverage(
-    *,
-    research_data_path: Path,
-    evidence_log: list[dict[str, Any]],
-) -> dict[str, Any]:
-    text = research_data_path.read_text(encoding="utf-8") if research_data_path.exists() else ""
-    evidence_counts = holding_evidence_counts(text)
-    claim_entities = claim_entities_by_ticker(text)
-    claim_source_ids = claim_source_ids_by_ticker(text)
-    source_labels = source_labels_by_id(text)
-    material_evidence_bullets = sum(evidence_counts.values())
-    claim_linked_bullets = sum(
-        min(evidence_counts.get(ticker, 0), len(claim_entities.get(ticker, [])))
-        for ticker in evidence_counts
-    )
-    evidence_log_links = sum(
-        1 for item in evidence_log if item.get("source_ids") or item.get("claim_ids")
-    )
-    weak_sources = build_weak_source_records(
-        claim_source_ids=claim_source_ids,
-        source_labels=source_labels,
-        evidence_log=evidence_log,
-    )
-    coverage_ratio = (
-        round(claim_linked_bullets / material_evidence_bullets, 4)
-        if material_evidence_bullets
-        else 0.0
-    )
-    return {
-        "schemaVersion": 1,
-        "generatedAtUtc": utc_iso(),
-        "summary": {
-            "materialEvidenceBullets": material_evidence_bullets,
-            "claimLinkedEvidenceBullets": claim_linked_bullets,
-            "coverageRatio": coverage_ratio,
-            "evidenceLogEntries": len(evidence_log),
-            "evidenceLogEntriesWithSourceOrClaim": evidence_log_links,
-            "weakSourceCount": len(weak_sources),
-        },
-        "holdingsMissingClaimCoverage": missing_claim_coverage(evidence_counts, claim_entities),
-        "holdingEvidenceCounts": evidence_counts,
-        "claimCountsByHolding": {
-            ticker: len(claim_entities.get(ticker, [])) for ticker in sorted(evidence_counts)
-        },
-        "weakSources": weak_sources,
-    }
-
-
-def holding_evidence_counts(text: str) -> dict[str, int]:
-    counts: dict[str, int] = {}
-    pattern = re.compile(r'\{\s*ticker: "([^"]+)".*?evidence: \[(.*?)\]\s*,\s*risks:', re.S)
-    for ticker, evidence_block in pattern.findall(text):
-        counts[ticker] = len(re.findall(r'"(?:\\.|[^"\\])*"', evidence_block))
-    return counts
-
-
-def claim_entities_by_ticker(text: str) -> dict[str, list[str]]:
-    entities: dict[str, list[str]] = {}
-    pattern = re.compile(r'claim_id: "([^"]+)".*?entity: "([^"]+)"', re.S)
-    for claim_id, entity in pattern.findall(text):
-        entities.setdefault(entity, []).append(claim_id)
-    return entities
-
-
-def claim_source_ids_by_ticker(text: str) -> dict[str, list[str]]:
-    source_ids: dict[str, list[str]] = {}
-    pattern = re.compile(
-        r'claim_id: "([^"]+)".*?source_id: "([^"]+)".*?entity: "([^"]+)"',
-        re.S,
-    )
-    for _claim_id, source_id, entity in pattern.findall(text):
-        source_ids.setdefault(entity, []).append(source_id)
-    return source_ids
-
-
-def source_labels_by_id(text: str) -> dict[str, str]:
-    labels: dict[str, str] = {}
-    pattern = re.compile(r'"([^"]+)": \{\s*label: "([^"]+)"', re.S)
-    for source_id, label in pattern.findall(text):
-        labels[source_id] = label
-    return labels
-
-
-def missing_claim_coverage(
-    evidence_counts: dict[str, int],
-    claim_entities: dict[str, list[str]],
-) -> list[str]:
-    return [
-        ticker
-        for ticker, count in evidence_counts.items()
-        if count and not claim_entities.get(ticker)
-    ]
-
-
-def build_weak_source_records(
-    *,
-    claim_source_ids: dict[str, list[str]],
-    source_labels: dict[str, str],
-    evidence_log: list[dict[str, Any]],
-) -> list[dict[str, str]]:
-    weak = []
-    seen = set()
-    weak_terms = ("reuters", "investing.com", "secondary")
-    for ticker, source_ids in sorted(claim_source_ids.items()):
-        for source_id in source_ids:
-            label = source_labels.get(source_id, "")
-            if any(term in label.lower() for term in weak_terms):
-                weak.append(weak_source_record(ticker, source_id, label))
-                seen.add((ticker, source_id))
-    for item in evidence_log:
-        ticker = str(item.get("ticker", ""))
-        for source_id in item.get("source_ids", []):
-            label = source_labels.get(source_id, "")
-            key = (ticker, source_id)
-            if key in seen:
-                continue
-            if any(term in label.lower() for term in weak_terms):
-                weak.append(weak_source_record(ticker, source_id, label))
-                seen.add(key)
-    return weak
-
-
-def weak_source_record(ticker: str, source_id: str, label: str) -> dict[str, str]:
-    return {
-        "ticker": ticker,
-        "source_id": source_id,
-        "reason": f"Secondary or syndicated source: {label}",
-        "recommended_action": (
-            "Supplement with primary filing, company, regulatory, or operator data."
-        ),
-    }
 
 
 def current_weight(portfolio_row: dict[str, Any] | None, portfolio_total: float) -> float | None:

@@ -2,7 +2,7 @@
   "companies": [
     {
       "cik": "0000789019",
-      "fetched_at_utc": "2026-05-24T06:53:02Z",
+      "fetched_at_utc": "2026-05-24T07:29:43Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -12,6 +12,10 @@
           "primary_doc_description": "8-K",
           "primary_document": "d125909d8k.htm",
           "report_date": "2026-05-13",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-msft-2026-05-14-8k",
+          "review_summary": "Reviewed filing event; no change to monitored production write-permission evidence.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-msft-2026-05-14-8k-26224155",
           "ticker": "MSFT",
           "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526224155/d125909d8k.htm"
@@ -101,11 +105,15 @@
         "primary_doc_description": "8-K",
         "primary_document": "d125909d8k.htm",
         "report_date": "2026-05-13",
+        "review_disposition": "no_thesis_change",
+        "review_id": "filing-msft-2026-05-14-8k",
+        "review_summary": "Reviewed filing event; no change to monitored production write-permission evidence.",
+        "reviewed_at": "2026-05-24",
         "source_id": "sec-msft-2026-05-14-8k-26224155",
         "ticker": "MSFT",
         "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526224155/d125909d8k.htm"
       },
-      "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+      "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
       "review_relevant_forms": [
         "10-K",
         "10-Q",
@@ -118,7 +126,7 @@
     },
     {
       "cik": "0001652044",
-      "fetched_at_utc": "2026-05-24T06:53:02Z",
+      "fetched_at_utc": "2026-05-24T07:29:43Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -128,6 +136,10 @@
           "primary_doc_description": "8-K",
           "primary_document": "d144566d8k.htm",
           "report_date": "2026-05-21",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-googl-2026-05-21-8k",
+          "review_summary": "Reviewed filing event; no change to TPU cost-advantage or Cloud margin evidence state.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-googl-2026-05-21-8k-26234488",
           "ticker": "GOOGL",
           "url": "https://www.sec.gov/Archives/edgar/data/1652044/000119312526234488/d144566d8k.htm"
@@ -217,11 +229,15 @@
         "primary_doc_description": "8-K",
         "primary_document": "d144566d8k.htm",
         "report_date": "2026-05-21",
+        "review_disposition": "no_thesis_change",
+        "review_id": "filing-googl-2026-05-21-8k",
+        "review_summary": "Reviewed filing event; no change to TPU cost-advantage or Cloud margin evidence state.",
+        "reviewed_at": "2026-05-24",
         "source_id": "sec-googl-2026-05-21-8k-26234488",
         "ticker": "GOOGL",
         "url": "https://www.sec.gov/Archives/edgar/data/1652044/000119312526234488/d144566d8k.htm"
       },
-      "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+      "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
       "review_relevant_forms": [
         "10-K",
         "10-Q",
@@ -234,7 +250,7 @@
     },
     {
       "cik": "0001730168",
-      "fetched_at_utc": "2026-05-24T06:53:02Z",
+      "fetched_at_utc": "2026-05-24T07:29:43Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -244,6 +260,10 @@
           "primary_doc_description": "8-K",
           "primary_document": "avgo-20260420.htm",
           "report_date": "2026-04-20",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-avgo-2026-04-21-8k",
+          "review_summary": "Reviewed filing event; no automatic change to AI semiconductor evidence state.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-avgo-2026-04-21-8k-26000039",
           "ticker": "AVGO",
           "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000039/avgo-20260420.htm"
@@ -333,11 +353,15 @@
         "primary_doc_description": "8-K",
         "primary_document": "avgo-20260420.htm",
         "report_date": "2026-04-20",
+        "review_disposition": "no_thesis_change",
+        "review_id": "filing-avgo-2026-04-21-8k",
+        "review_summary": "Reviewed filing event; no automatic change to AI semiconductor evidence state.",
+        "reviewed_at": "2026-05-24",
         "source_id": "sec-avgo-2026-04-21-8k-26000039",
         "ticker": "AVGO",
         "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000039/avgo-20260420.htm"
       },
-      "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+      "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
       "review_relevant_forms": [
         "10-K",
         "10-Q",
@@ -350,7 +374,7 @@
     },
     {
       "cik": "0001046179",
-      "fetched_at_utc": "2026-05-24T06:53:02Z",
+      "fetched_at_utc": "2026-05-24T07:29:43Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -360,6 +384,10 @@
           "primary_doc_description": "6-K",
           "primary_document": "tsmctosell81ofvanguardinte.htm",
           "report_date": "2026-05-15",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-tsm-2026-05-15-6k",
+          "review_summary": "Reviewed filing event; no change to leading-edge or packaging chokepoint thesis.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-tsm-2026-05-15-6k-26000280",
           "ticker": "TSM",
           "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000280/tsmctosell81ofvanguardinte.htm"
@@ -449,11 +477,15 @@
         "primary_doc_description": "6-K",
         "primary_document": "tsmctosell81ofvanguardinte.htm",
         "report_date": "2026-05-15",
+        "review_disposition": "no_thesis_change",
+        "review_id": "filing-tsm-2026-05-15-6k",
+        "review_summary": "Reviewed filing event; no change to leading-edge or packaging chokepoint thesis.",
+        "reviewed_at": "2026-05-24",
         "source_id": "sec-tsm-2026-05-15-6k-26000280",
         "ticker": "TSM",
         "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000280/tsmctosell81ofvanguardinte.htm"
       },
-      "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+      "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
       "review_relevant_forms": [
         "20-F",
         "6-K"
@@ -465,7 +497,7 @@
     },
     {
       "cik": "0001045810",
-      "fetched_at_utc": "2026-05-24T06:53:02Z",
+      "fetched_at_utc": "2026-05-24T07:29:43Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -475,6 +507,10 @@
           "primary_doc_description": "10-Q",
           "primary_document": "nvda-20260426.htm",
           "report_date": "2026-04-26",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-nvda-2026-05-20-10q",
+          "review_summary": "Reviewed filing event; Rubin architecture and margin durability remain quarterly review inputs.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-nvda-2026-05-20-10q-26000052",
           "ticker": "NVDA",
           "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm"
@@ -564,11 +600,15 @@
         "primary_doc_description": "10-Q",
         "primary_document": "nvda-20260426.htm",
         "report_date": "2026-04-26",
+        "review_disposition": "no_thesis_change",
+        "review_id": "filing-nvda-2026-05-20-10q",
+        "review_summary": "Reviewed filing event; Rubin architecture and margin durability remain quarterly review inputs.",
+        "reviewed_at": "2026-05-24",
         "source_id": "sec-nvda-2026-05-20-10q-26000052",
         "ticker": "NVDA",
         "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm"
       },
-      "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+      "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
       "review_relevant_forms": [
         "10-K",
         "10-Q",
@@ -581,7 +621,7 @@
     },
     {
       "cik": "0001868275",
-      "fetched_at_utc": "2026-05-24T06:53:02Z",
+      "fetched_at_utc": "2026-05-24T07:29:43Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -591,6 +631,10 @@
           "primary_doc_description": "10-Q",
           "primary_document": "ceg-20260331.htm",
           "report_date": "2026-03-31",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-ceg-2026-05-11-10q",
+          "review_summary": "Reviewed filing event; PJM and primary-source evidence gap remains open.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-ceg-2026-05-11-10q-26000067",
           "ticker": "CEG",
           "url": "https://www.sec.gov/Archives/edgar/data/1868275/000186827526000067/ceg-20260331.htm"
@@ -680,11 +724,15 @@
         "primary_doc_description": "10-Q",
         "primary_document": "ceg-20260331.htm",
         "report_date": "2026-03-31",
+        "review_disposition": "no_thesis_change",
+        "review_id": "filing-ceg-2026-05-11-10q",
+        "review_summary": "Reviewed filing event; PJM and primary-source evidence gap remains open.",
+        "reviewed_at": "2026-05-24",
         "source_id": "sec-ceg-2026-05-11-10q-26000067",
         "ticker": "CEG",
         "url": "https://www.sec.gov/Archives/edgar/data/1868275/000186827526000067/ceg-20260331.htm"
       },
-      "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+      "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
       "review_relevant_forms": [
         "10-K",
         "10-Q",
@@ -697,7 +745,7 @@
     },
     {
       "cik": "0001674101",
-      "fetched_at_utc": "2026-05-24T06:53:02Z",
+      "fetched_at_utc": "2026-05-24T07:29:43Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -707,6 +755,10 @@
           "primary_doc_description": "8-K",
           "primary_document": "vrt-20260427.htm",
           "report_date": "2026-04-27",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-vrt-2026-04-27-8k",
+          "review_summary": "Reviewed filing event; no change to power and liquid-cooling evidence state.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-vrt-2026-04-27-8k-26027297",
           "ticker": "VRT",
           "url": "https://www.sec.gov/Archives/edgar/data/1674101/000162828026027297/vrt-20260427.htm"
@@ -796,11 +848,15 @@
         "primary_doc_description": "8-K",
         "primary_document": "vrt-20260427.htm",
         "report_date": "2026-04-27",
+        "review_disposition": "no_thesis_change",
+        "review_id": "filing-vrt-2026-04-27-8k",
+        "review_summary": "Reviewed filing event; no change to power and liquid-cooling evidence state.",
+        "reviewed_at": "2026-05-24",
         "source_id": "sec-vrt-2026-04-27-8k-26027297",
         "ticker": "VRT",
         "url": "https://www.sec.gov/Archives/edgar/data/1674101/000162828026027297/vrt-20260427.htm"
       },
-      "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+      "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
       "review_relevant_forms": [
         "10-K",
         "10-Q",
@@ -813,7 +869,7 @@
     },
     {
       "cik": "0001408198",
-      "fetched_at_utc": "2026-05-24T06:53:02Z",
+      "fetched_at_utc": "2026-05-24T07:29:43Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -823,6 +879,10 @@
           "primary_doc_description": "8-K",
           "primary_document": "msci-20260421.htm",
           "report_date": "2026-04-21",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-msci-2026-04-23-8k",
+          "review_summary": "Reviewed filing event; no change to retention or analytics run-rate evidence state.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-msci-2026-04-23-8k-26000038",
           "ticker": "MSCI",
           "url": "https://www.sec.gov/Archives/edgar/data/1408198/000140819826000038/msci-20260421.htm"
@@ -912,11 +972,15 @@
         "primary_doc_description": "8-K",
         "primary_document": "msci-20260421.htm",
         "report_date": "2026-04-21",
+        "review_disposition": "no_thesis_change",
+        "review_id": "filing-msci-2026-04-23-8k",
+        "review_summary": "Reviewed filing event; no change to retention or analytics run-rate evidence state.",
+        "reviewed_at": "2026-05-24",
         "source_id": "sec-msci-2026-04-23-8k-26000038",
         "ticker": "MSCI",
         "url": "https://www.sec.gov/Archives/edgar/data/1408198/000140819826000038/msci-20260421.htm"
       },
-      "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+      "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
       "review_relevant_forms": [
         "10-K",
         "10-Q",
@@ -929,7 +993,7 @@
     },
     {
       "cik": "0001059556",
-      "fetched_at_utc": "2026-05-24T06:53:02Z",
+      "fetched_at_utc": "2026-05-24T07:29:43Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -939,6 +1003,10 @@
           "primary_doc_description": "10-Q",
           "primary_document": "mco-20260331.htm",
           "report_date": "2026-03-31",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-mco-2026-04-23-10q",
+          "review_summary": "Reviewed filing event; no change to Research Assistant adoption evidence state.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-mco-2026-04-23-10q-26026848",
           "ticker": "MCO",
           "url": "https://www.sec.gov/Archives/edgar/data/1059556/000162828026026848/mco-20260331.htm"
@@ -1028,11 +1096,15 @@
         "primary_doc_description": "10-Q",
         "primary_document": "mco-20260331.htm",
         "report_date": "2026-03-31",
+        "review_disposition": "no_thesis_change",
+        "review_id": "filing-mco-2026-04-23-10q",
+        "review_summary": "Reviewed filing event; no change to Research Assistant adoption evidence state.",
+        "reviewed_at": "2026-05-24",
         "source_id": "sec-mco-2026-04-23-10q-26026848",
         "ticker": "MCO",
         "url": "https://www.sec.gov/Archives/edgar/data/1059556/000162828026026848/mco-20260331.htm"
       },
-      "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+      "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
       "review_relevant_forms": [
         "10-K",
         "10-Q",
@@ -1045,7 +1117,7 @@
     },
     {
       "cik": "0000064040",
-      "fetched_at_utc": "2026-05-24T06:53:02Z",
+      "fetched_at_utc": "2026-05-24T07:29:43Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -1055,6 +1127,10 @@
           "primary_doc_description": "8-K",
           "primary_document": "spgi-20260520.htm",
           "report_date": "2026-05-20",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-spgi-2026-05-21-8k",
+          "review_summary": "Reviewed filing event; no change to Kensho/API/MCP workflow evidence state.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-spgi-2026-05-21-8k-26000028",
           "ticker": "SPGI",
           "url": "https://www.sec.gov/Archives/edgar/data/64040/000006404026000028/spgi-20260520.htm"
@@ -1144,11 +1220,15 @@
         "primary_doc_description": "8-K",
         "primary_document": "spgi-20260520.htm",
         "report_date": "2026-05-20",
+        "review_disposition": "no_thesis_change",
+        "review_id": "filing-spgi-2026-05-21-8k",
+        "review_summary": "Reviewed filing event; no change to Kensho/API/MCP workflow evidence state.",
+        "reviewed_at": "2026-05-24",
         "source_id": "sec-spgi-2026-05-21-8k-26000028",
         "ticker": "SPGI",
         "url": "https://www.sec.gov/Archives/edgar/data/64040/000006404026000028/spgi-20260520.htm"
       },
-      "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+      "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
       "review_relevant_forms": [
         "10-K",
         "10-Q",
@@ -1161,7 +1241,7 @@
     },
     {
       "cik": "0001393052",
-      "fetched_at_utc": "2026-05-24T06:53:02Z",
+      "fetched_at_utc": "2026-05-24T07:29:43Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -1171,6 +1251,10 @@
           "primary_doc_description": "8-K",
           "primary_document": "veev-20260420.htm",
           "report_date": "2026-04-20",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-veev-2026-04-20-8k",
+          "review_summary": "Reviewed filing event; AI Agents remain a roadmap and usage-evidence watch item.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-veev-2026-04-20-8k-26000018",
           "ticker": "VEEV",
           "url": "https://www.sec.gov/Archives/edgar/data/1393052/000139305226000018/veev-20260420.htm"
@@ -1260,11 +1344,15 @@
         "primary_doc_description": "8-K",
         "primary_document": "veev-20260420.htm",
         "report_date": "2026-04-20",
+        "review_disposition": "no_thesis_change",
+        "review_id": "filing-veev-2026-04-20-8k",
+        "review_summary": "Reviewed filing event; AI Agents remain a roadmap and usage-evidence watch item.",
+        "reviewed_at": "2026-05-24",
         "source_id": "sec-veev-2026-04-20-8k-26000018",
         "ticker": "VEEV",
         "url": "https://www.sec.gov/Archives/edgar/data/1393052/000139305226000018/veev-20260420.htm"
       },
-      "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+      "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
       "review_relevant_forms": [
         "10-K",
         "10-Q",
@@ -1277,7 +1365,7 @@
     },
     {
       "cik": "0000097210",
-      "fetched_at_utc": "2026-05-24T06:53:02Z",
+      "fetched_at_utc": "2026-05-24T07:29:43Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -1287,6 +1375,10 @@
           "primary_doc_description": "8-K",
           "primary_document": "ter-20260508.htm",
           "report_date": "2026-05-08",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-ter-2026-05-11-8k",
+          "review_summary": "Reviewed filing event; no change to semitest versus robotics evidence state.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-ter-2026-05-11-8k-26215848",
           "ticker": "TER",
           "url": "https://www.sec.gov/Archives/edgar/data/97210/000119312526215848/ter-20260508.htm"
@@ -1376,11 +1468,15 @@
         "primary_doc_description": "8-K",
         "primary_document": "ter-20260508.htm",
         "report_date": "2026-05-08",
+        "review_disposition": "no_thesis_change",
+        "review_id": "filing-ter-2026-05-11-8k",
+        "review_summary": "Reviewed filing event; no change to semitest versus robotics evidence state.",
+        "reviewed_at": "2026-05-24",
         "source_id": "sec-ter-2026-05-11-8k-26215848",
         "ticker": "TER",
         "url": "https://www.sec.gov/Archives/edgar/data/97210/000119312526215848/ter-20260508.htm"
       },
-      "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+      "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
       "review_relevant_forms": [
         "10-K",
         "10-Q",
@@ -1392,7 +1488,213 @@
       "ticker": "TER"
     }
   ],
-  "generatedAtUtc": "2026-05-24T06:53:02Z",
+  "filingReviewLog": [
+    {
+      "accession_number": "0001193125-26-224155",
+      "disposition": "no_thesis_change",
+      "filing_date": "2026-05-14",
+      "form": "8-K",
+      "mapped_to": {
+        "decision_log_ids": [],
+        "evidence_log_ids": [],
+        "thesis_changelog_ids": []
+      },
+      "review_id": "filing-msft-2026-05-14-8k",
+      "reviewed_at": "2026-05-24",
+      "reviewer": "human",
+      "source_id": "sec-msft-2026-05-14-8k-26224155",
+      "summary": "Reviewed filing event; no change to monitored production write-permission evidence.",
+      "ticker": "MSFT"
+    },
+    {
+      "accession_number": "0001193125-26-234488",
+      "disposition": "no_thesis_change",
+      "filing_date": "2026-05-21",
+      "form": "8-K",
+      "mapped_to": {
+        "decision_log_ids": [],
+        "evidence_log_ids": [],
+        "thesis_changelog_ids": []
+      },
+      "review_id": "filing-googl-2026-05-21-8k",
+      "reviewed_at": "2026-05-24",
+      "reviewer": "human",
+      "source_id": "sec-googl-2026-05-21-8k-26234488",
+      "summary": "Reviewed filing event; no change to TPU cost-advantage or Cloud margin evidence state.",
+      "ticker": "GOOGL"
+    },
+    {
+      "accession_number": "0001730168-26-000039",
+      "disposition": "no_thesis_change",
+      "filing_date": "2026-04-21",
+      "form": "8-K",
+      "mapped_to": {
+        "decision_log_ids": [],
+        "evidence_log_ids": [],
+        "thesis_changelog_ids": []
+      },
+      "review_id": "filing-avgo-2026-04-21-8k",
+      "reviewed_at": "2026-05-24",
+      "reviewer": "human",
+      "source_id": "sec-avgo-2026-04-21-8k-26000039",
+      "summary": "Reviewed filing event; no automatic change to AI semiconductor evidence state.",
+      "ticker": "AVGO"
+    },
+    {
+      "accession_number": "0001046179-26-000280",
+      "disposition": "no_thesis_change",
+      "filing_date": "2026-05-15",
+      "form": "6-K",
+      "mapped_to": {
+        "decision_log_ids": [],
+        "evidence_log_ids": [],
+        "thesis_changelog_ids": []
+      },
+      "review_id": "filing-tsm-2026-05-15-6k",
+      "reviewed_at": "2026-05-24",
+      "reviewer": "human",
+      "source_id": "sec-tsm-2026-05-15-6k-26000280",
+      "summary": "Reviewed filing event; no change to leading-edge or packaging chokepoint thesis.",
+      "ticker": "TSM"
+    },
+    {
+      "accession_number": "0001045810-26-000052",
+      "disposition": "no_thesis_change",
+      "filing_date": "2026-05-20",
+      "form": "10-Q",
+      "mapped_to": {
+        "decision_log_ids": [],
+        "evidence_log_ids": [],
+        "thesis_changelog_ids": []
+      },
+      "review_id": "filing-nvda-2026-05-20-10q",
+      "reviewed_at": "2026-05-24",
+      "reviewer": "human",
+      "source_id": "sec-nvda-2026-05-20-10q-26000052",
+      "summary": "Reviewed filing event; Rubin architecture and margin durability remain quarterly review inputs.",
+      "ticker": "NVDA"
+    },
+    {
+      "accession_number": "0001868275-26-000067",
+      "disposition": "no_thesis_change",
+      "filing_date": "2026-05-11",
+      "form": "10-Q",
+      "mapped_to": {
+        "decision_log_ids": [],
+        "evidence_log_ids": [],
+        "thesis_changelog_ids": []
+      },
+      "review_id": "filing-ceg-2026-05-11-10q",
+      "reviewed_at": "2026-05-24",
+      "reviewer": "human",
+      "source_id": "sec-ceg-2026-05-11-10q-26000067",
+      "summary": "Reviewed filing event; PJM and primary-source evidence gap remains open.",
+      "ticker": "CEG"
+    },
+    {
+      "accession_number": "0001628280-26-027297",
+      "disposition": "no_thesis_change",
+      "filing_date": "2026-04-27",
+      "form": "8-K",
+      "mapped_to": {
+        "decision_log_ids": [],
+        "evidence_log_ids": [],
+        "thesis_changelog_ids": []
+      },
+      "review_id": "filing-vrt-2026-04-27-8k",
+      "reviewed_at": "2026-05-24",
+      "reviewer": "human",
+      "source_id": "sec-vrt-2026-04-27-8k-26027297",
+      "summary": "Reviewed filing event; no change to power and liquid-cooling evidence state.",
+      "ticker": "VRT"
+    },
+    {
+      "accession_number": "0001408198-26-000038",
+      "disposition": "no_thesis_change",
+      "filing_date": "2026-04-23",
+      "form": "8-K",
+      "mapped_to": {
+        "decision_log_ids": [],
+        "evidence_log_ids": [],
+        "thesis_changelog_ids": []
+      },
+      "review_id": "filing-msci-2026-04-23-8k",
+      "reviewed_at": "2026-05-24",
+      "reviewer": "human",
+      "source_id": "sec-msci-2026-04-23-8k-26000038",
+      "summary": "Reviewed filing event; no change to retention or analytics run-rate evidence state.",
+      "ticker": "MSCI"
+    },
+    {
+      "accession_number": "0001628280-26-026848",
+      "disposition": "no_thesis_change",
+      "filing_date": "2026-04-23",
+      "form": "10-Q",
+      "mapped_to": {
+        "decision_log_ids": [],
+        "evidence_log_ids": [],
+        "thesis_changelog_ids": []
+      },
+      "review_id": "filing-mco-2026-04-23-10q",
+      "reviewed_at": "2026-05-24",
+      "reviewer": "human",
+      "source_id": "sec-mco-2026-04-23-10q-26026848",
+      "summary": "Reviewed filing event; no change to Research Assistant adoption evidence state.",
+      "ticker": "MCO"
+    },
+    {
+      "accession_number": "0000064040-26-000028",
+      "disposition": "no_thesis_change",
+      "filing_date": "2026-05-21",
+      "form": "8-K",
+      "mapped_to": {
+        "decision_log_ids": [],
+        "evidence_log_ids": [],
+        "thesis_changelog_ids": []
+      },
+      "review_id": "filing-spgi-2026-05-21-8k",
+      "reviewed_at": "2026-05-24",
+      "reviewer": "human",
+      "source_id": "sec-spgi-2026-05-21-8k-26000028",
+      "summary": "Reviewed filing event; no change to Kensho/API/MCP workflow evidence state.",
+      "ticker": "SPGI"
+    },
+    {
+      "accession_number": "0001393052-26-000018",
+      "disposition": "no_thesis_change",
+      "filing_date": "2026-04-20",
+      "form": "8-K",
+      "mapped_to": {
+        "decision_log_ids": [],
+        "evidence_log_ids": [],
+        "thesis_changelog_ids": []
+      },
+      "review_id": "filing-veev-2026-04-20-8k",
+      "reviewed_at": "2026-05-24",
+      "reviewer": "human",
+      "source_id": "sec-veev-2026-04-20-8k-26000018",
+      "summary": "Reviewed filing event; AI Agents remain a roadmap and usage-evidence watch item.",
+      "ticker": "VEEV"
+    },
+    {
+      "accession_number": "0001193125-26-215848",
+      "disposition": "no_thesis_change",
+      "filing_date": "2026-05-11",
+      "form": "8-K",
+      "mapped_to": {
+        "decision_log_ids": [],
+        "evidence_log_ids": [],
+        "thesis_changelog_ids": []
+      },
+      "review_id": "filing-ter-2026-05-11-8k",
+      "reviewed_at": "2026-05-24",
+      "reviewer": "human",
+      "source_id": "sec-ter-2026-05-11-8k-26215848",
+      "summary": "Reviewed filing event; no change to semitest versus robotics evidence state.",
+      "ticker": "TER"
+    }
+  ],
+  "generatedAtUtc": "2026-05-24T07:29:43Z",
   "nonSecHoldings": {
     "000660.KS": {
       "reason": "SK Hynix is Korea-listed and should be tracked through company IR or exchange disclosures."
@@ -1411,6 +1713,7 @@
   "source": "sec_edgar",
   "summary": {
     "company_count": 12,
+    "current_filing_reviewed_count": 12,
     "failed_company_count": 0,
     "healthy_company_count": 12,
     "latest_filing_count": 96,

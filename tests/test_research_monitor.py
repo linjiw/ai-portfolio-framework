@@ -91,7 +91,20 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
         """
         window.AI_FRAMEWORK_DATA = {
           holdings: [
-            { ticker: "MSFT", evidence: ["one", "two"], risks: [] }
+            {
+              ticker: "MSFT",
+              evidence: [
+                {
+                  id: "msft-evidence-agent",
+                  text: "one",
+                  materiality: "high",
+                  claim_ids: ["msft-claim"],
+                  metric_ids: ["agent"]
+                },
+                "two"
+              ],
+              risks: []
+            }
           ],
           claims: [
             { claim_id: "msft-claim", source_id: "msft-source", entity: "MSFT" }
@@ -364,6 +377,8 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
     assert payload["summary"]["highest_alert"] == "yellow"
     assert payload["summary"]["source_status_counts"]["stale"] == 1
     assert payload["summary"]["evidence_coverage"]["covered_metrics"] == 1
+    assert payload["summary"]["provenance_coverage"]["evidenceIdCount"] == 1
+    assert payload["summary"]["provenance_coverage"]["highMaterialityEvidenceIdCount"] == 1
     assert payload["summary"]["risk_overlay"]["capex_direct_exposure_pct"] == 50.0
     assert payload["summary"]["decision_discipline"]["operational_falsifier_count"] == 2
     assert payload["summary"]["sec_filings"]["review_required_count"] == 1
@@ -378,6 +393,8 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
     )
     assert evidence_item["metric_id"] == "agent"
     assert "direct capex-cycle exposure" in evidence_item["score_reasons"]
+    assert evidence_item["scoreBreakdown"]["riskOverlay"] > 0
+    assert evidence_item["scoreBreakdown"]["evidenceState"] > 0
     assert payload["holdings"][0]["top_metrics"][0]["evidence_state"]["state"] == "deteriorating"
     assert payload["holdings"][0]["falsifier_threshold"]["threshold"] == "No production evidence"
     assert payload["riskOverlay"]["riskFactors"][0]["status"] == "yellow"

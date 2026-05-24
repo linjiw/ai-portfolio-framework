@@ -1,6 +1,6 @@
 # AI Trusted Execution Framework Website Design
 
-As of: 2026-05-22
+As of: 2026-05-24
 
 This document describes the implementation and design system for the static
 research dashboard at `site/`. It is written for expert review of
@@ -69,6 +69,7 @@ Related framework data and reports:
 - `data/generated/link_health_snapshot.json`
 - `data/link_health_history.jsonl`
 - `data/evidence_log.yml`
+- `data/filing_review_log.yml`
 - `data/thesis_changelog.yml`
 - `data/portfolio/ai_portfolio_summary.csv`
 - `data/portfolio/ai_portfolio_snapshots.csv`
@@ -161,7 +162,17 @@ Holding schema:
   conviction: "A",
   layers: ["Authority", "Outcome"],
   thesis: "...",
-  evidence: ["...", "..."],
+  evidence: [
+    "...",
+    {
+      id: "msft-evidence-agent365-governance-surface",
+      text: "...",
+      materiality: "high",
+      claim_ids: ["msft-agent-authority"],
+      metric_ids: ["agent_governance_evidence"],
+      evidence_state_source: "data/evidence_log.yml"
+    }
+  ],
   risks: ["...", "..."],
   falsifier: "...",
   watch: "...",
@@ -209,6 +220,8 @@ Current invariants verified locally:
 - SEC filing feed: generated
 - Link-health snapshot: generated
 - Provenance coverage JSON: present
+- Filing review disposition log: present
+- High-materiality evidence IDs: present
 - Source count: 31
 - Claim count: 15
 - Missing source IDs: 0
@@ -262,6 +275,14 @@ The site encodes that thesis through six categories of research objects:
    filings are newer than the last reviewed date. Link-health distinguishes
    broken links from weak sources; a 403 or timeout is treated as source
    brittleness, not as a false claim.
+
+7. Evidence and filing disposition
+
+   Tier 1.1 gives high-materiality evidence bullets stable IDs and links them
+   to claim IDs and metric IDs. SEC filing events can now be closed with a
+   human disposition in `data/filing_review_log.yml`; this records why a filing
+   did or did not change the thesis without letting the filing feed update
+   evidence state automatically.
 
 Important writing rule added after review:
 

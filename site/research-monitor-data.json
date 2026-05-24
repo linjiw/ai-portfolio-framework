@@ -577,9 +577,87 @@
       "state_after": "watching",
       "summary": "Veeva AI Agents roadmap is relevant, but regulated production workflow usage is still not proven.",
       "ticker": "VEEV"
+    },
+    {
+      "claim_ids": [
+        "avgo-custom-ai-accelerator"
+      ],
+      "confidence": "medium",
+      "date": "2026-05-24",
+      "direction": "watching",
+      "evidence_type": "company_demand",
+      "metric_id": "ai_semiconductor_revenue",
+      "requires_review": true,
+      "reviewer": "human",
+      "source_ids": [
+        "broadcom-q1-2026",
+        "broadcom-openai",
+        "broadcom-meta"
+      ],
+      "state_after": "watching",
+      "summary": "AI semiconductor demand remains thesis-relevant, while customer concentration and program lumpiness still require quarterly review.",
+      "ticker": "AVGO"
+    },
+    {
+      "claim_ids": [
+        "tsm-ai-capacity"
+      ],
+      "confidence": "medium",
+      "date": "2026-05-24",
+      "direction": "watching",
+      "evidence_type": "quarterly_review_gap",
+      "metric_id": "hpc_revenue_mix",
+      "requires_review": true,
+      "reviewer": "human",
+      "source_ids": [
+        "tsmc-q1-2026",
+        "tsmc-transcript"
+      ],
+      "state_after": "watching",
+      "summary": "AI demand and capacity-planning evidence supports the chokepoint thesis, but HPC mix and packaging scarcity require ongoing quarterly confirmation.",
+      "ticker": "TSM"
+    },
+    {
+      "claim_ids": [
+        "mco-research-assistant"
+      ],
+      "confidence": "medium",
+      "date": "2026-05-24",
+      "direction": "watching",
+      "evidence_type": "product_adoption_gap",
+      "metric_id": "research_assistant_adoption",
+      "requires_review": true,
+      "reviewer": "human",
+      "source_ids": [
+        "moodys-research-assistant",
+        "moodys-genai"
+      ],
+      "state_after": "watching",
+      "summary": "Moody's Research Assistant is a relevant workflow product, but adoption and analytics revenue impact remain unproven.",
+      "ticker": "MCO"
+    },
+    {
+      "claim_ids": [
+        "spgi-kensho-agentic-data"
+      ],
+      "confidence": "medium",
+      "date": "2026-05-24",
+      "direction": "watching",
+      "evidence_type": "product_integration",
+      "metric_id": "kensho_api_mcp_mentions",
+      "requires_review": true,
+      "reviewer": "human",
+      "source_ids": [
+        "kensho-home",
+        "kensho-mcp",
+        "spgi-ai"
+      ],
+      "state_after": "watching",
+      "summary": "Kensho data-access and MCP evidence supports the agentic-data thesis, but monetization and workflow depth still need review.",
+      "ticker": "SPGI"
     }
   ],
-  "generatedAtUtc": "2026-05-24T06:53:48Z",
+  "generatedAtUtc": "2026-05-24T07:32:15Z",
   "holdings": [
     {
       "alert_count": 0,
@@ -914,15 +992,21 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
-            "claim_ids": [],
-            "confidence": "unknown",
-            "direction": "up",
-            "evidence_type": "",
-            "last_evidence_date": null,
-            "latest_summary": "",
-            "requires_review": false,
-            "source_ids": [],
-            "state": "unknown"
+            "claim_ids": [
+              "avgo-custom-ai-accelerator"
+            ],
+            "confidence": "medium",
+            "direction": "watching",
+            "evidence_type": "company_demand",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "AI semiconductor demand remains thesis-relevant, while customer concentration and program lumpiness still require quarterly review.",
+            "requires_review": true,
+            "source_ids": [
+              "broadcom-q1-2026",
+              "broadcom-openai",
+              "broadcom-meta"
+            ],
+            "state": "watching"
           },
           "id": "ai_semiconductor_revenue",
           "name": "AI semiconductor revenue",
@@ -1034,15 +1118,20 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
-            "claim_ids": [],
-            "confidence": "unknown",
-            "direction": "up",
-            "evidence_type": "",
-            "last_evidence_date": null,
-            "latest_summary": "",
-            "requires_review": false,
-            "source_ids": [],
-            "state": "unknown"
+            "claim_ids": [
+              "tsm-ai-capacity"
+            ],
+            "confidence": "medium",
+            "direction": "watching",
+            "evidence_type": "quarterly_review_gap",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "AI demand and capacity-planning evidence supports the chokepoint thesis, but HPC mix and packaging scarcity require ongoing quarterly confirmation.",
+            "requires_review": true,
+            "source_ids": [
+              "tsmc-q1-2026",
+              "tsmc-transcript"
+            ],
+            "state": "watching"
           },
           "id": "hpc_revenue_mix",
           "name": "HPC revenue mix",
@@ -1808,15 +1897,20 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
-            "claim_ids": [],
-            "confidence": "unknown",
-            "direction": "stronger",
-            "evidence_type": "",
-            "last_evidence_date": null,
-            "latest_summary": "",
-            "requires_review": false,
-            "source_ids": [],
-            "state": "unknown"
+            "claim_ids": [
+              "mco-research-assistant"
+            ],
+            "confidence": "medium",
+            "direction": "watching",
+            "evidence_type": "product_adoption_gap",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "Moody's Research Assistant is a relevant workflow product, but adoption and analytics revenue impact remain unproven.",
+            "requires_review": true,
+            "source_ids": [
+              "moodys-research-assistant",
+              "moodys-genai"
+            ],
+            "state": "watching"
           },
           "id": "research_assistant_adoption",
           "name": "Research Assistant adoption mentions",
@@ -1928,15 +2022,21 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
-            "claim_ids": [],
-            "confidence": "unknown",
-            "direction": "stronger",
-            "evidence_type": "",
-            "last_evidence_date": null,
-            "latest_summary": "",
-            "requires_review": false,
-            "source_ids": [],
-            "state": "unknown"
+            "claim_ids": [
+              "spgi-kensho-agentic-data"
+            ],
+            "confidence": "medium",
+            "direction": "watching",
+            "evidence_type": "product_integration",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "Kensho data-access and MCP evidence supports the agentic-data thesis, but monetization and workflow depth still need review.",
+            "requires_review": true,
+            "source_ids": [
+              "kensho-home",
+              "kensho-mcp",
+              "spgi-ai"
+            ],
+            "state": "watching"
           },
           "id": "kensho_api_mcp_mentions",
           "name": "Kensho API and MCP mentions",
@@ -2341,7 +2441,7 @@
     }
   ],
   "linkHealth": {
-    "checkedAtUtc": "2026-05-24T06:53:18Z",
+    "checkedAtUtc": "2026-05-24T07:29:54Z",
     "policy": {
       "forbidden": "Source may be bot-blocked; do not treat as claim failure.",
       "not_found": "Link needs replacement or archival support.",
@@ -2350,373 +2450,533 @@
     "schemaVersion": 1,
     "sources": [
       {
+        "archive_recommended": true,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://investors.broadcom.com/node/64236/pdf",
         "http_status": null,
         "label": "Broadcom and Meta partnership",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "timeout",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "broadcom-meta",
         "source_quality_status": "accepted",
         "url": "https://investors.broadcom.com/node/64236/pdf"
       },
       {
+        "archive_recommended": true,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://investors.broadcom.com/news-releases/news-release-details/openai-and-broadcom-announce-strategic-collaboration-deploy-10",
         "http_status": null,
         "label": "OpenAI and Broadcom 10GW collaboration",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "timeout",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "broadcom-openai",
         "source_quality_status": "accepted",
         "url": "https://investors.broadcom.com/news-releases/news-release-details/openai-and-broadcom-announce-strategic-collaboration-deploy-10"
       },
       {
+        "archive_recommended": true,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://investors.broadcom.com/node/63976/pdf",
         "http_status": null,
         "label": "Broadcom Q1 FY2026 results",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "timeout",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "broadcom-q1-2026",
         "source_quality_status": "accepted",
         "url": "https://investors.broadcom.com/node/63976/pdf"
       },
       {
+        "archive_recommended": true,
+        "archive_url": null,
+        "fallback_required": true,
         "final_url": "https://www.investing.com/news/stock-market-news/constellation-exec-says-grid-operator-told-company-three-mile-island-cant-connect-until-2031-4583367",
         "http_status": 403,
         "label": "Reuters via Investing.com - Three Mile Island PJM delay",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "forbidden",
+        "preferred_primary_types": [
+          "PJM",
+          "company_filing",
+          "regulatory_filing",
+          "operator_data"
+        ],
         "primary_support_required": true,
         "quality_reason": "CEG TMI/PJM timing claim should be supplemented with PJM, company, or regulatory primary support.",
+        "replacement_source_id": null,
         "source_id": "ceg-tmi-pjm",
         "source_quality_status": "weak_source",
         "url": "https://www.investing.com/news/stock-market-news/constellation-exec-says-grid-operator-told-company-three-mile-island-cant-connect-until-2031-4583367"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://epoch.ai/data-insights/llm-inference-price-trends",
         "http_status": 200,
         "label": "Epoch AI - LLM inference price trends",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "epoch-inference-prices",
         "source_quality_status": "accepted",
         "url": "https://epoch.ai/data-insights/llm-inference-price-trends"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/ironwood-tpu-age-of-inference/",
         "http_status": 200,
         "label": "Google - Ironwood TPU for inference",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "redirected",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "google-ironwood",
         "source_quality_status": "accepted",
         "url": "https://blog.google/products/google-cloud/ironwood-tpu-age-of-inference/"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/ironwood-google-tpu-things-to-know/",
         "http_status": 200,
         "label": "Google - Three things about Ironwood",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "redirected",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "google-ironwood-3things",
         "source_quality_status": "accepted",
         "url": "https://blog.google/products/google-cloud/ironwood-google-tpu-things-to-know/"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://kensho.com/",
         "http_status": 200,
         "label": "Kensho - S&P Global AI engine",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "kensho-home",
         "source_quality_status": "accepted",
         "url": "https://kensho.com/"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://kensho.com/news/kensho-llm-ready-api-expands-mcp-server-access-dataset-support-integrations",
         "http_status": 200,
         "label": "Kensho LLM-ready API and MCP server",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "kensho-mcp",
         "source_quality_status": "accepted",
         "url": "https://kensho.com/news/kensho-llm-ready-api-expands-mcp-server-access-dataset-support-integrations"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://arxiv.org/abs/2603.23802",
         "http_status": 200,
         "label": "MCP tools usage paper",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "mcp-tools-arxiv",
         "source_quality_status": "accepted",
         "url": "https://arxiv.org/abs/2603.23802"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://metr.org/index.html",
         "http_status": 200,
         "label": "METR time-horizon research hub",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "metr-home",
         "source_quality_status": "accepted",
         "url": "https://metr.org/index.html"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://arxiv.org/abs/2503.14499",
         "http_status": 200,
         "label": "METR paper - Measuring AI Ability to Complete Long Software Tasks",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "metr-long-tasks",
         "source_quality_status": "accepted",
         "url": "https://arxiv.org/abs/2503.14499"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://www.moodys.com/web/en/us/capabilities/gen-ai.html",
         "http_status": 200,
         "label": "Moody's AI and GenAI capabilities",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "moodys-genai",
         "source_quality_status": "accepted",
         "url": "https://www.moodys.com/web/en/us/capabilities/gen-ai.html"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://www.moodys.com/web/en/us/research-assistant.html",
         "http_status": 200,
         "label": "Moody's Research Assistant",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "moodys-research-assistant",
         "source_quality_status": "accepted",
         "url": "https://www.moodys.com/web/en/us/research-assistant.html"
       },
       {
+        "archive_recommended": true,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://ir.msci.com/news-releases/news-release-details/msci-reports-financial-results-first-quarter-2026",
         "http_status": null,
         "label": "MSCI Q1 2026 results",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "timeout",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "msci-q1-2026",
         "source_quality_status": "accepted",
         "url": "https://ir.msci.com/news-releases/news-release-details/msci-reports-financial-results-first-quarter-2026"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://www.microsoft.com/en-us/microsoft-agent-365",
         "http_status": 200,
         "label": "Microsoft Agent 365",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "redirected",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "msft-agent365",
         "source_quality_status": "accepted",
         "url": "https://www.microsoft.com/microsoft-agent-365"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://www.microsoft.com/en-us/security/blog/2026/05/01/microsoft-agent-365-now-generally-available-expands-capabilities-and-integrations/",
         "http_status": 200,
         "label": "Microsoft Security Blog - Agent 365 GA",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "msft-security-agent365",
         "source_quality_status": "accepted",
         "url": "https://www.microsoft.com/en-us/security/blog/2026/05/01/microsoft-agent-365-now-generally-available-expands-capabilities-and-integrations/"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://www.nvidia.com/en-us/data-center/vera-rubin-nvl72/",
         "http_status": 200,
         "label": "NVIDIA Vera Rubin NVL72",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "nvidia-rubin",
         "source_quality_status": "accepted",
         "url": "https://www.nvidia.com/en-us/data-center/vera-rubin-nvl72/"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
         "http_status": 200,
         "label": "NVIDIA Technical Blog - Vera Rubin Platform",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "nvidia-rubin-blog",
         "source_quality_status": "accepted",
         "url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/"
       },
       {
+        "archive_recommended": true,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/",
         "http_status": 403,
         "label": "OpenAI - SWE-bench Verified limitations",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "forbidden",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "openai-swebench",
         "source_quality_status": "accepted",
         "url": "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://www.pjm.com/planning/service-requests/application-and-forms",
         "http_status": 200,
         "label": "PJM interconnection request process",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "pjm-interconnection-process",
         "source_quality_status": "accepted",
         "url": "https://www.pjm.com/planning/service-requests/application-and-forms"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://news.skhynix.com/sk-hynix_sk-hynix-completes-worlds-first-hbm4-development-and-readies-mass-production_01/",
         "http_status": 200,
         "label": "SK hynix HBM4 development",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "skhynix-hbm4",
         "source_quality_status": "accepted",
         "url": "https://news.skhynix.com/sk-hynix_sk-hynix-completes-worlds-first-hbm4-development-and-readies-mass-production_01/"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://news.skhynix.com/q1-2026-business-results/",
         "http_status": 200,
         "label": "SK hynix Q1 2026 results",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "skhynix-q1-2026",
         "source_quality_status": "accepted",
         "url": "https://news.skhynix.com/q1-2026-business-results/"
       },
       {
+        "archive_recommended": true,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://www.spglobal.com/en/research-insights/market-insights/artificial-intelligence",
         "http_status": 403,
         "label": "S&P Global AI insights and benchmarks",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "forbidden",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "spgi-ai",
         "source_quality_status": "accepted",
         "url": "https://www.spglobal.com/en/research-insights/market-insights/artificial-intelligence"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://www.universal-robots.com/news-and-media/news-center/flex-teradyne-robotics-expand-partnership-scale-intelligent-automation-across-global-manufacturing/",
         "http_status": 200,
         "label": "Flex and Teradyne Robotics partnership",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "teradyne-flex",
         "source_quality_status": "accepted",
         "url": "https://www.universal-robots.com/news-and-media/news-center/flex-teradyne-robotics-expand-partnership-scale-intelligent-automation-across-global-manufacturing/"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://investors.teradyne.com/news-events/press-releases/detail/440/teradyne-reports-first-quarter-2026-results",
         "http_status": 200,
         "label": "Teradyne Q1 2026 results",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "teradyne-q1-2026",
         "source_quality_status": "accepted",
         "url": "https://investors.teradyne.com/news-events/press-releases/detail/440/teradyne-reports-first-quarter-2026-results"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://investor.tsmc.com/english/quarterly-results/2026/q1",
         "http_status": 200,
         "label": "TSMC Q1 2026 quarterly results",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "redirected",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "tsmc-q1-2026",
         "source_quality_status": "accepted",
         "url": "https://investor.tsmc.com/english/quarterly-results"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-04/3cef85204275f94fd111485cfdf4adb3c0263c45/TSMC%201Q26%20Transcript.pdf",
-        "http_status": 200,
+        "http_status": 206,
         "label": "TSMC Q1 2026 transcript",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "tsmc-transcript",
         "source_quality_status": "accepted",
         "url": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-04/3cef85204275f94fd111485cfdf4adb3c0263c45/TSMC%201Q26%20Transcript.pdf"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://www.veeva.com/eu/resources/veeva-ai-agents-to-be-released-across-all-veeva-applications/",
         "http_status": 200,
         "label": "Veeva AI Agents roadmap",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "veeva-ai-agents",
         "source_quality_status": "accepted",
         "url": "https://www.veeva.com/eu/resources/veeva-ai-agents-to-be-released-across-all-veeva-applications/"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://investors.vertiv.com/news/news-details/2026/Vertiv-and-Generate-Capital-Collaborate-to-Accelerate-Data-Center-Capacity-with-Complete-Power-and-Cooling-Infrastructure/",
         "http_status": 200,
         "label": "Vertiv and Generate Capital BYOP&C",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "ok",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "vertiv-generate",
         "source_quality_status": "accepted",
         "url": "https://investors.vertiv.com/news/news-details/2026/Vertiv-and-Generate-Capital-Collaborate-to-Accelerate-Data-Center-Capacity-with-Complete-Power-and-Cooling-Infrastructure/"
       },
       {
+        "archive_recommended": false,
+        "archive_url": null,
+        "fallback_required": false,
         "final_url": "https://www.vertiv.com/en-us/about/news-and-events/corporate-news/vertiv-expects-powering-up-for-ai-digital-twins-and-adaptive-liquid-cooling-to-shape-data-center-design-and-operations/",
         "http_status": 200,
         "label": "Vertiv 2026 AI data-center trends",
-        "last_checked_at": "2026-05-24T06:53:18Z",
+        "last_checked_at": "2026-05-24T07:29:54Z",
         "link_status": "redirected",
+        "preferred_primary_types": [],
         "primary_support_required": false,
         "quality_reason": "",
+        "replacement_source_id": null,
         "source_id": "vertiv-trends",
         "source_quality_status": "accepted",
         "url": "https://www.vertiv.com/en-us/about/news-and-insights/corporate-news/vertiv-expects-powering-up-for-ai-digital-twins-and-adaptive-liquid-cooling-to-shape-data-center-design-and-operations/"
@@ -2933,15 +3193,21 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
-            "claim_ids": [],
-            "confidence": "unknown",
-            "direction": "up",
-            "evidence_type": "",
-            "last_evidence_date": null,
-            "latest_summary": "",
-            "requires_review": false,
-            "source_ids": [],
-            "state": "unknown"
+            "claim_ids": [
+              "avgo-custom-ai-accelerator"
+            ],
+            "confidence": "medium",
+            "direction": "watching",
+            "evidence_type": "company_demand",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "AI semiconductor demand remains thesis-relevant, while customer concentration and program lumpiness still require quarterly review.",
+            "requires_review": true,
+            "source_ids": [
+              "broadcom-q1-2026",
+              "broadcom-openai",
+              "broadcom-meta"
+            ],
+            "state": "watching"
           },
           "id": "ai_semiconductor_revenue",
           "name": "AI semiconductor revenue",
@@ -3010,15 +3276,20 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
-            "claim_ids": [],
-            "confidence": "unknown",
-            "direction": "up",
-            "evidence_type": "",
-            "last_evidence_date": null,
-            "latest_summary": "",
-            "requires_review": false,
-            "source_ids": [],
-            "state": "unknown"
+            "claim_ids": [
+              "tsm-ai-capacity"
+            ],
+            "confidence": "medium",
+            "direction": "watching",
+            "evidence_type": "quarterly_review_gap",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "AI demand and capacity-planning evidence supports the chokepoint thesis, but HPC mix and packaging scarcity require ongoing quarterly confirmation.",
+            "requires_review": true,
+            "source_ids": [
+              "tsmc-q1-2026",
+              "tsmc-transcript"
+            ],
+            "state": "watching"
           },
           "id": "hpc_revenue_mix",
           "name": "HPC revenue mix",
@@ -3525,15 +3796,20 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
-            "claim_ids": [],
-            "confidence": "unknown",
-            "direction": "stronger",
-            "evidence_type": "",
-            "last_evidence_date": null,
-            "latest_summary": "",
-            "requires_review": false,
-            "source_ids": [],
-            "state": "unknown"
+            "claim_ids": [
+              "mco-research-assistant"
+            ],
+            "confidence": "medium",
+            "direction": "watching",
+            "evidence_type": "product_adoption_gap",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "Moody's Research Assistant is a relevant workflow product, but adoption and analytics revenue impact remain unproven.",
+            "requires_review": true,
+            "source_ids": [
+              "moodys-research-assistant",
+              "moodys-genai"
+            ],
+            "state": "watching"
           },
           "id": "research_assistant_adoption",
           "name": "Research Assistant adoption mentions",
@@ -3602,15 +3878,21 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
-            "claim_ids": [],
-            "confidence": "unknown",
-            "direction": "stronger",
-            "evidence_type": "",
-            "last_evidence_date": null,
-            "latest_summary": "",
-            "requires_review": false,
-            "source_ids": [],
-            "state": "unknown"
+            "claim_ids": [
+              "spgi-kensho-agentic-data"
+            ],
+            "confidence": "medium",
+            "direction": "watching",
+            "evidence_type": "product_integration",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "Kensho data-access and MCP evidence supports the agentic-data thesis, but monetization and workflow depth still need review.",
+            "requires_review": true,
+            "source_ids": [
+              "kensho-home",
+              "kensho-mcp",
+              "spgi-ai"
+            ],
+            "state": "watching"
           },
           "id": "kensho_api_mcp_mentions",
           "name": "Kensho API and MCP mentions",
@@ -3913,6 +4195,17 @@
       "priority": "high",
       "question": "Track PJM and interconnection conversion from data-center demand into realizable economics.",
       "score": 128,
+      "scoreBreakdown": {
+        "alert": 0,
+        "dueDate": 0,
+        "evidenceState": 40,
+        "filingEvent": 0,
+        "frameworkBottleneck": 0,
+        "priority": 70,
+        "requiresReview": 10,
+        "riskOverlay": 8,
+        "sourceWeakness": 0
+      },
       "score_reasons": [
         "high priority",
         "deteriorating evidence",
@@ -3946,6 +4239,17 @@
       "priority": "high",
       "question": "Look for evidence of Agent 365 production write-permission adoption.",
       "score": 123,
+      "scoreBreakdown": {
+        "alert": 0,
+        "dueDate": 0,
+        "evidenceState": 25,
+        "filingEvent": 0,
+        "frameworkBottleneck": 10,
+        "priority": 70,
+        "requiresReview": 10,
+        "riskOverlay": 8,
+        "sourceWeakness": 0
+      },
       "score_reasons": [
         "high priority",
         "unknown evidence",
@@ -3975,6 +4279,17 @@
       "priority": "high",
       "question": "Track HBM qualification and shipment evidence into the Vera Rubin generation.",
       "score": 108,
+      "scoreBreakdown": {
+        "alert": 0,
+        "dueDate": 0,
+        "evidenceState": 25,
+        "filingEvent": 0,
+        "frameworkBottleneck": 0,
+        "priority": 70,
+        "requiresReview": 0,
+        "riskOverlay": 13,
+        "sourceWeakness": 0
+      },
       "score_reasons": [
         "high priority",
         "unknown evidence",
@@ -4008,6 +4323,17 @@
       "priority": "high",
       "question": "Check whether TPU and capex advantage appears in Cloud margin or AI revenue quality.",
       "score": 108,
+      "scoreBreakdown": {
+        "alert": 0,
+        "dueDate": 0,
+        "evidenceState": 15,
+        "filingEvent": 0,
+        "frameworkBottleneck": 0,
+        "priority": 70,
+        "requiresReview": 10,
+        "riskOverlay": 13,
+        "sourceWeakness": 0
+      },
       "score_reasons": [
         "high priority",
         "watching evidence",
@@ -4042,6 +4368,17 @@
       "priority": "high",
       "question": "Track networking attach, rack-scale platform evidence, and margin durability.",
       "score": 98,
+      "scoreBreakdown": {
+        "alert": 0,
+        "dueDate": 0,
+        "evidenceState": 15,
+        "filingEvent": 0,
+        "frameworkBottleneck": 0,
+        "priority": 70,
+        "requiresReview": 0,
+        "riskOverlay": 13,
+        "sourceWeakness": 0
+      },
       "score_reasons": [
         "high priority",
         "watching evidence",
@@ -4056,23 +4393,41 @@
     {
       "due": "2026-08-22",
       "evidence_state": {
-        "claim_ids": [],
-        "confidence": "unknown",
-        "direction": "up",
-        "evidence_type": "",
-        "last_evidence_date": null,
-        "latest_summary": "",
-        "requires_review": false,
-        "source_ids": [],
-        "state": "unknown"
+        "claim_ids": [
+          "avgo-custom-ai-accelerator"
+        ],
+        "confidence": "medium",
+        "direction": "watching",
+        "evidence_type": "company_demand",
+        "last_evidence_date": "2026-05-24",
+        "latest_summary": "AI semiconductor demand remains thesis-relevant, while customer concentration and program lumpiness still require quarterly review.",
+        "requires_review": true,
+        "source_ids": [
+          "broadcom-q1-2026",
+          "broadcom-openai",
+          "broadcom-meta"
+        ],
+        "state": "watching"
       },
       "metric_id": "ai_semiconductor_revenue",
       "priority": "medium",
       "question": "Check whether AI semiconductor growth is broadening beyond a small customer set.",
       "score": 78,
+      "scoreBreakdown": {
+        "alert": 0,
+        "dueDate": 0,
+        "evidenceState": 15,
+        "filingEvent": 0,
+        "frameworkBottleneck": 0,
+        "priority": 40,
+        "requiresReview": 10,
+        "riskOverlay": 13,
+        "sourceWeakness": 0
+      },
       "score_reasons": [
         "medium priority",
-        "unknown evidence",
+        "watching evidence",
+        "evidence requires review",
         "direct capex-cycle exposure",
         "high cycle sensitivity"
       ],
@@ -4098,6 +4453,17 @@
       "priority": "medium",
       "question": "Review whether advanced packaging and leading-edge demand still support margin quality.",
       "score": 78,
+      "scoreBreakdown": {
+        "alert": 0,
+        "dueDate": 0,
+        "evidenceState": 25,
+        "filingEvent": 0,
+        "frameworkBottleneck": 0,
+        "priority": 40,
+        "requiresReview": 0,
+        "riskOverlay": 13,
+        "sourceWeakness": 0
+      },
       "score_reasons": [
         "medium priority",
         "unknown evidence",
@@ -4126,6 +4492,17 @@
       "priority": "medium",
       "question": "Check whether AI power and cooling capex is still visible in orders, backlog, and liquid-cooling commentary.",
       "score": 78,
+      "scoreBreakdown": {
+        "alert": 0,
+        "dueDate": 0,
+        "evidenceState": 25,
+        "filingEvent": 0,
+        "frameworkBottleneck": 0,
+        "priority": 40,
+        "requiresReview": 0,
+        "riskOverlay": 13,
+        "sourceWeakness": 0
+      },
       "score_reasons": [
         "medium priority",
         "unknown evidence",
@@ -4154,6 +4531,17 @@
       "priority": "medium",
       "question": "Check whether semiconductor test demand remains strong enough while robotics option value develops.",
       "score": 73,
+      "scoreBreakdown": {
+        "alert": 0,
+        "dueDate": 0,
+        "evidenceState": 25,
+        "filingEvent": 0,
+        "frameworkBottleneck": 0,
+        "priority": 40,
+        "requiresReview": 0,
+        "riskOverlay": 8,
+        "sourceWeakness": 0
+      },
       "score_reasons": [
         "medium priority",
         "unknown evidence",
@@ -4181,6 +4569,17 @@
       "priority": "medium",
       "question": "Review whether cash still has option value versus current alerts, drawdown, and valuation resets.",
       "score": 65,
+      "scoreBreakdown": {
+        "alert": 0,
+        "dueDate": 0,
+        "evidenceState": 25,
+        "filingEvent": 0,
+        "frameworkBottleneck": 0,
+        "priority": 40,
+        "requiresReview": 0,
+        "riskOverlay": 0,
+        "sourceWeakness": 0
+      },
       "score_reasons": [
         "medium priority",
         "unknown evidence"
@@ -4211,6 +4610,17 @@
       "priority": "medium",
       "question": "Track whether Veeva AI Agents move from roadmap to regulated production workflow usage.",
       "score": 65,
+      "scoreBreakdown": {
+        "alert": 0,
+        "dueDate": 0,
+        "evidenceState": 15,
+        "filingEvent": 0,
+        "frameworkBottleneck": 0,
+        "priority": 40,
+        "requiresReview": 10,
+        "riskOverlay": 0,
+        "sourceWeakness": 0
+      },
       "score_reasons": [
         "medium priority",
         "watching evidence",
@@ -4224,23 +4634,40 @@
     {
       "due": "2026-08-22",
       "evidence_state": {
-        "claim_ids": [],
-        "confidence": "unknown",
-        "direction": "stronger",
-        "evidence_type": "",
-        "last_evidence_date": null,
-        "latest_summary": "",
-        "requires_review": false,
-        "source_ids": [],
-        "state": "unknown"
+        "claim_ids": [
+          "mco-research-assistant"
+        ],
+        "confidence": "medium",
+        "direction": "watching",
+        "evidence_type": "product_adoption_gap",
+        "last_evidence_date": "2026-05-24",
+        "latest_summary": "Moody's Research Assistant is a relevant workflow product, but adoption and analytics revenue impact remain unproven.",
+        "requires_review": true,
+        "source_ids": [
+          "moodys-research-assistant",
+          "moodys-genai"
+        ],
+        "state": "watching"
       },
       "metric_id": "research_assistant_adoption",
       "priority": "low",
       "question": "Check whether Moody's AI tools improve analytics workflow adoption or credit-risk research quality.",
       "score": 35,
+      "scoreBreakdown": {
+        "alert": 0,
+        "dueDate": 0,
+        "evidenceState": 15,
+        "filingEvent": 0,
+        "frameworkBottleneck": 0,
+        "priority": 10,
+        "requiresReview": 10,
+        "riskOverlay": 0,
+        "sourceWeakness": 0
+      },
       "score_reasons": [
         "low priority",
-        "unknown evidence"
+        "watching evidence",
+        "evidence requires review"
       ],
       "source": "next_action",
       "success_condition": "Analytics growth, retention, or product evidence shows AI-enhanced workflow value.",
@@ -4264,6 +4691,17 @@
       "priority": "low",
       "question": "Look for evidence that MSCI risk and data products are becoming AI workflow verification assets.",
       "score": 35,
+      "scoreBreakdown": {
+        "alert": 0,
+        "dueDate": 0,
+        "evidenceState": 25,
+        "filingEvent": 0,
+        "frameworkBottleneck": 0,
+        "priority": 10,
+        "requiresReview": 0,
+        "riskOverlay": 0,
+        "sourceWeakness": 0
+      },
       "score_reasons": [
         "low priority",
         "unknown evidence"
@@ -4276,23 +4714,41 @@
     {
       "due": "2026-08-22",
       "evidence_state": {
-        "claim_ids": [],
-        "confidence": "unknown",
-        "direction": "stronger",
-        "evidence_type": "",
-        "last_evidence_date": null,
-        "latest_summary": "",
-        "requires_review": false,
-        "source_ids": [],
-        "state": "unknown"
+        "claim_ids": [
+          "spgi-kensho-agentic-data"
+        ],
+        "confidence": "medium",
+        "direction": "watching",
+        "evidence_type": "product_integration",
+        "last_evidence_date": "2026-05-24",
+        "latest_summary": "Kensho data-access and MCP evidence supports the agentic-data thesis, but monetization and workflow depth still need review.",
+        "requires_review": true,
+        "source_ids": [
+          "kensho-home",
+          "kensho-mcp",
+          "spgi-ai"
+        ],
+        "state": "watching"
       },
       "metric_id": "kensho_api_mcp_mentions",
       "priority": "low",
       "question": "Look for Kensho API, MCP, or data-licensing evidence inside LLM workflows.",
       "score": 35,
+      "scoreBreakdown": {
+        "alert": 0,
+        "dueDate": 0,
+        "evidenceState": 15,
+        "filingEvent": 0,
+        "frameworkBottleneck": 0,
+        "priority": 10,
+        "requiresReview": 10,
+        "riskOverlay": 0,
+        "sourceWeakness": 0
+      },
       "score_reasons": [
         "low priority",
-        "unknown evidence"
+        "watching evidence",
+        "evidence requires review"
       ],
       "source": "next_action",
       "success_condition": "Product or customer evidence shows trusted S&P data embedded in AI workflows.",
@@ -4503,7 +4959,7 @@
     "companies": [
       {
         "cik": "0000789019",
-        "fetched_at_utc": "2026-05-24T06:53:02Z",
+        "fetched_at_utc": "2026-05-24T07:29:43Z",
         "last_reviewed_at": "2026-05-22",
         "latest_filings": [
           {
@@ -4513,6 +4969,10 @@
             "primary_doc_description": "8-K",
             "primary_document": "d125909d8k.htm",
             "report_date": "2026-05-13",
+            "review_disposition": "no_thesis_change",
+            "review_id": "filing-msft-2026-05-14-8k",
+            "review_summary": "Reviewed filing event; no change to monitored production write-permission evidence.",
+            "reviewed_at": "2026-05-24",
             "source_id": "sec-msft-2026-05-14-8k-26224155",
             "ticker": "MSFT",
             "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526224155/d125909d8k.htm"
@@ -4602,11 +5062,15 @@
           "primary_doc_description": "8-K",
           "primary_document": "d125909d8k.htm",
           "report_date": "2026-05-13",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-msft-2026-05-14-8k",
+          "review_summary": "Reviewed filing event; no change to monitored production write-permission evidence.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-msft-2026-05-14-8k-26224155",
           "ticker": "MSFT",
           "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526224155/d125909d8k.htm"
         },
-        "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+        "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
         "review_relevant_forms": [
           "10-K",
           "10-Q",
@@ -4619,7 +5083,7 @@
       },
       {
         "cik": "0001652044",
-        "fetched_at_utc": "2026-05-24T06:53:02Z",
+        "fetched_at_utc": "2026-05-24T07:29:43Z",
         "last_reviewed_at": "2026-05-22",
         "latest_filings": [
           {
@@ -4629,6 +5093,10 @@
             "primary_doc_description": "8-K",
             "primary_document": "d144566d8k.htm",
             "report_date": "2026-05-21",
+            "review_disposition": "no_thesis_change",
+            "review_id": "filing-googl-2026-05-21-8k",
+            "review_summary": "Reviewed filing event; no change to TPU cost-advantage or Cloud margin evidence state.",
+            "reviewed_at": "2026-05-24",
             "source_id": "sec-googl-2026-05-21-8k-26234488",
             "ticker": "GOOGL",
             "url": "https://www.sec.gov/Archives/edgar/data/1652044/000119312526234488/d144566d8k.htm"
@@ -4718,11 +5186,15 @@
           "primary_doc_description": "8-K",
           "primary_document": "d144566d8k.htm",
           "report_date": "2026-05-21",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-googl-2026-05-21-8k",
+          "review_summary": "Reviewed filing event; no change to TPU cost-advantage or Cloud margin evidence state.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-googl-2026-05-21-8k-26234488",
           "ticker": "GOOGL",
           "url": "https://www.sec.gov/Archives/edgar/data/1652044/000119312526234488/d144566d8k.htm"
         },
-        "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+        "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
         "review_relevant_forms": [
           "10-K",
           "10-Q",
@@ -4735,7 +5207,7 @@
       },
       {
         "cik": "0001730168",
-        "fetched_at_utc": "2026-05-24T06:53:02Z",
+        "fetched_at_utc": "2026-05-24T07:29:43Z",
         "last_reviewed_at": "2026-05-22",
         "latest_filings": [
           {
@@ -4745,6 +5217,10 @@
             "primary_doc_description": "8-K",
             "primary_document": "avgo-20260420.htm",
             "report_date": "2026-04-20",
+            "review_disposition": "no_thesis_change",
+            "review_id": "filing-avgo-2026-04-21-8k",
+            "review_summary": "Reviewed filing event; no automatic change to AI semiconductor evidence state.",
+            "reviewed_at": "2026-05-24",
             "source_id": "sec-avgo-2026-04-21-8k-26000039",
             "ticker": "AVGO",
             "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000039/avgo-20260420.htm"
@@ -4834,11 +5310,15 @@
           "primary_doc_description": "8-K",
           "primary_document": "avgo-20260420.htm",
           "report_date": "2026-04-20",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-avgo-2026-04-21-8k",
+          "review_summary": "Reviewed filing event; no automatic change to AI semiconductor evidence state.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-avgo-2026-04-21-8k-26000039",
           "ticker": "AVGO",
           "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000039/avgo-20260420.htm"
         },
-        "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+        "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
         "review_relevant_forms": [
           "10-K",
           "10-Q",
@@ -4851,7 +5331,7 @@
       },
       {
         "cik": "0001046179",
-        "fetched_at_utc": "2026-05-24T06:53:02Z",
+        "fetched_at_utc": "2026-05-24T07:29:43Z",
         "last_reviewed_at": "2026-05-22",
         "latest_filings": [
           {
@@ -4861,6 +5341,10 @@
             "primary_doc_description": "6-K",
             "primary_document": "tsmctosell81ofvanguardinte.htm",
             "report_date": "2026-05-15",
+            "review_disposition": "no_thesis_change",
+            "review_id": "filing-tsm-2026-05-15-6k",
+            "review_summary": "Reviewed filing event; no change to leading-edge or packaging chokepoint thesis.",
+            "reviewed_at": "2026-05-24",
             "source_id": "sec-tsm-2026-05-15-6k-26000280",
             "ticker": "TSM",
             "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000280/tsmctosell81ofvanguardinte.htm"
@@ -4950,11 +5434,15 @@
           "primary_doc_description": "6-K",
           "primary_document": "tsmctosell81ofvanguardinte.htm",
           "report_date": "2026-05-15",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-tsm-2026-05-15-6k",
+          "review_summary": "Reviewed filing event; no change to leading-edge or packaging chokepoint thesis.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-tsm-2026-05-15-6k-26000280",
           "ticker": "TSM",
           "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000280/tsmctosell81ofvanguardinte.htm"
         },
-        "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+        "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
         "review_relevant_forms": [
           "20-F",
           "6-K"
@@ -4966,7 +5454,7 @@
       },
       {
         "cik": "0001045810",
-        "fetched_at_utc": "2026-05-24T06:53:02Z",
+        "fetched_at_utc": "2026-05-24T07:29:43Z",
         "last_reviewed_at": "2026-05-22",
         "latest_filings": [
           {
@@ -4976,6 +5464,10 @@
             "primary_doc_description": "10-Q",
             "primary_document": "nvda-20260426.htm",
             "report_date": "2026-04-26",
+            "review_disposition": "no_thesis_change",
+            "review_id": "filing-nvda-2026-05-20-10q",
+            "review_summary": "Reviewed filing event; Rubin architecture and margin durability remain quarterly review inputs.",
+            "reviewed_at": "2026-05-24",
             "source_id": "sec-nvda-2026-05-20-10q-26000052",
             "ticker": "NVDA",
             "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm"
@@ -5065,11 +5557,15 @@
           "primary_doc_description": "10-Q",
           "primary_document": "nvda-20260426.htm",
           "report_date": "2026-04-26",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-nvda-2026-05-20-10q",
+          "review_summary": "Reviewed filing event; Rubin architecture and margin durability remain quarterly review inputs.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-nvda-2026-05-20-10q-26000052",
           "ticker": "NVDA",
           "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm"
         },
-        "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+        "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
         "review_relevant_forms": [
           "10-K",
           "10-Q",
@@ -5082,7 +5578,7 @@
       },
       {
         "cik": "0001868275",
-        "fetched_at_utc": "2026-05-24T06:53:02Z",
+        "fetched_at_utc": "2026-05-24T07:29:43Z",
         "last_reviewed_at": "2026-05-22",
         "latest_filings": [
           {
@@ -5092,6 +5588,10 @@
             "primary_doc_description": "10-Q",
             "primary_document": "ceg-20260331.htm",
             "report_date": "2026-03-31",
+            "review_disposition": "no_thesis_change",
+            "review_id": "filing-ceg-2026-05-11-10q",
+            "review_summary": "Reviewed filing event; PJM and primary-source evidence gap remains open.",
+            "reviewed_at": "2026-05-24",
             "source_id": "sec-ceg-2026-05-11-10q-26000067",
             "ticker": "CEG",
             "url": "https://www.sec.gov/Archives/edgar/data/1868275/000186827526000067/ceg-20260331.htm"
@@ -5181,11 +5681,15 @@
           "primary_doc_description": "10-Q",
           "primary_document": "ceg-20260331.htm",
           "report_date": "2026-03-31",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-ceg-2026-05-11-10q",
+          "review_summary": "Reviewed filing event; PJM and primary-source evidence gap remains open.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-ceg-2026-05-11-10q-26000067",
           "ticker": "CEG",
           "url": "https://www.sec.gov/Archives/edgar/data/1868275/000186827526000067/ceg-20260331.htm"
         },
-        "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+        "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
         "review_relevant_forms": [
           "10-K",
           "10-Q",
@@ -5198,7 +5702,7 @@
       },
       {
         "cik": "0001674101",
-        "fetched_at_utc": "2026-05-24T06:53:02Z",
+        "fetched_at_utc": "2026-05-24T07:29:43Z",
         "last_reviewed_at": "2026-05-22",
         "latest_filings": [
           {
@@ -5208,6 +5712,10 @@
             "primary_doc_description": "8-K",
             "primary_document": "vrt-20260427.htm",
             "report_date": "2026-04-27",
+            "review_disposition": "no_thesis_change",
+            "review_id": "filing-vrt-2026-04-27-8k",
+            "review_summary": "Reviewed filing event; no change to power and liquid-cooling evidence state.",
+            "reviewed_at": "2026-05-24",
             "source_id": "sec-vrt-2026-04-27-8k-26027297",
             "ticker": "VRT",
             "url": "https://www.sec.gov/Archives/edgar/data/1674101/000162828026027297/vrt-20260427.htm"
@@ -5297,11 +5805,15 @@
           "primary_doc_description": "8-K",
           "primary_document": "vrt-20260427.htm",
           "report_date": "2026-04-27",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-vrt-2026-04-27-8k",
+          "review_summary": "Reviewed filing event; no change to power and liquid-cooling evidence state.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-vrt-2026-04-27-8k-26027297",
           "ticker": "VRT",
           "url": "https://www.sec.gov/Archives/edgar/data/1674101/000162828026027297/vrt-20260427.htm"
         },
-        "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+        "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
         "review_relevant_forms": [
           "10-K",
           "10-Q",
@@ -5314,7 +5826,7 @@
       },
       {
         "cik": "0001408198",
-        "fetched_at_utc": "2026-05-24T06:53:02Z",
+        "fetched_at_utc": "2026-05-24T07:29:43Z",
         "last_reviewed_at": "2026-05-22",
         "latest_filings": [
           {
@@ -5324,6 +5836,10 @@
             "primary_doc_description": "8-K",
             "primary_document": "msci-20260421.htm",
             "report_date": "2026-04-21",
+            "review_disposition": "no_thesis_change",
+            "review_id": "filing-msci-2026-04-23-8k",
+            "review_summary": "Reviewed filing event; no change to retention or analytics run-rate evidence state.",
+            "reviewed_at": "2026-05-24",
             "source_id": "sec-msci-2026-04-23-8k-26000038",
             "ticker": "MSCI",
             "url": "https://www.sec.gov/Archives/edgar/data/1408198/000140819826000038/msci-20260421.htm"
@@ -5413,11 +5929,15 @@
           "primary_doc_description": "8-K",
           "primary_document": "msci-20260421.htm",
           "report_date": "2026-04-21",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-msci-2026-04-23-8k",
+          "review_summary": "Reviewed filing event; no change to retention or analytics run-rate evidence state.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-msci-2026-04-23-8k-26000038",
           "ticker": "MSCI",
           "url": "https://www.sec.gov/Archives/edgar/data/1408198/000140819826000038/msci-20260421.htm"
         },
-        "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+        "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
         "review_relevant_forms": [
           "10-K",
           "10-Q",
@@ -5430,7 +5950,7 @@
       },
       {
         "cik": "0001059556",
-        "fetched_at_utc": "2026-05-24T06:53:02Z",
+        "fetched_at_utc": "2026-05-24T07:29:43Z",
         "last_reviewed_at": "2026-05-22",
         "latest_filings": [
           {
@@ -5440,6 +5960,10 @@
             "primary_doc_description": "10-Q",
             "primary_document": "mco-20260331.htm",
             "report_date": "2026-03-31",
+            "review_disposition": "no_thesis_change",
+            "review_id": "filing-mco-2026-04-23-10q",
+            "review_summary": "Reviewed filing event; no change to Research Assistant adoption evidence state.",
+            "reviewed_at": "2026-05-24",
             "source_id": "sec-mco-2026-04-23-10q-26026848",
             "ticker": "MCO",
             "url": "https://www.sec.gov/Archives/edgar/data/1059556/000162828026026848/mco-20260331.htm"
@@ -5529,11 +6053,15 @@
           "primary_doc_description": "10-Q",
           "primary_document": "mco-20260331.htm",
           "report_date": "2026-03-31",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-mco-2026-04-23-10q",
+          "review_summary": "Reviewed filing event; no change to Research Assistant adoption evidence state.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-mco-2026-04-23-10q-26026848",
           "ticker": "MCO",
           "url": "https://www.sec.gov/Archives/edgar/data/1059556/000162828026026848/mco-20260331.htm"
         },
-        "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+        "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
         "review_relevant_forms": [
           "10-K",
           "10-Q",
@@ -5546,7 +6074,7 @@
       },
       {
         "cik": "0000064040",
-        "fetched_at_utc": "2026-05-24T06:53:02Z",
+        "fetched_at_utc": "2026-05-24T07:29:43Z",
         "last_reviewed_at": "2026-05-22",
         "latest_filings": [
           {
@@ -5556,6 +6084,10 @@
             "primary_doc_description": "8-K",
             "primary_document": "spgi-20260520.htm",
             "report_date": "2026-05-20",
+            "review_disposition": "no_thesis_change",
+            "review_id": "filing-spgi-2026-05-21-8k",
+            "review_summary": "Reviewed filing event; no change to Kensho/API/MCP workflow evidence state.",
+            "reviewed_at": "2026-05-24",
             "source_id": "sec-spgi-2026-05-21-8k-26000028",
             "ticker": "SPGI",
             "url": "https://www.sec.gov/Archives/edgar/data/64040/000006404026000028/spgi-20260520.htm"
@@ -5645,11 +6177,15 @@
           "primary_doc_description": "8-K",
           "primary_document": "spgi-20260520.htm",
           "report_date": "2026-05-20",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-spgi-2026-05-21-8k",
+          "review_summary": "Reviewed filing event; no change to Kensho/API/MCP workflow evidence state.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-spgi-2026-05-21-8k-26000028",
           "ticker": "SPGI",
           "url": "https://www.sec.gov/Archives/edgar/data/64040/000006404026000028/spgi-20260520.htm"
         },
-        "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+        "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
         "review_relevant_forms": [
           "10-K",
           "10-Q",
@@ -5662,7 +6198,7 @@
       },
       {
         "cik": "0001393052",
-        "fetched_at_utc": "2026-05-24T06:53:02Z",
+        "fetched_at_utc": "2026-05-24T07:29:43Z",
         "last_reviewed_at": "2026-05-22",
         "latest_filings": [
           {
@@ -5672,6 +6208,10 @@
             "primary_doc_description": "8-K",
             "primary_document": "veev-20260420.htm",
             "report_date": "2026-04-20",
+            "review_disposition": "no_thesis_change",
+            "review_id": "filing-veev-2026-04-20-8k",
+            "review_summary": "Reviewed filing event; AI Agents remain a roadmap and usage-evidence watch item.",
+            "reviewed_at": "2026-05-24",
             "source_id": "sec-veev-2026-04-20-8k-26000018",
             "ticker": "VEEV",
             "url": "https://www.sec.gov/Archives/edgar/data/1393052/000139305226000018/veev-20260420.htm"
@@ -5761,11 +6301,15 @@
           "primary_doc_description": "8-K",
           "primary_document": "veev-20260420.htm",
           "report_date": "2026-04-20",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-veev-2026-04-20-8k",
+          "review_summary": "Reviewed filing event; AI Agents remain a roadmap and usage-evidence watch item.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-veev-2026-04-20-8k-26000018",
           "ticker": "VEEV",
           "url": "https://www.sec.gov/Archives/edgar/data/1393052/000139305226000018/veev-20260420.htm"
         },
-        "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+        "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
         "review_relevant_forms": [
           "10-K",
           "10-Q",
@@ -5778,7 +6322,7 @@
       },
       {
         "cik": "0000097210",
-        "fetched_at_utc": "2026-05-24T06:53:02Z",
+        "fetched_at_utc": "2026-05-24T07:29:43Z",
         "last_reviewed_at": "2026-05-22",
         "latest_filings": [
           {
@@ -5788,6 +6332,10 @@
             "primary_doc_description": "8-K",
             "primary_document": "ter-20260508.htm",
             "report_date": "2026-05-08",
+            "review_disposition": "no_thesis_change",
+            "review_id": "filing-ter-2026-05-11-8k",
+            "review_summary": "Reviewed filing event; no change to semitest versus robotics evidence state.",
+            "reviewed_at": "2026-05-24",
             "source_id": "sec-ter-2026-05-11-8k-26215848",
             "ticker": "TER",
             "url": "https://www.sec.gov/Archives/edgar/data/97210/000119312526215848/ter-20260508.htm"
@@ -5877,11 +6425,15 @@
           "primary_doc_description": "8-K",
           "primary_document": "ter-20260508.htm",
           "report_date": "2026-05-08",
+          "review_disposition": "no_thesis_change",
+          "review_id": "filing-ter-2026-05-11-8k",
+          "review_summary": "Reviewed filing event; no change to semitest versus robotics evidence state.",
+          "reviewed_at": "2026-05-24",
           "source_id": "sec-ter-2026-05-11-8k-26215848",
           "ticker": "TER",
           "url": "https://www.sec.gov/Archives/edgar/data/97210/000119312526215848/ter-20260508.htm"
         },
-        "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+        "reason": "Latest relevant SEC filing has human review disposition: no_thesis_change.",
         "review_relevant_forms": [
           "10-K",
           "10-Q",
@@ -5893,7 +6445,213 @@
         "ticker": "TER"
       }
     ],
-    "generatedAtUtc": "2026-05-24T06:53:02Z",
+    "filingReviewLog": [
+      {
+        "accession_number": "0001193125-26-224155",
+        "disposition": "no_thesis_change",
+        "filing_date": "2026-05-14",
+        "form": "8-K",
+        "mapped_to": {
+          "decision_log_ids": [],
+          "evidence_log_ids": [],
+          "thesis_changelog_ids": []
+        },
+        "review_id": "filing-msft-2026-05-14-8k",
+        "reviewed_at": "2026-05-24",
+        "reviewer": "human",
+        "source_id": "sec-msft-2026-05-14-8k-26224155",
+        "summary": "Reviewed filing event; no change to monitored production write-permission evidence.",
+        "ticker": "MSFT"
+      },
+      {
+        "accession_number": "0001193125-26-234488",
+        "disposition": "no_thesis_change",
+        "filing_date": "2026-05-21",
+        "form": "8-K",
+        "mapped_to": {
+          "decision_log_ids": [],
+          "evidence_log_ids": [],
+          "thesis_changelog_ids": []
+        },
+        "review_id": "filing-googl-2026-05-21-8k",
+        "reviewed_at": "2026-05-24",
+        "reviewer": "human",
+        "source_id": "sec-googl-2026-05-21-8k-26234488",
+        "summary": "Reviewed filing event; no change to TPU cost-advantage or Cloud margin evidence state.",
+        "ticker": "GOOGL"
+      },
+      {
+        "accession_number": "0001730168-26-000039",
+        "disposition": "no_thesis_change",
+        "filing_date": "2026-04-21",
+        "form": "8-K",
+        "mapped_to": {
+          "decision_log_ids": [],
+          "evidence_log_ids": [],
+          "thesis_changelog_ids": []
+        },
+        "review_id": "filing-avgo-2026-04-21-8k",
+        "reviewed_at": "2026-05-24",
+        "reviewer": "human",
+        "source_id": "sec-avgo-2026-04-21-8k-26000039",
+        "summary": "Reviewed filing event; no automatic change to AI semiconductor evidence state.",
+        "ticker": "AVGO"
+      },
+      {
+        "accession_number": "0001046179-26-000280",
+        "disposition": "no_thesis_change",
+        "filing_date": "2026-05-15",
+        "form": "6-K",
+        "mapped_to": {
+          "decision_log_ids": [],
+          "evidence_log_ids": [],
+          "thesis_changelog_ids": []
+        },
+        "review_id": "filing-tsm-2026-05-15-6k",
+        "reviewed_at": "2026-05-24",
+        "reviewer": "human",
+        "source_id": "sec-tsm-2026-05-15-6k-26000280",
+        "summary": "Reviewed filing event; no change to leading-edge or packaging chokepoint thesis.",
+        "ticker": "TSM"
+      },
+      {
+        "accession_number": "0001045810-26-000052",
+        "disposition": "no_thesis_change",
+        "filing_date": "2026-05-20",
+        "form": "10-Q",
+        "mapped_to": {
+          "decision_log_ids": [],
+          "evidence_log_ids": [],
+          "thesis_changelog_ids": []
+        },
+        "review_id": "filing-nvda-2026-05-20-10q",
+        "reviewed_at": "2026-05-24",
+        "reviewer": "human",
+        "source_id": "sec-nvda-2026-05-20-10q-26000052",
+        "summary": "Reviewed filing event; Rubin architecture and margin durability remain quarterly review inputs.",
+        "ticker": "NVDA"
+      },
+      {
+        "accession_number": "0001868275-26-000067",
+        "disposition": "no_thesis_change",
+        "filing_date": "2026-05-11",
+        "form": "10-Q",
+        "mapped_to": {
+          "decision_log_ids": [],
+          "evidence_log_ids": [],
+          "thesis_changelog_ids": []
+        },
+        "review_id": "filing-ceg-2026-05-11-10q",
+        "reviewed_at": "2026-05-24",
+        "reviewer": "human",
+        "source_id": "sec-ceg-2026-05-11-10q-26000067",
+        "summary": "Reviewed filing event; PJM and primary-source evidence gap remains open.",
+        "ticker": "CEG"
+      },
+      {
+        "accession_number": "0001628280-26-027297",
+        "disposition": "no_thesis_change",
+        "filing_date": "2026-04-27",
+        "form": "8-K",
+        "mapped_to": {
+          "decision_log_ids": [],
+          "evidence_log_ids": [],
+          "thesis_changelog_ids": []
+        },
+        "review_id": "filing-vrt-2026-04-27-8k",
+        "reviewed_at": "2026-05-24",
+        "reviewer": "human",
+        "source_id": "sec-vrt-2026-04-27-8k-26027297",
+        "summary": "Reviewed filing event; no change to power and liquid-cooling evidence state.",
+        "ticker": "VRT"
+      },
+      {
+        "accession_number": "0001408198-26-000038",
+        "disposition": "no_thesis_change",
+        "filing_date": "2026-04-23",
+        "form": "8-K",
+        "mapped_to": {
+          "decision_log_ids": [],
+          "evidence_log_ids": [],
+          "thesis_changelog_ids": []
+        },
+        "review_id": "filing-msci-2026-04-23-8k",
+        "reviewed_at": "2026-05-24",
+        "reviewer": "human",
+        "source_id": "sec-msci-2026-04-23-8k-26000038",
+        "summary": "Reviewed filing event; no change to retention or analytics run-rate evidence state.",
+        "ticker": "MSCI"
+      },
+      {
+        "accession_number": "0001628280-26-026848",
+        "disposition": "no_thesis_change",
+        "filing_date": "2026-04-23",
+        "form": "10-Q",
+        "mapped_to": {
+          "decision_log_ids": [],
+          "evidence_log_ids": [],
+          "thesis_changelog_ids": []
+        },
+        "review_id": "filing-mco-2026-04-23-10q",
+        "reviewed_at": "2026-05-24",
+        "reviewer": "human",
+        "source_id": "sec-mco-2026-04-23-10q-26026848",
+        "summary": "Reviewed filing event; no change to Research Assistant adoption evidence state.",
+        "ticker": "MCO"
+      },
+      {
+        "accession_number": "0000064040-26-000028",
+        "disposition": "no_thesis_change",
+        "filing_date": "2026-05-21",
+        "form": "8-K",
+        "mapped_to": {
+          "decision_log_ids": [],
+          "evidence_log_ids": [],
+          "thesis_changelog_ids": []
+        },
+        "review_id": "filing-spgi-2026-05-21-8k",
+        "reviewed_at": "2026-05-24",
+        "reviewer": "human",
+        "source_id": "sec-spgi-2026-05-21-8k-26000028",
+        "summary": "Reviewed filing event; no change to Kensho/API/MCP workflow evidence state.",
+        "ticker": "SPGI"
+      },
+      {
+        "accession_number": "0001393052-26-000018",
+        "disposition": "no_thesis_change",
+        "filing_date": "2026-04-20",
+        "form": "8-K",
+        "mapped_to": {
+          "decision_log_ids": [],
+          "evidence_log_ids": [],
+          "thesis_changelog_ids": []
+        },
+        "review_id": "filing-veev-2026-04-20-8k",
+        "reviewed_at": "2026-05-24",
+        "reviewer": "human",
+        "source_id": "sec-veev-2026-04-20-8k-26000018",
+        "summary": "Reviewed filing event; AI Agents remain a roadmap and usage-evidence watch item.",
+        "ticker": "VEEV"
+      },
+      {
+        "accession_number": "0001193125-26-215848",
+        "disposition": "no_thesis_change",
+        "filing_date": "2026-05-11",
+        "form": "8-K",
+        "mapped_to": {
+          "decision_log_ids": [],
+          "evidence_log_ids": [],
+          "thesis_changelog_ids": []
+        },
+        "review_id": "filing-ter-2026-05-11-8k",
+        "reviewed_at": "2026-05-24",
+        "reviewer": "human",
+        "source_id": "sec-ter-2026-05-11-8k-26215848",
+        "summary": "Reviewed filing event; no change to semitest versus robotics evidence state.",
+        "ticker": "TER"
+      }
+    ],
+    "generatedAtUtc": "2026-05-24T07:29:43Z",
     "nonSecHoldings": {
       "000660.KS": {
         "reason": "SK Hynix is Korea-listed and should be tracked through company IR or exchange disclosures."
@@ -5912,6 +6670,7 @@
     "source": "sec_edgar",
     "summary": {
       "company_count": 12,
+      "current_filing_reviewed_count": 12,
       "failed_company_count": 0,
       "healthy_company_count": 12,
       "latest_filing_count": 96,
@@ -6015,10 +6774,10 @@
       "valuation_band_coverage": 1.0
     },
     "evidence_coverage": {
-      "coverage_ratio": 0.1364,
-      "covered_metrics": 6,
+      "coverage_ratio": 0.2273,
+      "covered_metrics": 10,
       "total_metrics": 44,
-      "unknown_metrics": 38
+      "unknown_metrics": 34
     },
     "framework_bottleneck": "Trust / write-permission evidence",
     "highest_alert": "green",
@@ -6034,10 +6793,12 @@
       "weak_source": 1
     },
     "provenance_coverage": {
-      "claimLinkedEvidenceBullets": 13,
-      "coverageRatio": 0.3023,
-      "evidenceLogEntries": 7,
-      "evidenceLogEntriesWithSourceOrClaim": 7,
+      "claimLinkedEvidenceBullets": 37,
+      "coverageRatio": 0.8605,
+      "evidenceIdCount": 25,
+      "evidenceLogEntries": 11,
+      "evidenceLogEntriesWithSourceOrClaim": 11,
+      "highMaterialityEvidenceIdCount": 25,
       "materialEvidenceBullets": 43,
       "weakSourceCount": 1
     },
@@ -6051,6 +6812,7 @@
     "rule_alert": "green",
     "sec_filings": {
       "company_count": 12,
+      "current_filing_reviewed_count": 12,
       "failed_company_count": 0,
       "healthy_company_count": 12,
       "latest_filing_count": 96,

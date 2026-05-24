@@ -15,7 +15,318 @@
     "VEEV": 1,
     "VRT": 1
   },
-  "generatedAtUtc": "2026-05-24T06:53:48Z",
+  "evidenceObjectsByHolding": {
+    "000660.KS": [
+      {
+        "claim_ids": [
+          "sk-hynix-hbm4"
+        ],
+        "id": "skhynix-evidence-hbm4-readiness",
+        "materiality": "high",
+        "metric_ids": [
+          "hbm_revenue_commentary"
+        ],
+        "text": "SK hynix announced HBM4 development completion and mass-production readiness."
+      },
+      {
+        "claim_ids": [
+          "sk-hynix-hbm4"
+        ],
+        "id": "skhynix-evidence-high-value-hbm-products",
+        "materiality": "high",
+        "metric_ids": [
+          "hbm_revenue_commentary",
+          "dram_price_cycle"
+        ],
+        "text": "Q1 2026 results cite high-value products including HBM, server DRAM, and eSSDs."
+      }
+    ],
+    "AVGO": [
+      {
+        "claim_ids": [
+          "avgo-custom-ai-accelerator"
+        ],
+        "id": "avgo-evidence-ai-semiconductor-demand",
+        "materiality": "high",
+        "metric_ids": [
+          "ai_semiconductor_revenue"
+        ],
+        "text": "Broadcom reported strong AI semiconductor demand in fiscal Q1 2026."
+      },
+      {
+        "claim_ids": [
+          "avgo-custom-ai-accelerator"
+        ],
+        "id": "avgo-evidence-openai-custom-accelerator",
+        "materiality": "high",
+        "metric_ids": [
+          "xpu_customer_count"
+        ],
+        "text": "OpenAI and Broadcom announced a 10GW custom accelerator collaboration."
+      },
+      {
+        "claim_ids": [
+          "avgo-custom-ai-accelerator"
+        ],
+        "id": "avgo-evidence-meta-custom-infrastructure",
+        "materiality": "high",
+        "metric_ids": [
+          "xpu_customer_count",
+          "networking_attach_rate"
+        ],
+        "text": "Broadcom and Meta extended a custom AI infrastructure partnership around MTIA and networking."
+      }
+    ],
+    "CASH": [],
+    "CEG": [
+      {
+        "claim_ids": [
+          "ceg-pjm-interconnection-risk"
+        ],
+        "id": "ceg-evidence-tmi-pjm-delay",
+        "materiality": "high",
+        "metric_ids": [
+          "pjm_interconnection"
+        ],
+        "text": "The Three Mile Island / PJM delay shows the bottleneck is grid connection, transmission, and regulator timing."
+      },
+      {
+        "claim_ids": [
+          "ceg-pjm-interconnection-risk"
+        ],
+        "id": "ceg-evidence-pjm-monitoring-layer",
+        "materiality": "high",
+        "metric_ids": [
+          "pjm_interconnection"
+        ],
+        "text": "PJM interconnection process data is a required monitoring layer for node-level power underwriting."
+      }
+    ],
+    "GOOGL": [
+      {
+        "claim_ids": [
+          "googl-ironwood-cost-capacity"
+        ],
+        "id": "googl-evidence-ironwood-inference-tpu",
+        "materiality": "high",
+        "metric_ids": [
+          "tpu_product_evidence"
+        ],
+        "text": "Ironwood is Google's seventh-generation TPU and is designed for inference-scale AI workloads."
+      },
+      {
+        "claim_ids": [
+          "googl-ironwood-cost-capacity"
+        ],
+        "id": "googl-evidence-tpu-cost-internalization",
+        "materiality": "high",
+        "metric_ids": [
+          "google_cloud_revenue_margin",
+          "tpu_product_evidence"
+        ],
+        "text": "Google can internalize cost control through TPU deployment while still selling cloud AI capacity."
+      }
+    ],
+    "MCO": [
+      {
+        "claim_ids": [
+          "mco-research-assistant"
+        ],
+        "id": "mco-evidence-research-assistant-workflows",
+        "materiality": "high",
+        "metric_ids": [
+          "research_assistant_adoption"
+        ],
+        "text": "Moody's Research Assistant targets entity screening, credit analysis, and portfolio monitoring."
+      }
+    ],
+    "MSCI": [
+      {
+        "claim_ids": [
+          "msci-retention-analytics"
+        ],
+        "id": "msci-evidence-q1-retention-analytics",
+        "materiality": "high",
+        "metric_ids": [
+          "recurring_subscription_growth",
+          "retention"
+        ],
+        "text": "MSCI reported Q1 2026 revenue growth and high retention."
+      }
+    ],
+    "MSFT": [
+      {
+        "claim_ids": [
+          "msft-agent-authority"
+        ],
+        "id": "msft-evidence-agent365-governance-surface",
+        "materiality": "high",
+        "metric_ids": [
+          "agent_governance_evidence"
+        ],
+        "text": "Agent 365 gives Microsoft a concrete product surface for agent governance."
+      },
+      {
+        "claim_ids": [
+          "msft-agent-authority"
+        ],
+        "id": "msft-evidence-security-agent-governance",
+        "materiality": "high",
+        "metric_ids": [
+          "security_attach",
+          "agent_governance_evidence"
+        ],
+        "text": "Microsoft security materials emphasize observing, governing, and securing agent activity."
+      }
+    ],
+    "NVDA": [
+      {
+        "claim_ids": [
+          "nvda-rubin-platform"
+        ],
+        "id": "nvda-evidence-rubin-nvl72-stack",
+        "materiality": "high",
+        "metric_ids": [
+          "networking_attach"
+        ],
+        "text": "Vera Rubin NVL72 integrates Rubin GPUs, Vera CPUs, NVLink 6, ConnectX-9, and BlueField-4."
+      },
+      {
+        "claim_ids": [
+          "nvda-rubin-platform"
+        ],
+        "id": "nvda-evidence-rack-scale-template",
+        "materiality": "high",
+        "metric_ids": [
+          "networking_attach",
+          "rubin_blackwell_shipments"
+        ],
+        "text": "The rack-scale architecture turns NVIDIA into a deployment template for AI factories."
+      }
+    ],
+    "SPGI": [
+      {
+        "claim_ids": [
+          "spgi-kensho-agentic-data"
+        ],
+        "id": "spgi-evidence-kensho-llm-data",
+        "materiality": "high",
+        "metric_ids": [
+          "kensho_api_mcp_mentions"
+        ],
+        "text": "Kensho connects LLMs and agents to S&P Global's trusted data."
+      },
+      {
+        "claim_ids": [
+          "spgi-kensho-agentic-data"
+        ],
+        "id": "spgi-evidence-kensho-mcp-server",
+        "materiality": "high",
+        "metric_ids": [
+          "kensho_api_mcp_mentions"
+        ],
+        "text": "Kensho expanded MCP server support for LLM-ready data retrieval."
+      }
+    ],
+    "TER": [
+      {
+        "claim_ids": [
+          "ter-ai-semitest"
+        ],
+        "id": "ter-evidence-semitest-primary-exposure",
+        "materiality": "high",
+        "metric_ids": [
+          "semiconductor_test_revenue"
+        ],
+        "text": "Teradyne Q1 2026 revenue was driven mostly by Semiconductor Test, not Robotics."
+      },
+      {
+        "claim_ids": [
+          "ter-ai-semitest"
+        ],
+        "id": "ter-evidence-ai-related-revenue",
+        "materiality": "high",
+        "metric_ids": [
+          "semiconductor_test_revenue"
+        ],
+        "text": "Management tied about 70% of revenue to AI-related demand."
+      }
+    ],
+    "TSM": [
+      {
+        "claim_ids": [
+          "tsm-ai-capacity"
+        ],
+        "id": "tsm-evidence-q1-2026-margin-delivery",
+        "materiality": "high",
+        "metric_ids": [
+          "gross_margin"
+        ],
+        "text": "TSMC's Q1 2026 investor page shows strong revenue and margin delivery."
+      },
+      {
+        "claim_ids": [
+          "tsm-ai-capacity"
+        ],
+        "id": "tsm-evidence-ai-capacity-planning",
+        "materiality": "high",
+        "metric_ids": [
+          "hpc_revenue_mix"
+        ],
+        "text": "TSMC transcripts continue to frame AI as a multi-year demand and capacity-planning driver."
+      }
+    ],
+    "VEEV": [
+      {
+        "claim_ids": [
+          "veev-regulated-agents"
+        ],
+        "id": "veev-evidence-ai-agents-roadmap",
+        "materiality": "high",
+        "metric_ids": [
+          "ai_agents_rollout"
+        ],
+        "text": "Veeva plans AI Agents across commercial, clinical, regulatory, safety, quality, medical, and data applications."
+      },
+      {
+        "claim_ids": [
+          "veev-regulated-agents"
+        ],
+        "id": "veev-evidence-agent-safeguards-context",
+        "materiality": "high",
+        "metric_ids": [
+          "ai_agents_rollout"
+        ],
+        "text": "Veeva emphasizes application context, safeguards, and secure access to application data and workflows."
+      }
+    ],
+    "VRT": [
+      {
+        "claim_ids": [
+          "vrt-ai-power-cooling"
+        ],
+        "id": "vrt-evidence-high-density-power-cooling",
+        "materiality": "high",
+        "metric_ids": [
+          "liquid_cooling_commentary"
+        ],
+        "text": "Vertiv highlights high-density power and liquid cooling as central to AI data-center design."
+      },
+      {
+        "claim_ids": [
+          "vrt-ai-power-cooling"
+        ],
+        "id": "vrt-evidence-generate-power-constrained-markets",
+        "materiality": "high",
+        "metric_ids": [
+          "orders_backlog",
+          "liquid_cooling_commentary"
+        ],
+        "text": "The Generate Capital collaboration targets power-constrained markets with power and cooling infrastructure."
+      }
+    ]
+  },
+  "generatedAtUtc": "2026-05-24T07:32:15Z",
   "holdingEvidenceCounts": {
     "000660.KS": 3,
     "AVGO": 3,
@@ -37,10 +348,12 @@
   ],
   "schemaVersion": 1,
   "summary": {
-    "claimLinkedEvidenceBullets": 13,
-    "coverageRatio": 0.3023,
-    "evidenceLogEntries": 7,
-    "evidenceLogEntriesWithSourceOrClaim": 7,
+    "claimLinkedEvidenceBullets": 37,
+    "coverageRatio": 0.8605,
+    "evidenceIdCount": 25,
+    "evidenceLogEntries": 11,
+    "evidenceLogEntriesWithSourceOrClaim": 11,
+    "highMaterialityEvidenceIdCount": 25,
     "materialEvidenceBullets": 43,
     "weakSourceCount": 1
   },

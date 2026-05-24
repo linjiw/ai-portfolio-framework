@@ -421,8 +421,22 @@ window.AI_FRAMEWORK_DATA = {
       thesis:
         "The cleanest public authority-control asset: identity, permissioning, observability, governance, and enterprise workflow distribution. Production write-permission adoption is the unproven variable.",
       evidence: [
-        "Agent 365 gives Microsoft a concrete product surface for agent governance.",
-        "Microsoft security materials emphasize observing, governing, and securing agent activity.",
+        {
+          id: "msft-evidence-agent365-governance-surface",
+          text: "Agent 365 gives Microsoft a concrete product surface for agent governance.",
+          materiality: "high",
+          claim_ids: ["msft-agent-authority"],
+          metric_ids: ["agent_governance_evidence"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
+        {
+          id: "msft-evidence-security-agent-governance",
+          text: "Microsoft security materials emphasize observing, governing, and securing agent activity.",
+          materiality: "high",
+          claim_ids: ["msft-agent-authority"],
+          metric_ids: ["security_attach", "agent_governance_evidence"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
         "Entra, Defender, Microsoft 365, GitHub, and Azure create a stacked authority layer, but adoption depth must be measured."
       ],
       risks: ["Trust plateau", "Regulatory pressure", "Premium valuation"],
@@ -443,8 +457,22 @@ window.AI_FRAMEWORK_DATA = {
       thesis:
         "The strongest NVIDIA-bypass path: custom TPU infrastructure, DeepMind, Workspace distribution, Search cash flow, and Google Cloud.",
       evidence: [
-        "Ironwood is Google's seventh-generation TPU and is designed for inference-scale AI workloads.",
-        "Google can internalize cost control through TPU deployment while still selling cloud AI capacity.",
+        {
+          id: "googl-evidence-ironwood-inference-tpu",
+          text: "Ironwood is Google's seventh-generation TPU and is designed for inference-scale AI workloads.",
+          materiality: "high",
+          claim_ids: ["googl-ironwood-cost-capacity"],
+          metric_ids: ["tpu_product_evidence"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
+        {
+          id: "googl-evidence-tpu-cost-internalization",
+          text: "Google can internalize cost control through TPU deployment while still selling cloud AI capacity.",
+          materiality: "high",
+          claim_ids: ["googl-ironwood-cost-capacity"],
+          metric_ids: ["google_cloud_revenue_margin", "tpu_product_evidence"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
         "Workspace and Cloud give Google a route into enterprise authority and workflow; production authority adoption remains a watch item."
       ],
       risks: ["Search disruption", "Regulatory pressure", "Capex ROI uncertainty"],
@@ -465,9 +493,30 @@ window.AI_FRAMEWORK_DATA = {
       thesis:
         "Custom silicon and AI networking proxy for hyperscaler internalization of accelerator economics.",
       evidence: [
-        "Broadcom reported strong AI semiconductor demand in fiscal Q1 2026.",
-        "OpenAI and Broadcom announced a 10GW custom accelerator collaboration.",
-        "Broadcom and Meta extended a custom AI infrastructure partnership around MTIA and networking."
+        {
+          id: "avgo-evidence-ai-semiconductor-demand",
+          text: "Broadcom reported strong AI semiconductor demand in fiscal Q1 2026.",
+          materiality: "high",
+          claim_ids: ["avgo-custom-ai-accelerator"],
+          metric_ids: ["ai_semiconductor_revenue"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
+        {
+          id: "avgo-evidence-openai-custom-accelerator",
+          text: "OpenAI and Broadcom announced a 10GW custom accelerator collaboration.",
+          materiality: "high",
+          claim_ids: ["avgo-custom-ai-accelerator"],
+          metric_ids: ["xpu_customer_count"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
+        {
+          id: "avgo-evidence-meta-custom-infrastructure",
+          text: "Broadcom and Meta extended a custom AI infrastructure partnership around MTIA and networking.",
+          materiality: "high",
+          claim_ids: ["avgo-custom-ai-accelerator"],
+          metric_ids: ["xpu_customer_count", "networking_attach_rate"],
+          evidence_state_source: "data/evidence_log.yml"
+        }
       ],
       risks: ["Customer concentration", "ASIC program lumpiness", "VMware integration execution"],
       falsifier: "AI semiconductor growth slows while hyperscalers insource away from Broadcom.",
@@ -487,8 +536,22 @@ window.AI_FRAMEWORK_DATA = {
       thesis:
         "Still the AI factory operating layer, not a commodity GPU vendor. The position is sized below hyperscaler/custom-silicon winners but above a token hedge.",
       evidence: [
-        "Vera Rubin NVL72 integrates Rubin GPUs, Vera CPUs, NVLink 6, ConnectX-9, and BlueField-4.",
-        "The rack-scale architecture turns NVIDIA into a deployment template for AI factories.",
+        {
+          id: "nvda-evidence-rubin-nvl72-stack",
+          text: "Vera Rubin NVL72 integrates Rubin GPUs, Vera CPUs, NVLink 6, ConnectX-9, and BlueField-4.",
+          materiality: "high",
+          claim_ids: ["nvda-rubin-platform"],
+          metric_ids: ["networking_attach"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
+        {
+          id: "nvda-evidence-rack-scale-template",
+          text: "The rack-scale architecture turns NVIDIA into a deployment template for AI factories.",
+          materiality: "high",
+          claim_ids: ["nvda-rubin-platform"],
+          metric_ids: ["networking_attach", "rubin_blackwell_shipments"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
         "The moat is system design, fabric, software, ecosystem, and time-to-deploy; monetization durability must be tracked separately."
       ],
       risks: ["Custom silicon bypass", "Margin compression", "Export controls"],
@@ -510,8 +573,22 @@ window.AI_FRAMEWORK_DATA = {
       thesis:
         "A leading-edge foundry and advanced packaging chokepoint, but not a direct authority or outcome-control asset.",
       evidence: [
-        "TSMC's Q1 2026 investor page shows strong revenue and margin delivery.",
-        "TSMC transcripts continue to frame AI as a multi-year demand and capacity-planning driver.",
+        {
+          id: "tsm-evidence-q1-2026-margin-delivery",
+          text: "TSMC's Q1 2026 investor page shows strong revenue and margin delivery.",
+          materiality: "high",
+          claim_ids: ["tsm-ai-capacity"],
+          metric_ids: ["gross_margin"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
+        {
+          id: "tsm-evidence-ai-capacity-planning",
+          text: "TSMC transcripts continue to frame AI as a multi-year demand and capacity-planning driver.",
+          materiality: "high",
+          claim_ids: ["tsm-ai-capacity"],
+          metric_ids: ["hpc_revenue_mix"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
         "Advanced process and advanced packaging capacity remain central to AI silicon scaling."
       ],
       risks: ["Geopolitics", "Capex cycle", "Overseas fab cost"],
@@ -532,8 +609,22 @@ window.AI_FRAMEWORK_DATA = {
       thesis:
         "HBM4 leadership exposure, with explicit quarterly review of Samsung and Micron qualification risk.",
       evidence: [
-        "SK hynix announced HBM4 development completion and mass-production readiness.",
-        "Q1 2026 results cite high-value products including HBM, server DRAM, and eSSDs.",
+        {
+          id: "skhynix-evidence-hbm4-readiness",
+          text: "SK hynix announced HBM4 development completion and mass-production readiness.",
+          materiality: "high",
+          claim_ids: ["sk-hynix-hbm4"],
+          metric_ids: ["hbm_revenue_commentary"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
+        {
+          id: "skhynix-evidence-high-value-hbm-products",
+          text: "Q1 2026 results cite high-value products including HBM, server DRAM, and eSSDs.",
+          materiality: "high",
+          claim_ids: ["sk-hynix-hbm4"],
+          metric_ids: ["hbm_revenue_commentary", "dram_price_cycle"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
         "HBM is a bottleneck, but it remains a memory-cycle and qualification-cycle asset."
       ],
       risks: ["Memory cycle", "Customer concentration", "Samsung HBM4 comeback"],
@@ -554,8 +645,22 @@ window.AI_FRAMEWORK_DATA = {
       thesis:
         "High-quality but interconnection-heavy nodal power exposure, not a generic power thesis.",
       evidence: [
-        "The Three Mile Island / PJM delay shows the bottleneck is grid connection, transmission, and regulator timing.",
-        "PJM interconnection process data is a required monitoring layer for node-level power underwriting.",
+        {
+          id: "ceg-evidence-tmi-pjm-delay",
+          text: "The Three Mile Island / PJM delay shows the bottleneck is grid connection, transmission, and regulator timing.",
+          materiality: "high",
+          claim_ids: ["ceg-pjm-interconnection-risk"],
+          metric_ids: ["pjm_interconnection"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
+        {
+          id: "ceg-evidence-pjm-monitoring-layer",
+          text: "PJM interconnection process data is a required monitoring layer for node-level power underwriting.",
+          materiality: "high",
+          claim_ids: ["ceg-pjm-interconnection-risk"],
+          metric_ids: ["pjm_interconnection"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
         "The position was reduced to reflect consensus power enthusiasm and project-level uncertainty.",
         "Nuclear PPAs still matter, but node underwriting matters more."
       ],
@@ -577,8 +682,22 @@ window.AI_FRAMEWORK_DATA = {
       thesis:
         "Clean data-center power and thermal infrastructure exposure, with explicit capex-cycle beta.",
       evidence: [
-        "Vertiv highlights high-density power and liquid cooling as central to AI data-center design.",
-        "The Generate Capital collaboration targets power-constrained markets with power and cooling infrastructure.",
+        {
+          id: "vrt-evidence-high-density-power-cooling",
+          text: "Vertiv highlights high-density power and liquid cooling as central to AI data-center design.",
+          materiality: "high",
+          claim_ids: ["vrt-ai-power-cooling"],
+          metric_ids: ["liquid_cooling_commentary"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
+        {
+          id: "vrt-evidence-generate-power-constrained-markets",
+          text: "The Generate Capital collaboration targets power-constrained markets with power and cooling infrastructure.",
+          materiality: "high",
+          claim_ids: ["vrt-ai-power-cooling"],
+          metric_ids: ["orders_backlog", "liquid_cooling_commentary"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
         "The company is a picks-and-shovels beneficiary, not a closed-loop control-right owner."
       ],
       risks: ["Hyperscaler capex crack", "Execution", "Valuation"],
@@ -599,7 +718,14 @@ window.AI_FRAMEWORK_DATA = {
       thesis:
         "Financial data, index, and risk analytics control point. Good outcome-adjacent proxy, but less pure than ratings or life-sciences workflow verifiers.",
       evidence: [
-        "MSCI reported Q1 2026 revenue growth and high retention.",
+        {
+          id: "msci-evidence-q1-retention-analytics",
+          text: "MSCI reported Q1 2026 revenue growth and high retention.",
+          materiality: "high",
+          claim_ids: ["msci-retention-analytics"],
+          metric_ids: ["recurring_subscription_growth", "retention"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
         "The data and index franchise remains embedded in institutional workflow.",
         "Basket sizing acknowledges that no single public name perfectly captures vertical verification; retention and analytics run-rate are the measurable bridge."
       ],
@@ -622,7 +748,14 @@ window.AI_FRAMEWORK_DATA = {
       thesis:
         "Credit-risk verifier with proprietary data, ratings context, and AI decision-intelligence products.",
       evidence: [
-        "Moody's Research Assistant targets entity screening, credit analysis, and portfolio monitoring.",
+        {
+          id: "mco-evidence-research-assistant-workflows",
+          text: "Moody's Research Assistant targets entity screening, credit analysis, and portfolio monitoring.",
+          materiality: "high",
+          claim_ids: ["mco-research-assistant"],
+          metric_ids: ["research_assistant_adoption"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
         "Moody's describes GenAI products as grounded in proprietary data and risk expertise.",
         "The verifier angle is more direct than generic financial data exposure."
       ],
@@ -645,8 +778,22 @@ window.AI_FRAMEWORK_DATA = {
       thesis:
         "Ratings and data-verifier exposure with Kensho as an AI retrieval and financial-workflow layer.",
       evidence: [
-        "Kensho connects LLMs and agents to S&P Global's trusted data.",
-        "Kensho expanded MCP server support for LLM-ready data retrieval.",
+        {
+          id: "spgi-evidence-kensho-llm-data",
+          text: "Kensho connects LLMs and agents to S&P Global's trusted data.",
+          materiality: "high",
+          claim_ids: ["spgi-kensho-agentic-data"],
+          metric_ids: ["kensho_api_mcp_mentions"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
+        {
+          id: "spgi-evidence-kensho-mcp-server",
+          text: "Kensho expanded MCP server support for LLM-ready data retrieval.",
+          materiality: "high",
+          claim_ids: ["spgi-kensho-agentic-data"],
+          metric_ids: ["kensho_api_mcp_mentions"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
         "S&P AI Benchmarks by Kensho target business and financial use cases."
       ],
       risks: ["Ratings cyclicality", "Data licensing competition", "AI product monetization timing"],
@@ -668,8 +815,22 @@ window.AI_FRAMEWORK_DATA = {
       thesis:
         "Life-sciences workflow verifier where agentic AI can operate inside regulated applications and data.",
       evidence: [
-        "Veeva plans AI Agents across commercial, clinical, regulatory, safety, quality, medical, and data applications.",
-        "Veeva emphasizes application context, safeguards, and secure access to application data and workflows.",
+        {
+          id: "veev-evidence-ai-agents-roadmap",
+          text: "Veeva plans AI Agents across commercial, clinical, regulatory, safety, quality, medical, and data applications.",
+          materiality: "high",
+          claim_ids: ["veev-regulated-agents"],
+          metric_ids: ["ai_agents_rollout"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
+        {
+          id: "veev-evidence-agent-safeguards-context",
+          text: "Veeva emphasizes application context, safeguards, and secure access to application data and workflows.",
+          materiality: "high",
+          claim_ids: ["veev-regulated-agents"],
+          metric_ids: ["ai_agents_rollout"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
         "This is one of the cleaner public proxies for domain-specific trusted execution."
       ],
       risks: ["Life-sciences IT cycle", "Product rollout timing", "Regulated customer adoption"],
@@ -691,8 +852,22 @@ window.AI_FRAMEWORK_DATA = {
       thesis:
         "AI semiconductor test cycle core exposure plus robotics optionality, not a pure humanoid play.",
       evidence: [
-        "Teradyne Q1 2026 revenue was driven mostly by Semiconductor Test, not Robotics.",
-        "Management tied about 70% of revenue to AI-related demand.",
+        {
+          id: "ter-evidence-semitest-primary-exposure",
+          text: "Teradyne Q1 2026 revenue was driven mostly by Semiconductor Test, not Robotics.",
+          materiality: "high",
+          claim_ids: ["ter-ai-semitest"],
+          metric_ids: ["semiconductor_test_revenue"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
+        {
+          id: "ter-evidence-ai-related-revenue",
+          text: "Management tied about 70% of revenue to AI-related demand.",
+          materiality: "high",
+          claim_ids: ["ter-ai-semitest"],
+          metric_ids: ["semiconductor_test_revenue"],
+          evidence_state_source: "data/evidence_log.yml"
+        },
         "Flex and Teradyne Robotics expanded collaboration for intelligent manufacturing automation."
       ],
       risks: ["Semitest digestion", "Robotics execution", "Project-based demand lumpiness"],

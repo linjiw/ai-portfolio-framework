@@ -1,0 +1,179 @@
+- review_id: filing-msft-2026-05-14-8k
+  ticker: MSFT
+  form: 8-K
+  filing_date: "2026-05-14"
+  accession_number: 0001193125-26-224155
+  source_id: sec-msft-2026-05-14-8k-26224155
+  reviewed_at: "2026-05-24"
+  reviewer: human
+  disposition: no_thesis_change
+  mapped_to:
+    evidence_log_ids: []
+    decision_log_ids: []
+    thesis_changelog_ids: []
+  summary: Reviewed filing event; no change to monitored production write-permission evidence.
+
+- review_id: filing-googl-2026-05-21-8k
+  ticker: GOOGL
+  form: 8-K
+  filing_date: "2026-05-21"
+  accession_number: 0001193125-26-234488
+  source_id: sec-googl-2026-05-21-8k-26234488
+  reviewed_at: "2026-05-24"
+  reviewer: human
+  disposition: no_thesis_change
+  mapped_to:
+    evidence_log_ids: []
+    decision_log_ids: []
+    thesis_changelog_ids: []
+  summary: Reviewed filing event; no change to TPU cost-advantage or Cloud margin evidence state.
+
+- review_id: filing-avgo-2026-04-21-8k
+  ticker: AVGO
+  form: 8-K
+  filing_date: "2026-04-21"
+  accession_number: 0001730168-26-000039
+  source_id: sec-avgo-2026-04-21-8k-26000039
+  reviewed_at: "2026-05-24"
+  reviewer: human
+  disposition: no_thesis_change
+  mapped_to:
+    evidence_log_ids: []
+    decision_log_ids: []
+    thesis_changelog_ids: []
+  summary: Reviewed filing event; no automatic change to AI semiconductor evidence state.
+
+- review_id: filing-tsm-2026-05-15-6k
+  ticker: TSM
+  form: 6-K
+  filing_date: "2026-05-15"
+  accession_number: 0001046179-26-000280
+  source_id: sec-tsm-2026-05-15-6k-26000280
+  reviewed_at: "2026-05-24"
+  reviewer: human
+  disposition: no_thesis_change
+  mapped_to:
+    evidence_log_ids: []
+    decision_log_ids: []
+    thesis_changelog_ids: []
+  summary: Reviewed filing event; no change to leading-edge or packaging chokepoint thesis.
+
+- review_id: filing-nvda-2026-05-20-10q
+  ticker: NVDA
+  form: 10-Q
+  filing_date: "2026-05-20"
+  accession_number: 0001045810-26-000052
+  source_id: sec-nvda-2026-05-20-10q-26000052
+  reviewed_at: "2026-05-24"
+  reviewer: human
+  disposition: no_thesis_change
+  mapped_to:
+    evidence_log_ids: []
+    decision_log_ids: []
+    thesis_changelog_ids: []
+  summary: Reviewed filing event; Rubin architecture and margin durability remain quarterly review inputs.
+
+- review_id: filing-ceg-2026-05-11-10q
+  ticker: CEG
+  form: 10-Q
+  filing_date: "2026-05-11"
+  accession_number: 0001868275-26-000067
+  source_id: sec-ceg-2026-05-11-10q-26000067
+  reviewed_at: "2026-05-24"
+  reviewer: human
+  disposition: no_thesis_change
+  mapped_to:
+    evidence_log_ids: []
+    decision_log_ids: []
+    thesis_changelog_ids: []
+  summary: Reviewed filing event; PJM and primary-source evidence gap remains open.
+
+- review_id: filing-vrt-2026-04-27-8k
+  ticker: VRT
+  form: 8-K
+  filing_date: "2026-04-27"
+  accession_number: 0001628280-26-027297
+  source_id: sec-vrt-2026-04-27-8k-26027297
+  reviewed_at: "2026-05-24"
+  reviewer: human
+  disposition: no_thesis_change
+  mapped_to:
+    evidence_log_ids: []
+    decision_log_ids: []
+    thesis_changelog_ids: []
+  summary: Reviewed filing event; no change to power and liquid-cooling evidence state.
+
+- review_id: filing-msci-2026-04-23-8k
+  ticker: MSCI
+  form: 8-K
+  filing_date: "2026-04-23"
+  accession_number: 0001408198-26-000038
+  source_id: sec-msci-2026-04-23-8k-26000038
+  reviewed_at: "2026-05-24"
+  reviewer: human
+  disposition: no_thesis_change
+  mapped_to:
+    evidence_log_ids: []
+    decision_log_ids: []
+    thesis_changelog_ids: []
+  summary: Reviewed filing event; no change to retention or analytics run-rate evidence state.
+
+- review_id: filing-mco-2026-04-23-10q
+  ticker: MCO
+  form: 10-Q
+  filing_date: "2026-04-23"
+  accession_number: 0001628280-26-026848
+  source_id: sec-mco-2026-04-23-10q-26026848
+  reviewed_at: "2026-05-24"
+  reviewer: human
+  disposition: no_thesis_change
+  mapped_to:
+    evidence_log_ids: []
+    decision_log_ids: []
+    thesis_changelog_ids: []
+  summary: Reviewed filing event; no change to Research Assistant adoption evidence state.
+
+- review_id: filing-spgi-2026-05-21-8k
+  ticker: SPGI
+  form: 8-K
+  filing_date: "2026-05-21"
+  accession_number: 0000064040-26-000028
+  source_id: sec-spgi-2026-05-21-8k-26000028
+  reviewed_at: "2026-05-24"
+  reviewer: human
+  disposition: no_thesis_change
+  mapped_to:
+    evidence_log_ids: []
+    decision_log_ids: []
+    thesis_changelog_ids: []
+  summary: Reviewed filing event; no change to Kensho/API/MCP workflow evidence state.
+
+- review_id: filing-veev-2026-04-20-8k
+  ticker: VEEV
+  form: 8-K
+  filing_date: "2026-04-20"
+  accession_number: 0001393052-26-000018
+  source_id: sec-veev-2026-04-20-8k-26000018
+  reviewed_at: "2026-05-24"
+  reviewer: human
+  disposition: no_thesis_change
+  mapped_to:
+    evidence_log_ids: []
+    decision_log_ids: []
+    thesis_changelog_ids: []
+  summary: Reviewed filing event; AI Agents remain a roadmap and usage-evidence watch item.
+
+- review_id: filing-ter-2026-05-11-8k
+  ticker: TER
+  form: 8-K
+  filing_date: "2026-05-11"
+  accession_number: 0001193125-26-215848
+  source_id: sec-ter-2026-05-11-8k-26215848
+  reviewed_at: "2026-05-24"
+  reviewer: human
+  disposition: no_thesis_change
+  mapped_to:
+    evidence_log_ids: []
+    decision_log_ids: []
+    thesis_changelog_ids: []
+  summary: Reviewed filing event; no change to semitest versus robotics evidence state.

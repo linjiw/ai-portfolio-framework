@@ -107,3 +107,69 @@
     - veev-regulated-agents
   reviewer: human
   requires_review: true
+
+- date: 2026-05-24
+  ticker: AVGO
+  metric_id: ai_semiconductor_revenue
+  direction: watching
+  state_after: watching
+  confidence: medium
+  evidence_type: company_demand
+  summary: AI semiconductor demand remains thesis-relevant, while customer concentration and program lumpiness still require quarterly review.
+  source_ids:
+    - broadcom-q1-2026
+    - broadcom-openai
+    - broadcom-meta
+  claim_ids:
+    - avgo-custom-ai-accelerator
+  reviewer: human
+  requires_review: true
+
+- date: 2026-05-24
+  ticker: TSM
+  metric_id: hpc_revenue_mix
+  direction: watching
+  state_after: watching
+  confidence: medium
+  evidence_type: quarterly_review_gap
+  summary: AI demand and capacity-planning evidence supports the chokepoint thesis, but HPC mix and packaging scarcity require ongoing quarterly confirmation.
+  source_ids:
+    - tsmc-q1-2026
+    - tsmc-transcript
+  claim_ids:
+    - tsm-ai-capacity
+  reviewer: human
+  requires_review: true
+
+- date: 2026-05-24
+  ticker: MCO
+  metric_id: research_assistant_adoption
+  direction: watching
+  state_after: watching
+  confidence: medium
+  evidence_type: product_adoption_gap
+  summary: Moody's Research Assistant is a relevant workflow product, but adoption and analytics revenue impact remain unproven.
+  source_ids:
+    - moodys-research-assistant
+    - moodys-genai
+  claim_ids:
+    - mco-research-assistant
+  reviewer: human
+  requires_review: true
+
+- date: 2026-05-24
+  ticker: SPGI
+  metric_id: kensho_api_mcp_mentions
+  direction: watching
+  state_after: watching
+  confidence: medium
+  evidence_type: product_integration
+  summary: Kensho data-access and MCP evidence supports the agentic-data thesis, but monetization and workflow depth still need review.
+  source_ids:
+    - kensho-home
+    - kensho-mcp
+    - spgi-ai
+  claim_ids:
+    - spgi-kensho-agentic-data
+  reviewer: human
+  requires_review: true

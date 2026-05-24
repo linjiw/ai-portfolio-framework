@@ -37,6 +37,20 @@ def test_build_link_health_separates_weak_source_from_broken_link(tmp_path) -> N
                 "primary_support_required": [
                     {"source_id": "ceg-tmi-pjm", "reason": "Needs primary source"}
                 ],
+                "source_maintenance": {
+                    "ceg-tmi-pjm": {
+                        "quality": "weak_source",
+                        "fallback_required": True,
+                        "preferred_primary_types": ["PJM", "company_filing"],
+                        "archive_url": None,
+                        "replacement_source_id": None,
+                    },
+                    "primary-source": {
+                        "quality": "accepted",
+                        "archive_recommended": True,
+                        "fallback_required": False,
+                    },
+                },
             }
         },
     )
@@ -62,6 +76,9 @@ def test_build_link_health_separates_weak_source_from_broken_link(tmp_path) -> N
     assert payload["summary"]["broken"] == 1
     assert rows["ceg-tmi-pjm"]["link_status"] == "ok"
     assert rows["ceg-tmi-pjm"]["source_quality_status"] == "weak_source"
+    assert rows["ceg-tmi-pjm"]["fallback_required"] is True
+    assert rows["ceg-tmi-pjm"]["preferred_primary_types"] == ["PJM", "company_filing"]
+    assert rows["primary-source"]["archive_recommended"] is True
     assert rows["broken-source"]["source_quality_status"] == "accepted"
     assert rows["broken-source"]["link_status"] == "not_found"
     assert output_path.exists()

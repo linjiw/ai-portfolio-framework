@@ -120,7 +120,7 @@ function renderPortfolio(layer) {
 }
 
 function renderHoldingCard(holding) {
-  const evidence = holding.evidence.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+  const evidence = holding.evidence.map(renderEvidenceItem).join("");
   const risks = holding.risks.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
   const chips = holding.layers
     .map((layer) => `<span class="chip">${escapeHtml(layer)}</span>`)
@@ -161,6 +161,24 @@ function renderHoldingCard(holding) {
       </div>
       <div class="source-links">${sources}</div>
     </article>
+  `;
+}
+
+function renderEvidenceItem(item) {
+  if (typeof item === "string") {
+    return `<li>${escapeHtml(item)}</li>`;
+  }
+  const tags = [
+    item.id ? `ID ${item.id}` : "",
+    item.materiality ? `Materiality ${item.materiality}` : "",
+    (item.claim_ids || []).length ? `Claims ${(item.claim_ids || []).join(", ")}` : "",
+    (item.metric_ids || []).length ? `Metrics ${(item.metric_ids || []).join(", ")}` : ""
+  ].filter(Boolean);
+  return `
+    <li>
+      ${escapeHtml(item.text || "")}
+      <span class="evidence-meta">${escapeHtml(tags.join(" | "))}</span>
+    </li>
   `;
 }
 
@@ -652,6 +670,7 @@ function renderReviewQueue(queue) {
               <span>Due: ${escapeHtml(item.due || "unscheduled")}</span>
               <span>Source: ${escapeHtml(item.source)}</span>
             </div>
+            ${renderScoreBreakdown(item.scoreBreakdown)}
             <p class="muted">${escapeHtml((item.score_reasons || []).join(", "))}</p>
             <p class="muted">${escapeHtml(item.success_condition)}</p>
             ${
@@ -664,6 +683,21 @@ function renderReviewQueue(queue) {
       `
     )
     .join("");
+}
+
+function renderScoreBreakdown(scoreBreakdown) {
+  if (!scoreBreakdown) return "";
+  return `
+    <div class="score-breakdown">
+      ${Object.entries(scoreBreakdown)
+        .filter(([, value]) => Number(value || 0) !== 0)
+        .map(
+          ([label, value]) =>
+            `<span>${escapeHtml(label)} +${escapeHtml(value)}</span>`
+        )
+        .join("")}
+    </div>
+  `;
 }
 
 function renderMonitorAlerts(alerts) {
@@ -907,7 +941,16 @@ function renderLinkHealth(linkHealth) {
                     <div class="meta-row">
                       <span>Quality: ${escapeHtml(source.source_quality_status)}</span>
                       <span>HTTP: ${escapeHtml(source.http_status || "n/a")}</span>
+                      <span>Fallback: ${source.fallback_required ? "Required" : "Not required"}</span>
+                      <span>Archive: ${source.archive_recommended ? "Recommended" : "Not needed"}</span>
                     </div>
+                    ${
+                      (source.preferred_primary_types || []).length
+                        ? `<p class="muted">Preferred primary support: ${escapeHtml(
+                            source.preferred_primary_types.join(", ")
+                          )}</p>`
+                        : ""
+                    }
                     <p class="muted">${escapeHtml(source.quality_reason || "")}</p>
                   </article>
                 `

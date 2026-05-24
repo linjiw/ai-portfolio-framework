@@ -29,6 +29,7 @@ config/bear_cases.yml
 config/valuation_bands.yml
 data/decision_log.yml
 data/evidence_log.yml
+data/filing_review_log.yml
 data/thesis_changelog.yml
 ```
 
@@ -79,6 +80,12 @@ data/thesis_changelog.yml
 `data/evidence_log.yml`
 : Human-reviewed evidence events. These entries drive metric `evidence_state`
   fields in generated monitor JSON.
+
+`data/filing_review_log.yml`
+: Human review dispositions for SEC filing events. A filing can be marked
+  `no_thesis_change`, `evidence_update`, `bear_case_update`,
+  `falsifier_watch`, `thesis_revision`, or `valuation_review`. Closed
+  dispositions remove the filing from the generated `filing_review` queue.
 
 `data/thesis_changelog.yml`
 : Thesis wording and evidence-boundary changes. This keeps thesis edits
@@ -234,6 +241,9 @@ The first version only tracks filing events:
 It does not extract revenue, margin, capex, or evidence state. A new relevant
 filing can enter the review queue as `filing_review`, where a human reviewer
 decides whether it maps to evidence, bear-case movement, or no thesis change.
+The review disposition is then recorded in `data/filing_review_log.yml`; this
+closes the filing-review queue item without changing any holding weight or
+conviction.
 
 ### Link-health snapshots
 
@@ -256,6 +266,90 @@ broken_link = source URL is unavailable or errored
 `forbidden` and `timeout` are not treated as claim failures. They indicate a
 brittle, bot-blocked, or slow source that may need archive or primary-source
 backup.
+
+## Tier 1.1 State
+
+Tier 1.1 hardens evidence provenance and filing review disposition.
+
+### Evidence IDs
+
+High-materiality evidence bullets in `site/research-data.js` now use stable
+objects instead of anonymous strings:
+
+```js
+{
+  id: "msft-evidence-agent365-governance-surface",
+  text: "Agent 365 gives Microsoft a concrete product surface for agent governance.",
+  materiality: "high",
+  claim_ids: ["msft-agent-authority"],
+  metric_ids: ["agent_governance_evidence"],
+  evidence_state_source: "data/evidence_log.yml"
+}
+```
+
+This creates a durable chain:
+
+```text
+evidence_id -> claim_id -> source_id -> source health -> metric_id -> evidence_state
+```
+
+Legacy string evidence is still rendered, but it does not provide the same
+stable audit handle.
+
+### Filing review dispositions
+
+`site/sec-filings.json` now includes `filingReviewLog` and the latest relevant
+filing carries review-disposition fields when available:
+
+```json
+{
+  "review_disposition": "no_thesis_change",
+  "review_id": "filing-msft-2026-05-14-8k",
+  "reviewed_at": "2026-05-24"
+}
+```
+
+SEC filings remain events. They do not update `evidence_state` unless a human
+review maps them into `data/evidence_log.yml`.
+
+### Scored queue transparency
+
+Each review item now includes a structured `scoreBreakdown`, so the dashboard
+can show why an item is ranked:
+
+```json
+{
+  "priority": 70,
+  "dueDate": 15,
+  "alert": 0,
+  "evidenceState": 25,
+  "requiresReview": 10,
+  "riskOverlay": 13,
+  "frameworkBottleneck": 10,
+  "sourceWeakness": 0,
+  "filingEvent": 0
+}
+```
+
+### Source maintenance
+
+`config/source_rules.yml` can now define fallback guidance separately from HTTP
+link status:
+
+```yaml
+source_maintenance:
+  ceg-tmi-pjm:
+    quality: weak_source
+    fallback_required: true
+    preferred_primary_types:
+      - PJM
+      - company_filing
+      - regulatory_filing
+      - operator_data
+```
+
+This keeps `weak_source` distinct from `broken_link`: CEG remains a
+primary-support burn-down item even when its link is reachable.
 
 ## LLM Boundary
 
