@@ -1,6 +1,417 @@
 {
   "alerts": [],
   "asOfDate": "2026-05-23",
+  "decisionDiscipline": {
+    "bearCases": [
+      {
+        "bear_case": "Enterprise agents stay in draft, copilot, or human-approval workflows and never receive broad production write permissions.",
+        "strengthens_if": [
+          "Customer stories remain usage anecdotes without governed write-action proof.",
+          "Security and compliance language grows faster than deployment evidence."
+        ],
+        "ticker": "MSFT",
+        "weakens_if": [
+          "Primary sources show agents executing production actions under policy controls."
+        ]
+      },
+      {
+        "bear_case": "TPU ownership reduces cost but does not protect Search economics or improve Cloud margin enough to matter.",
+        "strengthens_if": [
+          "Capex rises while Cloud margin or AI revenue quality fails to improve.",
+          "Search monetization pressure accelerates."
+        ],
+        "ticker": "GOOGL",
+        "weakens_if": [
+          "Cloud margin and customer evidence support TPU-driven cost leverage."
+        ]
+      },
+      {
+        "bear_case": "AI ASIC wins are lumpy customer-concentration events rather than durable platform economics.",
+        "strengthens_if": [
+          "AI revenue commentary depends on a small number of named hyperscaler programs.",
+          "Networking pull-through or VMware margin quality weakens."
+        ],
+        "ticker": "AVGO",
+        "weakens_if": [
+          "Multiple hyperscaler programs and networking attach show repeatable demand."
+        ]
+      },
+      {
+        "bear_case": "Advanced packaging and leading-edge scarcity normalize while overseas fab costs pressure margins.",
+        "strengthens_if": [
+          "Packaging bottleneck language fades and margin quality weakens.",
+          "Customer diversification shifts bargaining power away from TSMC."
+        ],
+        "ticker": "TSM",
+        "weakens_if": [
+          "HPC mix, pricing, and packaging commentary remain tight and margin-supportive."
+        ]
+      },
+      {
+        "bear_case": "NVIDIA becomes a high-quality accelerator vendor whose margins and attach rates compress as custom silicon scales.",
+        "strengthens_if": [
+          "Gross margin compresses while custom silicon evidence rises.",
+          "Networking/software pull-through is not visible in disclosures."
+        ],
+        "ticker": "NVDA",
+        "weakens_if": [
+          "Rack-scale architecture, networking, software, and margin evidence remain aligned."
+        ]
+      },
+      {
+        "bear_case": "Samsung or Micron catches up in HBM qualification and erodes SK Hynix leadership.",
+        "strengthens_if": [
+          "Customer qualification evidence shifts away from SK Hynix.",
+          "HBM pricing or share commentary weakens."
+        ],
+        "ticker": "000660.KS",
+        "weakens_if": [
+          "Customer and company sources reinforce HBM leadership into next-generation platforms."
+        ]
+      },
+      {
+        "bear_case": "AI power demand exists, but grid, regulatory, and interconnection friction prevents earnings conversion.",
+        "strengthens_if": [
+          "PJM or regulatory timelines slip without offsetting contracted economics.",
+          "PPA announcements do not become realized earnings evidence."
+        ],
+        "ticker": "CEG",
+        "weakens_if": [
+          "Primary regulatory or company evidence shows demand converting into contracted economics."
+        ]
+      },
+      {
+        "bear_case": "Power and cooling narratives stay strong while orders, backlog, or margins roll over.",
+        "strengthens_if": [
+          "Orders/backlog slow before the AI capex story changes.",
+          "Liquid-cooling commentary remains promotional without financial pull-through."
+        ],
+        "ticker": "VRT",
+        "weakens_if": [
+          "Orders, backlog, margin, and cooling evidence remain mutually supportive."
+        ]
+      },
+      {
+        "bear_case": "AI becomes a feature inside existing products without changing workflow depth, retention, or revenue quality.",
+        "strengthens_if": [
+          "Product language rises without retention or subscription evidence.",
+          "Customers treat AI as table stakes rather than a paid verifier layer."
+        ],
+        "ticker": "MSCI",
+        "weakens_if": [
+          "AI workflow evidence links to subscription durability or product depth."
+        ]
+      },
+      {
+        "bear_case": "Credit-cycle noise overwhelms AI workflow benefits and AI does not improve analytics economics.",
+        "strengthens_if": [
+          "Analytics growth or retention weakens while AI mentions remain vague.",
+          "Ratings-cycle pressure explains results better than product adoption."
+        ],
+        "ticker": "MCO",
+        "weakens_if": [
+          "AI tools show measurable workflow, retention, or analytics value."
+        ]
+      },
+      {
+        "bear_case": "LLM workflows bypass S&P Global's data products or compress data-licensing economics.",
+        "strengthens_if": [
+          "Kensho/API/MCP references stay absent from customer or revenue evidence.",
+          "Data licensing weakens while AI usage grows elsewhere."
+        ],
+        "ticker": "SPGI",
+        "weakens_if": [
+          "Trusted data products become embedded in AI workflows."
+        ]
+      },
+      {
+        "bear_case": "Regulated customers experiment with AI but do not adopt Veeva Agents in production workflows.",
+        "strengthens_if": [
+          "AI Agents remain roadmap language or controlled demos.",
+          "CRM migration absorbs attention without AI workflow monetization."
+        ],
+        "ticker": "VEEV",
+        "weakens_if": [
+          "Customer or product evidence shows regulated production workflow usage."
+        ]
+      },
+      {
+        "bear_case": "AI semitest demand normalizes before robotics optionality is large enough to matter.",
+        "strengthens_if": [
+          "Semitest bookings weaken and robotics stays immaterial.",
+          "AI commentary does not convert into revenue durability."
+        ],
+        "ticker": "TER",
+        "weakens_if": [
+          "Semitest demand remains strong or robotics begins to offset cyclicality."
+        ]
+      },
+      {
+        "bear_case": "Cash becomes a persistent drag if thesis evidence stays strong and valuation resets never arrive.",
+        "strengthens_if": [
+          "Alerts stay green and cash drag dominates decision reviews.",
+          "Valuation bands do not create attractive review opportunities."
+        ],
+        "ticker": "CASH",
+        "weakens_if": [
+          "Drawdowns, valuation resets, or source-health issues make cash option value visible."
+        ]
+      }
+    ],
+    "falsifierThresholds": [
+      {
+        "cadence": "semiannual",
+        "decision_rule": "If threshold is missed, open thesis_revision review within 30 days and keep Trust bottleneck flagged.",
+        "metric_id": "production_write_permission",
+        "source": "official product docs, customer case studies, security disclosures, earnings transcripts",
+        "threshold": "Fewer than 2 independent primary-source examples of governed production write actions by 2027-12-31.",
+        "ticker": "MSFT"
+      },
+      {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, review whether TPU cost advantage is translating into economics or only capacity.",
+        "metric_id": "google_cloud_revenue_margin",
+        "source": "earnings release, Cloud segment disclosure, capex commentary",
+        "threshold": "Cloud margin fails to improve over 4 quarters while AI capex intensity stays elevated and TPU evidence remains product-only.",
+        "ticker": "GOOGL"
+      },
+      {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, relabel as cyclical bottleneck risk and require explicit customer-concentration review.",
+        "metric_id": "ai_semiconductor_revenue",
+        "source": "earnings release, transcript, customer-concentration disclosures",
+        "threshold": "AI semiconductor growth remains dependent on too few hyperscaler programs and networking pull-through is not disclosed for 2 consecutive reviews.",
+        "ticker": "AVGO"
+      },
+      {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, review whether leading-edge foundry remains a chokepoint or has become normal cycle exposure.",
+        "metric_id": "advanced_packaging_commentary",
+        "source": "earnings release, transcript, advanced-packaging commentary",
+        "threshold": "Advanced-packaging scarcity no longer appears in company commentary and gross margin quality weakens for 2 consecutive reviews.",
+        "ticker": "TSM"
+      },
+      {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, review whether NVIDIA is still an AI factory operating layer or mainly accelerator cycle exposure.",
+        "metric_id": "networking_attach",
+        "source": "earnings release, segment disclosures, product architecture docs",
+        "threshold": "Rack-scale systems ship while networking/software pull-through evidence weakens and gross margin compresses sharply for 2 consecutive reviews.",
+        "ticker": "NVDA"
+      },
+      {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, open HBM leadership review and require source-linked evidence before maintaining leadership claim.",
+        "metric_id": "nvidia_qualification",
+        "source": "company IR, customer qualification evidence, industry disclosures",
+        "threshold": "HBM qualification or shipment evidence falls behind Samsung or Micron for 2 consecutive reviews.",
+        "ticker": "000660.KS"
+      },
+      {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, review whether nodal power scarcity is investable earnings evidence or only a narrative bottleneck.",
+        "metric_id": "pjm_interconnection",
+        "source": "PJM data, regulatory filings, company IR, PPA announcements",
+        "threshold": "Data-center power demand does not convert into contracted or regulatory progress for 2 consecutive reviews.",
+        "ticker": "CEG"
+      },
+      {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, review whether power/cooling demand is decelerating before the thesis admits it.",
+        "metric_id": "backlog",
+        "source": "earnings release, orders, backlog, margin commentary",
+        "threshold": "Orders or backlog deteriorate for 2 consecutive reviews while AI capex commentary remains positive.",
+        "ticker": "VRT"
+      },
+      {
+        "cadence": "semiannual",
+        "decision_rule": "If triggered, review whether this remains a verifier thesis or only a trusted-data brand thesis.",
+        "metric_id": "ai_product_evidence",
+        "source": "company IR, product docs, retention and analytics disclosures",
+        "threshold": "No source-linked evidence that AI workflow adoption affects retention, product depth, or revenue by 2027-12-31.",
+        "ticker": "MSCI"
+      },
+      {
+        "cadence": "semiannual",
+        "decision_rule": "If triggered, review whether the AI thesis is separable from the ratings cycle.",
+        "metric_id": "research_assistant_adoption",
+        "source": "company IR, analytics disclosures, product docs",
+        "threshold": "No evidence that AI research tools improve analytics workflow adoption or credit-risk economics by 2027-12-31.",
+        "ticker": "MCO"
+      },
+      {
+        "cadence": "semiannual",
+        "decision_rule": "If triggered, review whether trusted data is being bypassed rather than integrated.",
+        "metric_id": "kensho_api_mcp_mentions",
+        "source": "company IR, Kensho product docs, data-licensing disclosures",
+        "threshold": "No source-linked evidence that Kensho, API, MCP, or data licensing embeds in AI workflows by 2027-12-31.",
+        "ticker": "SPGI"
+      },
+      {
+        "cadence": "semiannual",
+        "decision_rule": "If triggered, review whether AI Agents remain roadmap-only rather than a production workflow layer.",
+        "metric_id": "ai_agents_rollout",
+        "source": "Veeva product docs, customer evidence, earnings transcripts",
+        "threshold": "Fewer than 50 paid or clearly deployed AI Agent customers by FY2028 Q2, or no regulated production-workflow proof.",
+        "ticker": "VEEV"
+      },
+      {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, review whether optionality is masking a cyclical test downturn.",
+        "metric_id": "semiconductor_test_revenue",
+        "source": "earnings release, bookings, AI revenue commentary, robotics revenue",
+        "threshold": "Semiconductor-test demand weakens for 2 consecutive reviews before robotics revenue becomes material.",
+        "ticker": "TER"
+      },
+      {
+        "cadence": "semiannual",
+        "decision_rule": "If triggered, review cash policy wording and whether the reserve still has option value.",
+        "metric_id": "portfolio_drawdown",
+        "source": "local portfolio calculation, alert count, valuation reset list",
+        "threshold": "Cash drag dominates review outcomes for 2 consecutive semiannual reviews while drawdown, valuation, and alert risks remain low.",
+        "ticker": "CASH"
+      }
+    ],
+    "policy": {
+      "bear_cases": {
+        "boundary": "Bear-case movement changes review priority only; it is not a trade instruction.",
+        "purpose": "Force each thesis to track a live opposing argument, not only confirming evidence."
+      },
+      "falsifier_thresholds": {
+        "boundary": "Thresholds require a decision-log entry; they do not execute trades or rewrite weights automatically.",
+        "default_review_action": "Open thesis review, update evidence log, and record whether conviction, thesis wording, or sizing policy changed.",
+        "purpose": "Convert narrative falsifiers into operational human-review triggers."
+      },
+      "valuation_bands": {
+        "boundary": "Bands trigger human valuation review only. They do not change target weights, conviction, or holdings.",
+        "purpose": "Make the valuation gate operational without creating automatic trading.",
+        "status": "not_evaluated"
+      }
+    },
+    "summary": {
+      "bear_case_count": 14,
+      "bear_case_coverage": 1.0,
+      "holding_count": 14,
+      "operational_falsifier_count": 14,
+      "operational_falsifier_coverage": 1.0,
+      "valuation_band_count": 14,
+      "valuation_band_coverage": 1.0
+    },
+    "valuationBands": [
+      {
+        "metric": "forward_pe",
+        "reasonable_band": "28-34x",
+        "review_high": "> 40x",
+        "review_low": "< 24x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "MSFT"
+      },
+      {
+        "metric": "forward_pe",
+        "reasonable_band": "20-28x",
+        "review_high": "> 32x",
+        "review_low": "< 18x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "GOOGL"
+      },
+      {
+        "metric": "forward_pe",
+        "reasonable_band": "28-38x",
+        "review_high": "> 45x",
+        "review_low": "< 24x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "AVGO"
+      },
+      {
+        "metric": "forward_pe",
+        "reasonable_band": "18-26x",
+        "review_high": "> 30x",
+        "review_low": "< 16x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "TSM"
+      },
+      {
+        "metric": "forward_pe",
+        "reasonable_band": "30-45x",
+        "review_high": "> 55x",
+        "review_low": "< 25x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "NVDA"
+      },
+      {
+        "metric": "price_to_book",
+        "reasonable_band": "1.0-1.8x",
+        "review_high": "> 2.2x",
+        "review_low": "< 0.9x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "000660.KS"
+      },
+      {
+        "metric": "forward_pe",
+        "reasonable_band": "18-26x",
+        "review_high": "> 32x",
+        "review_low": "< 15x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "CEG"
+      },
+      {
+        "metric": "forward_pe",
+        "reasonable_band": "22-32x",
+        "review_high": "> 40x",
+        "review_low": "< 18x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "VRT"
+      },
+      {
+        "metric": "forward_pe",
+        "reasonable_band": "30-42x",
+        "review_high": "> 48x",
+        "review_low": "< 25x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "MSCI"
+      },
+      {
+        "metric": "forward_pe",
+        "reasonable_band": "28-38x",
+        "review_high": "> 45x",
+        "review_low": "< 24x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "MCO"
+      },
+      {
+        "metric": "forward_pe",
+        "reasonable_band": "26-36x",
+        "review_high": "> 42x",
+        "review_low": "< 22x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "SPGI"
+      },
+      {
+        "metric": "forward_pe",
+        "reasonable_band": "28-42x",
+        "review_high": "> 50x",
+        "review_low": "< 22x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "VEEV"
+      },
+      {
+        "metric": "normalized_pe",
+        "reasonable_band": "18-28x",
+        "review_high": "> 35x",
+        "review_low": "< 14x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "TER"
+      },
+      {
+        "metric": "opportunity_cost",
+        "reasonable_band": "policy reserve",
+        "review_high": "cash drag dominates semiannual review",
+        "review_low": "portfolio drawdown or valuation-reset risk rises",
+        "source": "local portfolio calculation",
+        "ticker": "CASH"
+      }
+    ]
+  },
   "decisionLog": [
     {
       "changed_conviction": false,
@@ -168,16 +579,35 @@
       "ticker": "VEEV"
     }
   ],
-  "generatedAtUtc": "2026-05-24T01:18:12Z",
+  "generatedAtUtc": "2026-05-24T06:37:34Z",
   "holdings": [
     {
       "alert_count": 0,
+      "bear_case": {
+        "bear_case": "Enterprise agents stay in draft, copilot, or human-approval workflows and never receive broad production write permissions.",
+        "strengthens_if": [
+          "Customer stories remain usage anecdotes without governed write-action proof.",
+          "Security and compliance language grows faster than deployment evidence."
+        ],
+        "ticker": "MSFT",
+        "weakens_if": [
+          "Primary sources show agents executing production actions under policy controls."
+        ]
+      },
       "bucket": "Core compounders",
       "core_question": "Can Microsoft become the enterprise authority-control layer for governed agents?",
       "current_weight": 18.017,
       "falsifier": [
         "Enterprise agents remain draft-only and fail to gain production write permissions."
       ],
+      "falsifier_threshold": {
+        "cadence": "semiannual",
+        "decision_rule": "If threshold is missed, open thesis_revision review within 30 days and keep Trust bottleneck flagged.",
+        "metric_id": "production_write_permission",
+        "source": "official product docs, customer case studies, security disclosures, earnings transcripts",
+        "threshold": "Fewer than 2 independent primary-source examples of governed production write actions by 2027-12-31.",
+        "ticker": "MSFT"
+      },
       "layers": [
         "Authority",
         "Outcome"
@@ -191,6 +621,13 @@
         "success_condition": "Official disclosure, customer case study, or product documentation shows agents executing governed production actions.",
         "ticker": "MSFT",
         "type": "evidence_check"
+      },
+      "risk_profile": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "Cloud and agent monetization still depend on enterprise AI infrastructure spending and adoption.",
+          "sensitivity": "medium_high"
+        }
       },
       "status": "green",
       "target_weight": 18.0,
@@ -282,17 +719,44 @@
           "type": "fundamental_or_qualitative"
         }
       ],
+      "valuation_band": {
+        "metric": "forward_pe",
+        "reasonable_band": "28-34x",
+        "review_high": "> 40x",
+        "review_low": "< 24x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "MSFT"
+      },
       "watch_rule": "No fresh evidence on production write-permission adoption.",
       "weight_drift_pct_points": 0.01699999999999946
     },
     {
       "alert_count": 0,
+      "bear_case": {
+        "bear_case": "TPU ownership reduces cost but does not protect Search economics or improve Cloud margin enough to matter.",
+        "strengthens_if": [
+          "Capex rises while Cloud margin or AI revenue quality fails to improve.",
+          "Search monetization pressure accelerates."
+        ],
+        "ticker": "GOOGL",
+        "weakens_if": [
+          "Cloud margin and customer evidence support TPU-driven cost leverage."
+        ]
+      },
       "bucket": "Core compounders",
       "core_question": "Can Google turn TPU, DeepMind, Cloud, Search, and Workspace into a cost advantage?",
       "current_weight": 14.9404,
       "falsifier": [
         "Search economics weaken while TPU differentiation fails to offset capex pressure."
       ],
+      "falsifier_threshold": {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, review whether TPU cost advantage is translating into economics or only capacity.",
+        "metric_id": "google_cloud_revenue_margin",
+        "source": "earnings release, Cloud segment disclosure, capex commentary",
+        "threshold": "Cloud margin fails to improve over 4 quarters while AI capex intensity stays elevated and TPU evidence remains product-only.",
+        "ticker": "GOOGL"
+      },
       "layers": [
         "Capacity",
         "Cost",
@@ -308,6 +772,13 @@
         "success_condition": "Cloud margin, product disclosure, or customer evidence supports TPU-driven cost leverage.",
         "ticker": "GOOGL",
         "type": "quarterly_review"
+      },
+      "risk_profile": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "TPU, Cloud, Search AI, and Workspace monetization are tied to AI capex and usage quality.",
+          "sensitivity": "high"
+        }
       },
       "status": "green",
       "target_weight": 15.0,
@@ -376,17 +847,44 @@
           "type": "qualitative"
         }
       ],
+      "valuation_band": {
+        "metric": "forward_pe",
+        "reasonable_band": "20-28x",
+        "review_high": "> 32x",
+        "review_low": "< 18x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "GOOGL"
+      },
       "watch_rule": "Cloud margin fails to show TPU or capex leverage.",
       "weight_drift_pct_points": -0.05959999999999965
     },
     {
       "alert_count": 0,
+      "bear_case": {
+        "bear_case": "AI ASIC wins are lumpy customer-concentration events rather than durable platform economics.",
+        "strengthens_if": [
+          "AI revenue commentary depends on a small number of named hyperscaler programs.",
+          "Networking pull-through or VMware margin quality weakens."
+        ],
+        "ticker": "AVGO",
+        "weakens_if": [
+          "Multiple hyperscaler programs and networking attach show repeatable demand."
+        ]
+      },
       "bucket": "Core compounders",
       "core_question": "Can Broadcom keep scaling hyperscaler ASIC and networking exposure?",
       "current_weight": 10.0366,
       "falsifier": [
         "Custom silicon wins do not translate into durable networking or platform pull-through."
       ],
+      "falsifier_threshold": {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, relabel as cyclical bottleneck risk and require explicit customer-concentration review.",
+        "metric_id": "ai_semiconductor_revenue",
+        "source": "earnings release, transcript, customer-concentration disclosures",
+        "threshold": "AI semiconductor growth remains dependent on too few hyperscaler programs and networking pull-through is not disclosed for 2 consecutive reviews.",
+        "ticker": "AVGO"
+      },
       "layers": [
         "Capacity",
         "Cost"
@@ -400,6 +898,13 @@
         "success_condition": "Management discloses durable ASIC or networking demand across multiple hyperscalers.",
         "ticker": "AVGO",
         "type": "quarterly_review"
+      },
+      "risk_profile": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "AI ASIC and networking growth is concentrated in hyperscaler programs.",
+          "sensitivity": "high"
+        }
       },
       "status": "green",
       "target_weight": 10.0,
@@ -463,17 +968,44 @@
           "type": "qualitative"
         }
       ],
+      "valuation_band": {
+        "metric": "forward_pe",
+        "reasonable_band": "28-38x",
+        "review_high": "> 45x",
+        "review_low": "< 24x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "AVGO"
+      },
       "watch_rule": "AI semiconductor growth depends on too few customers.",
       "weight_drift_pct_points": 0.036599999999999966
     },
     {
       "alert_count": 0,
+      "bear_case": {
+        "bear_case": "Advanced packaging and leading-edge scarcity normalize while overseas fab costs pressure margins.",
+        "strengthens_if": [
+          "Packaging bottleneck language fades and margin quality weakens.",
+          "Customer diversification shifts bargaining power away from TSMC."
+        ],
+        "ticker": "TSM",
+        "weakens_if": [
+          "HPC mix, pricing, and packaging commentary remain tight and margin-supportive."
+        ]
+      },
       "bucket": "Core compounders",
       "core_question": "Does leading-edge foundry plus advanced packaging remain the AI silicon chokepoint?",
       "current_weight": 6.9738,
       "falsifier": [
         "Advanced packaging no longer constrains AI silicon supply or margin quality degrades structurally."
       ],
+      "falsifier_threshold": {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, review whether leading-edge foundry remains a chokepoint or has become normal cycle exposure.",
+        "metric_id": "advanced_packaging_commentary",
+        "source": "earnings release, transcript, advanced-packaging commentary",
+        "threshold": "Advanced-packaging scarcity no longer appears in company commentary and gross margin quality weakens for 2 consecutive reviews.",
+        "ticker": "TSM"
+      },
       "layers": [
         "Capacity"
       ],
@@ -486,6 +1018,13 @@
         "success_condition": "HPC mix, margin, and packaging commentary remain thesis-supportive.",
         "ticker": "TSM",
         "type": "quarterly_review"
+      },
+      "risk_profile": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "Leading-edge and advanced-packaging demand are tied to AI accelerator buildouts.",
+          "sensitivity": "high"
+        }
       },
       "status": "green",
       "target_weight": 7.000000000000001,
@@ -549,17 +1088,44 @@
           "type": "qualitative"
         }
       ],
+      "valuation_band": {
+        "metric": "forward_pe",
+        "reasonable_band": "18-26x",
+        "review_high": "> 30x",
+        "review_low": "< 16x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "TSM"
+      },
       "watch_rule": "Overseas fab cost or packaging constraints pressure margin quality.",
       "weight_drift_pct_points": -0.02620000000000111
     },
     {
       "alert_count": 0,
+      "bear_case": {
+        "bear_case": "NVIDIA becomes a high-quality accelerator vendor whose margins and attach rates compress as custom silicon scales.",
+        "strengthens_if": [
+          "Gross margin compresses while custom silicon evidence rises.",
+          "Networking/software pull-through is not visible in disclosures."
+        ],
+        "ticker": "NVDA",
+        "weakens_if": [
+          "Rack-scale architecture, networking, software, and margin evidence remain aligned."
+        ]
+      },
       "bucket": "Core compounders",
       "core_question": "Is NVIDIA still the AI factory operating layer rather than only a GPU vendor?",
       "current_weight": 6.9761,
       "falsifier": [
         "Rubin racks ship, but networking attach, software pull-through, and margins compress sharply."
       ],
+      "falsifier_threshold": {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, review whether NVIDIA is still an AI factory operating layer or mainly accelerator cycle exposure.",
+        "metric_id": "networking_attach",
+        "source": "earnings release, segment disclosures, product architecture docs",
+        "threshold": "Rack-scale systems ship while networking/software pull-through evidence weakens and gross margin compresses sharply for 2 consecutive reviews.",
+        "ticker": "NVDA"
+      },
       "layers": [
         "Capacity",
         "Cost"
@@ -573,6 +1139,13 @@
         "success_condition": "Rubin or Blackwell platform evidence shows durable networking/software pull-through.",
         "ticker": "NVDA",
         "type": "evidence_check"
+      },
+      "risk_profile": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "Data-center GPU, networking, and rack-scale demand are exposed to AI factory capex.",
+          "sensitivity": "high"
+        }
       },
       "status": "green",
       "target_weight": 7.000000000000001,
@@ -660,17 +1233,44 @@
           "type": "qualitative"
         }
       ],
+      "valuation_band": {
+        "metric": "forward_pe",
+        "reasonable_band": "30-45x",
+        "review_high": "> 55x",
+        "review_low": "< 25x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "NVDA"
+      },
       "watch_rule": "Custom silicon bypass pressure rises without offsetting platform pull-through.",
       "weight_drift_pct_points": -0.023900000000001143
     },
     {
       "alert_count": 0,
+      "bear_case": {
+        "bear_case": "Samsung or Micron catches up in HBM qualification and erodes SK Hynix leadership.",
+        "strengthens_if": [
+          "Customer qualification evidence shifts away from SK Hynix.",
+          "HBM pricing or share commentary weakens."
+        ],
+        "ticker": "000660.KS",
+        "weakens_if": [
+          "Customer and company sources reinforce HBM leadership into next-generation platforms."
+        ]
+      },
       "bucket": "Bottleneck cyclicals",
       "core_question": "Does SK Hynix maintain HBM leadership into the Vera Rubin generation?",
       "current_weight": 8.0051,
       "falsifier": [
         "SK Hynix loses HBM leadership or NVIDIA qualification leverage into Rubin."
       ],
+      "falsifier_threshold": {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, open HBM leadership review and require source-linked evidence before maintaining leadership claim.",
+        "metric_id": "nvidia_qualification",
+        "source": "company IR, customer qualification evidence, industry disclosures",
+        "threshold": "HBM qualification or shipment evidence falls behind Samsung or Micron for 2 consecutive reviews.",
+        "ticker": "000660.KS"
+      },
       "layers": [
         "Capacity"
       ],
@@ -683,6 +1283,13 @@
         "success_condition": "Company or customer evidence supports continued HBM leadership and shipment leverage.",
         "ticker": "000660.KS",
         "type": "evidence_check"
+      },
+      "risk_profile": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "HBM leadership depends on AI accelerator demand and customer qualification cycles.",
+          "sensitivity": "high"
+        }
       },
       "status": "green",
       "target_weight": 8.0,
@@ -746,17 +1353,44 @@
           "type": "qualitative"
         }
       ],
+      "valuation_band": {
+        "metric": "price_to_book",
+        "reasonable_band": "1.0-1.8x",
+        "review_high": "> 2.2x",
+        "review_low": "< 0.9x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "000660.KS"
+      },
       "watch_rule": "Samsung or Micron narrows the HBM qualification and shipment gap.",
       "weight_drift_pct_points": 0.0051000000000005485
     },
     {
       "alert_count": 0,
+      "bear_case": {
+        "bear_case": "AI power demand exists, but grid, regulatory, and interconnection friction prevents earnings conversion.",
+        "strengthens_if": [
+          "PJM or regulatory timelines slip without offsetting contracted economics.",
+          "PPA announcements do not become realized earnings evidence."
+        ],
+        "ticker": "CEG",
+        "weakens_if": [
+          "Primary regulatory or company evidence shows demand converting into contracted economics."
+        ]
+      },
       "bucket": "Bottleneck cyclicals",
       "core_question": "Does data-center power scarcity convert into earnings and contracted growth?",
       "current_weight": 4.9741,
       "falsifier": [
         "Contracted data-center demand fails to overcome grid, regulatory, or interconnection constraints."
       ],
+      "falsifier_threshold": {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, review whether nodal power scarcity is investable earnings evidence or only a narrative bottleneck.",
+        "metric_id": "pjm_interconnection",
+        "source": "PJM data, regulatory filings, company IR, PPA announcements",
+        "threshold": "Data-center power demand does not convert into contracted or regulatory progress for 2 consecutive reviews.",
+        "ticker": "CEG"
+      },
       "layers": [
         "Capacity"
       ],
@@ -769,6 +1403,13 @@
         "success_condition": "Regulatory, PJM, or company evidence shows improved path from demand to contracted power economics.",
         "ticker": "CEG",
         "type": "evidence_check"
+      },
+      "risk_profile": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "Data-center power scarcity only monetizes if AI load growth converts into contracted demand.",
+          "sensitivity": "medium_high"
+        }
       },
       "status": "green",
       "target_weight": 5.0,
@@ -837,17 +1478,44 @@
           "type": "qualitative"
         }
       ],
+      "valuation_band": {
+        "metric": "forward_pe",
+        "reasonable_band": "18-26x",
+        "review_high": "> 32x",
+        "review_low": "< 15x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "CEG"
+      },
       "watch_rule": "Interconnection delays prevent power scarcity from reaching realized economics.",
       "weight_drift_pct_points": -0.025900000000000034
     },
     {
       "alert_count": 0,
+      "bear_case": {
+        "bear_case": "Power and cooling narratives stay strong while orders, backlog, or margins roll over.",
+        "strengthens_if": [
+          "Orders/backlog slow before the AI capex story changes.",
+          "Liquid-cooling commentary remains promotional without financial pull-through."
+        ],
+        "ticker": "VRT",
+        "weakens_if": [
+          "Orders, backlog, margin, and cooling evidence remain mutually supportive."
+        ]
+      },
       "bucket": "Bottleneck cyclicals",
       "core_question": "Does AI data-center power and cooling capex keep translating into orders and backlog?",
       "current_weight": 4.9986,
       "falsifier": [
         "AI data-center capex fails to convert into durable Vertiv orders, backlog, or margins."
       ],
+      "falsifier_threshold": {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, review whether power/cooling demand is decelerating before the thesis admits it.",
+        "metric_id": "backlog",
+        "source": "earnings release, orders, backlog, margin commentary",
+        "threshold": "Orders or backlog deteriorate for 2 consecutive reviews while AI capex commentary remains positive.",
+        "ticker": "VRT"
+      },
       "layers": [
         "Capacity"
       ],
@@ -860,6 +1528,13 @@
         "success_condition": "Orders, backlog, and cooling commentary remain aligned with AI data-center demand.",
         "ticker": "VRT",
         "type": "quarterly_review"
+      },
+      "risk_profile": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "Power and cooling orders depend on AI data-center capex durability.",
+          "sensitivity": "high"
+        }
       },
       "status": "green",
       "target_weight": 5.0,
@@ -928,17 +1603,44 @@
           "type": "qualitative"
         }
       ],
+      "valuation_band": {
+        "metric": "forward_pe",
+        "reasonable_band": "22-32x",
+        "review_high": "> 40x",
+        "review_low": "< 18x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "VRT"
+      },
       "watch_rule": "Orders or backlog slow while AI capex narratives remain strong.",
       "weight_drift_pct_points": -0.00140000000000029
     },
     {
       "alert_count": 0,
+      "bear_case": {
+        "bear_case": "AI becomes a feature inside existing products without changing workflow depth, retention, or revenue quality.",
+        "strengthens_if": [
+          "Product language rises without retention or subscription evidence.",
+          "Customers treat AI as table stakes rather than a paid verifier layer."
+        ],
+        "ticker": "MSCI",
+        "weakens_if": [
+          "AI workflow evidence links to subscription durability or product depth."
+        ]
+      },
       "bucket": "Vertical verifier basket",
       "core_question": "Can MSCI data and risk models become AI workflow verification infrastructure?",
       "current_weight": 2.0005,
       "falsifier": [
         "Trusted data and risk workflows do not become outcome-verification revenue."
       ],
+      "falsifier_threshold": {
+        "cadence": "semiannual",
+        "decision_rule": "If triggered, review whether this remains a verifier thesis or only a trusted-data brand thesis.",
+        "metric_id": "ai_product_evidence",
+        "source": "company IR, product docs, retention and analytics disclosures",
+        "threshold": "No source-linked evidence that AI workflow adoption affects retention, product depth, or revenue by 2027-12-31.",
+        "ticker": "MSCI"
+      },
       "layers": [
         "Outcome"
       ],
@@ -951,6 +1653,13 @@
         "success_condition": "Product, retention, or revenue evidence links AI workflow adoption to trusted data demand.",
         "ticker": "MSCI",
         "type": "quarterly_review"
+      },
+      "risk_profile": {
+        "hyperscaler_capex_cycle": {
+          "category": "lagged",
+          "rationale": "Outcome-verification workflow adoption may lag AI capex and is less directly tied to buildout cycles.",
+          "sensitivity": "low"
+        }
       },
       "status": "green",
       "target_weight": 2.0,
@@ -1014,17 +1723,44 @@
           "type": "qualitative"
         }
       ],
+      "valuation_band": {
+        "metric": "forward_pe",
+        "reasonable_band": "30-42x",
+        "review_high": "> 48x",
+        "review_low": "< 25x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "MSCI"
+      },
       "watch_rule": "AI remains a product feature without measurable workflow adoption.",
       "weight_drift_pct_points": 0.000500000000000167
     },
     {
       "alert_count": 0,
+      "bear_case": {
+        "bear_case": "Credit-cycle noise overwhelms AI workflow benefits and AI does not improve analytics economics.",
+        "strengthens_if": [
+          "Analytics growth or retention weakens while AI mentions remain vague.",
+          "Ratings-cycle pressure explains results better than product adoption."
+        ],
+        "ticker": "MCO",
+        "weakens_if": [
+          "AI tools show measurable workflow, retention, or analytics value."
+        ]
+      },
       "bucket": "Vertical verifier basket",
       "core_question": "Does AI strengthen Moody's credit-risk workflow rather than commoditize it?",
       "current_weight": 2.0021,
       "falsifier": [
         "AI does not improve Moody's analytics or ratings workflow economics."
       ],
+      "falsifier_threshold": {
+        "cadence": "semiannual",
+        "decision_rule": "If triggered, review whether the AI thesis is separable from the ratings cycle.",
+        "metric_id": "research_assistant_adoption",
+        "source": "company IR, analytics disclosures, product docs",
+        "threshold": "No evidence that AI research tools improve analytics workflow adoption or credit-risk economics by 2027-12-31.",
+        "ticker": "MCO"
+      },
       "layers": [
         "Outcome"
       ],
@@ -1037,6 +1773,13 @@
         "success_condition": "Analytics growth, retention, or product evidence shows AI-enhanced workflow value.",
         "ticker": "MCO",
         "type": "quarterly_review"
+      },
+      "risk_profile": {
+        "hyperscaler_capex_cycle": {
+          "category": "lagged",
+          "rationale": "Credit-risk workflow demand is less directly tied to hyperscaler capex.",
+          "sensitivity": "low"
+        }
       },
       "status": "green",
       "target_weight": 2.0,
@@ -1100,17 +1843,44 @@
           "type": "fundamental"
         }
       ],
+      "valuation_band": {
+        "metric": "forward_pe",
+        "reasonable_band": "28-38x",
+        "review_high": "> 45x",
+        "review_low": "< 24x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "MCO"
+      },
       "watch_rule": "AI assistant evidence stays marketing-only while credit cycle weakens.",
       "weight_drift_pct_points": 0.0020999999999999908
     },
     {
       "alert_count": 0,
+      "bear_case": {
+        "bear_case": "LLM workflows bypass S&P Global's data products or compress data-licensing economics.",
+        "strengthens_if": [
+          "Kensho/API/MCP references stay absent from customer or revenue evidence.",
+          "Data licensing weakens while AI usage grows elsewhere."
+        ],
+        "ticker": "SPGI",
+        "weakens_if": [
+          "Trusted data products become embedded in AI workflows."
+        ]
+      },
       "bucket": "Vertical verifier basket",
       "core_question": "Can Kensho and trusted data embed S&P Global inside LLM workflows?",
       "current_weight": 2.0031,
       "falsifier": [
         "LLM workflow adoption bypasses S&P Global's data and ratings franchises."
       ],
+      "falsifier_threshold": {
+        "cadence": "semiannual",
+        "decision_rule": "If triggered, review whether trusted data is being bypassed rather than integrated.",
+        "metric_id": "kensho_api_mcp_mentions",
+        "source": "company IR, Kensho product docs, data-licensing disclosures",
+        "threshold": "No source-linked evidence that Kensho, API, MCP, or data licensing embeds in AI workflows by 2027-12-31.",
+        "ticker": "SPGI"
+      },
       "layers": [
         "Outcome"
       ],
@@ -1123,6 +1893,13 @@
         "success_condition": "Product or customer evidence shows trusted S&P data embedded in AI workflows.",
         "ticker": "SPGI",
         "type": "quarterly_review"
+      },
+      "risk_profile": {
+        "hyperscaler_capex_cycle": {
+          "category": "lagged",
+          "rationale": "Data and ratings workflow adoption is a lagged trusted-data thesis, not a direct capex supplier thesis.",
+          "sensitivity": "low"
+        }
       },
       "status": "green",
       "target_weight": 2.0,
@@ -1186,17 +1963,44 @@
           "type": "qualitative"
         }
       ],
+      "valuation_band": {
+        "metric": "forward_pe",
+        "reasonable_band": "26-36x",
+        "review_high": "> 42x",
+        "review_low": "< 22x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "SPGI"
+      },
       "watch_rule": "Kensho and trusted-data products do not show workflow integration evidence.",
       "weight_drift_pct_points": 0.0030999999999998806
     },
     {
       "alert_count": 0,
+      "bear_case": {
+        "bear_case": "Regulated customers experiment with AI but do not adopt Veeva Agents in production workflows.",
+        "strengthens_if": [
+          "AI Agents remain roadmap language or controlled demos.",
+          "CRM migration absorbs attention without AI workflow monetization."
+        ],
+        "ticker": "VEEV",
+        "weakens_if": [
+          "Customer or product evidence shows regulated production workflow usage."
+        ]
+      },
       "bucket": "Vertical verifier basket",
       "core_question": "Does regulated workflow AI become real production adoption in life sciences?",
       "current_weight": 2.0094,
       "falsifier": [
         "Regulated customers do not adopt Veeva AI in production workflows."
       ],
+      "falsifier_threshold": {
+        "cadence": "semiannual",
+        "decision_rule": "If triggered, review whether AI Agents remain roadmap-only rather than a production workflow layer.",
+        "metric_id": "ai_agents_rollout",
+        "source": "Veeva product docs, customer evidence, earnings transcripts",
+        "threshold": "Fewer than 50 paid or clearly deployed AI Agent customers by FY2028 Q2, or no regulated production-workflow proof.",
+        "ticker": "VEEV"
+      },
       "layers": [
         "Outcome"
       ],
@@ -1209,6 +2013,13 @@
         "success_condition": "Official rollout, customer, or product evidence shows AI Agents used in regulated workflows.",
         "ticker": "VEEV",
         "type": "evidence_check"
+      },
+      "risk_profile": {
+        "hyperscaler_capex_cycle": {
+          "category": "lagged",
+          "rationale": "Regulated workflow AI adoption is driven by life-sciences software cycles more than AI factory capex.",
+          "sensitivity": "low"
+        }
       },
       "status": "green",
       "target_weight": 2.0,
@@ -1276,17 +2087,44 @@
           "type": "qualitative"
         }
       ],
+      "valuation_band": {
+        "metric": "forward_pe",
+        "reasonable_band": "28-42x",
+        "review_high": "> 50x",
+        "review_low": "< 22x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "VEEV"
+      },
       "watch_rule": "AI Agents remain roadmap-only or show low regulated-workflow usage.",
       "weight_drift_pct_points": 0.009399999999999853
     },
     {
       "alert_count": 0,
+      "bear_case": {
+        "bear_case": "AI semitest demand normalizes before robotics optionality is large enough to matter.",
+        "strengthens_if": [
+          "Semitest bookings weaken and robotics stays immaterial.",
+          "AI commentary does not convert into revenue durability."
+        ],
+        "ticker": "TER",
+        "weakens_if": [
+          "Semitest demand remains strong or robotics begins to offset cyclicality."
+        ]
+      },
       "bucket": "Asymmetric optionality",
       "core_question": "Is AI semiconductor test strong enough while robotics keeps option value?",
       "current_weight": 7.0379,
       "falsifier": [
         "AI semiconductor-test demand normalizes before robotics optionality can matter."
       ],
+      "falsifier_threshold": {
+        "cadence": "quarterly",
+        "decision_rule": "If triggered, review whether optionality is masking a cyclical test downturn.",
+        "metric_id": "semiconductor_test_revenue",
+        "source": "earnings release, bookings, AI revenue commentary, robotics revenue",
+        "threshold": "Semiconductor-test demand weakens for 2 consecutive reviews before robotics revenue becomes material.",
+        "ticker": "TER"
+      },
       "layers": [
         "Capacity",
         "Physical AI"
@@ -1300,6 +2138,13 @@
         "success_condition": "Semitest bookings, AI revenue commentary, or robotics deal evidence supports the blended thesis.",
         "ticker": "TER",
         "type": "quarterly_review"
+      },
+      "risk_profile": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "Semiconductor-test demand is levered to AI device complexity and capex timing.",
+          "sensitivity": "medium_high"
+        }
       },
       "status": "green",
       "target_weight": 7.000000000000001,
@@ -1363,17 +2208,44 @@
           "type": "fundamental_or_qualitative"
         }
       ],
+      "valuation_band": {
+        "metric": "normalized_pe",
+        "reasonable_band": "18-28x",
+        "review_high": "> 35x",
+        "review_low": "< 14x",
+        "source": "quarterly valuation snapshot",
+        "ticker": "TER"
+      },
       "watch_rule": "Semiconductor test demand digests before robotics becomes material.",
       "weight_drift_pct_points": 0.03789999999999871
     },
     {
       "alert_count": 0,
+      "bear_case": {
+        "bear_case": "Cash becomes a persistent drag if thesis evidence stays strong and valuation resets never arrive.",
+        "strengthens_if": [
+          "Alerts stay green and cash drag dominates decision reviews.",
+          "Valuation bands do not create attractive review opportunities."
+        ],
+        "ticker": "CASH",
+        "weakens_if": [
+          "Drawdowns, valuation resets, or source-health issues make cash option value visible."
+        ]
+      },
       "bucket": "Dry powder",
       "core_question": "Does cash still have risk-control option value?",
       "current_weight": 10.025,
       "falsifier": [
         "Cash no longer provides useful option value against drawdown, valuation, or framework risk."
       ],
+      "falsifier_threshold": {
+        "cadence": "semiannual",
+        "decision_rule": "If triggered, review cash policy wording and whether the reserve still has option value.",
+        "metric_id": "portfolio_drawdown",
+        "source": "local portfolio calculation, alert count, valuation reset list",
+        "threshold": "Cash drag dominates review outcomes for 2 consecutive semiannual reviews while drawdown, valuation, and alert risks remain low.",
+        "ticker": "CASH"
+      },
       "layers": [
         "Risk control"
       ],
@@ -1386,6 +2258,13 @@
         "success_condition": "Cash remains useful against drawdown, valuation, source-health, or framework uncertainty.",
         "ticker": "CASH",
         "type": "weight_review"
+      },
+      "risk_profile": {
+        "hyperscaler_capex_cycle": {
+          "category": "hedge",
+          "rationale": "Cash is the explicit risk-control reserve against synchronized thesis and valuation resets.",
+          "sensitivity": "inverse_or_uncorrelated"
+        }
       },
       "status": "green",
       "target_weight": 10.0,
@@ -1449,6 +2328,14 @@
           "type": "market"
         }
       ],
+      "valuation_band": {
+        "metric": "opportunity_cost",
+        "reasonable_band": "policy reserve",
+        "review_high": "cash drag dominates semiannual review",
+        "review_low": "portfolio drawdown or valuation-reset risk rises",
+        "source": "local portfolio calculation",
+        "ticker": "CASH"
+      },
       "watch_rule": "Cash drag becomes the main portfolio error while thesis evidence remains strong.",
       "weight_drift_pct_points": 0.025000000000000355
     }
@@ -2631,11 +3518,12 @@
       "metric_id": "pjm_interconnection",
       "priority": "high",
       "question": "Track PJM and interconnection conversion from data-center demand into realizable economics.",
-      "score": 120,
+      "score": 128,
       "score_reasons": [
         "high priority",
         "deteriorating evidence",
-        "evidence requires review"
+        "evidence requires review",
+        "direct capex-cycle exposure"
       ],
       "source": "next_action",
       "success_condition": "Regulatory, PJM, or company evidence shows improved path from demand to contracted power economics.",
@@ -2663,12 +3551,13 @@
       "metric_id": "production_write_permission",
       "priority": "high",
       "question": "Look for evidence of Agent 365 production write-permission adoption.",
-      "score": 115,
+      "score": 123,
       "score_reasons": [
         "high priority",
         "unknown evidence",
         "evidence requires review",
-        "framework trust bottleneck"
+        "framework trust bottleneck",
+        "direct capex-cycle exposure"
       ],
       "source": "next_action",
       "success_condition": "Official disclosure, customer case study, or product documentation shows agents executing governed production actions.",
@@ -2691,10 +3580,12 @@
       "metric_id": "nvidia_qualification",
       "priority": "high",
       "question": "Track HBM qualification and shipment evidence into the Vera Rubin generation.",
-      "score": 95,
+      "score": 108,
       "score_reasons": [
         "high priority",
-        "unknown evidence"
+        "unknown evidence",
+        "direct capex-cycle exposure",
+        "high cycle sensitivity"
       ],
       "source": "next_action",
       "success_condition": "Company or customer evidence supports continued HBM leadership and shipment leverage.",
@@ -2722,11 +3613,13 @@
       "metric_id": "google_cloud_revenue_margin",
       "priority": "high",
       "question": "Check whether TPU and capex advantage appears in Cloud margin or AI revenue quality.",
-      "score": 95,
+      "score": 108,
       "score_reasons": [
         "high priority",
         "watching evidence",
-        "evidence requires review"
+        "evidence requires review",
+        "direct capex-cycle exposure",
+        "high cycle sensitivity"
       ],
       "source": "next_action",
       "success_condition": "Cloud margin, product disclosure, or customer evidence supports TPU-driven cost leverage.",
@@ -2754,10 +3647,12 @@
       "metric_id": "networking_attach",
       "priority": "high",
       "question": "Track networking attach, rack-scale platform evidence, and margin durability.",
-      "score": 85,
+      "score": 98,
       "score_reasons": [
         "high priority",
-        "watching evidence"
+        "watching evidence",
+        "direct capex-cycle exposure",
+        "high cycle sensitivity"
       ],
       "source": "next_action",
       "success_condition": "Rubin or Blackwell platform evidence shows durable networking/software pull-through.",
@@ -2780,14 +3675,99 @@
       "metric_id": "ai_semiconductor_revenue",
       "priority": "medium",
       "question": "Check whether AI semiconductor growth is broadening beyond a small customer set.",
-      "score": 65,
+      "score": 78,
       "score_reasons": [
         "medium priority",
-        "unknown evidence"
+        "unknown evidence",
+        "direct capex-cycle exposure",
+        "high cycle sensitivity"
       ],
       "source": "next_action",
       "success_condition": "Management discloses durable ASIC or networking demand across multiple hyperscalers.",
       "ticker": "AVGO",
+      "type": "quarterly_review"
+    },
+    {
+      "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [],
+        "confidence": "unknown",
+        "direction": "stronger",
+        "evidence_type": "",
+        "last_evidence_date": null,
+        "latest_summary": "",
+        "requires_review": false,
+        "source_ids": [],
+        "state": "unknown"
+      },
+      "metric_id": "advanced_packaging_commentary",
+      "priority": "medium",
+      "question": "Review whether advanced packaging and leading-edge demand still support margin quality.",
+      "score": 78,
+      "score_reasons": [
+        "medium priority",
+        "unknown evidence",
+        "direct capex-cycle exposure",
+        "high cycle sensitivity"
+      ],
+      "source": "next_action",
+      "success_condition": "HPC mix, margin, and packaging commentary remain thesis-supportive.",
+      "ticker": "TSM",
+      "type": "quarterly_review"
+    },
+    {
+      "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [],
+        "confidence": "unknown",
+        "direction": "up",
+        "evidence_type": "",
+        "last_evidence_date": null,
+        "latest_summary": "",
+        "requires_review": false,
+        "source_ids": [],
+        "state": "unknown"
+      },
+      "metric_id": "backlog",
+      "priority": "medium",
+      "question": "Check whether AI power and cooling capex is still visible in orders, backlog, and liquid-cooling commentary.",
+      "score": 78,
+      "score_reasons": [
+        "medium priority",
+        "unknown evidence",
+        "direct capex-cycle exposure",
+        "high cycle sensitivity"
+      ],
+      "source": "next_action",
+      "success_condition": "Orders, backlog, and cooling commentary remain aligned with AI data-center demand.",
+      "ticker": "VRT",
+      "type": "quarterly_review"
+    },
+    {
+      "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [],
+        "confidence": "unknown",
+        "direction": "up",
+        "evidence_type": "",
+        "last_evidence_date": null,
+        "latest_summary": "",
+        "requires_review": false,
+        "source_ids": [],
+        "state": "unknown"
+      },
+      "metric_id": "semiconductor_test_revenue",
+      "priority": "medium",
+      "question": "Check whether semiconductor test demand remains strong enough while robotics option value develops.",
+      "score": 73,
+      "score_reasons": [
+        "medium priority",
+        "unknown evidence",
+        "direct capex-cycle exposure"
+      ],
+      "source": "next_action",
+      "success_condition": "Semitest bookings, AI revenue commentary, or robotics deal evidence supports the blended thesis.",
+      "ticker": "TER",
       "type": "quarterly_review"
     },
     {
@@ -2819,58 +3799,6 @@
     {
       "due": "2026-08-22",
       "evidence_state": {
-        "claim_ids": [],
-        "confidence": "unknown",
-        "direction": "up",
-        "evidence_type": "",
-        "last_evidence_date": null,
-        "latest_summary": "",
-        "requires_review": false,
-        "source_ids": [],
-        "state": "unknown"
-      },
-      "metric_id": "semiconductor_test_revenue",
-      "priority": "medium",
-      "question": "Check whether semiconductor test demand remains strong enough while robotics option value develops.",
-      "score": 65,
-      "score_reasons": [
-        "medium priority",
-        "unknown evidence"
-      ],
-      "source": "next_action",
-      "success_condition": "Semitest bookings, AI revenue commentary, or robotics deal evidence supports the blended thesis.",
-      "ticker": "TER",
-      "type": "quarterly_review"
-    },
-    {
-      "due": "2026-08-22",
-      "evidence_state": {
-        "claim_ids": [],
-        "confidence": "unknown",
-        "direction": "stronger",
-        "evidence_type": "",
-        "last_evidence_date": null,
-        "latest_summary": "",
-        "requires_review": false,
-        "source_ids": [],
-        "state": "unknown"
-      },
-      "metric_id": "advanced_packaging_commentary",
-      "priority": "medium",
-      "question": "Review whether advanced packaging and leading-edge demand still support margin quality.",
-      "score": 65,
-      "score_reasons": [
-        "medium priority",
-        "unknown evidence"
-      ],
-      "source": "next_action",
-      "success_condition": "HPC mix, margin, and packaging commentary remain thesis-supportive.",
-      "ticker": "TSM",
-      "type": "quarterly_review"
-    },
-    {
-      "due": "2026-08-22",
-      "evidence_state": {
         "claim_ids": [
           "veev-regulated-agents"
         ],
@@ -2898,32 +3826,6 @@
       "success_condition": "Official rollout, customer, or product evidence shows AI Agents used in regulated workflows.",
       "ticker": "VEEV",
       "type": "evidence_check"
-    },
-    {
-      "due": "2026-08-22",
-      "evidence_state": {
-        "claim_ids": [],
-        "confidence": "unknown",
-        "direction": "up",
-        "evidence_type": "",
-        "last_evidence_date": null,
-        "latest_summary": "",
-        "requires_review": false,
-        "source_ids": [],
-        "state": "unknown"
-      },
-      "metric_id": "backlog",
-      "priority": "medium",
-      "question": "Check whether AI power and cooling capex is still visible in orders, backlog, and liquid-cooling commentary.",
-      "score": 65,
-      "score_reasons": [
-        "medium priority",
-        "unknown evidence"
-      ],
-      "source": "next_action",
-      "success_condition": "Orders, backlog, and cooling commentary remain aligned with AI data-center demand.",
-      "ticker": "VRT",
-      "type": "quarterly_review"
     },
     {
       "due": "2026-08-22",
@@ -3004,6 +3906,204 @@
       "type": "quarterly_review"
     }
   ],
+  "riskOverlay": {
+    "frameworkGaps": [
+      {
+        "id": "agent_security_control_layer",
+        "label": "Agent cybersecurity control layer",
+        "reason": "If trust is the framework bottleneck, identity, policy, endpoint, and network security should be tracked explicitly.",
+        "research_questions": [
+          "Which public companies control policy enforcement for governed agent write actions?",
+          "Which security vendors show product evidence specific to agent permissions, identity, and runtime controls?"
+        ],
+        "status": "watchlist_not_position"
+      },
+      {
+        "id": "third_hyperscaler_entry",
+        "label": "Third enterprise AI hyperscaler",
+        "reason": "The framework owns MSFT and GOOGL, but a complete authority/capacity map should explain the absence of the third large hyperscaler.",
+        "research_questions": [
+          "Does the cloud platform offset non-cloud business complexity enough to deserve framework inclusion?",
+          "Is the enterprise AI entry point differentiated enough versus current holdings?"
+        ],
+        "status": "explicit_exclusion_needed"
+      },
+      {
+        "id": "edge_trust_distribution",
+        "label": "Edge and consumer trust distribution",
+        "reason": "Device-side and consumer distribution may represent a different trusted-execution path than enterprise cloud.",
+        "research_questions": [
+          "Does on-device AI create a durable trust and privacy control layer?",
+          "Does consumer-scale distribution create a control right that the current framework underweights?"
+        ],
+        "status": "watchlist_not_position"
+      },
+      {
+        "id": "defensive_uncorrelated_bucket",
+        "label": "Non-AI-capex defensive ballast",
+        "reason": "Cash is explicit, but the framework should track whether a non-capex operating asset would improve decision quality.",
+        "research_questions": [
+          "Which assets are genuinely uncorrelated to hyperscaler AI capex rather than merely in another thesis bucket?",
+          "What evidence would justify adding a ballast bucket without diluting the trusted-execution thesis?"
+        ],
+        "status": "research_needed"
+      }
+    ],
+    "holdingRisk": {
+      "000660.KS": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "HBM leadership depends on AI accelerator demand and customer qualification cycles.",
+          "sensitivity": "high"
+        }
+      },
+      "AVGO": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "AI ASIC and networking growth is concentrated in hyperscaler programs.",
+          "sensitivity": "high"
+        }
+      },
+      "CASH": {
+        "hyperscaler_capex_cycle": {
+          "category": "hedge",
+          "rationale": "Cash is the explicit risk-control reserve against synchronized thesis and valuation resets.",
+          "sensitivity": "inverse_or_uncorrelated"
+        }
+      },
+      "CEG": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "Data-center power scarcity only monetizes if AI load growth converts into contracted demand.",
+          "sensitivity": "medium_high"
+        }
+      },
+      "GOOGL": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "TPU, Cloud, Search AI, and Workspace monetization are tied to AI capex and usage quality.",
+          "sensitivity": "high"
+        }
+      },
+      "MCO": {
+        "hyperscaler_capex_cycle": {
+          "category": "lagged",
+          "rationale": "Credit-risk workflow demand is less directly tied to hyperscaler capex.",
+          "sensitivity": "low"
+        }
+      },
+      "MSCI": {
+        "hyperscaler_capex_cycle": {
+          "category": "lagged",
+          "rationale": "Outcome-verification workflow adoption may lag AI capex and is less directly tied to buildout cycles.",
+          "sensitivity": "low"
+        }
+      },
+      "MSFT": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "Cloud and agent monetization still depend on enterprise AI infrastructure spending and adoption.",
+          "sensitivity": "medium_high"
+        }
+      },
+      "NVDA": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "Data-center GPU, networking, and rack-scale demand are exposed to AI factory capex.",
+          "sensitivity": "high"
+        }
+      },
+      "SPGI": {
+        "hyperscaler_capex_cycle": {
+          "category": "lagged",
+          "rationale": "Data and ratings workflow adoption is a lagged trusted-data thesis, not a direct capex supplier thesis.",
+          "sensitivity": "low"
+        }
+      },
+      "TER": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "Semiconductor-test demand is levered to AI device complexity and capex timing.",
+          "sensitivity": "medium_high"
+        }
+      },
+      "TSM": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "Leading-edge and advanced-packaging demand are tied to AI accelerator buildouts.",
+          "sensitivity": "high"
+        }
+      },
+      "VEEV": {
+        "hyperscaler_capex_cycle": {
+          "category": "lagged",
+          "rationale": "Regulated workflow AI adoption is driven by life-sciences software cycles more than AI factory capex.",
+          "sensitivity": "low"
+        }
+      },
+      "VRT": {
+        "hyperscaler_capex_cycle": {
+          "category": "direct",
+          "rationale": "Power and cooling orders depend on AI data-center capex durability.",
+          "sensitivity": "high"
+        }
+      }
+    },
+    "policy": {
+      "boundary": "Risk overlays create research reviews only; they do not change holdings or target weights.",
+      "purpose": "Track portfolio-level framework risks that are hidden by thesis buckets."
+    },
+    "riskFactors": [
+      {
+        "exposure_groups": {
+          "direct": {
+            "target_weight": 82.0,
+            "tickers": [
+              "MSFT",
+              "GOOGL",
+              "AVGO",
+              "TSM",
+              "NVDA",
+              "000660.KS",
+              "CEG",
+              "VRT",
+              "TER"
+            ]
+          },
+          "hedge": {
+            "target_weight": 10.0,
+            "tickers": [
+              "CASH"
+            ]
+          },
+          "lagged": {
+            "target_weight": 8.0,
+            "tickers": [
+              "MSCI",
+              "MCO",
+              "SPGI",
+              "VEEV"
+            ]
+          }
+        },
+        "id": "hyperscaler_capex_cycle",
+        "label": "Hyperscaler AI capex cycle",
+        "primary_exposure_pct": 82.0,
+        "primary_group": "direct",
+        "review_policy": "If direct target exposure stays above threshold, keep a portfolio-level framework-risk review open.",
+        "status": "yellow",
+        "thesis_test": "A synchronized hyperscaler capex slowdown should be treated as one portfolio-level risk, not nine separate holding stories.",
+        "threshold_pct": 70.0,
+        "type": "concentration_overlay"
+      }
+    ],
+    "summary": {
+      "capex_direct_exposure_pct": 82.0,
+      "framework_gap_count": 4,
+      "high_concentration_count": 1,
+      "risk_factor_count": 1
+    }
+  },
   "schemaVersion": 1,
   "sourceHealth": [
     {
@@ -3081,6 +4181,15 @@
       "red": 0,
       "yellow": 0
     },
+    "decision_discipline": {
+      "bear_case_count": 14,
+      "bear_case_coverage": 1.0,
+      "holding_count": 14,
+      "operational_falsifier_count": 14,
+      "operational_falsifier_coverage": 1.0,
+      "valuation_band_count": 14,
+      "valuation_band_coverage": 1.0
+    },
     "evidence_coverage": {
       "coverage_ratio": 0.1364,
       "covered_metrics": 6,
@@ -3098,6 +4207,12 @@
       "weakSourceCount": 1
     },
     "review_queue_count": 14,
+    "risk_overlay": {
+      "capex_direct_exposure_pct": 82.0,
+      "framework_gap_count": 4,
+      "high_concentration_count": 1,
+      "risk_factor_count": 1
+    },
     "rule_alert": "green",
     "source_count": 6,
     "source_issues": 0,

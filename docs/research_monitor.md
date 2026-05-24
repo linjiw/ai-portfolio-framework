@@ -14,13 +14,17 @@ buy or sell instructions. Its job is to keep the framework auditable:
 
 ## Configuration
 
-The monitor reads four YAML files:
+The monitor reads structured YAML files:
 
 ```text
 config/holdings.yml
 config/metrics_catalog.yml
 config/alert_rules.yml
 config/sources.yml
+config/risk_factors.yml
+config/falsifier_thresholds.yml
+config/bear_cases.yml
+config/valuation_bands.yml
 data/decision_log.yml
 data/evidence_log.yml
 data/thesis_changelog.yml
@@ -40,6 +44,23 @@ data/thesis_changelog.yml
 `sources.yml`
 : Source-health definitions. Automated sources are checked against timestamps;
   planned and manual feeds are intentionally visible.
+
+`risk_factors.yml`
+: Portfolio-level risk overlays that cut across thesis buckets. The first
+  overlay tracks hyperscaler AI capex exposure, separating direct, lagged, and
+  hedge target weights.
+
+`falsifier_thresholds.yml`
+: Operational review thresholds for each falsifier. These are human-review
+  triggers only; they do not execute trades or change weights automatically.
+
+`bear_cases.yml`
+: One explicit opposing argument per holding, including what would strengthen
+  or weaken that bear case.
+
+`valuation_bands.yml`
+: Valuation review bands. These make the valuation gate inspectable without
+  turning it into an automatic rebalance rule.
 
 `data/decision_log.yml`
 : Human review decisions. The monitor includes recent decisions in the generated
@@ -113,6 +134,53 @@ only a queue-ordering tool; it is not a portfolio action.
 Provenance coverage is generated separately. It counts material evidence bullets
 in `site/research-data.js`, claim-linked coverage, evidence-log source linkage,
 and weak-source records that need stronger primary-source support.
+
+## Tier 0.8 State
+
+The monitor now adds research and decision-process hardening without changing
+holdings or target weights.
+
+### Risk overlay
+
+The primary overlay is `hyperscaler_capex_cycle`. It intentionally ignores the
+existing thesis buckets and asks a simpler risk question:
+
+```text
+How much target exposure depends directly on hyperscaler AI capex durability?
+```
+
+The current framework maps direct, lagged, and hedge groups. A direct exposure
+above the configured threshold creates a framework-risk review state, not a
+portfolio action.
+
+### Operational falsifiers
+
+Every holding now has a threshold record with:
+
+```yaml
+ticker: MSFT
+metric_id: production_write_permission
+cadence: semiannual
+source: official product docs, customer case studies, security disclosures, earnings transcripts
+threshold: Fewer than 2 independent primary-source examples of governed production write actions by 2027-12-31.
+decision_rule: If threshold is missed, open thesis_revision review within 30 days and keep Trust bottleneck flagged.
+```
+
+The important rule is that a threshold breach requires a decision-log entry. It
+does not imply an automatic sell, trim, add, or weight rewrite.
+
+### Bear-case tracking
+
+Each holding has a structured bear case with `strengthens_if` and `weakens_if`
+fields. This keeps quarterly review from becoming only confirming-evidence
+collection.
+
+### Valuation gates
+
+Valuation bands are stored as review ranges and remain `not_evaluated` until a
+separate valuation snapshot is wired in. The monitor can show that the valuation
+gate exists and is coverage-complete, while still preventing any automatic
+portfolio action.
 
 ## LLM Boundary
 

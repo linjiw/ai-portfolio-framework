@@ -22,6 +22,10 @@ HOLDINGS_CONFIG_PATH = CONFIG_DIR / "holdings.yml"
 METRICS_CATALOG_PATH = CONFIG_DIR / "metrics_catalog.yml"
 ALERT_RULES_PATH = CONFIG_DIR / "alert_rules.yml"
 SOURCES_CONFIG_PATH = CONFIG_DIR / "sources.yml"
+RISK_FACTORS_CONFIG_PATH = CONFIG_DIR / "risk_factors.yml"
+FALSIFIER_THRESHOLDS_CONFIG_PATH = CONFIG_DIR / "falsifier_thresholds.yml"
+BEAR_CASES_CONFIG_PATH = CONFIG_DIR / "bear_cases.yml"
+VALUATION_BANDS_CONFIG_PATH = CONFIG_DIR / "valuation_bands.yml"
 DECISION_LOG_PATH = GENERATED_DATA_DIR.parent / "decision_log.yml"
 EVIDENCE_LOG_PATH = GENERATED_DATA_DIR.parent / "evidence_log.yml"
 THESIS_CHANGELOG_PATH = GENERATED_DATA_DIR.parent / "thesis_changelog.yml"
@@ -70,6 +74,10 @@ def build_research_monitor_data(
     metrics_catalog_path: Path = METRICS_CATALOG_PATH,
     alert_rules_path: Path = ALERT_RULES_PATH,
     sources_config_path: Path = SOURCES_CONFIG_PATH,
+    risk_factors_config_path: Path = RISK_FACTORS_CONFIG_PATH,
+    falsifier_thresholds_config_path: Path = FALSIFIER_THRESHOLDS_CONFIG_PATH,
+    bear_cases_config_path: Path = BEAR_CASES_CONFIG_PATH,
+    valuation_bands_config_path: Path = VALUATION_BANDS_CONFIG_PATH,
     decision_log_path: Path = DECISION_LOG_PATH,
     evidence_log_path: Path = EVIDENCE_LOG_PATH,
     thesis_changelog_path: Path = THESIS_CHANGELOG_PATH,
@@ -88,6 +96,10 @@ def build_research_monitor_data(
     metrics_catalog = load_yaml(metrics_catalog_path)
     alert_rules = load_yaml(alert_rules_path)
     sources_config = load_yaml(sources_config_path)
+    risk_factors_config = load_yaml_optional(risk_factors_config_path)
+    falsifier_thresholds_config = load_yaml_optional(falsifier_thresholds_config_path)
+    bear_cases_config = load_yaml_optional(bear_cases_config_path)
+    valuation_bands_config = load_yaml_optional(valuation_bands_config_path)
     decision_log = load_yaml_list(decision_log_path)
     evidence_log = load_yaml_list(evidence_log_path)
     thesis_changelog = load_yaml_list(thesis_changelog_path)
@@ -99,6 +111,19 @@ def build_research_monitor_data(
     portfolio_total = float(summary.get("total_value_usd") or 0)
     portfolio_rows = {row["ticker"]: row for row in portfolio_data.get("holdings", [])}
     rules_by_id = {rule["id"]: rule for rule in alert_rules.get("rules", [])}
+    holding_tickers = [str(holding["ticker"]) for holding in holdings_config.get("holdings", [])]
+    risk_overlay = build_risk_overlay(holdings_config, risk_factors_config)
+    falsifier_threshold_index = index_by_ticker(
+        falsifier_thresholds_config.get("thresholds", [])
+    )
+    bear_case_index = index_by_ticker(bear_cases_config.get("bear_cases", []))
+    valuation_band_index = index_by_ticker(valuation_bands_config.get("bands", []))
+    decision_discipline = build_decision_discipline(
+        holding_tickers=holding_tickers,
+        falsifier_thresholds_config=falsifier_thresholds_config,
+        bear_cases_config=bear_cases_config,
+        valuation_bands_config=valuation_bands_config,
+    )
 
     alerts: list[dict[str, Any]] = []
     monitored_holdings = []
@@ -133,6 +158,10 @@ def build_research_monitor_data(
                 "watch_rule": catalog_entry.get("watch_rule", ""),
                 "falsifier": catalog_entry.get("falsifier", []),
                 "next_action": normalize_next_action(ticker, catalog_entry.get("next_action")),
+                "risk_profile": risk_overlay.get("holdingRisk", {}).get(ticker, {}),
+                "falsifier_threshold": falsifier_threshold_index.get(ticker),
+                "bear_case": bear_case_index.get(ticker),
+                "valuation_band": valuation_band_index.get(ticker),
                 "alert_count": len(holding_alerts),
             }
         )
@@ -180,12 +209,16 @@ def build_research_monitor_data(
             "source_status_counts": source_status_counts,
             "evidence_coverage": evidence_coverage,
             "provenance_coverage": provenance_coverage["summary"],
+            "risk_overlay": risk_overlay["summary"],
+            "decision_discipline": decision_discipline["summary"],
         },
         "alerts": alerts,
         "reviewQueue": review_queue,
         "sourceHealth": source_health,
         "holdings": monitored_holdings,
         "metricCatalog": compact_metric_catalog(metrics_catalog, evidence_index=evidence_index),
+        "riskOverlay": risk_overlay,
+        "decisionDiscipline": decision_discipline,
         "decisionLog": decision_log[-10:],
         "evidenceLog": evidence_log[-20:],
         "thesisChangelog": thesis_changelog[-20:],
@@ -471,6 +504,7 @@ def build_review_queue(
                         as_of_date=as_of_date,
                         alert_level=None,
                         ticker=holding["ticker"],
+                        risk_profile=holding.get("risk_profile"),
                     ),
                 }
             )
@@ -493,6 +527,7 @@ def score_review_item(
     as_of_date: date,
     alert_level: str | None,
     ticker: str,
+    risk_profile: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     score = PRIORITY_SCORE.get(priority, 40)
     reasons = [f"{priority} priority"]
@@ -523,6 +558,14 @@ def score_review_item(
     if ticker == "MSFT":
         score += 10
         reasons.append("framework trust bottleneck")
+
+    capex_profile = (risk_profile or {}).get("hyperscaler_capex_cycle", {})
+    if capex_profile.get("category") == "direct":
+        score += 8
+        reasons.append("direct capex-cycle exposure")
+    if capex_profile.get("sensitivity") == "high":
+        score += 5
+        reasons.append("high cycle sensitivity")
 
     return {
         "score": score,
@@ -591,6 +634,129 @@ def build_evidence_coverage(holdings: list[dict[str, Any]]) -> dict[str, Any]:
         "unknown_metrics": total - len(covered),
         "coverage_ratio": round(len(covered) / total, 4) if total else 0.0,
     }
+
+
+def build_risk_overlay(
+    holdings_config: dict[str, Any],
+    risk_config: dict[str, Any],
+) -> dict[str, Any]:
+    holdings = holdings_config.get("holdings", [])
+    target_weights = {
+        str(holding["ticker"]): normalize_weight(holding.get("target_weight", 0))
+        for holding in holdings
+    }
+    holding_risk_config = risk_config.get("holding_risk", {})
+    holding_risk = {
+        ticker: holding_risk_config.get(ticker, {})
+        for ticker in target_weights
+    }
+
+    risk_factors = []
+    high_concentration_count = 0
+    capex_direct_exposure_pct = 0.0
+    for factor in risk_config.get("risk_factors", []):
+        exposure_groups = {}
+        for group, tickers in factor.get("exposure_groups", {}).items():
+            normalized_tickers = [str(ticker) for ticker in tickers]
+            target_weight = sum(target_weights.get(ticker, 0.0) for ticker in normalized_tickers)
+            exposure_groups[group] = {
+                "target_weight": round(target_weight, 4),
+                "tickers": normalized_tickers,
+            }
+
+        primary_group = factor.get("primary_group", "direct")
+        primary_exposure = float(
+            exposure_groups.get(primary_group, {}).get("target_weight", 0.0)
+        )
+        threshold = float(factor.get("threshold_pct", 100.0))
+        status = "yellow" if primary_exposure > threshold else "green"
+        if status == "yellow":
+            high_concentration_count += 1
+        if factor.get("id") == "hyperscaler_capex_cycle":
+            capex_direct_exposure_pct = primary_exposure
+
+        risk_factors.append(
+            {
+                "id": factor.get("id", ""),
+                "label": factor.get("label", ""),
+                "type": factor.get("type", ""),
+                "threshold_pct": threshold,
+                "primary_group": primary_group,
+                "primary_exposure_pct": round(primary_exposure, 4),
+                "status": status,
+                "review_policy": factor.get("review_policy", ""),
+                "thesis_test": factor.get("thesis_test", ""),
+                "exposure_groups": exposure_groups,
+            }
+        )
+
+    framework_gaps = risk_config.get("framework_gaps", [])
+    return {
+        "policy": risk_config.get("policy", {}),
+        "summary": {
+            "risk_factor_count": len(risk_factors),
+            "high_concentration_count": high_concentration_count,
+            "capex_direct_exposure_pct": round(capex_direct_exposure_pct, 4),
+            "framework_gap_count": len(framework_gaps),
+        },
+        "riskFactors": risk_factors,
+        "holdingRisk": holding_risk,
+        "frameworkGaps": framework_gaps,
+    }
+
+
+def build_decision_discipline(
+    *,
+    holding_tickers: list[str],
+    falsifier_thresholds_config: dict[str, Any],
+    bear_cases_config: dict[str, Any],
+    valuation_bands_config: dict[str, Any],
+) -> dict[str, Any]:
+    falsifier_thresholds = falsifier_thresholds_config.get("thresholds", [])
+    bear_cases = bear_cases_config.get("bear_cases", [])
+    valuation_bands = valuation_bands_config.get("bands", [])
+    falsifier_index = index_by_ticker(falsifier_thresholds)
+    bear_case_index = index_by_ticker(bear_cases)
+    valuation_band_index = index_by_ticker(valuation_bands)
+    total = len(holding_tickers)
+
+    return {
+        "policy": {
+            "falsifier_thresholds": falsifier_thresholds_config.get("policy", {}),
+            "bear_cases": bear_cases_config.get("policy", {}),
+            "valuation_bands": valuation_bands_config.get("policy", {}),
+        },
+        "summary": {
+            "holding_count": total,
+            "operational_falsifier_count": coverage_count(falsifier_index, holding_tickers),
+            "bear_case_count": coverage_count(bear_case_index, holding_tickers),
+            "valuation_band_count": coverage_count(valuation_band_index, holding_tickers),
+            "operational_falsifier_coverage": coverage_ratio(
+                falsifier_index, holding_tickers
+            ),
+            "bear_case_coverage": coverage_ratio(bear_case_index, holding_tickers),
+            "valuation_band_coverage": coverage_ratio(valuation_band_index, holding_tickers),
+        },
+        "falsifierThresholds": falsifier_thresholds,
+        "bearCases": bear_cases,
+        "valuationBands": valuation_bands,
+    }
+
+
+def index_by_ticker(items: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    return {
+        str(item["ticker"]): item
+        for item in items
+        if item.get("ticker")
+    }
+
+
+def coverage_count(index: dict[str, Any], tickers: list[str]) -> int:
+    return sum(1 for ticker in tickers if ticker in index)
+
+
+def coverage_ratio(index: dict[str, Any], tickers: list[str]) -> float:
+    return round(coverage_count(index, tickers) / len(tickers), 4) if tickers else 0.0
 
 
 def build_provenance_coverage(
@@ -766,6 +932,12 @@ def load_yaml(path: Path) -> dict[str, Any]:
     if not path.exists():
         raise FileNotFoundError(f"Missing monitor config: {path}")
     return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+
+
+def load_yaml_optional(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {}
+    return load_yaml(path)
 
 
 def load_yaml_list(path: Path) -> list[dict[str, Any]]:

@@ -403,10 +403,15 @@ function renderResearchMonitor(monitor) {
   const alertCounts = summary.alert_counts || {};
   const sourceCounts = summary.source_status_counts || {};
   const evidenceCoverage = summary.evidence_coverage || {};
+  const riskSummary = summary.risk_overlay || {};
+  const disciplineSummary = summary.decision_discipline || {};
   kpis.innerHTML = [
     ["Rule alert", ruleAlert, severityClass(ruleAlert)],
     ["Review queue", summary.review_queue_count ?? 0, ""],
     ["Evidence coverage", Number(evidenceCoverage.coverage_ratio || 0).toFixed(2), ""],
+    ["Capex direct", `${Number(riskSummary.capex_direct_exposure_pct || 0).toFixed(0)}%`, ""],
+    ["Falsifier coverage", Number(disciplineSummary.operational_falsifier_coverage || 0).toFixed(2), ""],
+    ["Bear coverage", Number(disciplineSummary.bear_case_coverage || 0).toFixed(2), ""],
     ["Yellow alerts", alertCounts.yellow ?? 0, ""],
     ["Red alerts", alertCounts.red ?? 0, ""],
     ["Healthy sources", sourceCounts.healthy ?? 0, ""],
@@ -423,10 +428,131 @@ function renderResearchMonitor(monitor) {
     .join("");
 
   renderMonitorAlerts(monitor.alerts || []);
+  renderRiskOverlay(monitor.riskOverlay || {});
+  renderDecisionDiscipline(monitor.decisionDiscipline || {});
   renderReviewQueue(monitor.reviewQueue || []);
   renderMonitorHoldings(monitor.holdings || []);
   renderSourceHealth(monitor.sourceHealth || []);
   loadProvenanceCoverage();
+}
+
+function renderRiskOverlay(overlay) {
+  const panel = document.getElementById("riskOverlayPanel");
+  const riskFactors = overlay.riskFactors || [];
+  const frameworkGaps = overlay.frameworkGaps || [];
+  if (!riskFactors.length && !frameworkGaps.length) {
+    panel.innerHTML = `<div class="empty-monitor">No risk overlay configured yet.</div>`;
+    return;
+  }
+  panel.innerHTML = `
+    <div class="risk-factor-grid">
+      ${riskFactors
+        .map((factor) => {
+          const groups = Object.entries(factor.exposure_groups || {});
+          return `
+            <article>
+              <div class="card-head">
+                <div>
+                  <p class="section-label">${escapeHtml(factor.id)}</p>
+                  <h3>${escapeHtml(factor.label)}</h3>
+                </div>
+                <span class="severity ${severityClass(factor.status)}">${escapeHtml(factor.status)}</span>
+              </div>
+              <div class="meta-row">
+                <span>Primary: ${escapeHtml(factor.primary_group)}</span>
+                <span>Exposure: ${Number(factor.primary_exposure_pct || 0).toFixed(1)}%</span>
+                <span>Threshold: ${Number(factor.threshold_pct || 0).toFixed(1)}%</span>
+              </div>
+              <p>${escapeHtml(factor.thesis_test)}</p>
+              <div class="risk-group-list">
+                ${groups
+                  .map(
+                    ([group, value]) => `
+                      <div>
+                        <strong>${escapeHtml(group)} ${Number(value.target_weight || 0).toFixed(1)}%</strong>
+                        <span>${escapeHtml((value.tickers || []).join(", "))}</span>
+                      </div>
+                    `
+                  )
+                  .join("")}
+              </div>
+              <p class="muted">${escapeHtml(factor.review_policy)}</p>
+            </article>
+          `;
+        })
+        .join("")}
+    </div>
+    <div class="framework-gap-list">
+      ${frameworkGaps
+        .map(
+          (gap) => `
+            <article>
+              <div class="card-head">
+                <strong>${escapeHtml(gap.label)}</strong>
+                <span class="severity ${severityClass(gap.status)}">${escapeHtml(gap.status)}</span>
+              </div>
+              <p>${escapeHtml(gap.reason)}</p>
+              <ul>
+                ${(gap.research_questions || [])
+                  .map((question) => `<li>${escapeHtml(question)}</li>`)
+                  .join("")}
+              </ul>
+            </article>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderDecisionDiscipline(discipline) {
+  const panel = document.getElementById("disciplinePanel");
+  const summary = discipline.summary || {};
+  const thresholds = discipline.falsifierThresholds || [];
+  if (!thresholds.length) {
+    panel.innerHTML = `<div class="empty-monitor">No operational falsifier thresholds configured yet.</div>`;
+    return;
+  }
+  panel.innerHTML = `
+    <div class="discipline-kpis">
+      <div>
+        <span>Operational falsifiers</span>
+        <strong>${escapeHtml(summary.operational_falsifier_count ?? 0)}/${escapeHtml(
+          summary.holding_count ?? 0
+        )}</strong>
+      </div>
+      <div>
+        <span>Bear cases</span>
+        <strong>${escapeHtml(summary.bear_case_count ?? 0)}/${escapeHtml(
+          summary.holding_count ?? 0
+        )}</strong>
+      </div>
+      <div>
+        <span>Valuation gates</span>
+        <strong>${escapeHtml(summary.valuation_band_count ?? 0)}/${escapeHtml(
+          summary.holding_count ?? 0
+        )}</strong>
+      </div>
+      <div>
+        <span>Action boundary</span>
+        <strong>review</strong>
+      </div>
+    </div>
+    <div class="threshold-list">
+      ${thresholds
+        .slice(0, 6)
+        .map(
+          (item) => `
+            <article>
+              <p class="section-label">${escapeHtml(item.ticker)} | ${escapeHtml(item.metric_id)}</p>
+              <p>${escapeHtml(item.threshold)}</p>
+              <p class="muted">${escapeHtml(item.decision_rule)}</p>
+            </article>
+          `
+        )
+        .join("")}
+    </div>
+  `;
 }
 
 function renderReviewQueue(queue) {
@@ -545,8 +671,12 @@ function renderProvenanceCoverage(provenance) {
 
 function renderMonitorHoldings(holdings) {
   document.getElementById("monitorGrid").innerHTML = holdings
-    .map(
-      (holding) => `
+    .map((holding) => {
+      const capexRisk = holding.risk_profile?.hyperscaler_capex_cycle || {};
+      const threshold = holding.falsifier_threshold || {};
+      const valuation = holding.valuation_band || {};
+      const bearCase = holding.bear_case || {};
+      return `
         <article class="monitor-card">
           <div class="card-head">
             <div>
@@ -579,9 +709,31 @@ function renderMonitorHoldings(holdings) {
               .join("")}
           </div>
           <p class="muted">Watch: ${escapeHtml(holding.watch_rule)}</p>
+          <div class="discipline-list">
+            <div>
+              <strong>Risk overlay</strong>
+              <span>${escapeHtml(capexRisk.category || "unmapped")} | ${escapeHtml(
+                capexRisk.sensitivity || "n/a"
+              )}</span>
+            </div>
+            <div>
+              <strong>Falsifier trigger</strong>
+              <span>${escapeHtml(threshold.threshold || "not configured")}</span>
+            </div>
+            <div>
+              <strong>Valuation gate</strong>
+              <span>${escapeHtml(valuation.metric || "n/a")} ${escapeHtml(
+                valuation.reasonable_band || ""
+              )} | high ${escapeHtml(valuation.review_high || "n/a")}</span>
+            </div>
+            <div>
+              <strong>Bear case</strong>
+              <span>${escapeHtml(bearCase.bear_case || "not configured")}</span>
+            </div>
+          </div>
         </article>
-      `
-    )
+      `;
+    })
     .join("");
 }
 

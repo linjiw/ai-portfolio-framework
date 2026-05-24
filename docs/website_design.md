@@ -47,6 +47,10 @@ Related framework data and reports:
 - `config/metrics_catalog.yml`
 - `config/alert_rules.yml`
 - `config/sources.yml`
+- `config/risk_factors.yml`
+- `config/falsifier_thresholds.yml`
+- `config/bear_cases.yml`
+- `config/valuation_bands.yml`
 - `data/manual/ai_framework_holdings.csv`
 - `data/manual/ai_framework_indicators.csv`
 - `data/manual/ai_framework_predictions.csv`
@@ -68,7 +72,7 @@ The first screen is the usable dashboard, not a landing page. It starts with:
 
 - Operating thesis summary.
 - Total target weight.
-- Highest current alert.
+- Rule alert and framework bottleneck.
 - Investable row count.
 - Research-only disclaimer.
 
@@ -129,6 +133,8 @@ Monitor top-level fields:
   sourceHealth: [...],
   holdings: [...],
   metricCatalog: [...],
+  riskOverlay: {...},
+  decisionDiscipline: {...},
   decisionLog: [...],
   evidenceLog: [...],
   thesisChangelog: [...]
@@ -187,6 +193,10 @@ Current invariants verified locally:
 - Research monitor holdings: 14
 - Research monitor source-health rows: 6
 - Research monitor review queue rows: 14
+- Capex direct risk overlay: 82% target exposure
+- Operational falsifier coverage: 14/14 holdings
+- Bear-case coverage: 14/14 holdings
+- Valuation-band coverage: 14/14 holdings
 - Provenance coverage JSON: present
 - Source count: 31
 - Claim count: 15
@@ -219,7 +229,16 @@ The site encodes that thesis through four categories of research objects:
    systematic-discretionary review. Current signals focus on capability,
    economics, trust, and missing agent-runtime public-market exposure.
 
-4. Sources
+4. Risk and decision discipline
+
+   The monitor stores a second risk axis that is independent of thesis bucket
+   labels. The first overlay tracks hyperscaler AI capex dependency and shows
+   direct, lagged, and hedge exposure. The same monitor also stores operational
+   falsifier thresholds, one bear case per holding, and valuation review bands.
+   These objects raise review priority only; they never change holdings or
+   target weights by themselves.
+
+5. Sources
 
    The dashboard favors official/company sources and primary research where
    available. When secondary sources are used, the thesis labels the uncertainty
@@ -474,6 +493,10 @@ Research limitations:
   software pull-through, gross margin durability, and custom-silicon bypass.
 - Capacity names remain cycle-sensitive and should not be evaluated as if they
   were authority/outcome compounders.
+- The capex risk overlay shows concentration honestly, but it is not yet linked
+  to a historical stress test.
+- Valuation bands are policy ranges only until a repeatable valuation snapshot
+  source is wired in.
 
 ## 12. Expert Review Checklist
 
@@ -495,8 +518,9 @@ Please review these questions:
 Highest-value next work:
 
 1. Expand claim-level provenance to every material evidence bullet.
-2. Generate the website from the tracker CSV/SQLite data instead of manually
+2. Add historical alert replay tests for 2024-2026 drawdown, capex, and
+   source-health scenarios.
+3. Generate the website from the tracker CSV/SQLite data instead of manually
    duplicating content in `research-data.js`.
-3. Promote structured signal fields into tracker CSV/SQLite once the schema stabilizes.
-4. Add historical snapshots for link-health reports and claim provenance.
-5. Add a changelog of thesis updates so changes are auditable over time.
+4. Promote structured signal fields into tracker CSV/SQLite once the schema stabilizes.
+5. Add historical snapshots for link-health reports and claim provenance.

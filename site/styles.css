@@ -504,7 +504,10 @@ a:hover {
 
 .severity.manual,
 .severity.planned,
-.severity.manual_expected {
+.severity.manual_expected,
+.severity.watchlist_not_position,
+.severity.explicit_exclusion_needed,
+.severity.research_needed {
   color: var(--amber);
   background: var(--amber-soft);
 }
@@ -640,6 +643,11 @@ a:hover {
   padding: 18px;
 }
 
+.risk-overlay-panel,
+.discipline-panel {
+  padding: 18px;
+}
+
 .provenance-panel {
   padding: 18px;
 }
@@ -736,6 +744,106 @@ a:hover {
   margin-top: 4px;
   color: var(--muted);
   font-size: 12px;
+}
+
+.risk-factor-grid,
+.framework-gap-list,
+.threshold-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.framework-gap-list,
+.threshold-list {
+  margin-top: 12px;
+}
+
+.risk-factor-grid article,
+.framework-gap-list article,
+.threshold-list article {
+  min-width: 0;
+  padding: 14px;
+  background: #f8faf8;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.risk-factor-grid p,
+.framework-gap-list p,
+.threshold-list p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.risk-group-list,
+.discipline-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.risk-group-list div,
+.discipline-list div {
+  min-width: 0;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.risk-group-list strong,
+.risk-group-list span,
+.discipline-list strong,
+.discipline-list span {
+  display: block;
+}
+
+.risk-group-list strong,
+.discipline-list strong {
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.risk-group-list span,
+.discipline-list span {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.discipline-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.discipline-kpis div {
+  padding: 12px;
+  background: #f8faf8;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.discipline-kpis span,
+.discipline-kpis strong {
+  display: block;
+}
+
+.discipline-kpis span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.discipline-kpis strong {
+  margin-top: 6px;
+  color: var(--accent-dark);
+  font-size: 22px;
+  overflow-wrap: anywhere;
 }
 
 .source-health-wrap {
@@ -972,6 +1080,10 @@ a:hover {
   .portfolio-kpis,
   .monitor-kpis,
   .provenance-kpis,
+  .risk-factor-grid,
+  .framework-gap-list,
+  .threshold-list,
+  .discipline-kpis,
   .weak-source-list,
   .portfolio-plot-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1013,6 +1125,10 @@ a:hover {
   .portfolio-kpis,
   .monitor-kpis,
   .provenance-kpis,
+  .risk-factor-grid,
+  .framework-gap-list,
+  .threshold-list,
+  .discipline-kpis,
   .weak-source-list,
   .portfolio-plot-grid,
   .research-row {

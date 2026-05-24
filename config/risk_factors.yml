@@ -1,0 +1,134 @@
+schema_version: 1
+
+policy:
+  purpose: Track portfolio-level framework risks that are hidden by thesis buckets.
+  boundary: Risk overlays create research reviews only; they do not change holdings or target weights.
+
+risk_factors:
+  - id: hyperscaler_capex_cycle
+    label: Hyperscaler AI capex cycle
+    type: concentration_overlay
+    threshold_pct: 70.0
+    primary_group: direct
+    review_policy: If direct target exposure stays above threshold, keep a portfolio-level framework-risk review open.
+    exposure_groups:
+      direct:
+        - MSFT
+        - GOOGL
+        - AVGO
+        - TSM
+        - NVDA
+        - 000660.KS
+        - CEG
+        - VRT
+        - TER
+      lagged:
+        - MSCI
+        - MCO
+        - SPGI
+        - VEEV
+      hedge:
+        - CASH
+    thesis_test: A synchronized hyperscaler capex slowdown should be treated as one portfolio-level risk, not nine separate holding stories.
+
+holding_risk:
+  MSFT:
+    hyperscaler_capex_cycle:
+      category: direct
+      sensitivity: medium_high
+      rationale: Cloud and agent monetization still depend on enterprise AI infrastructure spending and adoption.
+  GOOGL:
+    hyperscaler_capex_cycle:
+      category: direct
+      sensitivity: high
+      rationale: TPU, Cloud, Search AI, and Workspace monetization are tied to AI capex and usage quality.
+  AVGO:
+    hyperscaler_capex_cycle:
+      category: direct
+      sensitivity: high
+      rationale: AI ASIC and networking growth is concentrated in hyperscaler programs.
+  TSM:
+    hyperscaler_capex_cycle:
+      category: direct
+      sensitivity: high
+      rationale: Leading-edge and advanced-packaging demand are tied to AI accelerator buildouts.
+  NVDA:
+    hyperscaler_capex_cycle:
+      category: direct
+      sensitivity: high
+      rationale: Data-center GPU, networking, and rack-scale demand are exposed to AI factory capex.
+  "000660.KS":
+    hyperscaler_capex_cycle:
+      category: direct
+      sensitivity: high
+      rationale: HBM leadership depends on AI accelerator demand and customer qualification cycles.
+  CEG:
+    hyperscaler_capex_cycle:
+      category: direct
+      sensitivity: medium_high
+      rationale: Data-center power scarcity only monetizes if AI load growth converts into contracted demand.
+  VRT:
+    hyperscaler_capex_cycle:
+      category: direct
+      sensitivity: high
+      rationale: Power and cooling orders depend on AI data-center capex durability.
+  TER:
+    hyperscaler_capex_cycle:
+      category: direct
+      sensitivity: medium_high
+      rationale: Semiconductor-test demand is levered to AI device complexity and capex timing.
+  MSCI:
+    hyperscaler_capex_cycle:
+      category: lagged
+      sensitivity: low
+      rationale: Outcome-verification workflow adoption may lag AI capex and is less directly tied to buildout cycles.
+  MCO:
+    hyperscaler_capex_cycle:
+      category: lagged
+      sensitivity: low
+      rationale: Credit-risk workflow demand is less directly tied to hyperscaler capex.
+  SPGI:
+    hyperscaler_capex_cycle:
+      category: lagged
+      sensitivity: low
+      rationale: Data and ratings workflow adoption is a lagged trusted-data thesis, not a direct capex supplier thesis.
+  VEEV:
+    hyperscaler_capex_cycle:
+      category: lagged
+      sensitivity: low
+      rationale: Regulated workflow AI adoption is driven by life-sciences software cycles more than AI factory capex.
+  CASH:
+    hyperscaler_capex_cycle:
+      category: hedge
+      sensitivity: inverse_or_uncorrelated
+      rationale: Cash is the explicit risk-control reserve against synchronized thesis and valuation resets.
+
+framework_gaps:
+  - id: agent_security_control_layer
+    label: Agent cybersecurity control layer
+    status: watchlist_not_position
+    reason: If trust is the framework bottleneck, identity, policy, endpoint, and network security should be tracked explicitly.
+    research_questions:
+      - Which public companies control policy enforcement for governed agent write actions?
+      - Which security vendors show product evidence specific to agent permissions, identity, and runtime controls?
+  - id: third_hyperscaler_entry
+    label: Third enterprise AI hyperscaler
+    status: explicit_exclusion_needed
+    reason: The framework owns MSFT and GOOGL, but a complete authority/capacity map should explain the absence of the third large hyperscaler.
+    research_questions:
+      - Does the cloud platform offset non-cloud business complexity enough to deserve framework inclusion?
+      - Is the enterprise AI entry point differentiated enough versus current holdings?
+  - id: edge_trust_distribution
+    label: Edge and consumer trust distribution
+    status: watchlist_not_position
+    reason: Device-side and consumer distribution may represent a different trusted-execution path than enterprise cloud.
+    research_questions:
+      - Does on-device AI create a durable trust and privacy control layer?
+      - Does consumer-scale distribution create a control right that the current framework underweights?
+  - id: defensive_uncorrelated_bucket
+    label: Non-AI-capex defensive ballast
+    status: research_needed
+    reason: Cash is explicit, but the framework should track whether a non-capex operating asset would improve decision quality.
+    research_questions:
+      - Which assets are genuinely uncorrelated to hyperscaler AI capex rather than merely in another thesis bucket?
+      - What evidence would justify adding a ballast bucket without diluting the trusted-execution thesis?

@@ -1,0 +1,92 @@
+schema_version: 1
+
+policy:
+  purpose: Convert narrative falsifiers into operational human-review triggers.
+  boundary: Thresholds require a decision-log entry; they do not execute trades or rewrite weights automatically.
+  default_review_action: Open thesis review, update evidence log, and record whether conviction, thesis wording, or sizing policy changed.
+
+thresholds:
+  - ticker: MSFT
+    metric_id: production_write_permission
+    cadence: semiannual
+    source: official product docs, customer case studies, security disclosures, earnings transcripts
+    threshold: Fewer than 2 independent primary-source examples of governed production write actions by 2027-12-31.
+    decision_rule: If threshold is missed, open thesis_revision review within 30 days and keep Trust bottleneck flagged.
+  - ticker: GOOGL
+    metric_id: google_cloud_revenue_margin
+    cadence: quarterly
+    source: earnings release, Cloud segment disclosure, capex commentary
+    threshold: Cloud margin fails to improve over 4 quarters while AI capex intensity stays elevated and TPU evidence remains product-only.
+    decision_rule: If triggered, review whether TPU cost advantage is translating into economics or only capacity.
+  - ticker: AVGO
+    metric_id: ai_semiconductor_revenue
+    cadence: quarterly
+    source: earnings release, transcript, customer-concentration disclosures
+    threshold: AI semiconductor growth remains dependent on too few hyperscaler programs and networking pull-through is not disclosed for 2 consecutive reviews.
+    decision_rule: If triggered, relabel as cyclical bottleneck risk and require explicit customer-concentration review.
+  - ticker: TSM
+    metric_id: advanced_packaging_commentary
+    cadence: quarterly
+    source: earnings release, transcript, advanced-packaging commentary
+    threshold: Advanced-packaging scarcity no longer appears in company commentary and gross margin quality weakens for 2 consecutive reviews.
+    decision_rule: If triggered, review whether leading-edge foundry remains a chokepoint or has become normal cycle exposure.
+  - ticker: NVDA
+    metric_id: networking_attach
+    cadence: quarterly
+    source: earnings release, segment disclosures, product architecture docs
+    threshold: Rack-scale systems ship while networking/software pull-through evidence weakens and gross margin compresses sharply for 2 consecutive reviews.
+    decision_rule: If triggered, review whether NVIDIA is still an AI factory operating layer or mainly accelerator cycle exposure.
+  - ticker: 000660.KS
+    metric_id: nvidia_qualification
+    cadence: quarterly
+    source: company IR, customer qualification evidence, industry disclosures
+    threshold: HBM qualification or shipment evidence falls behind Samsung or Micron for 2 consecutive reviews.
+    decision_rule: If triggered, open HBM leadership review and require source-linked evidence before maintaining leadership claim.
+  - ticker: CEG
+    metric_id: pjm_interconnection
+    cadence: quarterly
+    source: PJM data, regulatory filings, company IR, PPA announcements
+    threshold: Data-center power demand does not convert into contracted or regulatory progress for 2 consecutive reviews.
+    decision_rule: If triggered, review whether nodal power scarcity is investable earnings evidence or only a narrative bottleneck.
+  - ticker: VRT
+    metric_id: backlog
+    cadence: quarterly
+    source: earnings release, orders, backlog, margin commentary
+    threshold: Orders or backlog deteriorate for 2 consecutive reviews while AI capex commentary remains positive.
+    decision_rule: If triggered, review whether power/cooling demand is decelerating before the thesis admits it.
+  - ticker: MSCI
+    metric_id: ai_product_evidence
+    cadence: semiannual
+    source: company IR, product docs, retention and analytics disclosures
+    threshold: No source-linked evidence that AI workflow adoption affects retention, product depth, or revenue by 2027-12-31.
+    decision_rule: If triggered, review whether this remains a verifier thesis or only a trusted-data brand thesis.
+  - ticker: MCO
+    metric_id: research_assistant_adoption
+    cadence: semiannual
+    source: company IR, analytics disclosures, product docs
+    threshold: No evidence that AI research tools improve analytics workflow adoption or credit-risk economics by 2027-12-31.
+    decision_rule: If triggered, review whether the AI thesis is separable from the ratings cycle.
+  - ticker: SPGI
+    metric_id: kensho_api_mcp_mentions
+    cadence: semiannual
+    source: company IR, Kensho product docs, data-licensing disclosures
+    threshold: No source-linked evidence that Kensho, API, MCP, or data licensing embeds in AI workflows by 2027-12-31.
+    decision_rule: If triggered, review whether trusted data is being bypassed rather than integrated.
+  - ticker: VEEV
+    metric_id: ai_agents_rollout
+    cadence: semiannual
+    source: Veeva product docs, customer evidence, earnings transcripts
+    threshold: Fewer than 50 paid or clearly deployed AI Agent customers by FY2028 Q2, or no regulated production-workflow proof.
+    decision_rule: If triggered, review whether AI Agents remain roadmap-only rather than a production workflow layer.
+  - ticker: TER
+    metric_id: semiconductor_test_revenue
+    cadence: quarterly
+    source: earnings release, bookings, AI revenue commentary, robotics revenue
+    threshold: Semiconductor-test demand weakens for 2 consecutive reviews before robotics revenue becomes material.
+    decision_rule: If triggered, review whether optionality is masking a cyclical test downturn.
+  - ticker: CASH
+    metric_id: portfolio_drawdown
+    cadence: semiannual
+    source: local portfolio calculation, alert count, valuation reset list
+    threshold: Cash drag dominates review outcomes for 2 consecutive semiannual reviews while drawdown, valuation, and alert risks remain low.
+    decision_rule: If triggered, review cash policy wording and whether the reserve still has option value.

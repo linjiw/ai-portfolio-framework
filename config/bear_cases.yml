@@ -1,0 +1,105 @@
+schema_version: 1
+
+policy:
+  purpose: Force each thesis to track a live opposing argument, not only confirming evidence.
+  boundary: Bear-case movement changes review priority only; it is not a trade instruction.
+
+bear_cases:
+  - ticker: MSFT
+    bear_case: Enterprise agents stay in draft, copilot, or human-approval workflows and never receive broad production write permissions.
+    strengthens_if:
+      - Customer stories remain usage anecdotes without governed write-action proof.
+      - Security and compliance language grows faster than deployment evidence.
+    weakens_if:
+      - Primary sources show agents executing production actions under policy controls.
+  - ticker: GOOGL
+    bear_case: TPU ownership reduces cost but does not protect Search economics or improve Cloud margin enough to matter.
+    strengthens_if:
+      - Capex rises while Cloud margin or AI revenue quality fails to improve.
+      - Search monetization pressure accelerates.
+    weakens_if:
+      - Cloud margin and customer evidence support TPU-driven cost leverage.
+  - ticker: AVGO
+    bear_case: AI ASIC wins are lumpy customer-concentration events rather than durable platform economics.
+    strengthens_if:
+      - AI revenue commentary depends on a small number of named hyperscaler programs.
+      - Networking pull-through or VMware margin quality weakens.
+    weakens_if:
+      - Multiple hyperscaler programs and networking attach show repeatable demand.
+  - ticker: TSM
+    bear_case: Advanced packaging and leading-edge scarcity normalize while overseas fab costs pressure margins.
+    strengthens_if:
+      - Packaging bottleneck language fades and margin quality weakens.
+      - Customer diversification shifts bargaining power away from TSMC.
+    weakens_if:
+      - HPC mix, pricing, and packaging commentary remain tight and margin-supportive.
+  - ticker: NVDA
+    bear_case: NVIDIA becomes a high-quality accelerator vendor whose margins and attach rates compress as custom silicon scales.
+    strengthens_if:
+      - Gross margin compresses while custom silicon evidence rises.
+      - Networking/software pull-through is not visible in disclosures.
+    weakens_if:
+      - Rack-scale architecture, networking, software, and margin evidence remain aligned.
+  - ticker: 000660.KS
+    bear_case: Samsung or Micron catches up in HBM qualification and erodes SK Hynix leadership.
+    strengthens_if:
+      - Customer qualification evidence shifts away from SK Hynix.
+      - HBM pricing or share commentary weakens.
+    weakens_if:
+      - Customer and company sources reinforce HBM leadership into next-generation platforms.
+  - ticker: CEG
+    bear_case: AI power demand exists, but grid, regulatory, and interconnection friction prevents earnings conversion.
+    strengthens_if:
+      - PJM or regulatory timelines slip without offsetting contracted economics.
+      - PPA announcements do not become realized earnings evidence.
+    weakens_if:
+      - Primary regulatory or company evidence shows demand converting into contracted economics.
+  - ticker: VRT
+    bear_case: Power and cooling narratives stay strong while orders, backlog, or margins roll over.
+    strengthens_if:
+      - Orders/backlog slow before the AI capex story changes.
+      - Liquid-cooling commentary remains promotional without financial pull-through.
+    weakens_if:
+      - Orders, backlog, margin, and cooling evidence remain mutually supportive.
+  - ticker: MSCI
+    bear_case: AI becomes a feature inside existing products without changing workflow depth, retention, or revenue quality.
+    strengthens_if:
+      - Product language rises without retention or subscription evidence.
+      - Customers treat AI as table stakes rather than a paid verifier layer.
+    weakens_if:
+      - AI workflow evidence links to subscription durability or product depth.
+  - ticker: MCO
+    bear_case: Credit-cycle noise overwhelms AI workflow benefits and AI does not improve analytics economics.
+    strengthens_if:
+      - Analytics growth or retention weakens while AI mentions remain vague.
+      - Ratings-cycle pressure explains results better than product adoption.
+    weakens_if:
+      - AI tools show measurable workflow, retention, or analytics value.
+  - ticker: SPGI
+    bear_case: LLM workflows bypass S&P Global's data products or compress data-licensing economics.
+    strengthens_if:
+      - Kensho/API/MCP references stay absent from customer or revenue evidence.
+      - Data licensing weakens while AI usage grows elsewhere.
+    weakens_if:
+      - Trusted data products become embedded in AI workflows.
+  - ticker: VEEV
+    bear_case: Regulated customers experiment with AI but do not adopt Veeva Agents in production workflows.
+    strengthens_if:
+      - AI Agents remain roadmap language or controlled demos.
+      - CRM migration absorbs attention without AI workflow monetization.
+    weakens_if:
+      - Customer or product evidence shows regulated production workflow usage.
+  - ticker: TER
+    bear_case: AI semitest demand normalizes before robotics optionality is large enough to matter.
+    strengthens_if:
+      - Semitest bookings weaken and robotics stays immaterial.
+      - AI commentary does not convert into revenue durability.
+    weakens_if:
+      - Semitest demand remains strong or robotics begins to offset cyclicality.
+  - ticker: CASH
+    bear_case: Cash becomes a persistent drag if thesis evidence stays strong and valuation resets never arrive.
+    strengthens_if:
+      - Alerts stay green and cash drag dominates decision reviews.
+      - Valuation bands do not create attractive review opportunities.
+    weakens_if:
+      - Drawdowns, valuation resets, or source-health issues make cash option value visible.

@@ -1,0 +1,92 @@
+schema_version: 1
+
+policy:
+  purpose: Make the valuation gate operational without creating automatic trading.
+  boundary: Bands trigger human valuation review only. They do not change target weights, conviction, or holdings.
+  status: not_evaluated
+
+bands:
+  - ticker: MSFT
+    metric: forward_pe
+    reasonable_band: 28-34x
+    review_high: "> 40x"
+    review_low: "< 24x"
+    source: quarterly valuation snapshot
+  - ticker: GOOGL
+    metric: forward_pe
+    reasonable_band: 20-28x
+    review_high: "> 32x"
+    review_low: "< 18x"
+    source: quarterly valuation snapshot
+  - ticker: AVGO
+    metric: forward_pe
+    reasonable_band: 28-38x
+    review_high: "> 45x"
+    review_low: "< 24x"
+    source: quarterly valuation snapshot
+  - ticker: TSM
+    metric: forward_pe
+    reasonable_band: 18-26x
+    review_high: "> 30x"
+    review_low: "< 16x"
+    source: quarterly valuation snapshot
+  - ticker: NVDA
+    metric: forward_pe
+    reasonable_band: 30-45x
+    review_high: "> 55x"
+    review_low: "< 25x"
+    source: quarterly valuation snapshot
+  - ticker: 000660.KS
+    metric: price_to_book
+    reasonable_band: 1.0-1.8x
+    review_high: "> 2.2x"
+    review_low: "< 0.9x"
+    source: quarterly valuation snapshot
+  - ticker: CEG
+    metric: forward_pe
+    reasonable_band: 18-26x
+    review_high: "> 32x"
+    review_low: "< 15x"
+    source: quarterly valuation snapshot
+  - ticker: VRT
+    metric: forward_pe
+    reasonable_band: 22-32x
+    review_high: "> 40x"
+    review_low: "< 18x"
+    source: quarterly valuation snapshot
+  - ticker: MSCI
+    metric: forward_pe
+    reasonable_band: 30-42x
+    review_high: "> 48x"
+    review_low: "< 25x"
+    source: quarterly valuation snapshot
+  - ticker: MCO
+    metric: forward_pe
+    reasonable_band: 28-38x
+    review_high: "> 45x"
+    review_low: "< 24x"
+    source: quarterly valuation snapshot
+  - ticker: SPGI
+    metric: forward_pe
+    reasonable_band: 26-36x
+    review_high: "> 42x"
+    review_low: "< 22x"
+    source: quarterly valuation snapshot
+  - ticker: VEEV
+    metric: forward_pe
+    reasonable_band: 28-42x
+    review_high: "> 50x"
+    review_low: "< 22x"
+    source: quarterly valuation snapshot
+  - ticker: TER
+    metric: normalized_pe
+    reasonable_band: 18-28x
+    review_high: "> 35x"
+    review_low: "< 14x"
+    source: quarterly valuation snapshot
+  - ticker: CASH
+    metric: opportunity_cost
+    reasonable_band: policy reserve
+    review_high: cash drag dominates semiannual review
+    review_low: portfolio drawdown or valuation-reset risk rises
+    source: local portfolio calculation

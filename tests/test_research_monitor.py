@@ -14,6 +14,10 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
     metrics_path = tmp_path / "metrics.yml"
     rules_path = tmp_path / "rules.yml"
     sources_path = tmp_path / "sources.yml"
+    risk_path = tmp_path / "risk.yml"
+    falsifier_path = tmp_path / "falsifiers.yml"
+    bear_path = tmp_path / "bears.yml"
+    valuation_path = tmp_path / "valuation.yml"
     evidence_path = tmp_path / "evidence.yml"
     research_data_path = tmp_path / "research-data.js"
     output_path = tmp_path / "monitor.json"
@@ -153,6 +157,93 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
             ]
         },
     )
+    write_yaml(
+        risk_path,
+        {
+            "policy": {"boundary": "Review only"},
+            "risk_factors": [
+                {
+                    "id": "hyperscaler_capex_cycle",
+                    "label": "Hyperscaler capex",
+                    "threshold_pct": 40.0,
+                    "primary_group": "direct",
+                    "exposure_groups": {
+                        "direct": ["MSFT"],
+                        "hedge": ["CASH"],
+                    },
+                }
+            ],
+            "holding_risk": {
+                "MSFT": {
+                    "hyperscaler_capex_cycle": {
+                        "category": "direct",
+                        "sensitivity": "high",
+                        "rationale": "Test risk",
+                    }
+                },
+                "CASH": {
+                    "hyperscaler_capex_cycle": {
+                        "category": "hedge",
+                        "sensitivity": "inverse_or_uncorrelated",
+                        "rationale": "Test hedge",
+                    }
+                },
+            },
+            "framework_gaps": [{"id": "security", "label": "Security", "status": "watch"}],
+        },
+    )
+    write_yaml(
+        falsifier_path,
+        {
+            "policy": {"boundary": "Review only"},
+            "thresholds": [
+                {
+                    "ticker": "MSFT",
+                    "metric_id": "agent",
+                    "threshold": "No production evidence",
+                    "decision_rule": "Open review",
+                },
+                {
+                    "ticker": "CASH",
+                    "metric_id": "drawdown",
+                    "threshold": "No option value",
+                    "decision_rule": "Open review",
+                },
+            ],
+        },
+    )
+    write_yaml(
+        bear_path,
+        {
+            "policy": {"boundary": "Review only"},
+            "bear_cases": [
+                {"ticker": "MSFT", "bear_case": "Agent evidence stays weak"},
+                {"ticker": "CASH", "bear_case": "Cash drag dominates"},
+            ],
+        },
+    )
+    write_yaml(
+        valuation_path,
+        {
+            "policy": {"boundary": "Review only"},
+            "bands": [
+                {
+                    "ticker": "MSFT",
+                    "metric": "forward_pe",
+                    "reasonable_band": "20-30x",
+                    "review_high": "> 35x",
+                    "review_low": "< 18x",
+                },
+                {
+                    "ticker": "CASH",
+                    "metric": "opportunity_cost",
+                    "reasonable_band": "policy reserve",
+                    "review_high": "cash drag",
+                    "review_low": "drawdown risk",
+                },
+            ],
+        },
+    )
     portfolio_data = {
         "asOfDate": date(2026, 5, 23).isoformat(),
         "updatedAtUtc": "2026-05-23T12:00:00Z",
@@ -179,6 +270,10 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
         metrics_catalog_path=metrics_path,
         alert_rules_path=rules_path,
         sources_config_path=sources_path,
+        risk_factors_config_path=risk_path,
+        falsifier_thresholds_config_path=falsifier_path,
+        bear_cases_config_path=bear_path,
+        valuation_bands_config_path=valuation_path,
         evidence_log_path=evidence_path,
         research_data_path=research_data_path,
         output_path=output_path,
@@ -193,8 +288,13 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
     assert payload["summary"]["highest_alert"] == "yellow"
     assert payload["summary"]["source_status_counts"]["stale"] == 1
     assert payload["summary"]["evidence_coverage"]["covered_metrics"] == 1
+    assert payload["summary"]["risk_overlay"]["capex_direct_exposure_pct"] == 50.0
+    assert payload["summary"]["decision_discipline"]["operational_falsifier_count"] == 2
     assert payload["reviewQueue"][0]["score"] > 0
     assert payload["reviewQueue"][0]["metric_id"] == "agent"
+    assert "direct capex-cycle exposure" in payload["reviewQueue"][0]["score_reasons"]
     assert payload["holdings"][0]["top_metrics"][0]["evidence_state"]["state"] == "deteriorating"
+    assert payload["holdings"][0]["falsifier_threshold"]["threshold"] == "No production evidence"
+    assert payload["riskOverlay"]["riskFactors"][0]["status"] == "yellow"
     assert output_path.exists()
     assert provenance_path.exists()

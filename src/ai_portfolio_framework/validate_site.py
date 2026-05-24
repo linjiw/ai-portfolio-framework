@@ -156,6 +156,8 @@ def validate_research_monitor_json(site_dir: Path, monitor_path: Path) -> list[s
         "holdings",
         "evidenceLog",
         "thesisChangelog",
+        "riskOverlay",
+        "decisionDiscipline",
     ):
         if field not in monitor:
             errors.append(f"research-monitor-data.json missing required field: {field}")
@@ -180,6 +182,23 @@ def validate_research_monitor_json(site_dir: Path, monitor_path: Path) -> list[s
     for source in monitor.get("sourceHealth", []):
         if source.get("status") not in valid_source_statuses:
             errors.append(f"research monitor source has invalid status: {source}")
+
+    risk_summary = monitor.get("riskOverlay", {}).get("summary", {})
+    capex_exposure = float(risk_summary.get("capex_direct_exposure_pct", 0))
+    if capex_exposure < 0 or capex_exposure > 100:
+        errors.append(
+            "research monitor capex_direct_exposure_pct must be between 0 and 100, "
+            f"got {capex_exposure}"
+        )
+    discipline_summary = monitor.get("decisionDiscipline", {}).get("summary", {})
+    for field in (
+        "operational_falsifier_coverage",
+        "bear_case_coverage",
+        "valuation_band_coverage",
+    ):
+        coverage = float(discipline_summary.get(field, -1))
+        if coverage < 0 or coverage > 1:
+            errors.append(f"research monitor {field} must be between 0 and 1, got {coverage}")
     return errors
 
 
