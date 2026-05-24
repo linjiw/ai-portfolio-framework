@@ -42,6 +42,17 @@ Portfolio pricing uses Yahoo Finance directly in the standalone package.
 stays fixed at USD cash. Weekend and holiday runs use the latest available close
 at or before the run date.
 
+## Return Display
+
+The tracker does not annualize very short histories. Until the portfolio has at
+least one year of daily history, the final KPI is labeled `Since start` and uses
+the actual cumulative return from the paper portfolio start date. Once a
+year-old snapshot exists, that same slot switches to `Trailing 1Y` and uses the
+real one-year portfolio return from the nearest available year-ago snapshot.
+
+This avoids extrapolating a one- or two-day return into a misleading annualized
+number.
+
 ## Generated Site Files
 
 These generated files are included in the Pages artifact:

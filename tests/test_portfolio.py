@@ -56,6 +56,9 @@ def test_portfolio_handles_cash_and_krw_fx(tmp_path) -> None:
     assert round(float(snapshot["market_value_usd"].sum()), 2) == 1050.0
     assert round(float(summary.iloc[0]["pnl_usd"]), 2) == 50.0
     assert round(float(summary.iloc[0]["return_pct"]), 2) == 5.0
+    assert round(float(summary.iloc[0]["annualized_return_pct"]), 2) == 5.0
+    assert summary.iloc[0]["annualized_return_basis"] == "since_start"
+    assert int(summary.iloc[0]["annualized_return_days"]) == 1
 
 
 def test_portfolio_price_tickers_include_fx() -> None:
@@ -64,3 +67,29 @@ def test_portfolio_price_tickers_include_fx() -> None:
         "KRW=X",
         "MSFT",
     ]
+
+
+def test_annual_return_metric_uses_trailing_year_when_available(tmp_path) -> None:
+    summary_path = tmp_path / "summary.csv"
+    summary_path.write_text(
+        "\n".join(
+            [
+                ",".join(portfolio.SUMMARY_COLUMNS),
+                "2025-05-23,900,800,100,1000,-100,-10,0,0,-10,since_start,0,2025-05-23T00:00:00Z",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    metric = portfolio.build_annual_return_metric(
+        total_value=990.0,
+        return_pct=-1.0,
+        snapshot_date=date(2026, 5, 24),
+        start_date=date(2025, 5, 23),
+        summary_path=summary_path,
+    )
+
+    assert metric["basis"] == "trailing_1y"
+    assert metric["days"] == 366
+    assert round(float(metric["return_pct"]), 2) == 10.0

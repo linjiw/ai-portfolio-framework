@@ -1,6 +1,6 @@
 {
   "alerts": [],
-  "asOfDate": "2026-05-23",
+  "asOfDate": "2026-05-24",
   "decisionDiscipline": {
     "bearCases": [
       {
@@ -657,7 +657,7 @@
       "ticker": "SPGI"
     }
   ],
-  "generatedAtUtc": "2026-05-24T07:32:15Z",
+  "generatedAtUtc": "2026-05-24T08:23:23Z",
   "holdings": [
     {
       "alert_count": 0,
@@ -4194,10 +4194,10 @@
       "metric_id": "pjm_interconnection",
       "priority": "high",
       "question": "Track PJM and interconnection conversion from data-center demand into realizable economics.",
-      "score": 128,
+      "score": 133,
       "scoreBreakdown": {
         "alert": 0,
-        "dueDate": 0,
+        "dueDate": 5,
         "evidenceState": 40,
         "filingEvent": 0,
         "frameworkBottleneck": 0,
@@ -4208,6 +4208,7 @@
       },
       "score_reasons": [
         "high priority",
+        "due date approaching",
         "deteriorating evidence",
         "evidence requires review",
         "direct capex-cycle exposure"
@@ -4238,10 +4239,10 @@
       "metric_id": "production_write_permission",
       "priority": "high",
       "question": "Look for evidence of Agent 365 production write-permission adoption.",
-      "score": 123,
+      "score": 128,
       "scoreBreakdown": {
         "alert": 0,
-        "dueDate": 0,
+        "dueDate": 5,
         "evidenceState": 25,
         "filingEvent": 0,
         "frameworkBottleneck": 10,
@@ -4252,6 +4253,7 @@
       },
       "score_reasons": [
         "high priority",
+        "due date approaching",
         "unknown evidence",
         "evidence requires review",
         "framework trust bottleneck",
@@ -4278,10 +4280,10 @@
       "metric_id": "nvidia_qualification",
       "priority": "high",
       "question": "Track HBM qualification and shipment evidence into the Vera Rubin generation.",
-      "score": 108,
+      "score": 113,
       "scoreBreakdown": {
         "alert": 0,
-        "dueDate": 0,
+        "dueDate": 5,
         "evidenceState": 25,
         "filingEvent": 0,
         "frameworkBottleneck": 0,
@@ -4292,6 +4294,7 @@
       },
       "score_reasons": [
         "high priority",
+        "due date approaching",
         "unknown evidence",
         "direct capex-cycle exposure",
         "high cycle sensitivity"
@@ -4322,10 +4325,10 @@
       "metric_id": "google_cloud_revenue_margin",
       "priority": "high",
       "question": "Check whether TPU and capex advantage appears in Cloud margin or AI revenue quality.",
-      "score": 108,
+      "score": 113,
       "scoreBreakdown": {
         "alert": 0,
-        "dueDate": 0,
+        "dueDate": 5,
         "evidenceState": 15,
         "filingEvent": 0,
         "frameworkBottleneck": 0,
@@ -4336,6 +4339,7 @@
       },
       "score_reasons": [
         "high priority",
+        "due date approaching",
         "watching evidence",
         "evidence requires review",
         "direct capex-cycle exposure",
@@ -4367,10 +4371,10 @@
       "metric_id": "networking_attach",
       "priority": "high",
       "question": "Track networking attach, rack-scale platform evidence, and margin durability.",
-      "score": 98,
+      "score": 103,
       "scoreBreakdown": {
         "alert": 0,
-        "dueDate": 0,
+        "dueDate": 5,
         "evidenceState": 15,
         "filingEvent": 0,
         "frameworkBottleneck": 0,
@@ -4381,6 +4385,7 @@
       },
       "score_reasons": [
         "high priority",
+        "due date approaching",
         "watching evidence",
         "direct capex-cycle exposure",
         "high cycle sensitivity"
@@ -4412,10 +4417,10 @@
       "metric_id": "ai_semiconductor_revenue",
       "priority": "medium",
       "question": "Check whether AI semiconductor growth is broadening beyond a small customer set.",
-      "score": 78,
+      "score": 83,
       "scoreBreakdown": {
         "alert": 0,
-        "dueDate": 0,
+        "dueDate": 5,
         "evidenceState": 15,
         "filingEvent": 0,
         "frameworkBottleneck": 0,
@@ -4426,6 +4431,7 @@
       },
       "score_reasons": [
         "medium priority",
+        "due date approaching",
         "watching evidence",
         "evidence requires review",
         "direct capex-cycle exposure",
@@ -4452,10 +4458,10 @@
       "metric_id": "advanced_packaging_commentary",
       "priority": "medium",
       "question": "Review whether advanced packaging and leading-edge demand still support margin quality.",
-      "score": 78,
+      "score": 83,
       "scoreBreakdown": {
         "alert": 0,
-        "dueDate": 0,
+        "dueDate": 5,
         "evidenceState": 25,
         "filingEvent": 0,
         "frameworkBottleneck": 0,
@@ -4466,6 +4472,7 @@
       },
       "score_reasons": [
         "medium priority",
+        "due date approaching",
         "unknown evidence",
         "direct capex-cycle exposure",
         "high cycle sensitivity"
@@ -4491,10 +4498,10 @@
       "metric_id": "backlog",
       "priority": "medium",
       "question": "Check whether AI power and cooling capex is still visible in orders, backlog, and liquid-cooling commentary.",
-      "score": 78,
+      "score": 83,
       "scoreBreakdown": {
         "alert": 0,
-        "dueDate": 0,
+        "dueDate": 5,
         "evidenceState": 25,
         "filingEvent": 0,
         "frameworkBottleneck": 0,
@@ -4505,6 +4512,7 @@
       },
       "score_reasons": [
         "medium priority",
+        "due date approaching",
         "unknown evidence",
         "direct capex-cycle exposure",
         "high cycle sensitivity"
@@ -4530,10 +4538,10 @@
       "metric_id": "semiconductor_test_revenue",
       "priority": "medium",
       "question": "Check whether semiconductor test demand remains strong enough while robotics option value develops.",
-      "score": 73,
+      "score": 78,
       "scoreBreakdown": {
         "alert": 0,
-        "dueDate": 0,
+        "dueDate": 5,
         "evidenceState": 25,
         "filingEvent": 0,
         "frameworkBottleneck": 0,
@@ -4544,6 +4552,7 @@
       },
       "score_reasons": [
         "medium priority",
+        "due date approaching",
         "unknown evidence",
         "direct capex-cycle exposure"
       ],
@@ -4568,10 +4577,10 @@
       "metric_id": "portfolio_drawdown",
       "priority": "medium",
       "question": "Review whether cash still has option value versus current alerts, drawdown, and valuation resets.",
-      "score": 65,
+      "score": 70,
       "scoreBreakdown": {
         "alert": 0,
-        "dueDate": 0,
+        "dueDate": 5,
         "evidenceState": 25,
         "filingEvent": 0,
         "frameworkBottleneck": 0,
@@ -4582,6 +4591,7 @@
       },
       "score_reasons": [
         "medium priority",
+        "due date approaching",
         "unknown evidence"
       ],
       "source": "next_action",
@@ -4609,10 +4619,10 @@
       "metric_id": "ai_agents_rollout",
       "priority": "medium",
       "question": "Track whether Veeva AI Agents move from roadmap to regulated production workflow usage.",
-      "score": 65,
+      "score": 70,
       "scoreBreakdown": {
         "alert": 0,
-        "dueDate": 0,
+        "dueDate": 5,
         "evidenceState": 15,
         "filingEvent": 0,
         "frameworkBottleneck": 0,
@@ -4623,6 +4633,7 @@
       },
       "score_reasons": [
         "medium priority",
+        "due date approaching",
         "watching evidence",
         "evidence requires review"
       ],
@@ -4652,10 +4663,10 @@
       "metric_id": "research_assistant_adoption",
       "priority": "low",
       "question": "Check whether Moody's AI tools improve analytics workflow adoption or credit-risk research quality.",
-      "score": 35,
+      "score": 40,
       "scoreBreakdown": {
         "alert": 0,
-        "dueDate": 0,
+        "dueDate": 5,
         "evidenceState": 15,
         "filingEvent": 0,
         "frameworkBottleneck": 0,
@@ -4666,6 +4677,7 @@
       },
       "score_reasons": [
         "low priority",
+        "due date approaching",
         "watching evidence",
         "evidence requires review"
       ],
@@ -4690,10 +4702,10 @@
       "metric_id": "ai_product_evidence",
       "priority": "low",
       "question": "Look for evidence that MSCI risk and data products are becoming AI workflow verification assets.",
-      "score": 35,
+      "score": 40,
       "scoreBreakdown": {
         "alert": 0,
-        "dueDate": 0,
+        "dueDate": 5,
         "evidenceState": 25,
         "filingEvent": 0,
         "frameworkBottleneck": 0,
@@ -4704,6 +4716,7 @@
       },
       "score_reasons": [
         "low priority",
+        "due date approaching",
         "unknown evidence"
       ],
       "source": "next_action",
@@ -4733,10 +4746,10 @@
       "metric_id": "kensho_api_mcp_mentions",
       "priority": "low",
       "question": "Look for Kensho API, MCP, or data-licensing evidence inside LLM workflows.",
-      "score": 35,
+      "score": 40,
       "scoreBreakdown": {
         "alert": 0,
-        "dueDate": 0,
+        "dueDate": 5,
         "evidenceState": 15,
         "filingEvent": 0,
         "frameworkBottleneck": 0,
@@ -4747,6 +4760,7 @@
       },
       "score_reasons": [
         "low priority",
+        "due date approaching",
         "watching evidence",
         "evidence requires review"
       ],
@@ -6693,7 +6707,7 @@
       "cadence": "daily",
       "id": "local_calculation",
       "label": "Local portfolio calculation",
-      "last_update": "2026-05-23",
+      "last_update": "2026-05-24",
       "notes": "Calculated from versioned lots, target weights, prices, and FX.",
       "status": "healthy",
       "status_policy": "auditable",

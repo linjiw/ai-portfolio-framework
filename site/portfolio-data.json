@@ -1,10 +1,12 @@
 {
-  "asOfDate": "2026-05-23",
+  "asOfDate": "2026-05-24",
   "baseCurrency": "USD",
   "enabled": true,
   "history": [
     {
-      "annualized_return_pct": 0.0,
+      "annualized_return_basis": "since_start",
+      "annualized_return_days": 0,
+      "annualized_return_pct": -0.139737,
       "cash_value_usd": 100.0,
       "cost_basis_usd": 1000.0,
       "daily_pnl_usd": 0.0,
@@ -17,7 +19,9 @@
       "updated_at_utc": "2026-05-22T18:15:25Z"
     },
     {
-      "annualized_return_pct": -59.817417,
+      "annualized_return_basis": "since_start",
+      "annualized_return_days": 1,
+      "annualized_return_pct": -0.249479,
       "cash_value_usd": 100.0,
       "cost_basis_usd": 1000.0,
       "daily_pnl_usd": -1.097418,
@@ -27,7 +31,22 @@
       "return_pct": -0.249479,
       "snapshot_date": "2026-05-23",
       "total_value_usd": 997.505209,
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-23T19:51:24Z"
+    },
+    {
+      "annualized_return_basis": "since_start",
+      "annualized_return_days": 2,
+      "annualized_return_pct": -0.249479,
+      "cash_value_usd": 100.0,
+      "cost_basis_usd": 1000.0,
+      "daily_pnl_usd": 0.0,
+      "daily_return_pct": 0.0,
+      "invested_value_usd": 897.505209,
+      "pnl_usd": -2.494791,
+      "return_pct": -0.249479,
+      "snapshot_date": "2026-05-24",
+      "total_value_usd": 997.505209,
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     }
   ],
   "holdings": [
@@ -43,11 +62,11 @@
       "price_usd": 418.570007,
       "quantity": 0.429369,
       "return_pct": -0.155027,
-      "snapshot_date": "2026-05-23",
+      "snapshot_date": "2026-05-24",
       "source": "yfinance",
       "target_weight": 18.0,
       "ticker": "MSFT",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     },
     {
       "cost_basis_usd": 150.0,
@@ -61,11 +80,11 @@
       "price_usd": 382.970001,
       "quantity": 0.389145,
       "return_pct": -0.645979,
-      "snapshot_date": "2026-05-23",
+      "snapshot_date": "2026-05-24",
       "source": "yfinance",
       "target_weight": 15.0,
       "ticker": "GOOGL",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     },
     {
       "cost_basis_usd": 100.0,
@@ -79,11 +98,11 @@
       "price_usd": 414.140015,
       "quantity": 0.241744,
       "return_pct": 0.11604,
-      "snapshot_date": "2026-05-23",
+      "snapshot_date": "2026-05-24",
       "source": "yfinance",
       "target_weight": 10.0,
       "ticker": "AVGO",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     },
     {
       "cost_basis_usd": 100.0,
@@ -92,16 +111,16 @@
       "holding_name": "Cash",
       "market_value_usd": 100.0,
       "pnl_usd": 0.0,
-      "price_date": "2026-05-23",
+      "price_date": "2026-05-24",
       "price_native": 1.0,
       "price_usd": 1.0,
       "quantity": 100.0,
       "return_pct": 0.0,
-      "snapshot_date": "2026-05-23",
+      "snapshot_date": "2026-05-24",
       "source": "cash",
       "target_weight": 10.0,
       "ticker": "CASH",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     },
     {
       "cost_basis_usd": 80.0,
@@ -115,11 +134,11 @@
       "price_usd": 1276.528554,
       "quantity": 0.062554,
       "return_pct": -0.185334,
-      "snapshot_date": "2026-05-23",
+      "snapshot_date": "2026-05-24",
       "source": "yfinance",
       "target_weight": 8.0,
       "ticker": "000660.KS",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     },
     {
       "cost_basis_usd": 70.0,
@@ -133,11 +152,11 @@
       "price_usd": 404.519989,
       "quantity": 0.171967,
       "return_pct": -0.622767,
-      "snapshot_date": "2026-05-23",
+      "snapshot_date": "2026-05-24",
       "source": "yfinance",
       "target_weight": 7.0,
       "ticker": "TSM",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     },
     {
       "cost_basis_usd": 70.0,
@@ -151,11 +170,11 @@
       "price_usd": 215.330002,
       "quantity": 0.323166,
       "return_pct": -0.589411,
-      "snapshot_date": "2026-05-23",
+      "snapshot_date": "2026-05-24",
       "source": "yfinance",
       "target_weight": 7.0,
       "ticker": "NVDA",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     },
     {
       "cost_basis_usd": 70.0,
@@ -169,11 +188,11 @@
       "price_usd": 358.440002,
       "quantity": 0.195859,
       "return_pct": 0.290993,
-      "snapshot_date": "2026-05-23",
+      "snapshot_date": "2026-05-24",
       "source": "yfinance",
       "target_weight": 7.0,
       "ticker": "TER",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     },
     {
       "cost_basis_usd": 50.0,
@@ -187,11 +206,11 @@
       "price_usd": 294.070007,
       "quantity": 0.168726,
       "return_pct": -0.765477,
-      "snapshot_date": "2026-05-23",
+      "snapshot_date": "2026-05-24",
       "source": "yfinance",
       "target_weight": 5.0,
       "ticker": "CEG",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     },
     {
       "cost_basis_usd": 50.0,
@@ -205,11 +224,11 @@
       "price_usd": 327.459991,
       "quantity": 0.152267,
       "return_pct": -0.277128,
-      "snapshot_date": "2026-05-23",
+      "snapshot_date": "2026-05-24",
       "source": "yfinance",
       "target_weight": 5.0,
       "ticker": "VRT",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     },
     {
       "cost_basis_usd": 20.0,
@@ -223,11 +242,11 @@
       "price_usd": 588.549988,
       "quantity": 0.033905,
       "return_pct": -0.225472,
-      "snapshot_date": "2026-05-23",
+      "snapshot_date": "2026-05-24",
       "source": "yfinance",
       "target_weight": 2.0,
       "ticker": "MSCI",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     },
     {
       "cost_basis_usd": 20.0,
@@ -241,11 +260,11 @@
       "price_usd": 449.119995,
       "quantity": 0.044468,
       "return_pct": -0.142301,
-      "snapshot_date": "2026-05-23",
+      "snapshot_date": "2026-05-24",
       "source": "yfinance",
       "target_weight": 2.0,
       "ticker": "MCO",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     },
     {
       "cost_basis_usd": 20.0,
@@ -259,11 +278,11 @@
       "price_usd": 417.600006,
       "quantity": 0.047848,
       "return_pct": -0.0933,
-      "snapshot_date": "2026-05-23",
+      "snapshot_date": "2026-05-24",
       "source": "yfinance",
       "target_weight": 2.0,
       "ticker": "SPGI",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     },
     {
       "cost_basis_usd": 20.0,
@@ -277,11 +296,11 @@
       "price_usd": 160.169998,
       "quantity": 0.125141,
       "return_pct": 0.218991,
-      "snapshot_date": "2026-05-23",
+      "snapshot_date": "2026-05-24",
       "source": "yfinance",
       "target_weight": 2.0,
       "ticker": "VEEV",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     }
   ],
   "initialCapitalUsd": 1000.0,
@@ -559,7 +578,7 @@
       "source": "yfinance",
       "target_weight": 8.0,
       "ticker": "000660.KS",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-23T19:51:24Z"
     },
     {
       "cost_basis_usd": 100.0,
@@ -577,7 +596,7 @@
       "source": "yfinance",
       "target_weight": 10.0,
       "ticker": "AVGO",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-23T19:51:24Z"
     },
     {
       "cost_basis_usd": 100.0,
@@ -595,7 +614,7 @@
       "source": "cash",
       "target_weight": 10.0,
       "ticker": "CASH",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-23T19:51:24Z"
     },
     {
       "cost_basis_usd": 50.0,
@@ -613,7 +632,7 @@
       "source": "yfinance",
       "target_weight": 5.0,
       "ticker": "CEG",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-23T19:51:24Z"
     },
     {
       "cost_basis_usd": 150.0,
@@ -631,7 +650,7 @@
       "source": "yfinance",
       "target_weight": 15.0,
       "ticker": "GOOGL",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-23T19:51:24Z"
     },
     {
       "cost_basis_usd": 20.0,
@@ -649,7 +668,7 @@
       "source": "yfinance",
       "target_weight": 2.0,
       "ticker": "MCO",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-23T19:51:24Z"
     },
     {
       "cost_basis_usd": 20.0,
@@ -667,7 +686,7 @@
       "source": "yfinance",
       "target_weight": 2.0,
       "ticker": "MSCI",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-23T19:51:24Z"
     },
     {
       "cost_basis_usd": 180.0,
@@ -685,7 +704,7 @@
       "source": "yfinance",
       "target_weight": 18.0,
       "ticker": "MSFT",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-23T19:51:24Z"
     },
     {
       "cost_basis_usd": 70.0,
@@ -703,7 +722,7 @@
       "source": "yfinance",
       "target_weight": 7.0,
       "ticker": "NVDA",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-23T19:51:24Z"
     },
     {
       "cost_basis_usd": 20.0,
@@ -721,7 +740,7 @@
       "source": "yfinance",
       "target_weight": 2.0,
       "ticker": "SPGI",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-23T19:51:24Z"
     },
     {
       "cost_basis_usd": 70.0,
@@ -739,7 +758,7 @@
       "source": "yfinance",
       "target_weight": 7.0,
       "ticker": "TER",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-23T19:51:24Z"
     },
     {
       "cost_basis_usd": 70.0,
@@ -757,7 +776,7 @@
       "source": "yfinance",
       "target_weight": 7.0,
       "ticker": "TSM",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-23T19:51:24Z"
     },
     {
       "cost_basis_usd": 20.0,
@@ -775,7 +794,7 @@
       "source": "yfinance",
       "target_weight": 2.0,
       "ticker": "VEEV",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-23T19:51:24Z"
     },
     {
       "cost_basis_usd": 50.0,
@@ -793,22 +812,276 @@
       "source": "yfinance",
       "target_weight": 5.0,
       "ticker": "VRT",
-      "updated_at_utc": "2026-05-23T19:47:45Z"
+      "updated_at_utc": "2026-05-23T19:51:24Z"
+    },
+    {
+      "cost_basis_usd": 80.0,
+      "currency": "KRW",
+      "fx_to_usd": 0.000658,
+      "holding_name": "SK Hynix",
+      "market_value_usd": 79.851733,
+      "pnl_usd": -0.148267,
+      "price_date": "2026-05-22",
+      "price_native": 1941000.0,
+      "price_usd": 1276.528554,
+      "quantity": 0.062554,
+      "return_pct": -0.185334,
+      "snapshot_date": "2026-05-24",
+      "source": "yfinance",
+      "target_weight": 8.0,
+      "ticker": "000660.KS",
+      "updated_at_utc": "2026-05-24T08:23:15Z"
+    },
+    {
+      "cost_basis_usd": 100.0,
+      "currency": "USD",
+      "fx_to_usd": 1.0,
+      "holding_name": "Broadcom",
+      "market_value_usd": 100.11604,
+      "pnl_usd": 0.11604,
+      "price_date": "2026-05-22",
+      "price_native": 414.140015,
+      "price_usd": 414.140015,
+      "quantity": 0.241744,
+      "return_pct": 0.11604,
+      "snapshot_date": "2026-05-24",
+      "source": "yfinance",
+      "target_weight": 10.0,
+      "ticker": "AVGO",
+      "updated_at_utc": "2026-05-24T08:23:15Z"
+    },
+    {
+      "cost_basis_usd": 100.0,
+      "currency": "USD",
+      "fx_to_usd": 1.0,
+      "holding_name": "Cash",
+      "market_value_usd": 100.0,
+      "pnl_usd": 0.0,
+      "price_date": "2026-05-24",
+      "price_native": 1.0,
+      "price_usd": 1.0,
+      "quantity": 100.0,
+      "return_pct": 0.0,
+      "snapshot_date": "2026-05-24",
+      "source": "cash",
+      "target_weight": 10.0,
+      "ticker": "CASH",
+      "updated_at_utc": "2026-05-24T08:23:15Z"
+    },
+    {
+      "cost_basis_usd": 50.0,
+      "currency": "USD",
+      "fx_to_usd": 1.0,
+      "holding_name": "Constellation Energy",
+      "market_value_usd": 49.617262,
+      "pnl_usd": -0.382738,
+      "price_date": "2026-05-22",
+      "price_native": 294.070007,
+      "price_usd": 294.070007,
+      "quantity": 0.168726,
+      "return_pct": -0.765477,
+      "snapshot_date": "2026-05-24",
+      "source": "yfinance",
+      "target_weight": 5.0,
+      "ticker": "CEG",
+      "updated_at_utc": "2026-05-24T08:23:15Z"
+    },
+    {
+      "cost_basis_usd": 150.0,
+      "currency": "USD",
+      "fx_to_usd": 1.0,
+      "holding_name": "Alphabet",
+      "market_value_usd": 149.031032,
+      "pnl_usd": -0.968968,
+      "price_date": "2026-05-22",
+      "price_native": 382.970001,
+      "price_usd": 382.970001,
+      "quantity": 0.389145,
+      "return_pct": -0.645979,
+      "snapshot_date": "2026-05-24",
+      "source": "yfinance",
+      "target_weight": 15.0,
+      "ticker": "GOOGL",
+      "updated_at_utc": "2026-05-24T08:23:15Z"
+    },
+    {
+      "cost_basis_usd": 20.0,
+      "currency": "USD",
+      "fx_to_usd": 1.0,
+      "holding_name": "Moody's",
+      "market_value_usd": 19.97154,
+      "pnl_usd": -0.02846,
+      "price_date": "2026-05-22",
+      "price_native": 449.119995,
+      "price_usd": 449.119995,
+      "quantity": 0.044468,
+      "return_pct": -0.142301,
+      "snapshot_date": "2026-05-24",
+      "source": "yfinance",
+      "target_weight": 2.0,
+      "ticker": "MCO",
+      "updated_at_utc": "2026-05-24T08:23:15Z"
+    },
+    {
+      "cost_basis_usd": 20.0,
+      "currency": "USD",
+      "fx_to_usd": 1.0,
+      "holding_name": "MSCI",
+      "market_value_usd": 19.954906,
+      "pnl_usd": -0.045094,
+      "price_date": "2026-05-22",
+      "price_native": 588.549988,
+      "price_usd": 588.549988,
+      "quantity": 0.033905,
+      "return_pct": -0.225472,
+      "snapshot_date": "2026-05-24",
+      "source": "yfinance",
+      "target_weight": 2.0,
+      "ticker": "MSCI",
+      "updated_at_utc": "2026-05-24T08:23:15Z"
+    },
+    {
+      "cost_basis_usd": 180.0,
+      "currency": "USD",
+      "fx_to_usd": 1.0,
+      "holding_name": "Microsoft",
+      "market_value_usd": 179.720952,
+      "pnl_usd": -0.279048,
+      "price_date": "2026-05-22",
+      "price_native": 418.570007,
+      "price_usd": 418.570007,
+      "quantity": 0.429369,
+      "return_pct": -0.155027,
+      "snapshot_date": "2026-05-24",
+      "source": "yfinance",
+      "target_weight": 18.0,
+      "ticker": "MSFT",
+      "updated_at_utc": "2026-05-24T08:23:15Z"
+    },
+    {
+      "cost_basis_usd": 70.0,
+      "currency": "USD",
+      "fx_to_usd": 1.0,
+      "holding_name": "NVIDIA",
+      "market_value_usd": 69.587413,
+      "pnl_usd": -0.412587,
+      "price_date": "2026-05-22",
+      "price_native": 215.330002,
+      "price_usd": 215.330002,
+      "quantity": 0.323166,
+      "return_pct": -0.589411,
+      "snapshot_date": "2026-05-24",
+      "source": "yfinance",
+      "target_weight": 7.0,
+      "ticker": "NVDA",
+      "updated_at_utc": "2026-05-24T08:23:15Z"
+    },
+    {
+      "cost_basis_usd": 20.0,
+      "currency": "USD",
+      "fx_to_usd": 1.0,
+      "holding_name": "S&P Global",
+      "market_value_usd": 19.98134,
+      "pnl_usd": -0.01866,
+      "price_date": "2026-05-22",
+      "price_native": 417.600006,
+      "price_usd": 417.600006,
+      "quantity": 0.047848,
+      "return_pct": -0.0933,
+      "snapshot_date": "2026-05-24",
+      "source": "yfinance",
+      "target_weight": 2.0,
+      "ticker": "SPGI",
+      "updated_at_utc": "2026-05-24T08:23:15Z"
+    },
+    {
+      "cost_basis_usd": 70.0,
+      "currency": "USD",
+      "fx_to_usd": 1.0,
+      "holding_name": "Teradyne",
+      "market_value_usd": 70.203695,
+      "pnl_usd": 0.203695,
+      "price_date": "2026-05-22",
+      "price_native": 358.440002,
+      "price_usd": 358.440002,
+      "quantity": 0.195859,
+      "return_pct": 0.290993,
+      "snapshot_date": "2026-05-24",
+      "source": "yfinance",
+      "target_weight": 7.0,
+      "ticker": "TER",
+      "updated_at_utc": "2026-05-24T08:23:15Z"
+    },
+    {
+      "cost_basis_usd": 70.0,
+      "currency": "USD",
+      "fx_to_usd": 1.0,
+      "holding_name": "TSMC",
+      "market_value_usd": 69.564063,
+      "pnl_usd": -0.435937,
+      "price_date": "2026-05-22",
+      "price_native": 404.519989,
+      "price_usd": 404.519989,
+      "quantity": 0.171967,
+      "return_pct": -0.622767,
+      "snapshot_date": "2026-05-24",
+      "source": "yfinance",
+      "target_weight": 7.0,
+      "ticker": "TSM",
+      "updated_at_utc": "2026-05-24T08:23:15Z"
+    },
+    {
+      "cost_basis_usd": 20.0,
+      "currency": "USD",
+      "fx_to_usd": 1.0,
+      "holding_name": "Veeva Systems",
+      "market_value_usd": 20.043798,
+      "pnl_usd": 0.043798,
+      "price_date": "2026-05-22",
+      "price_native": 160.169998,
+      "price_usd": 160.169998,
+      "quantity": 0.125141,
+      "return_pct": 0.218991,
+      "snapshot_date": "2026-05-24",
+      "source": "yfinance",
+      "target_weight": 2.0,
+      "ticker": "VEEV",
+      "updated_at_utc": "2026-05-24T08:23:15Z"
+    },
+    {
+      "cost_basis_usd": 50.0,
+      "currency": "USD",
+      "fx_to_usd": 1.0,
+      "holding_name": "Vertiv",
+      "market_value_usd": 49.861436,
+      "pnl_usd": -0.138564,
+      "price_date": "2026-05-22",
+      "price_native": 327.459991,
+      "price_usd": 327.459991,
+      "quantity": 0.152267,
+      "return_pct": -0.277128,
+      "snapshot_date": "2026-05-24",
+      "source": "yfinance",
+      "target_weight": 5.0,
+      "ticker": "VRT",
+      "updated_at_utc": "2026-05-24T08:23:15Z"
     }
   ],
   "startDate": "2026-05-22",
   "summary": {
-    "annualized_return_pct": -59.817417,
+    "annualized_return_basis": "since_start",
+    "annualized_return_days": 2,
+    "annualized_return_pct": -0.249479,
     "cash_value_usd": 100.0,
     "cost_basis_usd": 1000.0,
-    "daily_pnl_usd": -1.097418,
-    "daily_return_pct": -0.109895,
+    "daily_pnl_usd": 0.0,
+    "daily_return_pct": 0.0,
     "invested_value_usd": 897.505209,
     "pnl_usd": -2.494791,
     "return_pct": -0.249479,
-    "snapshot_date": "2026-05-23",
+    "snapshot_date": "2026-05-24",
     "total_value_usd": 997.505209,
-    "updated_at_utc": "2026-05-23T19:47:45Z"
+    "updated_at_utc": "2026-05-24T08:23:15Z"
   },
-  "updatedAtUtc": "2026-05-23T19:47:45Z"
+  "updatedAtUtc": "2026-05-24T08:23:15Z"
 }

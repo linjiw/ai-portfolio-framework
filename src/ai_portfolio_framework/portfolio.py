@@ -13,7 +13,7 @@ import math
 import shutil
 from collections.abc import Iterable
 from dataclasses import asdict, dataclass
-from datetime import UTC, date, datetime
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
 import matplotlib
@@ -40,6 +40,7 @@ SITE_DATA_PATH = SITE_DIR / "portfolio-data.json"
 
 BASE_CURRENCY = "USD"
 DEFAULT_INITIAL_CAPITAL = 1000.0
+MIN_ANNUAL_RETURN_DAYS = 365
 PORTFOLIO_HOLDINGS_PATH = MANUAL_DIR / "ai_framework_holdings.csv"
 FX_TICKER_BY_CURRENCY = {"KRW": "KRW=X"}
 TICKER_CURRENCY = {"000660.KS": "KRW"}
@@ -74,6 +75,8 @@ SUMMARY_COLUMNS = [
     "daily_pnl_usd",
     "daily_return_pct",
     "annualized_return_pct",
+    "annualized_return_basis",
+    "annualized_return_days",
     "updated_at_utc",
 ]
 
@@ -154,7 +157,11 @@ def update_portfolio(
     )
     upsert_csv(summary_path, summary, SUMMARY_COLUMNS, "snapshot_date", run_date.isoformat())
 
-    summary_history = read_csv_if_exists(summary_path, SUMMARY_COLUMNS)
+    summary_history = normalize_summary_return_metrics(
+        read_csv_if_exists(summary_path, SUMMARY_COLUMNS),
+        config=config,
+    )
+    summary_history.to_csv(summary_path, index=False, quoting=csv.QUOTE_MINIMAL)
     snapshot_history = read_csv_if_exists(snapshots_path, SNAPSHOT_COLUMNS)
     plot_paths = write_plots(
         summary_history=summary_history,
@@ -419,15 +426,13 @@ def build_summary(
         previous_value = float(previous["total_value_usd"])
         daily_pnl = total_value - previous_value
         daily_return = pct(daily_pnl, previous_value)
-    start_date = date.fromisoformat(config.portfolio_start_date)
-    elapsed_days = (snapshot_date - start_date).days
-    annualized = (
-        0.0
-        if elapsed_days < 1
-        else ((total_value / config.initial_capital_usd) ** (365.0 / elapsed_days) - 1.0) * 100.0
+    return_metric = build_annual_return_metric(
+        total_value=total_value,
+        return_pct=return_pct,
+        snapshot_date=snapshot_date,
+        start_date=date.fromisoformat(config.portfolio_start_date),
+        summary_path=summary_path,
     )
-    if not math.isfinite(annualized):
-        annualized = 0.0
     return pd.DataFrame(
         [
             {
@@ -440,12 +445,111 @@ def build_summary(
                 "return_pct": return_pct,
                 "daily_pnl_usd": daily_pnl,
                 "daily_return_pct": daily_return,
-                "annualized_return_pct": annualized,
+                "annualized_return_pct": return_metric["return_pct"],
+                "annualized_return_basis": return_metric["basis"],
+                "annualized_return_days": return_metric["days"],
                 "updated_at_utc": utc_iso(),
             }
         ],
         columns=SUMMARY_COLUMNS,
     )
+
+
+def build_annual_return_metric(
+    *,
+    total_value: float,
+    return_pct: float,
+    snapshot_date: date,
+    start_date: date,
+    summary_path: Path,
+) -> dict[str, float | int | str]:
+    """Return a non-misleading annual KPI for the public tracker.
+
+    The dashboard should not annualize a one- or two-day result. Until at least
+    one year of history exists, the metric falls back to the actual since-start
+    return and labels the basis accordingly. Once a year-old observation exists,
+    it reports the trailing one-year portfolio return.
+    """
+
+    elapsed_days = max(0, (snapshot_date - start_date).days)
+    if elapsed_days < MIN_ANNUAL_RETURN_DAYS:
+        return {
+            "return_pct": safe_return(return_pct),
+            "basis": "since_start",
+            "days": elapsed_days,
+        }
+
+    year_ago = latest_summary_on_or_before(
+        snapshot_date - timedelta(days=MIN_ANNUAL_RETURN_DAYS),
+        summary_path=summary_path,
+    )
+    if year_ago is None:
+        return {
+            "return_pct": safe_return(return_pct),
+            "basis": "since_start",
+            "days": elapsed_days,
+        }
+
+    base_value = float(year_ago["total_value_usd"])
+    base_date = year_ago["snapshot_date"]
+    if isinstance(base_date, str):
+        base_date = date.fromisoformat(base_date)
+    trailing_return = pct(total_value - base_value, base_value)
+    return {
+        "return_pct": safe_return(trailing_return),
+        "basis": "trailing_1y",
+        "days": max(0, (snapshot_date - base_date).days),
+    }
+
+
+def normalize_summary_return_metrics(
+    summary_history: pd.DataFrame,
+    *,
+    config: PortfolioConfig,
+) -> pd.DataFrame:
+    if summary_history.empty:
+        return pd.DataFrame(columns=SUMMARY_COLUMNS)
+
+    frame = summary_history.copy()
+    for column in SUMMARY_COLUMNS:
+        if column not in frame.columns:
+            frame[column] = default_column_value(column)
+    frame["_snapshot_date"] = pd.to_datetime(frame["snapshot_date"]).dt.date
+    frame = frame.sort_values("_snapshot_date")
+    start_date = date.fromisoformat(config.portfolio_start_date)
+
+    for index, row in frame.iterrows():
+        snapshot_date = row["_snapshot_date"]
+        elapsed_days = max(0, (snapshot_date - start_date).days)
+        return_pct = float(row["return_pct"])
+        if elapsed_days < MIN_ANNUAL_RETURN_DAYS:
+            frame.at[index, "annualized_return_pct"] = safe_return(return_pct)
+            frame.at[index, "annualized_return_basis"] = "since_start"
+            frame.at[index, "annualized_return_days"] = elapsed_days
+            continue
+
+        year_ago = snapshot_date - timedelta(days=MIN_ANNUAL_RETURN_DAYS)
+        candidates = frame[frame["_snapshot_date"] <= year_ago]
+        if candidates.empty:
+            frame.at[index, "annualized_return_pct"] = safe_return(return_pct)
+            frame.at[index, "annualized_return_basis"] = "since_start"
+            frame.at[index, "annualized_return_days"] = elapsed_days
+            continue
+
+        base = candidates.iloc[-1]
+        base_value = float(base["total_value_usd"])
+        base_date = base["_snapshot_date"]
+        frame.at[index, "annualized_return_pct"] = safe_return(
+            pct(float(row["total_value_usd"]) - base_value, base_value)
+        )
+        frame.at[index, "annualized_return_basis"] = "trailing_1y"
+        frame.at[index, "annualized_return_days"] = max(0, (snapshot_date - base_date).days)
+
+    return frame.drop(columns=["_snapshot_date"])[SUMMARY_COLUMNS]
+
+
+def safe_return(value: float) -> float:
+    return value if math.isfinite(value) else 0.0
 
 
 def latest_summary_before(
@@ -463,6 +567,21 @@ def latest_summary_before(
     return previous.iloc[-1]
 
 
+def latest_summary_on_or_before(
+    snapshot_date: date,
+    *,
+    summary_path: Path = PORTFOLIO_SUMMARY_PATH,
+) -> pd.Series | None:
+    frame = read_csv_if_exists(summary_path, SUMMARY_COLUMNS)
+    if frame.empty:
+        return None
+    frame["snapshot_date"] = pd.to_datetime(frame["snapshot_date"]).dt.date
+    candidates = frame[frame["snapshot_date"] <= snapshot_date].sort_values("snapshot_date")
+    if candidates.empty:
+        return None
+    return candidates.iloc[-1]
+
+
 def upsert_csv(
     path: Path,
     rows: pd.DataFrame,
@@ -472,6 +591,9 @@ def upsert_csv(
 ) -> None:
     existing = read_csv_if_exists(path, columns)
     if not existing.empty:
+        for column in columns:
+            if column not in existing.columns:
+                existing[column] = default_column_value(column)
         existing = existing[existing[key].astype(str) != key_value]
     combined = pd.concat([existing, rows], ignore_index=True)
     sort_columns = [key, "ticker"] if "ticker" in columns else [key]
@@ -483,6 +605,14 @@ def read_csv_if_exists(path: Path, columns: list[str]) -> pd.DataFrame:
     if not path.exists():
         return pd.DataFrame(columns=columns)
     return pd.read_csv(path)
+
+
+def default_column_value(column: str) -> str | int | float:
+    if column == "annualized_return_basis":
+        return "legacy_annualized"
+    if column == "annualized_return_days":
+        return 0
+    return ""
 
 
 def write_plots(

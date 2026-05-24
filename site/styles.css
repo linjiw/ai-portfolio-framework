@@ -751,6 +751,14 @@ a:hover {
   overflow-wrap: anywhere;
 }
 
+.portfolio-kpi small {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.2;
+}
+
 .metric-list {
   display: grid;
   gap: 8px;

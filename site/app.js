@@ -970,19 +970,37 @@ function renderPortfolioPerformance(portfolio) {
 
   const kpis = document.getElementById("portfolioPerformanceKpis");
   kpis.hidden = false;
+  const returnBasis = summary.annualized_return_basis || "legacy_annualized";
+  const periodDays = Number(summary.annualized_return_days || 0);
+  const periodLabel =
+    returnBasis === "trailing_1y"
+      ? "Trailing 1Y"
+      : returnBasis === "since_start"
+        ? "Since start"
+        : "Annualized";
+  const periodHelper =
+    returnBasis === "since_start" && periodDays > 0
+      ? `${periodDays}d`
+      : "";
   kpis.innerHTML = [
     ["Total value", formatUsd(summary.total_value_usd), ""],
     ["Total P/L", formatUsd(summary.pnl_usd), signedClass(summary.pnl_usd)],
     ["Return", formatPct(summary.return_pct), signedClass(summary.return_pct)],
     ["Daily P/L", formatUsd(summary.daily_pnl_usd), signedClass(summary.daily_pnl_usd)],
     ["Daily return", formatPct(summary.daily_return_pct), signedClass(summary.daily_return_pct)],
-    ["Annualized", formatPct(summary.annualized_return_pct), signedClass(summary.annualized_return_pct)]
+    [
+      periodLabel,
+      formatPct(summary.annualized_return_pct),
+      signedClass(summary.annualized_return_pct),
+      periodHelper
+    ]
   ]
     .map(
-      ([label, value, tone]) => `
+      ([label, value, tone, helper]) => `
         <div class="portfolio-kpi">
           <span>${escapeHtml(label)}</span>
           <strong class="${tone}">${escapeHtml(value)}</strong>
+          ${helper ? `<small>${escapeHtml(helper)}</small>` : ""}
         </div>
       `
     )
