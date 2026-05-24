@@ -970,16 +970,15 @@ function renderPortfolioPerformance(portfolio) {
 
   const kpis = document.getElementById("portfolioPerformanceKpis");
   kpis.hidden = false;
-  const returnBasis = summary.annualized_return_basis || "legacy_annualized";
-  const periodDays = Number(summary.annualized_return_days || 0);
-  const periodLabel =
-    returnBasis === "trailing_1y"
-      ? "Trailing 1Y"
-      : returnBasis === "since_start"
-        ? "Since start"
-        : "Annualized";
+  const returnKpi = portfolio.returnKpi || {
+    label: summary.annualized_return_basis === "since_start" ? "Since start" : "Annualized",
+    value_pct: summary.annualized_return_pct,
+    horizonDays: Number(summary.annualized_return_days || 0),
+    isAnnualized: summary.annualized_return_basis !== "since_start"
+  };
+  const periodDays = Number(returnKpi.horizonDays || 0);
   const periodHelper =
-    returnBasis === "since_start" && periodDays > 0
+    !returnKpi.isAnnualized && periodDays > 0
       ? `${periodDays}d`
       : "";
   kpis.innerHTML = [
@@ -989,9 +988,9 @@ function renderPortfolioPerformance(portfolio) {
     ["Daily P/L", formatUsd(summary.daily_pnl_usd), signedClass(summary.daily_pnl_usd)],
     ["Daily return", formatPct(summary.daily_return_pct), signedClass(summary.daily_return_pct)],
     [
-      periodLabel,
-      formatPct(summary.annualized_return_pct),
-      signedClass(summary.annualized_return_pct),
+      returnKpi.label,
+      formatPct(returnKpi.value_pct),
+      signedClass(returnKpi.value_pct),
       periodHelper
     ]
   ]

@@ -53,6 +53,24 @@ real one-year portfolio return from the nearest available year-ago snapshot.
 This avoids extrapolating a one- or two-day return into a misleading annualized
 number.
 
+The generated site data exposes this as an explicit contract:
+
+```json
+{
+  "returnKpi": {
+    "label": "Since start",
+    "value": -0.00249479,
+    "value_pct": -0.249479,
+    "horizonDays": 2,
+    "method": "cumulative_since_start",
+    "isAnnualized": false
+  }
+}
+```
+
+The frontend renders `returnKpi` directly. It does not infer annualization from
+history length.
+
 ## Generated Site Files
 
 These generated files are included in the Pages artifact:

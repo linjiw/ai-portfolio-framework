@@ -680,6 +680,7 @@ def build_site_data(
     plot_paths: dict[str, str],
 ) -> dict:
     latest_summary = summary_history.sort_values("snapshot_date").iloc[-1].to_dict()
+    clean_summary = clean_numbers(latest_summary)
     holdings = latest_snapshot.sort_values("target_weight", ascending=False).to_dict(
         orient="records"
     )
@@ -690,7 +691,8 @@ def build_site_data(
         "startDate": config.portfolio_start_date,
         "asOfDate": latest_summary["snapshot_date"],
         "updatedAtUtc": latest_summary["updated_at_utc"],
-        "summary": clean_numbers(latest_summary),
+        "summary": clean_summary,
+        "returnKpi": build_return_kpi(clean_summary),
         "holdings": [clean_numbers(row) for row in holdings],
         "history": [
             clean_numbers(row)
@@ -704,6 +706,32 @@ def build_site_data(
         ],
         "plots": plot_paths,
         "publication": "public GitHub Pages tracker backed by versioned initial lots and history",
+    }
+
+
+def build_return_kpi(summary: dict) -> dict[str, object]:
+    basis = str(summary.get("annualized_return_basis") or "legacy_annualized")
+    value_pct = float(summary.get("annualized_return_pct") or 0.0)
+    horizon_days = int(float(summary.get("annualized_return_days") or 0))
+    if basis == "trailing_1y":
+        label = "Trailing 1Y"
+        method = "nearest_snapshot_trailing_1y"
+        is_annualized = False
+    elif basis == "since_start":
+        label = "Since start"
+        method = "cumulative_since_start"
+        is_annualized = False
+    else:
+        label = "Annualized"
+        method = "legacy_annualized"
+        is_annualized = True
+    return {
+        "label": label,
+        "value": round(value_pct / 100.0, 8),
+        "value_pct": round(value_pct, 6),
+        "horizonDays": horizon_days,
+        "method": method,
+        "isAnnualized": is_annualized,
     }
 
 

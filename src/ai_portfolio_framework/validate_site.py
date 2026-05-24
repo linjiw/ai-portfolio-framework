@@ -104,6 +104,7 @@ def validate_portfolio_json(site_dir: Path, portfolio_path: Path) -> list[str]:
         "baseCurrency",
         "initialCapitalUsd",
         "summary",
+        "returnKpi",
         "holdings",
         "history",
     )
@@ -123,6 +124,16 @@ def validate_portfolio_json(site_dir: Path, portfolio_path: Path) -> list[str]:
     for field in ("total_value_usd", "pnl_usd", "return_pct", "daily_pnl_usd", "daily_return_pct"):
         if not isinstance(summary.get(field), int | float):
             errors.append(f"portfolio summary {field} must be numeric")
+
+    return_kpi = portfolio.get("returnKpi", {})
+    for field in ("label", "method"):
+        if not isinstance(return_kpi.get(field), str):
+            errors.append(f"portfolio returnKpi {field} must be a string")
+    for field in ("value", "value_pct", "horizonDays"):
+        if not isinstance(return_kpi.get(field), int | float):
+            errors.append(f"portfolio returnKpi {field} must be numeric")
+    if not isinstance(return_kpi.get("isAnnualized"), bool):
+        errors.append("portfolio returnKpi isAnnualized must be boolean")
 
     holdings = portfolio.get("holdings", [])
     if len(holdings) != 14:
