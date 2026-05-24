@@ -49,7 +49,9 @@ These generated files are included in the Pages artifact:
 ```text
 site/portfolio-data.json
 site/research-monitor-data.json
+site/provenance-coverage.json
 data/generated/dashboard_data.json
+data/generated/provenance_coverage.json
 site/portfolio/portfolio-value.png
 site/portfolio/portfolio-allocation.png
 ```
@@ -59,6 +61,7 @@ The public dashboard reads the generated JSON from the same GitHub Pages site:
 ```text
 portfolio-data.json
 research-monitor-data.json
+provenance-coverage.json
 ```
 
 ## Manual Commands

@@ -55,7 +55,10 @@ def build_site(
     build_research_monitor_data(
         portfolio_data_path=output_dir / "portfolio-data.json",
         output_path=output_dir / "research-monitor-data.json",
+        research_data_path=output_dir / "research-data.js",
+        provenance_output_path=output_dir / "provenance-coverage.json",
         generated_output_path=None,
+        generated_provenance_output_path=None,
     )
     write_refresh_manifest(output_dir, site_source_dir, data_date, review_date)
     (output_dir / ".nojekyll").write_text("", encoding="utf-8")

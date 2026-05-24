@@ -1,0 +1,55 @@
+{
+  "claimCountsByHolding": {
+    "000660.KS": 1,
+    "AVGO": 1,
+    "CASH": 0,
+    "CEG": 1,
+    "GOOGL": 1,
+    "MCO": 1,
+    "MSCI": 1,
+    "MSFT": 1,
+    "NVDA": 1,
+    "SPGI": 1,
+    "TER": 1,
+    "TSM": 1,
+    "VEEV": 1,
+    "VRT": 1
+  },
+  "generatedAtUtc": "2026-05-24T01:18:12Z",
+  "holdingEvidenceCounts": {
+    "000660.KS": 3,
+    "AVGO": 3,
+    "CASH": 3,
+    "CEG": 4,
+    "GOOGL": 3,
+    "MCO": 3,
+    "MSCI": 3,
+    "MSFT": 3,
+    "NVDA": 3,
+    "SPGI": 3,
+    "TER": 3,
+    "TSM": 3,
+    "VEEV": 3,
+    "VRT": 3
+  },
+  "holdingsMissingClaimCoverage": [
+    "CASH"
+  ],
+  "schemaVersion": 1,
+  "summary": {
+    "claimLinkedEvidenceBullets": 13,
+    "coverageRatio": 0.3023,
+    "evidenceLogEntries": 7,
+    "evidenceLogEntriesWithSourceOrClaim": 7,
+    "materialEvidenceBullets": 43,
+    "weakSourceCount": 1
+  },
+  "weakSources": [
+    {
+      "reason": "Secondary or syndicated source: Reuters via Investing.com - Three Mile Island PJM delay",
+      "recommended_action": "Supplement with primary filing, company, regulatory, or operator data.",
+      "source_id": "ceg-tmi-pjm",
+      "ticker": "CEG"
+    }
+  ]
+}

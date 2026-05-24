@@ -49,6 +49,10 @@ def validate_site(site_dir: Path, *, require_portfolio: bool = False) -> list[st
     monitor_path = site_dir / "research-monitor-data.json"
     if require_portfolio or monitor_path.exists():
         errors.extend(validate_research_monitor_json(site_dir, monitor_path))
+
+    provenance_path = site_dir / "provenance-coverage.json"
+    if require_portfolio or provenance_path.exists():
+        errors.extend(validate_provenance_coverage_json(site_dir, provenance_path))
     return errors
 
 
@@ -150,6 +154,8 @@ def validate_research_monitor_json(site_dir: Path, monitor_path: Path) -> list[s
         "reviewQueue",
         "sourceHealth",
         "holdings",
+        "evidenceLog",
+        "thesisChangelog",
     ):
         if field not in monitor:
             errors.append(f"research-monitor-data.json missing required field: {field}")
@@ -174,6 +180,29 @@ def validate_research_monitor_json(site_dir: Path, monitor_path: Path) -> list[s
     for source in monitor.get("sourceHealth", []):
         if source.get("status") not in valid_source_statuses:
             errors.append(f"research monitor source has invalid status: {source}")
+    return errors
+
+
+def validate_provenance_coverage_json(site_dir: Path, provenance_path: Path) -> list[str]:
+    if not provenance_path.exists():
+        return [f"provenance-coverage.json is required but missing in {site_dir}"]
+
+    errors: list[str] = []
+    try:
+        provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        return [f"provenance-coverage.json is invalid JSON: {exc}"]
+
+    if provenance.get("schemaVersion") != 1:
+        errors.append(
+            f"provenance coverage schemaVersion must be 1, got {provenance.get('schemaVersion')}"
+        )
+    summary = provenance.get("summary", {})
+    if summary.get("materialEvidenceBullets", 0) <= 0:
+        errors.append("provenance coverage must count material evidence bullets")
+    ratio = float(summary.get("coverageRatio", -1))
+    if ratio < 0 or ratio > 1:
+        errors.append(f"provenance coverage ratio must be between 0 and 1, got {ratio}")
     return errors
 
 

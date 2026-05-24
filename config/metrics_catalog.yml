@@ -13,6 +13,12 @@ MSFT:
       cadence: monthly
       source: filings_news_product_docs
       direction: stronger
+    - id: production_write_permission
+      name: Production write-permission adoption evidence
+      type: qualitative
+      cadence: monthly
+      source: filings_news_product_docs
+      direction: stronger
     - id: security_attach
       name: Security and identity attach evidence
       type: fundamental_or_qualitative
@@ -22,6 +28,7 @@ MSFT:
   watch_rule: No fresh evidence on production write-permission adoption.
   next_action:
     type: evidence_check
+    metric_id: production_write_permission
     priority: high
     due: 2026-08-22
     question: Look for evidence of Agent 365 production write-permission adoption.
@@ -53,6 +60,7 @@ GOOGL:
   watch_rule: Cloud margin fails to show TPU or capex leverage.
   next_action:
     type: quarterly_review
+    metric_id: google_cloud_revenue_margin
     priority: high
     due: 2026-08-22
     question: Check whether TPU and capex advantage appears in Cloud margin or AI revenue quality.
@@ -84,6 +92,7 @@ AVGO:
   watch_rule: AI semiconductor growth depends on too few customers.
   next_action:
     type: quarterly_review
+    metric_id: ai_semiconductor_revenue
     priority: medium
     due: 2026-08-22
     question: Check whether AI semiconductor growth is broadening beyond a small customer set.
@@ -115,6 +124,7 @@ TSM:
   watch_rule: Overseas fab cost or packaging constraints pressure margin quality.
   next_action:
     type: quarterly_review
+    metric_id: advanced_packaging_commentary
     priority: medium
     due: 2026-08-22
     question: Review whether advanced packaging and leading-edge demand still support margin quality.
@@ -152,6 +162,7 @@ NVDA:
   watch_rule: Custom silicon bypass pressure rises without offsetting platform pull-through.
   next_action:
     type: evidence_check
+    metric_id: networking_attach
     priority: high
     due: 2026-08-22
     question: Track networking attach, rack-scale platform evidence, and margin durability.
@@ -183,6 +194,7 @@ NVDA:
   watch_rule: Samsung or Micron narrows the HBM qualification and shipment gap.
   next_action:
     type: evidence_check
+    metric_id: nvidia_qualification
     priority: high
     due: 2026-08-22
     question: Track HBM qualification and shipment evidence into the Vera Rubin generation.
@@ -214,6 +226,7 @@ CEG:
   watch_rule: Interconnection delays prevent power scarcity from reaching realized economics.
   next_action:
     type: evidence_check
+    metric_id: pjm_interconnection
     priority: high
     due: 2026-08-22
     question: Track PJM and interconnection conversion from data-center demand into realizable economics.
@@ -245,6 +258,7 @@ VRT:
   watch_rule: Orders or backlog slow while AI capex narratives remain strong.
   next_action:
     type: quarterly_review
+    metric_id: backlog
     priority: medium
     due: 2026-08-22
     question: Check whether AI power and cooling capex is still visible in orders, backlog, and liquid-cooling commentary.
@@ -276,6 +290,7 @@ MSCI:
   watch_rule: AI remains a product feature without measurable workflow adoption.
   next_action:
     type: quarterly_review
+    metric_id: ai_product_evidence
     priority: low
     due: 2026-08-22
     question: Look for evidence that MSCI risk and data products are becoming AI workflow verification assets.
@@ -307,6 +322,7 @@ MCO:
   watch_rule: AI assistant evidence stays marketing-only while credit cycle weakens.
   next_action:
     type: quarterly_review
+    metric_id: research_assistant_adoption
     priority: low
     due: 2026-08-22
     question: Check whether Moody's AI tools improve analytics workflow adoption or credit-risk research quality.
@@ -338,6 +354,7 @@ SPGI:
   watch_rule: Kensho and trusted-data products do not show workflow integration evidence.
   next_action:
     type: quarterly_review
+    metric_id: kensho_api_mcp_mentions
     priority: low
     due: 2026-08-22
     question: Look for Kensho API, MCP, or data-licensing evidence inside LLM workflows.
@@ -369,6 +386,7 @@ VEEV:
   watch_rule: AI Agents remain roadmap-only or show low regulated-workflow usage.
   next_action:
     type: evidence_check
+    metric_id: ai_agents_rollout
     priority: medium
     due: 2026-08-22
     question: Track whether Veeva AI Agents move from roadmap to regulated production workflow usage.
@@ -400,6 +418,7 @@ TER:
   watch_rule: Semiconductor test demand digests before robotics becomes material.
   next_action:
     type: quarterly_review
+    metric_id: semiconductor_test_revenue
     priority: medium
     due: 2026-08-22
     question: Check whether semiconductor test demand remains strong enough while robotics option value develops.
@@ -431,6 +450,7 @@ CASH:
   watch_rule: Cash drag becomes the main portfolio error while thesis evidence remains strong.
   next_action:
     type: weight_review
+    metric_id: portfolio_drawdown
     priority: medium
     due: 2026-08-22
     question: Review whether cash still has option value versus current alerts, drawdown, and valuation resets.

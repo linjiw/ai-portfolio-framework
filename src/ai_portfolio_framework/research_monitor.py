@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any
@@ -22,13 +23,26 @@ METRICS_CATALOG_PATH = CONFIG_DIR / "metrics_catalog.yml"
 ALERT_RULES_PATH = CONFIG_DIR / "alert_rules.yml"
 SOURCES_CONFIG_PATH = CONFIG_DIR / "sources.yml"
 DECISION_LOG_PATH = GENERATED_DATA_DIR.parent / "decision_log.yml"
+EVIDENCE_LOG_PATH = GENERATED_DATA_DIR.parent / "evidence_log.yml"
+THESIS_CHANGELOG_PATH = GENERATED_DATA_DIR.parent / "thesis_changelog.yml"
+RESEARCH_DATA_PATH = SITE_DIR / "research-data.js"
 SITE_PORTFOLIO_DATA_PATH = SITE_DIR / "portfolio-data.json"
 SITE_MONITOR_DATA_PATH = SITE_DIR / "research-monitor-data.json"
+SITE_PROVENANCE_COVERAGE_PATH = SITE_DIR / "provenance-coverage.json"
 GENERATED_MONITOR_DATA_PATH = GENERATED_DATA_DIR / "dashboard_data.json"
+GENERATED_PROVENANCE_COVERAGE_PATH = GENERATED_DATA_DIR / "provenance_coverage.json"
 
 LEVEL_RANK = {"green": 0, "blue": 1, "gray": 1, "yellow": 2, "red": 3}
 SOURCE_STATUS_ORDER = ("healthy", "manual_expected", "planned", "stale", "broken")
 PRIORITY_RANK = {"high": 0, "medium": 1, "low": 2}
+PRIORITY_SCORE = {"high": 70, "medium": 40, "low": 10}
+EVIDENCE_STATE_SCORE = {
+    "deteriorating": 40,
+    "unknown": 25,
+    "watching": 15,
+    "improving": 5,
+    "confirmed": 0,
+}
 
 
 def main() -> None:
@@ -57,9 +71,14 @@ def build_research_monitor_data(
     alert_rules_path: Path = ALERT_RULES_PATH,
     sources_config_path: Path = SOURCES_CONFIG_PATH,
     decision_log_path: Path = DECISION_LOG_PATH,
+    evidence_log_path: Path = EVIDENCE_LOG_PATH,
+    thesis_changelog_path: Path = THESIS_CHANGELOG_PATH,
+    research_data_path: Path = RESEARCH_DATA_PATH,
     portfolio_data_path: Path = SITE_PORTFOLIO_DATA_PATH,
     output_path: Path = SITE_MONITOR_DATA_PATH,
     generated_output_path: Path | None = GENERATED_MONITOR_DATA_PATH,
+    provenance_output_path: Path | None = SITE_PROVENANCE_COVERAGE_PATH,
+    generated_provenance_output_path: Path | None = GENERATED_PROVENANCE_COVERAGE_PATH,
     portfolio_data: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build and persist the static JSON used by the research-monitor UI."""
@@ -70,6 +89,9 @@ def build_research_monitor_data(
     alert_rules = load_yaml(alert_rules_path)
     sources_config = load_yaml(sources_config_path)
     decision_log = load_yaml_list(decision_log_path)
+    evidence_log = load_yaml_list(evidence_log_path)
+    thesis_changelog = load_yaml_list(thesis_changelog_path)
+    evidence_index = latest_evidence_by_metric(evidence_log)
     portfolio_data = portfolio_data or load_json(portfolio_data_path)
 
     as_of_date = date.fromisoformat(portfolio_data.get("asOfDate", today_utc()))
@@ -92,7 +114,10 @@ def build_research_monitor_data(
             rules_by_id=rules_by_id,
         )
         alerts.extend(holding_alerts)
-        metrics = [normalize_metric(metric) for metric in catalog_entry.get("metrics", [])]
+        metrics = [
+            normalize_metric(metric, ticker=ticker, evidence_index=evidence_index)
+            for metric in catalog_entry.get("metrics", [])
+        ]
         monitored_holdings.append(
             {
                 "ticker": ticker,
@@ -126,7 +151,12 @@ def build_research_monitor_data(
         as_of_date=as_of_date,
         stale_days=int(rules_by_id.get("stale_price", {}).get("threshold_days", 3)),
     )
-    review_queue = build_review_queue(monitored_holdings, alerts)
+    review_queue = build_review_queue(monitored_holdings, alerts, as_of_date=as_of_date)
+    evidence_coverage = build_evidence_coverage(monitored_holdings)
+    provenance_coverage = build_provenance_coverage(
+        research_data_path=research_data_path,
+        evidence_log=evidence_log,
+    )
     source_status_counts = count_source_statuses(source_health)
     source_issues = source_status_counts["stale"] + source_status_counts["broken"]
     highest_rule_alert = highest_level(alerts)
@@ -148,17 +178,25 @@ def build_research_monitor_data(
             "source_count": len(source_health),
             "source_issues": source_issues,
             "source_status_counts": source_status_counts,
+            "evidence_coverage": evidence_coverage,
+            "provenance_coverage": provenance_coverage["summary"],
         },
         "alerts": alerts,
         "reviewQueue": review_queue,
         "sourceHealth": source_health,
         "holdings": monitored_holdings,
-        "metricCatalog": compact_metric_catalog(metrics_catalog),
+        "metricCatalog": compact_metric_catalog(metrics_catalog, evidence_index=evidence_index),
         "decisionLog": decision_log[-10:],
+        "evidenceLog": evidence_log[-20:],
+        "thesisChangelog": thesis_changelog[-20:],
     }
     write_json(output_path, payload)
     if generated_output_path:
         write_json(generated_output_path, payload)
+    if provenance_output_path:
+        write_json(provenance_output_path, provenance_coverage)
+    if generated_provenance_output_path:
+        write_json(generated_provenance_output_path, provenance_coverage)
     return payload
 
 
@@ -314,13 +352,20 @@ def make_alert(
     }
 
 
-def compact_metric_catalog(metrics_catalog: dict[str, Any]) -> list[dict[str, Any]]:
+def compact_metric_catalog(
+    metrics_catalog: dict[str, Any],
+    *,
+    evidence_index: dict[tuple[str, str], dict[str, Any]],
+) -> list[dict[str, Any]]:
     return [
         {
             "ticker": ticker,
             "core_question": entry.get("core_question", ""),
             "metric_count": len(entry.get("metrics", [])),
-            "metrics": [normalize_metric(metric) for metric in entry.get("metrics", [])],
+            "metrics": [
+                normalize_metric(metric, ticker=ticker, evidence_index=evidence_index)
+                for metric in entry.get("metrics", [])
+            ],
             "watch_rule": entry.get("watch_rule", ""),
             "falsifier": entry.get("falsifier", []),
             "next_action": normalize_next_action(ticker, entry.get("next_action")),
@@ -329,8 +374,26 @@ def compact_metric_catalog(metrics_catalog: dict[str, Any]) -> list[dict[str, An
     ]
 
 
-def normalize_metric(metric: dict[str, Any]) -> dict[str, Any]:
+def normalize_metric(
+    metric: dict[str, Any],
+    *,
+    ticker: str,
+    evidence_index: dict[tuple[str, str], dict[str, Any]],
+) -> dict[str, Any]:
     evidence_state = metric.get("evidence_state", {})
+    latest_evidence = evidence_index.get((ticker, metric["id"]))
+    if latest_evidence:
+        evidence_state = {
+            "state": latest_evidence.get("state_after", "unknown"),
+            "confidence": latest_evidence.get("confidence", "unknown"),
+            "last_evidence_date": str(latest_evidence.get("date", "")) or None,
+            "direction": latest_evidence.get("direction", "unknown"),
+            "latest_summary": latest_evidence.get("summary", ""),
+            "evidence_type": latest_evidence.get("evidence_type", ""),
+            "source_ids": latest_evidence.get("source_ids", []),
+            "claim_ids": latest_evidence.get("claim_ids", []),
+            "requires_review": bool(latest_evidence.get("requires_review", False)),
+        }
     return {
         **metric,
         "evidence_state": {
@@ -339,6 +402,12 @@ def normalize_metric(metric: dict[str, Any]) -> dict[str, Any]:
             "last_evidence_date": evidence_state.get(
                 "last_evidence_date", metric.get("last_evidence_date")
             ),
+            "direction": evidence_state.get("direction", metric.get("direction", "unknown")),
+            "latest_summary": evidence_state.get("latest_summary", ""),
+            "evidence_type": evidence_state.get("evidence_type", ""),
+            "source_ids": evidence_state.get("source_ids", []),
+            "claim_ids": evidence_state.get("claim_ids", []),
+            "requires_review": bool(evidence_state.get("requires_review", False)),
         },
     }
 
@@ -349,6 +418,7 @@ def normalize_next_action(ticker: str, next_action: dict[str, Any] | None) -> di
     return {
         "ticker": ticker,
         "type": next_action.get("type", "evidence_check"),
+        "metric_id": next_action.get("metric_id"),
         "priority": next_action.get("priority", "medium"),
         "due": str(next_action.get("due", "")),
         "question": next_action.get("question", ""),
@@ -359,6 +429,8 @@ def normalize_next_action(ticker: str, next_action: dict[str, Any] | None) -> di
 def build_review_queue(
     holdings: list[dict[str, Any]],
     alerts: list[dict[str, Any]],
+    *,
+    as_of_date: date,
 ) -> list[dict[str, Any]]:
     queue = []
     for alert in alerts:
@@ -373,15 +445,39 @@ def build_review_queue(
                 "question": alert["message"],
                 "success_condition": "Human reviewer accepts, rejects, or rewrites the alert.",
                 "source": "alert",
+                "alert_level": alert["level"],
             }
+            | score_review_item(
+                priority="high" if alert["level"] == "red" else "medium",
+                due=alert["date"],
+                metric=None,
+                as_of_date=as_of_date,
+                alert_level=alert["level"],
+                ticker=alert["ticker"],
+            )
         )
     for holding in holdings:
         action = holding.get("next_action")
         if action:
-            queue.append({**action, "source": "next_action"})
+            metric = metric_by_id(holding.get("top_metrics", []), action.get("metric_id"))
+            queue.append(
+                {
+                    **action,
+                    "source": "next_action",
+                    **score_review_item(
+                        priority=action.get("priority", "medium"),
+                        due=action.get("due"),
+                        metric=metric,
+                        as_of_date=as_of_date,
+                        alert_level=None,
+                        ticker=holding["ticker"],
+                    ),
+                }
+            )
     return sorted(
         queue,
         key=lambda item: (
+            -float(item.get("score", 0)),
             PRIORITY_RANK.get(item.get("priority", "medium"), 1),
             item.get("due") or "9999-12-31",
             item.get("ticker", ""),
@@ -389,10 +485,244 @@ def build_review_queue(
     )
 
 
+def score_review_item(
+    *,
+    priority: str,
+    due: str | None,
+    metric: dict[str, Any] | None,
+    as_of_date: date,
+    alert_level: str | None,
+    ticker: str,
+) -> dict[str, Any]:
+    score = PRIORITY_SCORE.get(priority, 40)
+    reasons = [f"{priority} priority"]
+    if alert_level == "red":
+        score += 50
+        reasons.append("red alert")
+    elif alert_level == "yellow":
+        score += 25
+        reasons.append("yellow alert")
+
+    urgency_score = due_date_score(due, as_of_date)
+    if urgency_score:
+        score += urgency_score
+        reasons.append("due date approaching")
+
+    evidence_state = None
+    if metric:
+        evidence_state = metric.get("evidence_state", {})
+        state = evidence_state.get("state", "unknown")
+        state_score = EVIDENCE_STATE_SCORE.get(state, 0)
+        score += state_score
+        if state_score:
+            reasons.append(f"{state} evidence")
+        if evidence_state.get("requires_review"):
+            score += 10
+            reasons.append("evidence requires review")
+
+    if ticker == "MSFT":
+        score += 10
+        reasons.append("framework trust bottleneck")
+
+    return {
+        "score": score,
+        "score_reasons": reasons,
+        "evidence_state": evidence_state,
+    }
+
+
+def due_date_score(due: str | None, as_of_date: date) -> int:
+    if not due:
+        return 0
+    try:
+        remaining = (date.fromisoformat(str(due)) - as_of_date).days
+    except ValueError:
+        return 0
+    if remaining < 0:
+        return 30
+    if remaining <= 30:
+        return 15
+    if remaining <= 90:
+        return 5
+    return 0
+
+
+def metric_by_id(metrics: list[dict[str, Any]], metric_id: str | None) -> dict[str, Any] | None:
+    for metric in metrics:
+        if metric.get("id") == metric_id:
+            return metric
+    return metrics[0] if metrics else None
+
+
 def count_source_statuses(source_health: list[dict[str, Any]]) -> dict[str, int]:
     return {
         status: sum(1 for source in source_health if source.get("status") == status)
         for status in SOURCE_STATUS_ORDER
+    }
+
+
+def latest_evidence_by_metric(
+    evidence_log: list[dict[str, Any]],
+) -> dict[tuple[str, str], dict[str, Any]]:
+    latest: dict[tuple[str, str], dict[str, Any]] = {}
+    for item in sorted(evidence_log, key=lambda value: str(value.get("date", ""))):
+        ticker = str(item.get("ticker", ""))
+        metric_id = str(item.get("metric_id", ""))
+        if ticker and metric_id:
+            latest[(ticker, metric_id)] = item
+    return latest
+
+
+def build_evidence_coverage(holdings: list[dict[str, Any]]) -> dict[str, Any]:
+    metrics = [
+        metric
+        for holding in holdings
+        for metric in holding.get("top_metrics", [])
+    ]
+    covered = [
+        metric
+        for metric in metrics
+        if metric.get("evidence_state", {}).get("state") != "unknown"
+    ]
+    total = len(metrics)
+    return {
+        "total_metrics": total,
+        "covered_metrics": len(covered),
+        "unknown_metrics": total - len(covered),
+        "coverage_ratio": round(len(covered) / total, 4) if total else 0.0,
+    }
+
+
+def build_provenance_coverage(
+    *,
+    research_data_path: Path,
+    evidence_log: list[dict[str, Any]],
+) -> dict[str, Any]:
+    text = research_data_path.read_text(encoding="utf-8") if research_data_path.exists() else ""
+    evidence_counts = holding_evidence_counts(text)
+    claim_entities = claim_entities_by_ticker(text)
+    claim_source_ids = claim_source_ids_by_ticker(text)
+    source_labels = source_labels_by_id(text)
+    material_evidence_bullets = sum(evidence_counts.values())
+    claim_linked_bullets = sum(
+        min(evidence_counts.get(ticker, 0), len(claim_entities.get(ticker, [])))
+        for ticker in evidence_counts
+    )
+    evidence_log_links = sum(
+        1 for item in evidence_log if item.get("source_ids") or item.get("claim_ids")
+    )
+    weak_sources = build_weak_source_records(
+        claim_source_ids=claim_source_ids,
+        source_labels=source_labels,
+        evidence_log=evidence_log,
+    )
+    coverage_ratio = (
+        round(claim_linked_bullets / material_evidence_bullets, 4)
+        if material_evidence_bullets
+        else 0.0
+    )
+    return {
+        "schemaVersion": 1,
+        "generatedAtUtc": utc_iso(),
+        "summary": {
+            "materialEvidenceBullets": material_evidence_bullets,
+            "claimLinkedEvidenceBullets": claim_linked_bullets,
+            "coverageRatio": coverage_ratio,
+            "evidenceLogEntries": len(evidence_log),
+            "evidenceLogEntriesWithSourceOrClaim": evidence_log_links,
+            "weakSourceCount": len(weak_sources),
+        },
+        "holdingsMissingClaimCoverage": missing_claim_coverage(evidence_counts, claim_entities),
+        "holdingEvidenceCounts": evidence_counts,
+        "claimCountsByHolding": {
+            ticker: len(claim_entities.get(ticker, [])) for ticker in sorted(evidence_counts)
+        },
+        "weakSources": weak_sources,
+    }
+
+
+def holding_evidence_counts(text: str) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    pattern = re.compile(r'\{\s*ticker: "([^"]+)".*?evidence: \[(.*?)\]\s*,\s*risks:', re.S)
+    for ticker, evidence_block in pattern.findall(text):
+        counts[ticker] = len(re.findall(r'"(?:\\.|[^"\\])*"', evidence_block))
+    return counts
+
+
+def claim_entities_by_ticker(text: str) -> dict[str, list[str]]:
+    entities: dict[str, list[str]] = {}
+    pattern = re.compile(r'claim_id: "([^"]+)".*?entity: "([^"]+)"', re.S)
+    for claim_id, entity in pattern.findall(text):
+        entities.setdefault(entity, []).append(claim_id)
+    return entities
+
+
+def claim_source_ids_by_ticker(text: str) -> dict[str, list[str]]:
+    source_ids: dict[str, list[str]] = {}
+    pattern = re.compile(
+        r'claim_id: "([^"]+)".*?source_id: "([^"]+)".*?entity: "([^"]+)"',
+        re.S,
+    )
+    for _claim_id, source_id, entity in pattern.findall(text):
+        source_ids.setdefault(entity, []).append(source_id)
+    return source_ids
+
+
+def source_labels_by_id(text: str) -> dict[str, str]:
+    labels: dict[str, str] = {}
+    pattern = re.compile(r'"([^"]+)": \{\s*label: "([^"]+)"', re.S)
+    for source_id, label in pattern.findall(text):
+        labels[source_id] = label
+    return labels
+
+
+def missing_claim_coverage(
+    evidence_counts: dict[str, int],
+    claim_entities: dict[str, list[str]],
+) -> list[str]:
+    return [
+        ticker
+        for ticker, count in evidence_counts.items()
+        if count and not claim_entities.get(ticker)
+    ]
+
+
+def build_weak_source_records(
+    *,
+    claim_source_ids: dict[str, list[str]],
+    source_labels: dict[str, str],
+    evidence_log: list[dict[str, Any]],
+) -> list[dict[str, str]]:
+    weak = []
+    seen = set()
+    weak_terms = ("reuters", "investing.com", "secondary")
+    for ticker, source_ids in sorted(claim_source_ids.items()):
+        for source_id in source_ids:
+            label = source_labels.get(source_id, "")
+            if any(term in label.lower() for term in weak_terms):
+                weak.append(weak_source_record(ticker, source_id, label))
+                seen.add((ticker, source_id))
+    for item in evidence_log:
+        ticker = str(item.get("ticker", ""))
+        for source_id in item.get("source_ids", []):
+            label = source_labels.get(source_id, "")
+            key = (ticker, source_id)
+            if key in seen:
+                continue
+            if any(term in label.lower() for term in weak_terms):
+                weak.append(weak_source_record(ticker, source_id, label))
+                seen.add(key)
+    return weak
+
+
+def weak_source_record(ticker: str, source_id: str, label: str) -> dict[str, str]:
+    return {
+        "ticker": ticker,
+        "source_id": source_id,
+        "reason": f"Secondary or syndicated source: {label}",
+        "recommended_action": (
+            "Supplement with primary filing, company, regulatory, or operator data."
+        ),
     }
 
 

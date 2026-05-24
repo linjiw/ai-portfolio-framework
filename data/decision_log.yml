@@ -1,5 +1,7 @@
 - date: 2026-05-23
+  decision_id: 2026-05-23-framework-001
   ticker: FRAMEWORK
+  next_action_id: framework-monitor-design
   decision_type: system_design
   previous_status: portfolio_tracker
   new_status: deterministic_research_monitor
@@ -11,7 +13,9 @@
     - docs/research_monitor.md
 
 - date: 2026-05-23
+  decision_id: 2026-05-23-msft-001
   ticker: MSFT
+  metric_id: agent_governance_evidence
   decision_type: thesis_review
   previous_status: watch
   new_status: watch

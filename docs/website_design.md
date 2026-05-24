@@ -54,7 +54,11 @@ Related framework data and reports:
 - `data/manual/ai_control_right_scores.csv`
 - `site/portfolio-data.json`
 - `site/research-monitor-data.json`
+- `site/provenance-coverage.json`
 - `data/generated/dashboard_data.json`
+- `data/generated/provenance_coverage.json`
+- `data/evidence_log.yml`
+- `data/thesis_changelog.yml`
 - `data/portfolio/ai_portfolio_summary.csv`
 - `data/portfolio/ai_portfolio_snapshots.csv`
 
@@ -125,7 +129,9 @@ Monitor top-level fields:
   sourceHealth: [...],
   holdings: [...],
   metricCatalog: [...],
-  decisionLog: [...]
+  decisionLog: [...],
+  evidenceLog: [...],
+  thesisChangelog: [...]
 }
 ```
 
@@ -181,6 +187,7 @@ Current invariants verified locally:
 - Research monitor holdings: 14
 - Research monitor source-health rows: 6
 - Research monitor review queue rows: 14
+- Provenance coverage JSON: present
 - Source count: 31
 - Claim count: 15
 - Missing source IDs: 0

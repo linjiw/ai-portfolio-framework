@@ -402,9 +402,11 @@ function renderResearchMonitor(monitor) {
   kpis.hidden = false;
   const alertCounts = summary.alert_counts || {};
   const sourceCounts = summary.source_status_counts || {};
+  const evidenceCoverage = summary.evidence_coverage || {};
   kpis.innerHTML = [
     ["Rule alert", ruleAlert, severityClass(ruleAlert)],
     ["Review queue", summary.review_queue_count ?? 0, ""],
+    ["Evidence coverage", Number(evidenceCoverage.coverage_ratio || 0).toFixed(2), ""],
     ["Yellow alerts", alertCounts.yellow ?? 0, ""],
     ["Red alerts", alertCounts.red ?? 0, ""],
     ["Healthy sources", sourceCounts.healthy ?? 0, ""],
@@ -424,6 +426,7 @@ function renderResearchMonitor(monitor) {
   renderReviewQueue(monitor.reviewQueue || []);
   renderMonitorHoldings(monitor.holdings || []);
   renderSourceHealth(monitor.sourceHealth || []);
+  loadProvenanceCoverage();
 }
 
 function renderReviewQueue(queue) {
@@ -444,9 +447,12 @@ function renderReviewQueue(queue) {
             </div>
             <p>${escapeHtml(item.question)}</p>
             <div class="meta-row">
+              <span>Score: ${escapeHtml(item.score)}</span>
+              <span>Metric: ${escapeHtml(item.metric_id || "n/a")}</span>
               <span>Due: ${escapeHtml(item.due || "unscheduled")}</span>
               <span>Source: ${escapeHtml(item.source)}</span>
             </div>
+            <p class="muted">${escapeHtml((item.score_reasons || []).join(", "))}</p>
             <p class="muted">${escapeHtml(item.success_condition)}</p>
           </div>
         </article>
@@ -477,6 +483,64 @@ function renderMonitorAlerts(alerts) {
       `
     )
     .join("");
+}
+
+async function loadProvenanceCoverage() {
+  try {
+    const response = await fetch("./provenance-coverage.json", { cache: "no-store" });
+    if (!response.ok) {
+      renderProvenanceCoverageMissing();
+      return;
+    }
+    renderProvenanceCoverage(await response.json());
+  } catch {
+    renderProvenanceCoverageMissing();
+  }
+}
+
+function renderProvenanceCoverageMissing() {
+  document.getElementById("provenancePanel").innerHTML =
+    `<div class="empty-monitor">No provenance coverage generated yet.</div>`;
+}
+
+function renderProvenanceCoverage(provenance) {
+  const summary = provenance.summary || {};
+  const weakSources = provenance.weakSources || [];
+  document.getElementById("provenancePanel").innerHTML = `
+    <div class="provenance-kpis">
+      <div>
+        <span>Material bullets</span>
+        <strong>${escapeHtml(summary.materialEvidenceBullets ?? 0)}</strong>
+      </div>
+      <div>
+        <span>Claim-linked</span>
+        <strong>${escapeHtml(summary.claimLinkedEvidenceBullets ?? 0)}</strong>
+      </div>
+      <div>
+        <span>Coverage</span>
+        <strong>${Number(summary.coverageRatio || 0).toFixed(2)}</strong>
+      </div>
+      <div>
+        <span>Weak sources</span>
+        <strong>${escapeHtml(summary.weakSourceCount ?? 0)}</strong>
+      </div>
+    </div>
+    ${
+      weakSources.length
+        ? `<div class="weak-source-list">${weakSources
+            .map(
+              (source) => `
+                <article>
+                  <strong>${escapeHtml(source.ticker)} | ${escapeHtml(source.source_id)}</strong>
+                  <p>${escapeHtml(source.reason)}</p>
+                  <p class="muted">${escapeHtml(source.recommended_action)}</p>
+                </article>
+              `
+            )
+            .join("")}</div>`
+        : `<p class="muted">No weak-source records currently flagged.</p>`
+    }
+  `;
 }
 
 function renderMonitorHoldings(holdings) {

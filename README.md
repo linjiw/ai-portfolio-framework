@@ -60,11 +60,16 @@ The first automation layer is deliberately rules-based and does not use an LLM. 
 It writes:
 
 - `site/research-monitor-data.json` for the website.
+- `site/provenance-coverage.json` for evidence coverage.
 - `data/generated/dashboard_data.json` for audit and downstream reuse.
+- `data/generated/provenance_coverage.json` for audit and downstream reuse.
 
 The monitor now separates `rule_alert` from the framework bottleneck, classifies source health as
 `healthy`, `manual_expected`, `planned`, `stale`, or `broken`, and generates a review queue from
 holding-level `next_action` records plus any human-review alerts.
+
+Metric evidence state is driven by `data/evidence_log.yml`; thesis wording changes are tracked in
+`data/thesis_changelog.yml`; human decisions stay in `data/decision_log.yml`.
 
 LLMs belong in a later phase as evidence extractors for filings, transcripts, and official
 documents. They should produce draft evidence notes, not portfolio actions.

@@ -14,7 +14,10 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
     metrics_path = tmp_path / "metrics.yml"
     rules_path = tmp_path / "rules.yml"
     sources_path = tmp_path / "sources.yml"
+    evidence_path = tmp_path / "evidence.yml"
+    research_data_path = tmp_path / "research-data.js"
     output_path = tmp_path / "monitor.json"
+    provenance_path = tmp_path / "provenance.json"
 
     write_yaml(
         holdings_path,
@@ -44,6 +47,13 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
             "MSFT": {
                 "core_question": "Can MSFT control agent authority?",
                 "metrics": [{"id": "agent", "name": "Agent evidence"}],
+                "next_action": {
+                    "type": "evidence_check",
+                    "metric_id": "agent",
+                    "priority": "high",
+                    "due": "2026-05-30",
+                    "question": "Check agent evidence",
+                },
                 "watch_rule": "No fresh evidence",
                 "falsifier": ["No production permission"],
             },
@@ -52,6 +62,39 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
                 "metrics": [{"id": "drawdown", "name": "Drawdown"}],
             },
         },
+    )
+    write_yaml(
+        evidence_path,
+        [
+            {
+                "date": "2026-05-23",
+                "ticker": "MSFT",
+                "metric_id": "agent",
+                "direction": "deteriorating",
+                "state_after": "deteriorating",
+                "confidence": "medium",
+                "summary": "Evidence got worse",
+                "source_ids": ["msft-source"],
+                "claim_ids": ["msft-claim"],
+                "requires_review": True,
+            }
+        ],
+    )
+    research_data_path.write_text(
+        """
+        window.AI_FRAMEWORK_DATA = {
+          holdings: [
+            { ticker: "MSFT", evidence: ["one", "two"], risks: [] }
+          ],
+          claims: [
+            { claim_id: "msft-claim", source_id: "msft-source", entity: "MSFT" }
+          ],
+          sources: {
+            "msft-source": { label: "Microsoft source", url: "https://example.com" }
+          }
+        };
+        """,
+        encoding="utf-8",
     )
     write_yaml(
         rules_path,
@@ -136,8 +179,12 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
         metrics_catalog_path=metrics_path,
         alert_rules_path=rules_path,
         sources_config_path=sources_path,
+        evidence_log_path=evidence_path,
+        research_data_path=research_data_path,
         output_path=output_path,
         generated_output_path=None,
+        provenance_output_path=provenance_path,
+        generated_provenance_output_path=None,
         portfolio_data=portfolio_data,
     )
 
@@ -145,4 +192,9 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
     assert {"stale_price", "weight_drift"} <= rule_ids
     assert payload["summary"]["highest_alert"] == "yellow"
     assert payload["summary"]["source_status_counts"]["stale"] == 1
+    assert payload["summary"]["evidence_coverage"]["covered_metrics"] == 1
+    assert payload["reviewQueue"][0]["score"] > 0
+    assert payload["reviewQueue"][0]["metric_id"] == "agent"
+    assert payload["holdings"][0]["top_metrics"][0]["evidence_state"]["state"] == "deteriorating"
     assert output_path.exists()
+    assert provenance_path.exists()

@@ -1,0 +1,37 @@
+- date: 2026-05-24
+  ticker: MSFT
+  change_type: wording_tightening
+  field: thesis
+  previous_summary: Microsoft as authority-control asset.
+  new_summary: Microsoft as authority-control asset, with production write-permission adoption still unproven.
+  reason: Avoid overstating product existence as production adoption.
+  source_ids:
+    - msft-agent365
+  changed_weight: false
+  changed_conviction: false
+
+- date: 2026-05-24
+  ticker: NVDA
+  change_type: evidence_boundary
+  field: watch
+  previous_summary: Rubin platform evidence supports infrastructure moat.
+  new_summary: Rubin platform evidence supports architecture, while attach rate and margin durability remain separate evidence questions.
+  reason: Architecture strength is not automatically monetization durability.
+  source_ids:
+    - nvidia-rubin
+    - nvidia-rubin-blog
+  changed_weight: false
+  changed_conviction: false
+
+- date: 2026-05-24
+  ticker: CEG
+  change_type: provenance_gap
+  field: evidence
+  previous_summary: Three Mile Island and PJM timing risk tracked through secondary reporting.
+  new_summary: PJM and interconnection claims should be supplemented with primary PJM, regulatory, or company sources.
+  reason: Nodal power thesis needs primary-source provenance before confidence can increase.
+  source_ids:
+    - ceg-tmi-pjm
+    - pjm-interconnection-process
+  changed_weight: false
+  changed_conviction: false

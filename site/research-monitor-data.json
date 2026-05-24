@@ -6,8 +6,10 @@
       "changed_conviction": false,
       "changed_weight": false,
       "date": "2026-05-23",
+      "decision_id": "2026-05-23-framework-001",
       "decision_type": "system_design",
       "new_status": "deterministic_research_monitor",
+      "next_action_id": "framework-monitor-design",
       "previous_status": "portfolio_tracker",
       "reviewer": "human",
       "source_refs": [
@@ -20,7 +22,9 @@
       "changed_conviction": false,
       "changed_weight": false,
       "date": "2026-05-23",
+      "decision_id": "2026-05-23-msft-001",
       "decision_type": "thesis_review",
+      "metric_id": "agent_governance_evidence",
       "new_status": "watch",
       "previous_status": "watch",
       "reviewer": "human",
@@ -31,7 +35,140 @@
       "ticker": "MSFT"
     }
   ],
-  "generatedAtUtc": "2026-05-24T00:37:30Z",
+  "evidenceLog": [
+    {
+      "claim_ids": [
+        "msft-agent-authority"
+      ],
+      "confidence": "low",
+      "date": "2026-05-24",
+      "direction": "unknown",
+      "evidence_type": "gap",
+      "metric_id": "production_write_permission",
+      "requires_review": true,
+      "reviewer": "human",
+      "source_ids": [
+        "msft-agent365",
+        "msft-security-agent365"
+      ],
+      "state_after": "unknown",
+      "summary": "No direct public evidence yet that Agent 365 is broadly executing governed production write actions.",
+      "ticker": "MSFT"
+    },
+    {
+      "claim_ids": [
+        "msft-agent-authority"
+      ],
+      "confidence": "medium",
+      "date": "2026-05-24",
+      "direction": "improving",
+      "evidence_type": "product_governance",
+      "metric_id": "agent_governance_evidence",
+      "requires_review": false,
+      "reviewer": "human",
+      "source_ids": [
+        "msft-agent365"
+      ],
+      "state_after": "improving",
+      "summary": "Agent 365 improves the governance surface, but does not by itself prove broad production write-permission adoption.",
+      "ticker": "MSFT"
+    },
+    {
+      "claim_ids": [
+        "googl-ironwood-cost-capacity"
+      ],
+      "confidence": "medium",
+      "date": "2026-05-24",
+      "direction": "watching",
+      "evidence_type": "quarterly_review_gap",
+      "metric_id": "google_cloud_revenue_margin",
+      "requires_review": true,
+      "reviewer": "human",
+      "source_ids": [
+        "google-ironwood",
+        "google-ironwood-3things"
+      ],
+      "state_after": "watching",
+      "summary": "Ironwood and TPU evidence supports the cost-control question, but Cloud margin proof remains a quarterly review item.",
+      "ticker": "GOOGL"
+    },
+    {
+      "claim_ids": [
+        "nvda-rubin-platform"
+      ],
+      "confidence": "medium",
+      "date": "2026-05-24",
+      "direction": "watching",
+      "evidence_type": "product_architecture",
+      "metric_id": "networking_attach",
+      "requires_review": false,
+      "reviewer": "human",
+      "source_ids": [
+        "nvidia-rubin",
+        "nvidia-rubin-blog"
+      ],
+      "state_after": "watching",
+      "summary": "Rubin platform evidence supports rack-scale architecture, while attach-rate and margin durability remain unproven.",
+      "ticker": "NVDA"
+    },
+    {
+      "claim_ids": [
+        "ceg-pjm-interconnection-risk"
+      ],
+      "confidence": "medium",
+      "date": "2026-05-24",
+      "direction": "deteriorating",
+      "evidence_type": "interconnection_risk",
+      "metric_id": "pjm_interconnection",
+      "requires_review": true,
+      "reviewer": "human",
+      "source_ids": [
+        "ceg-tmi-pjm",
+        "pjm-interconnection-process"
+      ],
+      "state_after": "deteriorating",
+      "summary": "PJM interconnection timing remains a thesis risk; supplement current secondary reporting with primary PJM or company evidence.",
+      "ticker": "CEG"
+    },
+    {
+      "claim_ids": [
+        "vrt-ai-power-cooling"
+      ],
+      "confidence": "medium",
+      "date": "2026-05-24",
+      "direction": "improving",
+      "evidence_type": "product_demand",
+      "metric_id": "liquid_cooling_commentary",
+      "requires_review": false,
+      "reviewer": "human",
+      "source_ids": [
+        "vertiv-trends",
+        "vertiv-generate"
+      ],
+      "state_after": "improving",
+      "summary": "Vertiv power and liquid-cooling evidence remains thesis-supportive, but orders and backlog still need quarterly confirmation.",
+      "ticker": "VRT"
+    },
+    {
+      "claim_ids": [
+        "veev-regulated-agents"
+      ],
+      "confidence": "medium",
+      "date": "2026-05-24",
+      "direction": "watching",
+      "evidence_type": "product_roadmap",
+      "metric_id": "ai_agents_rollout",
+      "requires_review": true,
+      "reviewer": "human",
+      "source_ids": [
+        "veeva-ai-agents"
+      ],
+      "state_after": "watching",
+      "summary": "Veeva AI Agents roadmap is relevant, but regulated production workflow usage is still not proven.",
+      "ticker": "VEEV"
+    }
+  ],
+  "generatedAtUtc": "2026-05-24T01:18:12Z",
   "holdings": [
     {
       "alert_count": 0,
@@ -48,6 +185,7 @@
       "name": "Microsoft",
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "production_write_permission",
         "priority": "high",
         "question": "Look for evidence of Agent 365 production write-permission adoption.",
         "success_condition": "Official disclosure, customer case study, or product documentation shows agents executing governed production actions.",
@@ -62,8 +200,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "azure_growth",
@@ -75,9 +219,19 @@
           "cadence": "monthly",
           "direction": "stronger",
           "evidence_state": {
-            "confidence": "unknown",
-            "last_evidence_date": null,
-            "state": "unknown"
+            "claim_ids": [
+              "msft-agent-authority"
+            ],
+            "confidence": "medium",
+            "direction": "improving",
+            "evidence_type": "product_governance",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "Agent 365 improves the governance surface, but does not by itself prove broad production write-permission adoption.",
+            "requires_review": false,
+            "source_ids": [
+              "msft-agent365"
+            ],
+            "state": "improving"
           },
           "id": "agent_governance_evidence",
           "name": "Agent governance and write-permission evidence",
@@ -85,11 +239,41 @@
           "type": "qualitative"
         },
         {
+          "cadence": "monthly",
+          "direction": "stronger",
+          "evidence_state": {
+            "claim_ids": [
+              "msft-agent-authority"
+            ],
+            "confidence": "low",
+            "direction": "unknown",
+            "evidence_type": "gap",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "No direct public evidence yet that Agent 365 is broadly executing governed production write actions.",
+            "requires_review": true,
+            "source_ids": [
+              "msft-agent365",
+              "msft-security-agent365"
+            ],
+            "state": "unknown"
+          },
+          "id": "production_write_permission",
+          "name": "Production write-permission adoption evidence",
+          "source": "filings_news_product_docs",
+          "type": "qualitative"
+        },
+        {
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "security_attach",
@@ -118,6 +302,7 @@
       "name": "Alphabet",
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "google_cloud_revenue_margin",
         "priority": "high",
         "question": "Check whether TPU and capex advantage appears in Cloud margin or AI revenue quality.",
         "success_condition": "Cloud margin, product disclosure, or customer evidence supports TPU-driven cost leverage.",
@@ -132,9 +317,20 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
-            "confidence": "unknown",
-            "last_evidence_date": null,
-            "state": "unknown"
+            "claim_ids": [
+              "googl-ironwood-cost-capacity"
+            ],
+            "confidence": "medium",
+            "direction": "watching",
+            "evidence_type": "quarterly_review_gap",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "Ironwood and TPU evidence supports the cost-control question, but Cloud margin proof remains a quarterly review item.",
+            "requires_review": true,
+            "source_ids": [
+              "google-ironwood",
+              "google-ironwood-3things"
+            ],
+            "state": "watching"
           },
           "id": "google_cloud_revenue_margin",
           "name": "Google Cloud revenue and margin",
@@ -145,8 +341,14 @@
           "cadence": "monthly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "tpu_product_evidence",
@@ -158,8 +360,14 @@
           "cadence": "monthly",
           "direction": "lower",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "lower",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "search_pressure",
@@ -186,6 +394,7 @@
       "name": "Broadcom",
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "ai_semiconductor_revenue",
         "priority": "medium",
         "question": "Check whether AI semiconductor growth is broadening beyond a small customer set.",
         "success_condition": "Management discloses durable ASIC or networking demand across multiple hyperscalers.",
@@ -200,8 +409,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "ai_semiconductor_revenue",
@@ -213,8 +428,14 @@
           "cadence": "quarterly",
           "direction": "lower",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "lower",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "customer_concentration",
@@ -226,8 +447,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "networking_attach",
@@ -253,6 +480,7 @@
       "name": "TSMC",
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "advanced_packaging_commentary",
         "priority": "medium",
         "question": "Review whether advanced packaging and leading-edge demand still support margin quality.",
         "success_condition": "HPC mix, margin, and packaging commentary remain thesis-supportive.",
@@ -267,8 +495,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "hpc_revenue_mix",
@@ -280,8 +514,14 @@
           "cadence": "quarterly",
           "direction": "stable_or_up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stable_or_up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "gross_margin",
@@ -293,8 +533,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "advanced_packaging_commentary",
@@ -321,6 +567,7 @@
       "name": "NVIDIA",
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "networking_attach",
         "priority": "high",
         "question": "Track networking attach, rack-scale platform evidence, and margin durability.",
         "success_condition": "Rubin or Blackwell platform evidence shows durable networking/software pull-through.",
@@ -335,8 +582,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "data_center_revenue_growth",
@@ -348,8 +601,14 @@
           "cadence": "quarterly",
           "direction": "stable_or_up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stable_or_up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "gross_margin",
@@ -361,9 +620,20 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
-            "confidence": "unknown",
-            "last_evidence_date": null,
-            "state": "unknown"
+            "claim_ids": [
+              "nvda-rubin-platform"
+            ],
+            "confidence": "medium",
+            "direction": "watching",
+            "evidence_type": "product_architecture",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "Rubin platform evidence supports rack-scale architecture, while attach-rate and margin durability remain unproven.",
+            "requires_review": false,
+            "source_ids": [
+              "nvidia-rubin",
+              "nvidia-rubin-blog"
+            ],
+            "state": "watching"
           },
           "id": "networking_attach",
           "name": "Networking and rack-scale attach evidence",
@@ -374,8 +644,14 @@
           "cadence": "monthly",
           "direction": "lower",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "lower",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "custom_silicon_bypass",
@@ -401,6 +677,7 @@
       "name": "SK Hynix",
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "nvidia_qualification",
         "priority": "high",
         "question": "Track HBM qualification and shipment evidence into the Vera Rubin generation.",
         "success_condition": "Company or customer evidence supports continued HBM leadership and shipment leverage.",
@@ -415,8 +692,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "hbm_revenue_commentary",
@@ -428,8 +711,14 @@
           "cadence": "monthly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "nvidia_qualification",
@@ -441,8 +730,14 @@
           "cadence": "monthly",
           "direction": "lower",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "lower",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "samsung_micron_share_risk",
@@ -468,6 +763,7 @@
       "name": "Constellation Energy",
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "pjm_interconnection",
         "priority": "high",
         "question": "Track PJM and interconnection conversion from data-center demand into realizable economics.",
         "success_condition": "Regulatory, PJM, or company evidence shows improved path from demand to contracted power economics.",
@@ -482,8 +778,14 @@
           "cadence": "monthly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "ppa_announcements",
@@ -495,9 +797,20 @@
           "cadence": "quarterly",
           "direction": "faster",
           "evidence_state": {
-            "confidence": "unknown",
-            "last_evidence_date": null,
-            "state": "unknown"
+            "claim_ids": [
+              "ceg-pjm-interconnection-risk"
+            ],
+            "confidence": "medium",
+            "direction": "deteriorating",
+            "evidence_type": "interconnection_risk",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "PJM interconnection timing remains a thesis risk; supplement current secondary reporting with primary PJM or company evidence.",
+            "requires_review": true,
+            "source_ids": [
+              "ceg-tmi-pjm",
+              "pjm-interconnection-process"
+            ],
+            "state": "deteriorating"
           },
           "id": "pjm_interconnection",
           "name": "PJM interconnection updates",
@@ -508,8 +821,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "power_price_commentary",
@@ -535,6 +854,7 @@
       "name": "Vertiv",
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "backlog",
         "priority": "medium",
         "question": "Check whether AI power and cooling capex is still visible in orders, backlog, and liquid-cooling commentary.",
         "success_condition": "Orders, backlog, and cooling commentary remain aligned with AI data-center demand.",
@@ -549,8 +869,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "orders",
@@ -562,8 +888,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "backlog",
@@ -575,9 +907,20 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
-            "confidence": "unknown",
-            "last_evidence_date": null,
-            "state": "unknown"
+            "claim_ids": [
+              "vrt-ai-power-cooling"
+            ],
+            "confidence": "medium",
+            "direction": "improving",
+            "evidence_type": "product_demand",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "Vertiv power and liquid-cooling evidence remains thesis-supportive, but orders and backlog still need quarterly confirmation.",
+            "requires_review": false,
+            "source_ids": [
+              "vertiv-trends",
+              "vertiv-generate"
+            ],
+            "state": "improving"
           },
           "id": "liquid_cooling_commentary",
           "name": "Liquid cooling commentary",
@@ -602,6 +945,7 @@
       "name": "MSCI",
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "ai_product_evidence",
         "priority": "low",
         "question": "Look for evidence that MSCI risk and data products are becoming AI workflow verification assets.",
         "success_condition": "Product, retention, or revenue evidence links AI workflow adoption to trusted data demand.",
@@ -616,8 +960,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "recurring_subscription_growth",
@@ -629,8 +979,14 @@
           "cadence": "quarterly",
           "direction": "stable_or_up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stable_or_up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "retention",
@@ -642,8 +998,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "ai_product_evidence",
@@ -669,6 +1031,7 @@
       "name": "Moody's",
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "research_assistant_adoption",
         "priority": "low",
         "question": "Check whether Moody's AI tools improve analytics workflow adoption or credit-risk research quality.",
         "success_condition": "Analytics growth, retention, or product evidence shows AI-enhanced workflow value.",
@@ -683,8 +1046,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "analytics_revenue",
@@ -696,8 +1065,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "research_assistant_adoption",
@@ -709,8 +1084,14 @@
           "cadence": "quarterly",
           "direction": "stable_or_up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stable_or_up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "ratings_cycle",
@@ -736,6 +1117,7 @@
       "name": "S&P Global",
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "kensho_api_mcp_mentions",
         "priority": "low",
         "question": "Look for Kensho API, MCP, or data-licensing evidence inside LLM workflows.",
         "success_condition": "Product or customer evidence shows trusted S&P data embedded in AI workflows.",
@@ -750,8 +1132,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "market_intelligence_growth",
@@ -763,8 +1151,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "kensho_api_mcp_mentions",
@@ -776,8 +1170,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "data_licensing_evidence",
@@ -803,6 +1203,7 @@
       "name": "Veeva Systems",
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "ai_agents_rollout",
         "priority": "medium",
         "question": "Track whether Veeva AI Agents move from roadmap to regulated production workflow usage.",
         "success_condition": "Official rollout, customer, or product evidence shows AI Agents used in regulated workflows.",
@@ -817,8 +1218,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "vault_growth",
@@ -830,8 +1237,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "crm_migration",
@@ -843,9 +1256,19 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
-            "confidence": "unknown",
-            "last_evidence_date": null,
-            "state": "unknown"
+            "claim_ids": [
+              "veev-regulated-agents"
+            ],
+            "confidence": "medium",
+            "direction": "watching",
+            "evidence_type": "product_roadmap",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "Veeva AI Agents roadmap is relevant, but regulated production workflow usage is still not proven.",
+            "requires_review": true,
+            "source_ids": [
+              "veeva-ai-agents"
+            ],
+            "state": "watching"
           },
           "id": "ai_agents_rollout",
           "name": "AI Agents rollout evidence",
@@ -871,6 +1294,7 @@
       "name": "Teradyne",
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "semiconductor_test_revenue",
         "priority": "medium",
         "question": "Check whether semiconductor test demand remains strong enough while robotics option value develops.",
         "success_condition": "Semitest bookings, AI revenue commentary, or robotics deal evidence supports the blended thesis.",
@@ -885,8 +1309,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "semiconductor_test_revenue",
@@ -898,8 +1328,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "ai_revenue_commentary",
@@ -911,8 +1347,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "robotics_revenue",
@@ -938,6 +1380,7 @@
       "name": "Cash",
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "portfolio_drawdown",
         "priority": "medium",
         "question": "Review whether cash still has option value versus current alerts, drawdown, and valuation resets.",
         "success_condition": "Cash remains useful against drawdown, valuation, source-health, or framework uncertainty.",
@@ -952,8 +1395,14 @@
           "cadence": "daily",
           "direction": "lower",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "lower",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "portfolio_drawdown",
@@ -965,8 +1414,14 @@
           "cadence": "daily",
           "direction": "lower",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "lower",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "alert_count",
@@ -978,8 +1433,14 @@
           "cadence": "monthly",
           "direction": "lower",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "lower",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "cash_drag",
@@ -998,14 +1459,20 @@
       "falsifier": [
         "Enterprise agents remain draft-only and fail to gain production write permissions."
       ],
-      "metric_count": 3,
+      "metric_count": 4,
       "metrics": [
         {
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "azure_growth",
@@ -1017,9 +1484,19 @@
           "cadence": "monthly",
           "direction": "stronger",
           "evidence_state": {
-            "confidence": "unknown",
-            "last_evidence_date": null,
-            "state": "unknown"
+            "claim_ids": [
+              "msft-agent-authority"
+            ],
+            "confidence": "medium",
+            "direction": "improving",
+            "evidence_type": "product_governance",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "Agent 365 improves the governance surface, but does not by itself prove broad production write-permission adoption.",
+            "requires_review": false,
+            "source_ids": [
+              "msft-agent365"
+            ],
+            "state": "improving"
           },
           "id": "agent_governance_evidence",
           "name": "Agent governance and write-permission evidence",
@@ -1027,11 +1504,41 @@
           "type": "qualitative"
         },
         {
+          "cadence": "monthly",
+          "direction": "stronger",
+          "evidence_state": {
+            "claim_ids": [
+              "msft-agent-authority"
+            ],
+            "confidence": "low",
+            "direction": "unknown",
+            "evidence_type": "gap",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "No direct public evidence yet that Agent 365 is broadly executing governed production write actions.",
+            "requires_review": true,
+            "source_ids": [
+              "msft-agent365",
+              "msft-security-agent365"
+            ],
+            "state": "unknown"
+          },
+          "id": "production_write_permission",
+          "name": "Production write-permission adoption evidence",
+          "source": "filings_news_product_docs",
+          "type": "qualitative"
+        },
+        {
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "security_attach",
@@ -1042,6 +1549,7 @@
       ],
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "production_write_permission",
         "priority": "high",
         "question": "Look for evidence of Agent 365 production write-permission adoption.",
         "success_condition": "Official disclosure, customer case study, or product documentation shows agents executing governed production actions.",
@@ -1062,9 +1570,20 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
-            "confidence": "unknown",
-            "last_evidence_date": null,
-            "state": "unknown"
+            "claim_ids": [
+              "googl-ironwood-cost-capacity"
+            ],
+            "confidence": "medium",
+            "direction": "watching",
+            "evidence_type": "quarterly_review_gap",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "Ironwood and TPU evidence supports the cost-control question, but Cloud margin proof remains a quarterly review item.",
+            "requires_review": true,
+            "source_ids": [
+              "google-ironwood",
+              "google-ironwood-3things"
+            ],
+            "state": "watching"
           },
           "id": "google_cloud_revenue_margin",
           "name": "Google Cloud revenue and margin",
@@ -1075,8 +1594,14 @@
           "cadence": "monthly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "tpu_product_evidence",
@@ -1088,8 +1613,14 @@
           "cadence": "monthly",
           "direction": "lower",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "lower",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "search_pressure",
@@ -1100,6 +1631,7 @@
       ],
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "google_cloud_revenue_margin",
         "priority": "high",
         "question": "Check whether TPU and capex advantage appears in Cloud margin or AI revenue quality.",
         "success_condition": "Cloud margin, product disclosure, or customer evidence supports TPU-driven cost leverage.",
@@ -1120,8 +1652,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "ai_semiconductor_revenue",
@@ -1133,8 +1671,14 @@
           "cadence": "quarterly",
           "direction": "lower",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "lower",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "customer_concentration",
@@ -1146,8 +1690,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "networking_attach",
@@ -1158,6 +1708,7 @@
       ],
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "ai_semiconductor_revenue",
         "priority": "medium",
         "question": "Check whether AI semiconductor growth is broadening beyond a small customer set.",
         "success_condition": "Management discloses durable ASIC or networking demand across multiple hyperscalers.",
@@ -1178,8 +1729,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "hpc_revenue_mix",
@@ -1191,8 +1748,14 @@
           "cadence": "quarterly",
           "direction": "stable_or_up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stable_or_up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "gross_margin",
@@ -1204,8 +1767,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "advanced_packaging_commentary",
@@ -1216,6 +1785,7 @@
       ],
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "advanced_packaging_commentary",
         "priority": "medium",
         "question": "Review whether advanced packaging and leading-edge demand still support margin quality.",
         "success_condition": "HPC mix, margin, and packaging commentary remain thesis-supportive.",
@@ -1236,8 +1806,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "data_center_revenue_growth",
@@ -1249,8 +1825,14 @@
           "cadence": "quarterly",
           "direction": "stable_or_up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stable_or_up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "gross_margin",
@@ -1262,9 +1844,20 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
-            "confidence": "unknown",
-            "last_evidence_date": null,
-            "state": "unknown"
+            "claim_ids": [
+              "nvda-rubin-platform"
+            ],
+            "confidence": "medium",
+            "direction": "watching",
+            "evidence_type": "product_architecture",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "Rubin platform evidence supports rack-scale architecture, while attach-rate and margin durability remain unproven.",
+            "requires_review": false,
+            "source_ids": [
+              "nvidia-rubin",
+              "nvidia-rubin-blog"
+            ],
+            "state": "watching"
           },
           "id": "networking_attach",
           "name": "Networking and rack-scale attach evidence",
@@ -1275,8 +1868,14 @@
           "cadence": "monthly",
           "direction": "lower",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "lower",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "custom_silicon_bypass",
@@ -1287,6 +1886,7 @@
       ],
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "networking_attach",
         "priority": "high",
         "question": "Track networking attach, rack-scale platform evidence, and margin durability.",
         "success_condition": "Rubin or Blackwell platform evidence shows durable networking/software pull-through.",
@@ -1307,8 +1907,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "hbm_revenue_commentary",
@@ -1320,8 +1926,14 @@
           "cadence": "monthly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "nvidia_qualification",
@@ -1333,8 +1945,14 @@
           "cadence": "monthly",
           "direction": "lower",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "lower",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "samsung_micron_share_risk",
@@ -1345,6 +1963,7 @@
       ],
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "nvidia_qualification",
         "priority": "high",
         "question": "Track HBM qualification and shipment evidence into the Vera Rubin generation.",
         "success_condition": "Company or customer evidence supports continued HBM leadership and shipment leverage.",
@@ -1365,8 +1984,14 @@
           "cadence": "monthly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "ppa_announcements",
@@ -1378,9 +2003,20 @@
           "cadence": "quarterly",
           "direction": "faster",
           "evidence_state": {
-            "confidence": "unknown",
-            "last_evidence_date": null,
-            "state": "unknown"
+            "claim_ids": [
+              "ceg-pjm-interconnection-risk"
+            ],
+            "confidence": "medium",
+            "direction": "deteriorating",
+            "evidence_type": "interconnection_risk",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "PJM interconnection timing remains a thesis risk; supplement current secondary reporting with primary PJM or company evidence.",
+            "requires_review": true,
+            "source_ids": [
+              "ceg-tmi-pjm",
+              "pjm-interconnection-process"
+            ],
+            "state": "deteriorating"
           },
           "id": "pjm_interconnection",
           "name": "PJM interconnection updates",
@@ -1391,8 +2027,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "power_price_commentary",
@@ -1403,6 +2045,7 @@
       ],
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "pjm_interconnection",
         "priority": "high",
         "question": "Track PJM and interconnection conversion from data-center demand into realizable economics.",
         "success_condition": "Regulatory, PJM, or company evidence shows improved path from demand to contracted power economics.",
@@ -1423,8 +2066,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "orders",
@@ -1436,8 +2085,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "backlog",
@@ -1449,9 +2104,20 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
-            "confidence": "unknown",
-            "last_evidence_date": null,
-            "state": "unknown"
+            "claim_ids": [
+              "vrt-ai-power-cooling"
+            ],
+            "confidence": "medium",
+            "direction": "improving",
+            "evidence_type": "product_demand",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "Vertiv power and liquid-cooling evidence remains thesis-supportive, but orders and backlog still need quarterly confirmation.",
+            "requires_review": false,
+            "source_ids": [
+              "vertiv-trends",
+              "vertiv-generate"
+            ],
+            "state": "improving"
           },
           "id": "liquid_cooling_commentary",
           "name": "Liquid cooling commentary",
@@ -1461,6 +2127,7 @@
       ],
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "backlog",
         "priority": "medium",
         "question": "Check whether AI power and cooling capex is still visible in orders, backlog, and liquid-cooling commentary.",
         "success_condition": "Orders, backlog, and cooling commentary remain aligned with AI data-center demand.",
@@ -1481,8 +2148,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "recurring_subscription_growth",
@@ -1494,8 +2167,14 @@
           "cadence": "quarterly",
           "direction": "stable_or_up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stable_or_up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "retention",
@@ -1507,8 +2186,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "ai_product_evidence",
@@ -1519,6 +2204,7 @@
       ],
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "ai_product_evidence",
         "priority": "low",
         "question": "Look for evidence that MSCI risk and data products are becoming AI workflow verification assets.",
         "success_condition": "Product, retention, or revenue evidence links AI workflow adoption to trusted data demand.",
@@ -1539,8 +2225,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "analytics_revenue",
@@ -1552,8 +2244,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "research_assistant_adoption",
@@ -1565,8 +2263,14 @@
           "cadence": "quarterly",
           "direction": "stable_or_up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stable_or_up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "ratings_cycle",
@@ -1577,6 +2281,7 @@
       ],
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "research_assistant_adoption",
         "priority": "low",
         "question": "Check whether Moody's AI tools improve analytics workflow adoption or credit-risk research quality.",
         "success_condition": "Analytics growth, retention, or product evidence shows AI-enhanced workflow value.",
@@ -1597,8 +2302,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "market_intelligence_growth",
@@ -1610,8 +2321,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "kensho_api_mcp_mentions",
@@ -1623,8 +2340,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "data_licensing_evidence",
@@ -1635,6 +2358,7 @@
       ],
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "kensho_api_mcp_mentions",
         "priority": "low",
         "question": "Look for Kensho API, MCP, or data-licensing evidence inside LLM workflows.",
         "success_condition": "Product or customer evidence shows trusted S&P data embedded in AI workflows.",
@@ -1655,8 +2379,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "vault_growth",
@@ -1668,8 +2398,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "crm_migration",
@@ -1681,9 +2417,19 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
-            "confidence": "unknown",
-            "last_evidence_date": null,
-            "state": "unknown"
+            "claim_ids": [
+              "veev-regulated-agents"
+            ],
+            "confidence": "medium",
+            "direction": "watching",
+            "evidence_type": "product_roadmap",
+            "last_evidence_date": "2026-05-24",
+            "latest_summary": "Veeva AI Agents roadmap is relevant, but regulated production workflow usage is still not proven.",
+            "requires_review": true,
+            "source_ids": [
+              "veeva-ai-agents"
+            ],
+            "state": "watching"
           },
           "id": "ai_agents_rollout",
           "name": "AI Agents rollout evidence",
@@ -1693,6 +2439,7 @@
       ],
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "ai_agents_rollout",
         "priority": "medium",
         "question": "Track whether Veeva AI Agents move from roadmap to regulated production workflow usage.",
         "success_condition": "Official rollout, customer, or product evidence shows AI Agents used in regulated workflows.",
@@ -1713,8 +2460,14 @@
           "cadence": "quarterly",
           "direction": "up",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "up",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "semiconductor_test_revenue",
@@ -1726,8 +2479,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "ai_revenue_commentary",
@@ -1739,8 +2498,14 @@
           "cadence": "quarterly",
           "direction": "stronger",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "stronger",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "robotics_revenue",
@@ -1751,6 +2516,7 @@
       ],
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "semiconductor_test_revenue",
         "priority": "medium",
         "question": "Check whether semiconductor test demand remains strong enough while robotics option value develops.",
         "success_condition": "Semitest bookings, AI revenue commentary, or robotics deal evidence supports the blended thesis.",
@@ -1771,8 +2537,14 @@
           "cadence": "daily",
           "direction": "lower",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "lower",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "portfolio_drawdown",
@@ -1784,8 +2556,14 @@
           "cadence": "daily",
           "direction": "lower",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "lower",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "alert_count",
@@ -1797,8 +2575,14 @@
           "cadence": "monthly",
           "direction": "lower",
           "evidence_state": {
+            "claim_ids": [],
             "confidence": "unknown",
+            "direction": "lower",
+            "evidence_type": "",
             "last_evidence_date": null,
+            "latest_summary": "",
+            "requires_review": false,
+            "source_ids": [],
             "state": "unknown"
           },
           "id": "cash_drag",
@@ -1809,6 +2593,7 @@
       ],
       "next_action": {
         "due": "2026-08-22",
+        "metric_id": "portfolio_drawdown",
         "priority": "medium",
         "question": "Review whether cash still has option value versus current alerts, drawdown, and valuation resets.",
         "success_condition": "Cash remains useful against drawdown, valuation, source-health, or framework uncertainty.",
@@ -1827,17 +2612,31 @@
   "reviewQueue": [
     {
       "due": "2026-08-22",
-      "priority": "high",
-      "question": "Track HBM qualification and shipment evidence into the Vera Rubin generation.",
-      "source": "next_action",
-      "success_condition": "Company or customer evidence supports continued HBM leadership and shipment leverage.",
-      "ticker": "000660.KS",
-      "type": "evidence_check"
-    },
-    {
-      "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [
+          "ceg-pjm-interconnection-risk"
+        ],
+        "confidence": "medium",
+        "direction": "deteriorating",
+        "evidence_type": "interconnection_risk",
+        "last_evidence_date": "2026-05-24",
+        "latest_summary": "PJM interconnection timing remains a thesis risk; supplement current secondary reporting with primary PJM or company evidence.",
+        "requires_review": true,
+        "source_ids": [
+          "ceg-tmi-pjm",
+          "pjm-interconnection-process"
+        ],
+        "state": "deteriorating"
+      },
+      "metric_id": "pjm_interconnection",
       "priority": "high",
       "question": "Track PJM and interconnection conversion from data-center demand into realizable economics.",
+      "score": 120,
+      "score_reasons": [
+        "high priority",
+        "deteriorating evidence",
+        "evidence requires review"
+      ],
       "source": "next_action",
       "success_condition": "Regulatory, PJM, or company evidence shows improved path from demand to contracted power economics.",
       "ticker": "CEG",
@@ -1845,17 +2644,32 @@
     },
     {
       "due": "2026-08-22",
-      "priority": "high",
-      "question": "Check whether TPU and capex advantage appears in Cloud margin or AI revenue quality.",
-      "source": "next_action",
-      "success_condition": "Cloud margin, product disclosure, or customer evidence supports TPU-driven cost leverage.",
-      "ticker": "GOOGL",
-      "type": "quarterly_review"
-    },
-    {
-      "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [
+          "msft-agent-authority"
+        ],
+        "confidence": "low",
+        "direction": "unknown",
+        "evidence_type": "gap",
+        "last_evidence_date": "2026-05-24",
+        "latest_summary": "No direct public evidence yet that Agent 365 is broadly executing governed production write actions.",
+        "requires_review": true,
+        "source_ids": [
+          "msft-agent365",
+          "msft-security-agent365"
+        ],
+        "state": "unknown"
+      },
+      "metric_id": "production_write_permission",
       "priority": "high",
       "question": "Look for evidence of Agent 365 production write-permission adoption.",
+      "score": 115,
+      "score_reasons": [
+        "high priority",
+        "unknown evidence",
+        "evidence requires review",
+        "framework trust bottleneck"
+      ],
       "source": "next_action",
       "success_condition": "Official disclosure, customer case study, or product documentation shows agents executing governed production actions.",
       "ticker": "MSFT",
@@ -1863,8 +2677,88 @@
     },
     {
       "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [],
+        "confidence": "unknown",
+        "direction": "stronger",
+        "evidence_type": "",
+        "last_evidence_date": null,
+        "latest_summary": "",
+        "requires_review": false,
+        "source_ids": [],
+        "state": "unknown"
+      },
+      "metric_id": "nvidia_qualification",
+      "priority": "high",
+      "question": "Track HBM qualification and shipment evidence into the Vera Rubin generation.",
+      "score": 95,
+      "score_reasons": [
+        "high priority",
+        "unknown evidence"
+      ],
+      "source": "next_action",
+      "success_condition": "Company or customer evidence supports continued HBM leadership and shipment leverage.",
+      "ticker": "000660.KS",
+      "type": "evidence_check"
+    },
+    {
+      "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [
+          "googl-ironwood-cost-capacity"
+        ],
+        "confidence": "medium",
+        "direction": "watching",
+        "evidence_type": "quarterly_review_gap",
+        "last_evidence_date": "2026-05-24",
+        "latest_summary": "Ironwood and TPU evidence supports the cost-control question, but Cloud margin proof remains a quarterly review item.",
+        "requires_review": true,
+        "source_ids": [
+          "google-ironwood",
+          "google-ironwood-3things"
+        ],
+        "state": "watching"
+      },
+      "metric_id": "google_cloud_revenue_margin",
+      "priority": "high",
+      "question": "Check whether TPU and capex advantage appears in Cloud margin or AI revenue quality.",
+      "score": 95,
+      "score_reasons": [
+        "high priority",
+        "watching evidence",
+        "evidence requires review"
+      ],
+      "source": "next_action",
+      "success_condition": "Cloud margin, product disclosure, or customer evidence supports TPU-driven cost leverage.",
+      "ticker": "GOOGL",
+      "type": "quarterly_review"
+    },
+    {
+      "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [
+          "nvda-rubin-platform"
+        ],
+        "confidence": "medium",
+        "direction": "watching",
+        "evidence_type": "product_architecture",
+        "last_evidence_date": "2026-05-24",
+        "latest_summary": "Rubin platform evidence supports rack-scale architecture, while attach-rate and margin durability remain unproven.",
+        "requires_review": false,
+        "source_ids": [
+          "nvidia-rubin",
+          "nvidia-rubin-blog"
+        ],
+        "state": "watching"
+      },
+      "metric_id": "networking_attach",
       "priority": "high",
       "question": "Track networking attach, rack-scale platform evidence, and margin durability.",
+      "score": 85,
+      "score_reasons": [
+        "high priority",
+        "watching evidence"
+      ],
       "source": "next_action",
       "success_condition": "Rubin or Blackwell platform evidence shows durable networking/software pull-through.",
       "ticker": "NVDA",
@@ -1872,8 +2766,25 @@
     },
     {
       "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [],
+        "confidence": "unknown",
+        "direction": "up",
+        "evidence_type": "",
+        "last_evidence_date": null,
+        "latest_summary": "",
+        "requires_review": false,
+        "source_ids": [],
+        "state": "unknown"
+      },
+      "metric_id": "ai_semiconductor_revenue",
       "priority": "medium",
       "question": "Check whether AI semiconductor growth is broadening beyond a small customer set.",
+      "score": 65,
+      "score_reasons": [
+        "medium priority",
+        "unknown evidence"
+      ],
       "source": "next_action",
       "success_condition": "Management discloses durable ASIC or networking demand across multiple hyperscalers.",
       "ticker": "AVGO",
@@ -1881,8 +2792,25 @@
     },
     {
       "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [],
+        "confidence": "unknown",
+        "direction": "lower",
+        "evidence_type": "",
+        "last_evidence_date": null,
+        "latest_summary": "",
+        "requires_review": false,
+        "source_ids": [],
+        "state": "unknown"
+      },
+      "metric_id": "portfolio_drawdown",
       "priority": "medium",
       "question": "Review whether cash still has option value versus current alerts, drawdown, and valuation resets.",
+      "score": 65,
+      "score_reasons": [
+        "medium priority",
+        "unknown evidence"
+      ],
       "source": "next_action",
       "success_condition": "Cash remains useful against drawdown, valuation, source-health, or framework uncertainty.",
       "ticker": "CASH",
@@ -1890,8 +2818,25 @@
     },
     {
       "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [],
+        "confidence": "unknown",
+        "direction": "up",
+        "evidence_type": "",
+        "last_evidence_date": null,
+        "latest_summary": "",
+        "requires_review": false,
+        "source_ids": [],
+        "state": "unknown"
+      },
+      "metric_id": "semiconductor_test_revenue",
       "priority": "medium",
       "question": "Check whether semiconductor test demand remains strong enough while robotics option value develops.",
+      "score": 65,
+      "score_reasons": [
+        "medium priority",
+        "unknown evidence"
+      ],
       "source": "next_action",
       "success_condition": "Semitest bookings, AI revenue commentary, or robotics deal evidence supports the blended thesis.",
       "ticker": "TER",
@@ -1899,8 +2844,25 @@
     },
     {
       "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [],
+        "confidence": "unknown",
+        "direction": "stronger",
+        "evidence_type": "",
+        "last_evidence_date": null,
+        "latest_summary": "",
+        "requires_review": false,
+        "source_ids": [],
+        "state": "unknown"
+      },
+      "metric_id": "advanced_packaging_commentary",
       "priority": "medium",
       "question": "Review whether advanced packaging and leading-edge demand still support margin quality.",
+      "score": 65,
+      "score_reasons": [
+        "medium priority",
+        "unknown evidence"
+      ],
       "source": "next_action",
       "success_condition": "HPC mix, margin, and packaging commentary remain thesis-supportive.",
       "ticker": "TSM",
@@ -1908,8 +2870,30 @@
     },
     {
       "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [
+          "veev-regulated-agents"
+        ],
+        "confidence": "medium",
+        "direction": "watching",
+        "evidence_type": "product_roadmap",
+        "last_evidence_date": "2026-05-24",
+        "latest_summary": "Veeva AI Agents roadmap is relevant, but regulated production workflow usage is still not proven.",
+        "requires_review": true,
+        "source_ids": [
+          "veeva-ai-agents"
+        ],
+        "state": "watching"
+      },
+      "metric_id": "ai_agents_rollout",
       "priority": "medium",
       "question": "Track whether Veeva AI Agents move from roadmap to regulated production workflow usage.",
+      "score": 65,
+      "score_reasons": [
+        "medium priority",
+        "watching evidence",
+        "evidence requires review"
+      ],
       "source": "next_action",
       "success_condition": "Official rollout, customer, or product evidence shows AI Agents used in regulated workflows.",
       "ticker": "VEEV",
@@ -1917,8 +2901,25 @@
     },
     {
       "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [],
+        "confidence": "unknown",
+        "direction": "up",
+        "evidence_type": "",
+        "last_evidence_date": null,
+        "latest_summary": "",
+        "requires_review": false,
+        "source_ids": [],
+        "state": "unknown"
+      },
+      "metric_id": "backlog",
       "priority": "medium",
       "question": "Check whether AI power and cooling capex is still visible in orders, backlog, and liquid-cooling commentary.",
+      "score": 65,
+      "score_reasons": [
+        "medium priority",
+        "unknown evidence"
+      ],
       "source": "next_action",
       "success_condition": "Orders, backlog, and cooling commentary remain aligned with AI data-center demand.",
       "ticker": "VRT",
@@ -1926,8 +2927,25 @@
     },
     {
       "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [],
+        "confidence": "unknown",
+        "direction": "stronger",
+        "evidence_type": "",
+        "last_evidence_date": null,
+        "latest_summary": "",
+        "requires_review": false,
+        "source_ids": [],
+        "state": "unknown"
+      },
+      "metric_id": "research_assistant_adoption",
       "priority": "low",
       "question": "Check whether Moody's AI tools improve analytics workflow adoption or credit-risk research quality.",
+      "score": 35,
+      "score_reasons": [
+        "low priority",
+        "unknown evidence"
+      ],
       "source": "next_action",
       "success_condition": "Analytics growth, retention, or product evidence shows AI-enhanced workflow value.",
       "ticker": "MCO",
@@ -1935,8 +2953,25 @@
     },
     {
       "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [],
+        "confidence": "unknown",
+        "direction": "stronger",
+        "evidence_type": "",
+        "last_evidence_date": null,
+        "latest_summary": "",
+        "requires_review": false,
+        "source_ids": [],
+        "state": "unknown"
+      },
+      "metric_id": "ai_product_evidence",
       "priority": "low",
       "question": "Look for evidence that MSCI risk and data products are becoming AI workflow verification assets.",
+      "score": 35,
+      "score_reasons": [
+        "low priority",
+        "unknown evidence"
+      ],
       "source": "next_action",
       "success_condition": "Product, retention, or revenue evidence links AI workflow adoption to trusted data demand.",
       "ticker": "MSCI",
@@ -1944,8 +2979,25 @@
     },
     {
       "due": "2026-08-22",
+      "evidence_state": {
+        "claim_ids": [],
+        "confidence": "unknown",
+        "direction": "stronger",
+        "evidence_type": "",
+        "last_evidence_date": null,
+        "latest_summary": "",
+        "requires_review": false,
+        "source_ids": [],
+        "state": "unknown"
+      },
+      "metric_id": "kensho_api_mcp_mentions",
       "priority": "low",
       "question": "Look for Kensho API, MCP, or data-licensing evidence inside LLM workflows.",
+      "score": 35,
+      "score_reasons": [
+        "low priority",
+        "unknown evidence"
+      ],
       "source": "next_action",
       "success_condition": "Product or customer evidence shows trusted S&P data embedded in AI workflows.",
       "ticker": "SPGI",
@@ -2029,8 +3081,22 @@
       "red": 0,
       "yellow": 0
     },
+    "evidence_coverage": {
+      "coverage_ratio": 0.1364,
+      "covered_metrics": 6,
+      "total_metrics": 44,
+      "unknown_metrics": 38
+    },
     "framework_bottleneck": "Trust / write-permission evidence",
     "highest_alert": "green",
+    "provenance_coverage": {
+      "claimLinkedEvidenceBullets": 13,
+      "coverageRatio": 0.3023,
+      "evidenceLogEntries": 7,
+      "evidenceLogEntriesWithSourceOrClaim": 7,
+      "materialEvidenceBullets": 43,
+      "weakSourceCount": 1
+    },
     "review_queue_count": 14,
     "rule_alert": "green",
     "source_count": 6,
@@ -2042,5 +3108,51 @@
       "planned": 3,
       "stale": 0
     }
-  }
+  },
+  "thesisChangelog": [
+    {
+      "change_type": "wording_tightening",
+      "changed_conviction": false,
+      "changed_weight": false,
+      "date": "2026-05-24",
+      "field": "thesis",
+      "new_summary": "Microsoft as authority-control asset, with production write-permission adoption still unproven.",
+      "previous_summary": "Microsoft as authority-control asset.",
+      "reason": "Avoid overstating product existence as production adoption.",
+      "source_ids": [
+        "msft-agent365"
+      ],
+      "ticker": "MSFT"
+    },
+    {
+      "change_type": "evidence_boundary",
+      "changed_conviction": false,
+      "changed_weight": false,
+      "date": "2026-05-24",
+      "field": "watch",
+      "new_summary": "Rubin platform evidence supports architecture, while attach rate and margin durability remain separate evidence questions.",
+      "previous_summary": "Rubin platform evidence supports infrastructure moat.",
+      "reason": "Architecture strength is not automatically monetization durability.",
+      "source_ids": [
+        "nvidia-rubin",
+        "nvidia-rubin-blog"
+      ],
+      "ticker": "NVDA"
+    },
+    {
+      "change_type": "provenance_gap",
+      "changed_conviction": false,
+      "changed_weight": false,
+      "date": "2026-05-24",
+      "field": "evidence",
+      "new_summary": "PJM and interconnection claims should be supplemented with primary PJM, regulatory, or company sources.",
+      "previous_summary": "Three Mile Island and PJM timing risk tracked through secondary reporting.",
+      "reason": "Nodal power thesis needs primary-source provenance before confidence can increase.",
+      "source_ids": [
+        "ceg-tmi-pjm",
+        "pjm-interconnection-process"
+      ],
+      "ticker": "CEG"
+    }
+  ]
 }

@@ -22,6 +22,8 @@ config/metrics_catalog.yml
 config/alert_rules.yml
 config/sources.yml
 data/decision_log.yml
+data/evidence_log.yml
+data/thesis_changelog.yml
 ```
 
 `holdings.yml`
@@ -43,11 +45,21 @@ data/decision_log.yml
 : Human review decisions. The monitor includes recent decisions in the generated
   JSON, but it never changes weights or conviction automatically.
 
+`data/evidence_log.yml`
+: Human-reviewed evidence events. These entries drive metric `evidence_state`
+  fields in generated monitor JSON.
+
+`data/thesis_changelog.yml`
+: Thesis wording and evidence-boundary changes. This keeps thesis edits
+  separate from portfolio decisions.
+
 ## Outputs
 
 ```text
 site/research-monitor-data.json
+site/provenance-coverage.json
 data/generated/dashboard_data.json
+data/generated/provenance_coverage.json
 ```
 
 The website reads `site/research-monitor-data.json` from the same static Pages
@@ -83,8 +95,8 @@ next_action:
 Generated `reviewQueue` entries come from these next actions plus any alerts
 that require human review.
 
-Metric records include an evidence state. If a metric has no explicit state yet,
-the generator emits:
+Metric records derive evidence state from `data/evidence_log.yml`. If a metric
+has no evidence entry yet, the generator emits:
 
 ```json
 {
@@ -93,6 +105,14 @@ the generator emits:
   "last_evidence_date": null
 }
 ```
+
+The review queue is scored deterministically from priority, due-date urgency,
+alert severity, evidence state, and framework bottleneck relevance. The score is
+only a queue-ordering tool; it is not a portfolio action.
+
+Provenance coverage is generated separately. It counts material evidence bullets
+in `site/research-data.js`, claim-linked coverage, evidence-log source linkage,
+and weak-source records that need stronger primary-source support.
 
 ## LLM Boundary
 

@@ -1,0 +1,109 @@
+- date: 2026-05-24
+  ticker: MSFT
+  metric_id: production_write_permission
+  direction: unknown
+  state_after: unknown
+  confidence: low
+  evidence_type: gap
+  summary: No direct public evidence yet that Agent 365 is broadly executing governed production write actions.
+  source_ids:
+    - msft-agent365
+    - msft-security-agent365
+  claim_ids:
+    - msft-agent-authority
+  reviewer: human
+  requires_review: true
+
+- date: 2026-05-24
+  ticker: MSFT
+  metric_id: agent_governance_evidence
+  direction: improving
+  state_after: improving
+  confidence: medium
+  evidence_type: product_governance
+  summary: Agent 365 improves the governance surface, but does not by itself prove broad production write-permission adoption.
+  source_ids:
+    - msft-agent365
+  claim_ids:
+    - msft-agent-authority
+  reviewer: human
+  requires_review: false
+
+- date: 2026-05-24
+  ticker: GOOGL
+  metric_id: google_cloud_revenue_margin
+  direction: watching
+  state_after: watching
+  confidence: medium
+  evidence_type: quarterly_review_gap
+  summary: Ironwood and TPU evidence supports the cost-control question, but Cloud margin proof remains a quarterly review item.
+  source_ids:
+    - google-ironwood
+    - google-ironwood-3things
+  claim_ids:
+    - googl-ironwood-cost-capacity
+  reviewer: human
+  requires_review: true
+
+- date: 2026-05-24
+  ticker: NVDA
+  metric_id: networking_attach
+  direction: watching
+  state_after: watching
+  confidence: medium
+  evidence_type: product_architecture
+  summary: Rubin platform evidence supports rack-scale architecture, while attach-rate and margin durability remain unproven.
+  source_ids:
+    - nvidia-rubin
+    - nvidia-rubin-blog
+  claim_ids:
+    - nvda-rubin-platform
+  reviewer: human
+  requires_review: false
+
+- date: 2026-05-24
+  ticker: CEG
+  metric_id: pjm_interconnection
+  direction: deteriorating
+  state_after: deteriorating
+  confidence: medium
+  evidence_type: interconnection_risk
+  summary: PJM interconnection timing remains a thesis risk; supplement current secondary reporting with primary PJM or company evidence.
+  source_ids:
+    - ceg-tmi-pjm
+    - pjm-interconnection-process
+  claim_ids:
+    - ceg-pjm-interconnection-risk
+  reviewer: human
+  requires_review: true
+
+- date: 2026-05-24
+  ticker: VRT
+  metric_id: liquid_cooling_commentary
+  direction: improving
+  state_after: improving
+  confidence: medium
+  evidence_type: product_demand
+  summary: Vertiv power and liquid-cooling evidence remains thesis-supportive, but orders and backlog still need quarterly confirmation.
+  source_ids:
+    - vertiv-trends
+    - vertiv-generate
+  claim_ids:
+    - vrt-ai-power-cooling
+  reviewer: human
+  requires_review: false
+
+- date: 2026-05-24
+  ticker: VEEV
+  metric_id: ai_agents_rollout
+  direction: watching
+  state_after: watching
+  confidence: medium
+  evidence_type: product_roadmap
+  summary: Veeva AI Agents roadmap is relevant, but regulated production workflow usage is still not proven.
+  source_ids:
+    - veeva-ai-agents
+  claim_ids:
+    - veev-regulated-agents
+  reviewer: human
+  requires_review: true
