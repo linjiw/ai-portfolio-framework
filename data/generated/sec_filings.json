@@ -2,7 +2,7 @@
   "companies": [
     {
       "cik": "0000789019",
-      "fetched_at_utc": "2026-05-24T07:29:43Z",
+      "fetched_at_utc": "2026-05-24T08:44:41Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -126,7 +126,7 @@
     },
     {
       "cik": "0001652044",
-      "fetched_at_utc": "2026-05-24T07:29:43Z",
+      "fetched_at_utc": "2026-05-24T08:44:41Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -250,7 +250,7 @@
     },
     {
       "cik": "0001730168",
-      "fetched_at_utc": "2026-05-24T07:29:43Z",
+      "fetched_at_utc": "2026-05-24T08:44:41Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -374,7 +374,7 @@
     },
     {
       "cik": "0001046179",
-      "fetched_at_utc": "2026-05-24T07:29:43Z",
+      "fetched_at_utc": "2026-05-24T08:44:41Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -497,7 +497,7 @@
     },
     {
       "cik": "0001045810",
-      "fetched_at_utc": "2026-05-24T07:29:43Z",
+      "fetched_at_utc": "2026-05-24T08:44:41Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -621,7 +621,7 @@
     },
     {
       "cik": "0001868275",
-      "fetched_at_utc": "2026-05-24T07:29:43Z",
+      "fetched_at_utc": "2026-05-24T08:44:41Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -745,7 +745,7 @@
     },
     {
       "cik": "0001674101",
-      "fetched_at_utc": "2026-05-24T07:29:43Z",
+      "fetched_at_utc": "2026-05-24T08:44:41Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -869,7 +869,7 @@
     },
     {
       "cik": "0001408198",
-      "fetched_at_utc": "2026-05-24T07:29:43Z",
+      "fetched_at_utc": "2026-05-24T08:44:41Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -993,7 +993,7 @@
     },
     {
       "cik": "0001059556",
-      "fetched_at_utc": "2026-05-24T07:29:43Z",
+      "fetched_at_utc": "2026-05-24T08:44:41Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -1117,7 +1117,7 @@
     },
     {
       "cik": "0000064040",
-      "fetched_at_utc": "2026-05-24T07:29:43Z",
+      "fetched_at_utc": "2026-05-24T08:44:41Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -1241,7 +1241,7 @@
     },
     {
       "cik": "0001393052",
-      "fetched_at_utc": "2026-05-24T07:29:43Z",
+      "fetched_at_utc": "2026-05-24T08:44:41Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -1365,7 +1365,7 @@
     },
     {
       "cik": "0000097210",
-      "fetched_at_utc": "2026-05-24T07:29:43Z",
+      "fetched_at_utc": "2026-05-24T08:44:41Z",
       "last_reviewed_at": "2026-05-22",
       "latest_filings": [
         {
@@ -1486,6 +1486,130 @@
       "source": "sec_edgar",
       "status": "healthy",
       "ticker": "TER"
+    },
+    {
+      "cik": "0000723125",
+      "fetched_at_utc": "2026-05-24T08:44:41Z",
+      "last_reviewed_at": "2026-05-24",
+      "latest_filings": [
+        {
+          "accession_number": "0001104659-26-038249",
+          "filing_date": "2026-04-01",
+          "form": "8-K",
+          "primary_doc_description": "FORM 8-K",
+          "primary_document": "tm2610810d1_8k.htm",
+          "report_date": "2026-03-31",
+          "review_disposition": "not_reviewed",
+          "review_id": null,
+          "review_summary": null,
+          "reviewed_at": null,
+          "source_id": "sec-mu-2026-04-01-8k-26038249",
+          "ticker": "MU",
+          "url": "https://www.sec.gov/Archives/edgar/data/723125/000110465926038249/tm2610810d1_8k.htm"
+        },
+        {
+          "accession_number": "0001104659-26-034174",
+          "filing_date": "2026-03-25",
+          "form": "8-K",
+          "primary_doc_description": "FORM 8-K",
+          "primary_document": "tm269755d1_8k.htm",
+          "report_date": "2026-03-25",
+          "source_id": "sec-mu-2026-03-25-8k-26034174",
+          "ticker": "MU",
+          "url": "https://www.sec.gov/Archives/edgar/data/723125/000110465926034174/tm269755d1_8k.htm"
+        },
+        {
+          "accession_number": "0000723125-26-000006",
+          "filing_date": "2026-03-19",
+          "form": "10-Q",
+          "primary_doc_description": "10-Q",
+          "primary_document": "mu-20260226.htm",
+          "report_date": "2026-02-26",
+          "source_id": "sec-mu-2026-03-19-10q-26000006",
+          "ticker": "MU",
+          "url": "https://www.sec.gov/Archives/edgar/data/723125/000072312526000006/mu-20260226.htm"
+        },
+        {
+          "accession_number": "0000723125-26-000004",
+          "filing_date": "2026-03-18",
+          "form": "8-K",
+          "primary_doc_description": "8-K",
+          "primary_document": "mu-20260318.htm",
+          "report_date": "2026-03-18",
+          "source_id": "sec-mu-2026-03-18-8k-26000004",
+          "ticker": "MU",
+          "url": "https://www.sec.gov/Archives/edgar/data/723125/000072312526000004/mu-20260318.htm"
+        },
+        {
+          "accession_number": "0001104659-26-005366",
+          "filing_date": "2026-01-21",
+          "form": "8-K",
+          "primary_doc_description": "FORM 8-K",
+          "primary_document": "tm263707d1_8k.htm",
+          "report_date": "2026-01-15",
+          "source_id": "sec-mu-2026-01-21-8k-26005366",
+          "ticker": "MU",
+          "url": "https://www.sec.gov/Archives/edgar/data/723125/000110465926005366/tm263707d1_8k.htm"
+        },
+        {
+          "accession_number": "0000723125-25-000046",
+          "filing_date": "2025-12-18",
+          "form": "10-Q",
+          "primary_doc_description": "10-Q",
+          "primary_document": "mu-20251127.htm",
+          "report_date": "2025-11-27",
+          "source_id": "sec-mu-2025-12-18-10q-25000046",
+          "ticker": "MU",
+          "url": "https://www.sec.gov/Archives/edgar/data/723125/000072312525000046/mu-20251127.htm"
+        },
+        {
+          "accession_number": "0000723125-25-000044",
+          "filing_date": "2025-12-17",
+          "form": "8-K",
+          "primary_doc_description": "8-K",
+          "primary_document": "mu-20251217.htm",
+          "report_date": "2025-12-17",
+          "source_id": "sec-mu-2025-12-17-8k-25000044",
+          "ticker": "MU",
+          "url": "https://www.sec.gov/Archives/edgar/data/723125/000072312525000044/mu-20251217.htm"
+        },
+        {
+          "accession_number": "0001104659-25-101237",
+          "filing_date": "2025-10-21",
+          "form": "8-K",
+          "primary_doc_description": "FORM 8-K",
+          "primary_document": "tm2529116d1_8k.htm",
+          "report_date": "2025-10-15",
+          "source_id": "sec-mu-2025-10-21-8k-25101237",
+          "ticker": "MU",
+          "url": "https://www.sec.gov/Archives/edgar/data/723125/000110465925101237/tm2529116d1_8k.htm"
+        }
+      ],
+      "latest_relevant_filing": {
+        "accession_number": "0001104659-26-038249",
+        "filing_date": "2026-04-01",
+        "form": "8-K",
+        "primary_doc_description": "FORM 8-K",
+        "primary_document": "tm2610810d1_8k.htm",
+        "report_date": "2026-03-31",
+        "review_disposition": "not_reviewed",
+        "review_id": null,
+        "review_summary": null,
+        "reviewed_at": null,
+        "source_id": "sec-mu-2026-04-01-8k-26038249",
+        "ticker": "MU",
+        "url": "https://www.sec.gov/Archives/edgar/data/723125/000110465926038249/tm2610810d1_8k.htm"
+      },
+      "reason": "Latest relevant SEC filing is not newer than last reviewed date.",
+      "review_relevant_forms": [
+        "10-K",
+        "10-Q",
+        "8-K"
+      ],
+      "review_required": false,
+      "source": "sec_edgar",
+      "status": "healthy",
+      "ticker": "MU"
     }
   ],
   "filingReviewLog": [
@@ -1694,7 +1818,7 @@
       "ticker": "TER"
     }
   ],
-  "generatedAtUtc": "2026-05-24T07:29:43Z",
+  "generatedAtUtc": "2026-05-24T08:44:41Z",
   "nonSecHoldings": {
     "000660.KS": {
       "reason": "SK Hynix is Korea-listed and should be tracked through company IR or exchange disclosures."
@@ -1712,11 +1836,11 @@
   "schemaVersion": 1,
   "source": "sec_edgar",
   "summary": {
-    "company_count": 12,
+    "company_count": 13,
     "current_filing_reviewed_count": 12,
     "failed_company_count": 0,
-    "healthy_company_count": 12,
-    "latest_filing_count": 96,
+    "healthy_company_count": 13,
+    "latest_filing_count": 104,
     "review_required_count": 0
   }
 }

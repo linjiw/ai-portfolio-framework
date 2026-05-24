@@ -1,13 +1,13 @@
 {
   "claimCountsByHolding": {
-    "000660.KS": 1,
+    "000660.KS": 2,
     "AVGO": 1,
     "CASH": 0,
     "CEG": 1,
     "GOOGL": 1,
     "MCO": 1,
     "MSCI": 1,
-    "MSFT": 1,
+    "MU": 3,
     "NVDA": 1,
     "SPGI": 1,
     "TER": 1,
@@ -154,7 +154,7 @@
         "text": "MSCI reported Q1 2026 revenue growth and high retention."
       }
     ],
-    "MSFT": [
+    "MU": [
       {
         "claim_ids": [
           "msft-agent-authority"
@@ -326,7 +326,7 @@
       }
     ]
   },
-  "generatedAtUtc": "2026-05-24T08:34:48Z",
+  "generatedAtUtc": "2026-05-24T08:45:04Z",
   "holdingEvidenceCounts": {
     "000660.KS": 3,
     "AVGO": 3,
@@ -335,7 +335,7 @@
     "GOOGL": 3,
     "MCO": 3,
     "MSCI": 3,
-    "MSFT": 3,
+    "MU": 3,
     "NVDA": 3,
     "SPGI": 3,
     "TER": 3,

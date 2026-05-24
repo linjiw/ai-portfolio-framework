@@ -218,6 +218,294 @@ window.AI_FRAMEWORK_DATA = {
       sources: ["mcp-tools-arxiv", "kensho-mcp"]
     }
   ],
+  watchlist: {
+    stage: "Memory watchlist",
+    objective:
+      "Compare MU and SK Hynix as HBM and memory re-rating candidates without changing current holdings.",
+    policy:
+      "Watchlist entries create evidence, valuation, filing, and bear-case review work only. They cannot add a position, alter target weights, or change conviction without a later human decision log.",
+    boundary: "human review only",
+    items: [
+      {
+        ticker: "MU",
+        name: "Micron Technology",
+        status: "watchlist_not_position",
+        statusLabel: "watchlist only",
+        role: "HBM re-rating candidate",
+        priority: "high",
+        nextReviewDue: "2026-06-24",
+        decisionBoundary: "No position change from watchlist data",
+        coreQuestion:
+          "Is Micron becoming a contracted AI-memory supplier, or is the market simply annualizing a peak memory cycle?",
+        thesisToTest:
+          "Micron has the cleanest potential re-rating setup if HBM4, HBM4E customization, SCAs, and data-center NAND shift the business from spot-cycle memory toward durable strategic supply. The watchlist burden is to prove durability before treating MU like a framework holding.",
+        keySignals: [
+          {
+            label: "Q3 guide",
+            value: "GM ~81%",
+            interpretation:
+              "Official FQ2 2026 materials guide to about 81% gross margin; the next earnings print is the first durability test."
+          },
+          {
+            label: "HBM4 ramp",
+            value: "Volume shipments",
+            interpretation:
+              "Micron says HBM4 36GB 12H volume shipments began in calendar Q1 2026 and are designed for NVIDIA Vera Rubin."
+          },
+          {
+            label: "SCA evidence",
+            value: "First 5-year SCA",
+            interpretation:
+              "Strategic customer agreements are the key test for whether memory demand is becoming contracted instead of purely cyclical."
+          },
+          {
+            label: "Portfolio status",
+            value: "0% target weight",
+            interpretation:
+              "MU remains outside the portfolio until source-linked evidence, valuation, and falsifier thresholds are reviewed."
+          }
+        ],
+        watchMetrics: [
+          {
+            metric_id: "mu_gross_margin_durability",
+            label: "Gross margin durability",
+            state: "watching",
+            cadence: "quarterly",
+            trigger:
+              "FQ3 actual gross margin near or above guide supports pricing power; a break below 80% requires bear-case review."
+          },
+          {
+            metric_id: "mu_hbm4_hbm4e_ramp",
+            label: "HBM4 / HBM4E ramp evidence",
+            state: "watching",
+            cadence: "quarterly",
+            trigger:
+              "Track HBM4 yield/ramp language, HBM4 16-high sampling, and HBM4E 1-gamma roadmap disclosure."
+          },
+          {
+            metric_id: "mu_sca_count_quality",
+            label: "SCA count and quality",
+            state: "unknown",
+            cadence: "quarterly",
+            trigger:
+              "Watch for additional multi-year SCAs and any take-or-pay or volume-commitment language."
+          },
+          {
+            metric_id: "mu_supply_capex_discipline",
+            label: "Supply discipline versus greenfield capex",
+            state: "watching",
+            cadence: "quarterly",
+            trigger:
+              "Review whether Idaho, New York, Tongluo, Singapore, and Hiroshima spend improves strategic supply or creates 2028 oversupply risk."
+          }
+        ],
+        evidenceNeeded: [
+          "Official disclosure of HBM revenue mix or enough segment detail to infer HBM contribution without relying on market-share guesses.",
+          "Evidence that SCAs are durable commitments rather than looser long-term agreements with limited pricing protection.",
+          "Customer or platform evidence that HBM4E customization materially raises switching cost.",
+          "A valuation snapshot with method and source before any position-sizing discussion."
+        ],
+        bearCase: [
+          "Samsung or SK Hynix qualification progress normalizes HBM scarcity faster than expected.",
+          "The apparent demand shortage is partly double ordering or strategic stockpiling.",
+          "Large greenfield capex builds future oversupply before SCAs prove durable.",
+          "China exposure or export-control risk creates a non-operating drawdown."
+        ],
+        falsifier:
+          "Micron misses the FQ3 gross-margin guide materially, fails to add credible SCA evidence, or HBM4/HBM4E commentary weakens while capex intensity accelerates.",
+        nextAction: {
+          type: "earnings_checklist",
+          priority: "high",
+          question:
+            "Build a Q3 FY2026 review checklist for gross margin, HBM ramp, SCA additions, capex discipline, and data-center NAND.",
+          successCondition:
+            "Primary-source earnings materials can map each watch metric to confirming, watching, deteriorating, or unknown."
+        },
+        decisionProcess: [
+          {
+            step: "Evidence first",
+            text:
+              "Treat the JPM conference notes as useful prompts, but promote only official filings, company materials, or clearly attributed transcripts into evidence."
+          },
+          {
+            step: "Compare against SK Hynix",
+            text:
+              "MU must show better re-rating asymmetry than the existing SK Hynix HBM exposure after valuation and cycle risk."
+          },
+          {
+            step: "No automatic add",
+            text:
+              "A watchlist score can only create review work; a future weight change would need a decision-log entry and updated framework rationale."
+          }
+        ],
+        source_ids: [
+          "micron-q2-2026-results",
+          "micron-q2-2026-deck",
+          "micron-jpm-2026",
+          "micron-sec-submissions",
+          "asml-2025-results"
+        ]
+      },
+      {
+        ticker: "000660.KS",
+        name: "SK Hynix",
+        status: "portfolio_holding_watch",
+        statusLabel: "holding watch",
+        role: "Existing HBM bottleneck holding",
+        priority: "high",
+        nextReviewDue: "2026-08-22",
+        decisionBoundary: "No target-weight change; review state only",
+        coreQuestion:
+          "Does SK Hynix retain HBM leadership as HBM4, High-NA EUV, and Samsung/Micron qualification pressure evolve?",
+        thesisToTest:
+          "SK Hynix remains the portfolio's most direct HBM bottleneck exposure. The watchlist exists because the position is already owned, but the evidence state must track whether the leadership premium is widening or being competed away.",
+        keySignals: [
+          {
+            label: "FY2025 record",
+            value: "AI memory driver",
+            interpretation:
+              "Official FY2025 results cite high-value products including HBM as a driver of record annual and quarterly performance."
+          },
+          {
+            label: "Q1 2026",
+            value: "72% operating margin",
+            interpretation:
+              "Official Q1 2026 results show extraordinary profitability; the review question is how durable this is through HBM4 supply competition."
+          },
+          {
+            label: "HBM4",
+            value: "Mass-production ready",
+            interpretation:
+              "SK Hynix says HBM4 development and mass-production preparation were completed first in the industry."
+          },
+          {
+            label: "High-NA EUV",
+            value: "M16 system assembled",
+            interpretation:
+              "The company says it assembled ASML's EXE:5200B High-NA EUV system for next-generation memory production."
+          }
+        ],
+        watchMetrics: [
+          {
+            metric_id: "skhynix_hbm_revenue_commentary",
+            label: "HBM revenue and mix commentary",
+            state: "watching",
+            cadence: "quarterly",
+            trigger:
+              "Track whether HBM remains the high-value product driver or whether conventional DRAM is doing more of the work."
+          },
+          {
+            metric_id: "skhynix_hbm4_customer_qualification",
+            label: "HBM4 customer qualification",
+            state: "improving",
+            cadence: "quarterly",
+            trigger:
+              "Look for customer-request language, shipment timing, and signs that NVIDIA/Samsung/Micron share is shifting."
+          },
+          {
+            metric_id: "skhynix_euv_high_na_transition",
+            label: "EUV / High-NA transition",
+            state: "watching",
+            cadence: "semiannual",
+            trigger:
+              "Track whether EUV adoption improves 1c/next-node cost and density rather than only signaling capex escalation."
+          },
+          {
+            metric_id: "skhynix_memory_cycle_risk",
+            label: "Memory-cycle risk",
+            state: "watching",
+            cadence: "quarterly",
+            trigger:
+              "Review DRAM/NAND pricing, capex plans, KRW exposure, and customer concentration."
+          }
+        ],
+        evidenceNeeded: [
+          "Primary-source HBM4 shipment and qualification updates by customer or platform where available.",
+          "Disclosure that separates HBM-led margin durability from broad DRAM price-cycle strength.",
+          "Evidence that High-NA and EUV capex improves cost competitiveness rather than just increasing fixed-cost risk.",
+          "Explicit bear-case tracking for Samsung and Micron gaining Rubin-generation share."
+        ],
+        bearCase: [
+          "Samsung regains meaningful NVIDIA HBM4/HBM4E share and compresses SK Hynix pricing power.",
+          "Micron's SCA and HBM4E customization narrative closes the quality gap faster than expected.",
+          "A hyperscaler capex slowdown hits HBM, server DRAM, eSSD, and portfolio capex exposure at the same time.",
+          "KRW, Korea geopolitical risk, or export controls dominate stock performance despite good operating data."
+        ],
+        falsifier:
+          "Samsung or Micron captures material Rubin-generation HBM share, SK Hynix margin language deteriorates, or HBM leadership stops translating into financial outperformance.",
+        nextAction: {
+          type: "holding_review",
+          priority: "high",
+          question:
+            "Compare SK Hynix Q2/Q3 evidence against MU's next earnings evidence before changing any memory exposure language.",
+          successCondition:
+            "The review can explain whether SK Hynix still has the best risk-adjusted HBM exposure in the framework."
+        },
+        decisionProcess: [
+          {
+            step: "Separate holding from thesis",
+            text:
+              "Owning SK Hynix does not mean HBM leadership is assumed; each quarter must update the evidence state."
+          },
+          {
+            step: "Track competitor displacement",
+            text:
+              "The key bear case is not weak demand alone, but Samsung or Micron taking share while supply expands."
+          },
+          {
+            step: "Preserve boundary",
+            text:
+              "Watchlist deterioration triggers review, not an automatic trim; any change requires a decision-log entry."
+          }
+        ],
+        source_ids: [
+          "skhynix-hbm4",
+          "skhynix-q1-2026",
+          "skhynix-fy2025-results",
+          "skhynix-high-na-euv",
+          "asml-2025-results"
+        ]
+      }
+    ],
+    comparison: [
+      {
+        dimension: "Framework role",
+        micron:
+          "Candidate for a new memory re-rating sleeve if SCAs and HBM4E customization make earnings less cyclical.",
+        skHynix:
+          "Existing bottleneck-cyclical holding that already expresses HBM leadership inside the portfolio.",
+        decisionUse:
+          "MU must improve portfolio evidence quality or asymmetry beyond what SK Hynix already provides."
+      },
+      {
+        dimension: "Evidence quality",
+        micron:
+          "Strong official Q2 materials, but HBM revenue mix and SCA economics still need sharper disclosure.",
+        skHynix:
+          "Official releases support HBM4 readiness, record results, and High-NA EUV adoption, but customer-share detail remains limited.",
+        decisionUse:
+          "Prefer primary-source evidence over conference-note summaries before updating thesis status."
+      },
+      {
+        dimension: "Main falsifier",
+        micron:
+          "Cycle peak: margin guide fails, SCAs do not multiply, or capex expands faster than durable contracted demand.",
+        skHynix:
+          "Leadership erosion: Samsung or Micron wins material HBM4/HBM4E share and margin durability weakens.",
+        decisionUse:
+          "The two names should be reviewed as substitutes before adding any memory beta."
+      },
+      {
+        dimension: "Valuation discipline",
+        micron:
+          "Requires a sourced valuation snapshot before any framework weight discussion because sentiment has moved quickly.",
+        skHynix:
+          "Already sized as a cyclical bottleneck holding; valuation changes should affect review language before weight.",
+        decisionUse:
+          "Do not let HBM excitement bypass the valuation gate."
+      }
+    ]
+  },
   claims: [
     {
       claim_id: "framework-capability-horizon",
@@ -327,6 +615,50 @@ window.AI_FRAMEWORK_DATA = {
       metric: "HBM4 development and mass-production readiness",
       quote_or_excerpt: "HBM4 development completion",
       retrieved_at: "2026-05-22",
+      confidence: "High"
+    },
+    {
+      claim_id: "mu-hbm4-hbm4e-ramp",
+      source_id: "micron-q2-2026-deck",
+      entity: "MU",
+      claim: "Micron's HBM4 and HBM4E roadmap is a credible watchlist catalyst but still needs durability proof.",
+      evidence_type: "company_earnings_deck",
+      metric: "HBM4 shipments, HBM4 16-high sampling, HBM4E 1-gamma roadmap",
+      quote_or_excerpt: "Q2 2026 deck HBM roadmap disclosure",
+      retrieved_at: "2026-05-24",
+      confidence: "High"
+    },
+    {
+      claim_id: "mu-sca-memory-re-rating",
+      source_id: "micron-q2-2026-deck",
+      entity: "MU",
+      claim: "Micron's SCA language is the key test for whether memory demand is becoming more contracted.",
+      evidence_type: "company_earnings_deck",
+      metric: "strategic customer agreements",
+      quote_or_excerpt: "Five-year SCA and multi-year commitment language",
+      retrieved_at: "2026-05-24",
+      confidence: "Medium"
+    },
+    {
+      claim_id: "mu-gross-margin-watch",
+      source_id: "micron-q2-2026-results",
+      entity: "MU",
+      claim: "Micron's FQ3 2026 gross-margin guide is a near-term durability watch item.",
+      evidence_type: "company_earnings_release",
+      metric: "FQ3 2026 gross margin guide",
+      quote_or_excerpt: "Approximately 81% gross margin outlook",
+      retrieved_at: "2026-05-24",
+      confidence: "High"
+    },
+    {
+      claim_id: "skhynix-high-na-euv-memory",
+      source_id: "skhynix-high-na-euv",
+      entity: "000660.KS",
+      claim: "SK hynix's High-NA EUV installation supports its next-generation memory manufacturing thesis.",
+      evidence_type: "company_press_release",
+      metric: "High-NA EUV adoption for next-generation memory",
+      quote_or_excerpt: "EXE:5200B assembled at M16 fab",
+      retrieved_at: "2026-05-24",
       confidence: "High"
     },
     {
@@ -970,6 +1302,34 @@ window.AI_FRAMEWORK_DATA = {
     "skhynix-q1-2026": {
       label: "SK hynix Q1 2026 results",
       url: "https://news.skhynix.com/q1-2026-business-results/"
+    },
+    "skhynix-fy2025-results": {
+      label: "SK hynix FY2025 results",
+      url: "https://news.skhynix.com/sk-hynix-announces-fy25-financial-results/"
+    },
+    "skhynix-high-na-euv": {
+      label: "SK hynix High-NA EUV installation",
+      url: "https://news.skhynix.com/sk-hynix-introduces-industrys-first-commercial-high-na-euv/"
+    },
+    "micron-q2-2026-results": {
+      label: "Micron Q2 FY2026 results",
+      url: "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-results-second-quarter-fiscal-2026"
+    },
+    "micron-q2-2026-deck": {
+      label: "Micron Q2 FY2026 earnings deck",
+      url: "https://investors.micron.com/static-files/9c0becf5-df56-4eec-bd67-453dda68b273"
+    },
+    "micron-jpm-2026": {
+      label: "Micron 2026 J.P. Morgan TMT event",
+      url: "https://investors.micron.com/events/event-details/2026-jp-morgan-global-technology-media-and-communications-conference"
+    },
+    "micron-sec-submissions": {
+      label: "SEC submissions - Micron Technology",
+      url: "https://data.sec.gov/submissions/CIK0000723125.json"
+    },
+    "asml-2025-results": {
+      label: "ASML FY2025 results",
+      url: "https://www.asml.com/en/news/press-releases/2026/q4-2025-financial-results"
     },
     "ceg-tmi-pjm": {
       label: "Reuters via Investing.com - Three Mile Island PJM delay",

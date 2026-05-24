@@ -75,6 +75,13 @@ signal generation remain out of scope.
 : Tracks missing public-market exposure, especially agent runtime, security,
   observability, credential vaults, MCP gateways, and policy-as-code.
 
+`memory_watchlist`
+: Tracks MU and SK Hynix as a paired HBM / memory-cycle research queue. MU is a
+  non-holding candidate; SK Hynix is an existing holding under special review.
+  The watchlist records evidence gaps, bear cases, source links, and next
+  actions only. It does not add positions, change target weights, or change
+  conviction.
+
 `mispricing_research`
 : Identifies areas where the framework says a control right may matter but the
   system lacks a valuation-implied score. This is a research queue, not a trade.

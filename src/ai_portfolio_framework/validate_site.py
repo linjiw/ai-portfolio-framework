@@ -39,6 +39,15 @@ def validate_site(site_dir: Path, *, require_portfolio: bool = False) -> list[st
             errors.append("research-data.js does not define window.AI_FRAMEWORK_DATA")
         if "trusted execution" not in research_text.lower():
             errors.append("research-data.js does not include the trusted-execution thesis")
+        if "watchlist:" not in research_text:
+            errors.append("research-data.js does not include a watchlist section")
+        for ticker in ('ticker: "MU"', 'ticker: "000660.KS"'):
+            if ticker not in research_text:
+                errors.append(f"research-data.js watchlist missing {ticker}")
+        if "watchlist_not_position" not in research_text:
+            errors.append("research-data.js watchlist must distinguish non-holding candidates")
+        if "portfolio_holding_watch" not in research_text:
+            errors.append("research-data.js watchlist must distinguish existing holding watches")
 
     errors.extend(validate_manual_holdings())
 

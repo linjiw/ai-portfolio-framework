@@ -67,6 +67,11 @@ companies:
     forms: [10-K, 10-Q, 8-K]
     review_relevant_forms: [10-K, 10-Q, 8-K]
     last_reviewed_at: 2026-05-22
+  MU:
+    cik: "0000723125"
+    forms: [10-K, 10-Q, 8-K]
+    review_relevant_forms: [10-K, 10-Q, 8-K]
+    last_reviewed_at: 2026-05-24
 
 non_sec_holdings:
   "000660.KS":

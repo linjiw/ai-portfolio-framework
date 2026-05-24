@@ -515,6 +515,7 @@ a:hover {
 .severity.planned,
 .severity.manual_expected,
 .severity.watchlist_not_position,
+.severity.portfolio_holding_watch,
 .severity.explicit_exclusion_needed,
 .severity.research_needed,
 .severity.redirected,
@@ -663,6 +664,160 @@ a:hover {
 .claim-card {
   min-height: 190px;
   overflow-wrap: anywhere;
+}
+
+.watchlist-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(360px, 0.8fr);
+  gap: 18px;
+  align-items: start;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+
+.watchlist-summary h3 {
+  margin-top: 8px;
+  font-size: 22px;
+}
+
+.watchlist-summary p {
+  margin-top: 10px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.watchlist-kpis {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.watchlist-kpis div,
+.watchlist-signal-grid div {
+  min-width: 0;
+  padding: 12px;
+  background: #f8faf8;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.watchlist-kpis span,
+.watchlist-signal-grid span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.watchlist-kpis strong,
+.watchlist-signal-grid strong {
+  display: block;
+  margin-top: 6px;
+  color: #22312b;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.watchlist-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.watchlist-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.watchlist-card p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.watchlist-signal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.watchlist-signal-grid p {
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.watchlist-section {
+  min-width: 0;
+}
+
+.watchlist-list li {
+  margin-bottom: 12px;
+}
+
+.watchlist-list strong,
+.decision-step-list strong {
+  display: block;
+  color: #27332f;
+}
+
+.watchlist-list span,
+.decision-step-list span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.watchlist-list p {
+  margin-top: 4px;
+  font-size: 13px;
+}
+
+.decision-step-list {
+  padding-left: 20px;
+}
+
+.decision-step-list li {
+  margin-bottom: 10px;
+}
+
+.watchlist-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.comparison-card {
+  padding: 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.comparison-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.comparison-columns strong {
+  display: block;
+  color: #27332f;
+}
+
+.comparison-card p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 .performance-panel {
@@ -1136,6 +1291,9 @@ a:hover {
   .link-health-list,
   .discipline-kpis,
   .weak-source-list,
+  .watchlist-summary,
+  .watchlist-grid,
+  .watchlist-comparison,
   .portfolio-plot-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1183,6 +1341,12 @@ a:hover {
   .link-health-list,
   .discipline-kpis,
   .weak-source-list,
+  .watchlist-summary,
+  .watchlist-kpis,
+  .watchlist-grid,
+  .watchlist-signal-grid,
+  .watchlist-comparison,
+  .comparison-columns,
   .portfolio-plot-grid,
   .research-row {
     grid-template-columns: 1fr;

@@ -84,13 +84,14 @@ The first screen is the usable dashboard, not a landing page. It starts with:
 - Investable row count.
 - Research-only disclaimer.
 
-The navigation has seven views:
+The navigation has eight views:
 
 | View | Purpose |
 | --- | --- |
 | Portfolio | Holdings, weights, thesis, evidence, risks, watch item, source links |
 | Decision process | Why the allocation exists, how sizing works, and which gates can change it |
 | Monitor | Deterministic alert output, metric dictionary, and source-health boundaries |
+| Watchlist | Non-actionable research queue for candidates and existing holdings under special review |
 | Control rights | Overlapping exposure bars and allocation buckets |
 | Signals | Systematic-discretionary plateau and watchlist signals |
 | Research notes | Compressed stock-by-stock story for written review |
@@ -116,11 +117,18 @@ Top-level fields:
   exposures: [...],
   monitoringQuestions: [...],
   signals: [...],
+  watchlist: {...},
   claims: [...],
   holdings: [...],
   sources: {...}
 }
 ```
+
+`watchlist` is a research-only object. It can include non-holding candidates such
+as `MU` and existing holdings under special review such as `000660.KS`, but it
+cannot alter `holdings`, target weights, conviction, or portfolio actions.
+Watchlist rows must carry a decision boundary, source IDs, watch metrics,
+evidence gaps, bear case, falsifier, next action, and comparison notes.
 
 The deterministic research monitor is generated as JSON at
 `site/research-monitor-data.json`. It is intentionally separate from
@@ -424,6 +432,8 @@ Important functions in `app.js`:
 - `renderPortfolio(layer)`: holding card rendering.
 - `renderControlRights()`: exposure bars and allocation cards.
 - `renderSignals()`: plateau/watchlist signal rendering with sources.
+- `renderWatchlist()`: memory watchlist rendering with review-only decision
+  boundaries.
 - `renderResearch()`: compressed stock story view.
 - `renderSources()`: complete source registry.
 - `renderClaims()`: claim-level evidence provenance rendering.

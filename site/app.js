@@ -58,6 +58,7 @@ function init() {
   renderDecisionProcess();
   renderControlRights();
   renderSignals();
+  renderWatchlist();
   renderResearch();
   renderSources();
   renderClaims();
@@ -297,6 +298,157 @@ function renderSignals() {
       `;
     })
     .join("");
+}
+
+function renderWatchlist() {
+  const watchlist = data.watchlist || {};
+  const summary = document.getElementById("watchlistSummary");
+  const grid = document.getElementById("watchlistGrid");
+  const comparison = document.getElementById("watchlistComparison");
+  if (!summary || !grid || !comparison) return;
+
+  const items = watchlist.items || [];
+  if (!items.length) {
+    summary.innerHTML = `<div class="empty-monitor">No watchlist entries configured yet.</div>`;
+    grid.innerHTML = "";
+    comparison.innerHTML = "";
+    return;
+  }
+
+  summary.innerHTML = `
+    <div>
+      <p class="section-label">${escapeHtml(watchlist.stage || "Watchlist")}</p>
+      <h3>${escapeHtml(watchlist.objective || "Research candidates")}</h3>
+      <p>${escapeHtml(watchlist.policy || "")}</p>
+    </div>
+    <div class="watchlist-kpis">
+      <div>
+        <span>Names tracked</span>
+        <strong>${escapeHtml(items.length)}</strong>
+      </div>
+      <div>
+        <span>Non-holding candidates</span>
+        <strong>${escapeHtml(items.filter((item) => item.status === "watchlist_not_position").length)}</strong>
+      </div>
+      <div>
+        <span>Portfolio holdings</span>
+        <strong>${escapeHtml(items.filter((item) => item.status === "portfolio_holding_watch").length)}</strong>
+      </div>
+      <div>
+        <span>Action boundary</span>
+        <strong>${escapeHtml(watchlist.boundary || "review")}</strong>
+      </div>
+    </div>
+  `;
+
+  grid.innerHTML = items.map(renderWatchlistCard).join("");
+  comparison.innerHTML = (watchlist.comparison || [])
+    .map(
+      (row) => `
+        <article class="comparison-card">
+          <p class="section-label">${escapeHtml(row.dimension)}</p>
+          <div class="comparison-columns">
+            <div>
+              <strong>MU</strong>
+              <p>${escapeHtml(row.micron)}</p>
+            </div>
+            <div>
+              <strong>SK Hynix</strong>
+              <p>${escapeHtml(row.skHynix)}</p>
+            </div>
+          </div>
+          <p class="muted">Decision use: ${escapeHtml(row.decisionUse)}</p>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function renderWatchlistCard(item) {
+  const sources = (item.source_ids || []).map(sourceLink).join("");
+  const signalRows = (item.keySignals || [])
+    .map(
+      (signal) => `
+        <div>
+          <span>${escapeHtml(signal.label)}</span>
+          <strong>${escapeHtml(signal.value)}</strong>
+          <p>${escapeHtml(signal.interpretation)}</p>
+        </div>
+      `
+    )
+    .join("");
+  const metrics = (item.watchMetrics || [])
+    .map(
+      (metric) => `
+        <li>
+          <strong>${escapeHtml(metric.label)}</strong>
+          <span>${escapeHtml(metric.state)} | ${escapeHtml(metric.cadence)}</span>
+          <p>${escapeHtml(metric.trigger)}</p>
+        </li>
+      `
+    )
+    .join("");
+  const evidenceNeeded = (item.evidenceNeeded || [])
+    .map((entry) => `<li>${escapeHtml(entry)}</li>`)
+    .join("");
+  const bearCase = (item.bearCase || [])
+    .map((entry) => `<li>${escapeHtml(entry)}</li>`)
+    .join("");
+  const process = (item.decisionProcess || [])
+    .map(
+      (step) => `
+        <li>
+          <strong>${escapeHtml(step.step)}</strong>
+          <span>${escapeHtml(step.text)}</span>
+        </li>
+      `
+    )
+    .join("");
+  return `
+    <article class="watchlist-card">
+      <div class="card-head">
+        <div>
+          <div class="ticker">${escapeHtml(item.ticker)}</div>
+          <div class="name">${escapeHtml(item.name)}</div>
+        </div>
+        <span class="severity ${severityClass(item.status)}">${escapeHtml(item.statusLabel || item.status)}</span>
+      </div>
+      <div class="bucket">${escapeHtml(item.role)} | Priority ${escapeHtml(item.priority)}</div>
+      <div class="meta-row">
+        <span>Review: ${escapeHtml(item.nextReviewDue)}</span>
+        <span>Boundary: ${escapeHtml(item.decisionBoundary)}</span>
+      </div>
+      <p class="thesis">${escapeHtml(item.coreQuestion)}</p>
+      <p>${escapeHtml(item.thesisToTest)}</p>
+      <div class="watchlist-signal-grid">${signalRows}</div>
+      <div class="watchlist-section">
+        <div class="card-section-title">Watch metrics</div>
+        <ul class="watchlist-list">${metrics}</ul>
+      </div>
+      <div class="watchlist-section">
+        <div class="card-section-title">Evidence needed</div>
+        <ul>${evidenceNeeded}</ul>
+      </div>
+      <div class="watchlist-section">
+        <div class="card-section-title">Bear case</div>
+        <ul>${bearCase}</ul>
+      </div>
+      <div class="watchlist-section">
+        <div class="card-section-title">Falsifier</div>
+        <p class="muted">${escapeHtml(item.falsifier)}</p>
+      </div>
+      <div class="watchlist-section">
+        <div class="card-section-title">Next action</div>
+        <p>${escapeHtml(item.nextAction?.question || "")}</p>
+        <p class="muted">${escapeHtml(item.nextAction?.successCondition || "")}</p>
+      </div>
+      <div class="watchlist-section">
+        <div class="card-section-title">Decision process</div>
+        <ol class="decision-step-list">${process}</ol>
+      </div>
+      <div class="source-links">${sources}</div>
+    </article>
+  `;
 }
 
 function renderResearch() {

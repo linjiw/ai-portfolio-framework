@@ -17,8 +17,8 @@ Published Pages target:
 https://linjiw.github.io/ai-portfolio-framework/
 ```
 
-The dashboard includes the portfolio, decision process, control-right map,
-research monitor, signals, research notes, and source provenance.
+The dashboard includes the portfolio, decision process, research monitor, memory
+watchlist, control-right map, signals, research notes, and source provenance.
 
 The personal performance panel reads generated `portfolio-data.json`. Generate
 it from the repo root:

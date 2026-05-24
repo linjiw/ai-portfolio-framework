@@ -85,6 +85,17 @@
         </button>
         <button
           class="tab"
+          id="tab-watchlist"
+          role="tab"
+          data-view="watchlist"
+          aria-controls="view-watchlist"
+          aria-selected="false"
+          tabindex="-1"
+        >
+          Watchlist
+        </button>
+        <button
+          class="tab"
           id="tab-control"
           role="tab"
           data-view="control"
@@ -286,6 +297,26 @@
         <section class="panel provenance-panel" id="provenancePanel">
           Checking provenance coverage...
         </section>
+      </section>
+
+      <section class="view" id="view-watchlist" role="tabpanel" aria-labelledby="tab-watchlist" hidden>
+        <div class="section-head">
+          <div>
+            <p class="section-label">Research watchlist</p>
+            <h2>Memory re-rating candidates</h2>
+          </div>
+          <p class="muted">Watchlist work creates evidence review only; it does not change holdings or weights.</p>
+        </div>
+        <section class="panel watchlist-summary" id="watchlistSummary"></section>
+        <div class="watchlist-grid" id="watchlistGrid"></div>
+        <div class="section-head claims-head">
+          <div>
+            <p class="section-label">Decision comparison</p>
+            <h2>MU versus SK Hynix</h2>
+          </div>
+          <p class="muted">The comparison records what would need to be true before any future portfolio review.</p>
+        </div>
+        <div class="watchlist-comparison" id="watchlistComparison"></div>
       </section>
 
       <section class="view" id="view-control" role="tabpanel" aria-labelledby="tab-control" hidden>
