@@ -21,6 +21,8 @@ config/holdings.yml
 config/metrics_catalog.yml
 config/alert_rules.yml
 config/sources.yml
+config/source_rules.yml
+config/sec_companies.yml
 config/risk_factors.yml
 config/falsifier_thresholds.yml
 config/bear_cases.yml
@@ -44,6 +46,14 @@ data/thesis_changelog.yml
 `sources.yml`
 : Source-health definitions. Automated sources are checked against timestamps;
   planned and manual feeds are intentionally visible.
+
+`source_rules.yml`
+: Link-health rules that separate link availability from evidence quality.
+  Forbidden and timeout states are brittle-source signals, not claim failures.
+
+`sec_companies.yml`
+: CIKs, tracked SEC forms, review-relevant forms, and last-reviewed dates for
+  US-listed holdings and ADRs.
 
 `risk_factors.yml`
 : Portfolio-level risk overlays that cut across thesis buckets. The first
@@ -79,8 +89,13 @@ data/thesis_changelog.yml
 ```text
 site/research-monitor-data.json
 site/provenance-coverage.json
+site/sec-filings.json
+site/link-health.json
 data/generated/dashboard_data.json
 data/generated/provenance_coverage.json
+data/generated/sec_filings.json
+data/generated/link_health_snapshot.json
+data/link_health_history.jsonl
 ```
 
 The website reads `site/research-monitor-data.json` from the same static Pages
@@ -181,6 +196,66 @@ Valuation bands are stored as review ranges and remain `not_evaluated` until a
 separate valuation snapshot is wired in. The monitor can show that the valuation
 gate exists and is coverage-complete, while still preventing any automatic
 portfolio action.
+
+## Tier 1.0 State
+
+The monitor now starts free-data ingestion without changing the LLM boundary.
+
+### SEC filing feed
+
+`scripts/fetch_sec_filings.py` reads `config/sec_companies.yml`, calls SEC
+submissions JSON endpoints, and writes:
+
+```text
+site/sec-filings.json
+data/generated/sec_filings.json
+```
+
+The request user agent can be overridden with `SEC_USER_AGENT` in CI or a local
+shell. The checked-in default is only a project placeholder for the public demo.
+
+The first version only tracks filing events:
+
+```json
+{
+  "ticker": "MSFT",
+  "source": "sec_edgar",
+  "latest_relevant_filing": {
+    "form": "10-Q",
+    "filing_date": "2026-04-24",
+    "accession_number": "...",
+    "url": "..."
+  },
+  "review_required": true,
+  "reason": "Latest relevant SEC filing is newer than last reviewed date."
+}
+```
+
+It does not extract revenue, margin, capex, or evidence state. A new relevant
+filing can enter the review queue as `filing_review`, where a human reviewer
+decides whether it maps to evidence, bear-case movement, or no thesis change.
+
+### Link-health snapshots
+
+`scripts/check_link_health.py` checks source URLs from `site/research-data.js`
+and writes:
+
+```text
+site/link-health.json
+data/generated/link_health_snapshot.json
+data/link_health_history.jsonl
+```
+
+The monitor separates two concepts:
+
+```text
+weak_source = source is available but evidence quality needs stronger primary support
+broken_link = source URL is unavailable or errored
+```
+
+`forbidden` and `timeout` are not treated as claim failures. They indicate a
+brittle, bot-blocked, or slow source that may need archive or primary-source
+backup.
 
 ## LLM Boundary
 

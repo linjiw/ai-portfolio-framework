@@ -1,3 +1,4 @@
+import json
 from datetime import date
 
 import yaml
@@ -19,6 +20,8 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
     bear_path = tmp_path / "bears.yml"
     valuation_path = tmp_path / "valuation.yml"
     evidence_path = tmp_path / "evidence.yml"
+    sec_path = tmp_path / "sec-filings.json"
+    link_health_path = tmp_path / "link-health.json"
     research_data_path = tmp_path / "research-data.js"
     output_path = tmp_path / "monitor.json"
     provenance_path = tmp_path / "provenance.json"
@@ -154,8 +157,79 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
                     "cadence": "daily",
                     "update_mode": "automated",
                 },
+                {
+                    "id": "sec_edgar",
+                    "label": "SEC EDGAR",
+                    "tier": "filings",
+                    "cadence": "weekly",
+                    "update_mode": "automated",
+                },
+                {
+                    "id": "source_link_health",
+                    "label": "Source link health",
+                    "tier": "source_audit",
+                    "cadence": "weekly",
+                    "update_mode": "automated",
+                },
             ]
         },
+    )
+    sec_path.write_text(
+        json.dumps(
+            {
+                "schemaVersion": 1,
+                "generatedAtUtc": "2026-05-23T12:00:00Z",
+                "summary": {
+                    "company_count": 1,
+                    "healthy_company_count": 1,
+                    "failed_company_count": 0,
+                    "review_required_count": 1,
+                },
+                "companies": [
+                    {
+                        "ticker": "MSFT",
+                        "cik": "0000789019",
+                        "status": "healthy",
+                        "review_required": True,
+                        "reason": "Latest relevant SEC filing is newer than last reviewed date.",
+                        "latest_relevant_filing": {
+                            "form": "10-Q",
+                            "filing_date": "2026-05-22",
+                            "source_id": "sec-msft-10q",
+                            "url": "https://www.sec.gov/example",
+                        },
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    link_health_path.write_text(
+        json.dumps(
+            {
+                "schemaVersion": 1,
+                "checkedAtUtc": "2026-05-23T12:00:00Z",
+                "summary": {
+                    "total": 1,
+                    "ok": 1,
+                    "redirected": 0,
+                    "forbidden": 0,
+                    "timeout": 0,
+                    "not_found": 0,
+                    "error": 0,
+                    "broken": 0,
+                    "weak_source": 0,
+                },
+                "sources": [
+                    {
+                        "source_id": "msft-source",
+                        "link_status": "ok",
+                        "source_quality_status": "accepted",
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
     )
     write_yaml(
         risk_path,
@@ -275,6 +349,8 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
         bear_cases_config_path=bear_path,
         valuation_bands_config_path=valuation_path,
         evidence_log_path=evidence_path,
+        sec_filings_path=sec_path,
+        link_health_path=link_health_path,
         research_data_path=research_data_path,
         output_path=output_path,
         generated_output_path=None,
@@ -290,9 +366,18 @@ def test_research_monitor_flags_stale_price_and_weight_drift(tmp_path) -> None:
     assert payload["summary"]["evidence_coverage"]["covered_metrics"] == 1
     assert payload["summary"]["risk_overlay"]["capex_direct_exposure_pct"] == 50.0
     assert payload["summary"]["decision_discipline"]["operational_falsifier_count"] == 2
+    assert payload["summary"]["sec_filings"]["review_required_count"] == 1
+    assert payload["summary"]["link_health"]["broken"] == 0
     assert payload["reviewQueue"][0]["score"] > 0
-    assert payload["reviewQueue"][0]["metric_id"] == "agent"
-    assert "direct capex-cycle exposure" in payload["reviewQueue"][0]["score_reasons"]
+    assert {item["type"] for item in payload["reviewQueue"]} >= {
+        "filing_review",
+        "evidence_check",
+    }
+    evidence_item = next(
+        item for item in payload["reviewQueue"] if item["type"] == "evidence_check"
+    )
+    assert evidence_item["metric_id"] == "agent"
+    assert "direct capex-cycle exposure" in evidence_item["score_reasons"]
     assert payload["holdings"][0]["top_metrics"][0]["evidence_state"]["state"] == "deteriorating"
     assert payload["holdings"][0]["falsifier_threshold"]["threshold"] == "No production evidence"
     assert payload["riskOverlay"]["riskFactors"][0]["status"] == "yellow"

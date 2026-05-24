@@ -1,0 +1,16 @@
+schema_version: 1
+
+link_health:
+  timeout_seconds: 12
+  history_limit: 120
+  status_policy:
+    forbidden: Source may be bot-blocked; do not treat as claim failure.
+    timeout: Source may be brittle or slow; do not treat as claim failure.
+    not_found: Link needs replacement or archival support.
+  weak_source_terms:
+    - reuters
+    - investing.com
+    - secondary
+  primary_support_required:
+    - source_id: ceg-tmi-pjm
+      reason: CEG TMI/PJM timing claim should be supplemented with PJM, company, or regulatory primary support.

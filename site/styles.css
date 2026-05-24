@@ -507,7 +507,10 @@ a:hover {
 .severity.manual_expected,
 .severity.watchlist_not_position,
 .severity.explicit_exclusion_needed,
-.severity.research_needed {
+.severity.research_needed,
+.severity.redirected,
+.severity.forbidden,
+.severity.timeout {
   color: var(--amber);
   background: var(--amber-soft);
 }
@@ -518,7 +521,9 @@ a:hover {
 }
 
 .severity.stale,
-.severity.broken {
+.severity.broken,
+.severity.not_found,
+.severity.error {
   color: var(--red);
   background: var(--red-soft);
 }
@@ -644,7 +649,9 @@ a:hover {
 }
 
 .risk-overlay-panel,
-.discipline-panel {
+.discipline-panel,
+.sec-panel,
+.link-health-panel {
   padding: 18px;
 }
 
@@ -748,20 +755,26 @@ a:hover {
 
 .risk-factor-grid,
 .framework-gap-list,
-.threshold-list {
+.threshold-list,
+.filing-list,
+.link-health-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
 .framework-gap-list,
-.threshold-list {
+.threshold-list,
+.filing-list,
+.link-health-list {
   margin-top: 12px;
 }
 
 .risk-factor-grid article,
 .framework-gap-list article,
-.threshold-list article {
+.threshold-list article,
+.filing-list article,
+.link-health-list article {
   min-width: 0;
   padding: 14px;
   background: #f8faf8;
@@ -771,7 +784,9 @@ a:hover {
 
 .risk-factor-grid p,
 .framework-gap-list p,
-.threshold-list p {
+.threshold-list p,
+.filing-list p,
+.link-health-list p {
   margin-top: 10px;
   color: var(--muted);
   font-size: 13px;
@@ -1083,6 +1098,8 @@ a:hover {
   .risk-factor-grid,
   .framework-gap-list,
   .threshold-list,
+  .filing-list,
+  .link-health-list,
   .discipline-kpis,
   .weak-source-list,
   .portfolio-plot-grid {
@@ -1128,6 +1145,8 @@ a:hover {
   .risk-factor-grid,
   .framework-gap-list,
   .threshold-list,
+  .filing-list,
+  .link-health-list,
   .discipline-kpis,
   .weak-source-list,
   .portfolio-plot-grid,

@@ -47,6 +47,8 @@ Related framework data and reports:
 - `config/metrics_catalog.yml`
 - `config/alert_rules.yml`
 - `config/sources.yml`
+- `config/source_rules.yml`
+- `config/sec_companies.yml`
 - `config/risk_factors.yml`
 - `config/falsifier_thresholds.yml`
 - `config/bear_cases.yml`
@@ -59,8 +61,13 @@ Related framework data and reports:
 - `site/portfolio-data.json`
 - `site/research-monitor-data.json`
 - `site/provenance-coverage.json`
+- `site/sec-filings.json`
+- `site/link-health.json`
 - `data/generated/dashboard_data.json`
 - `data/generated/provenance_coverage.json`
+- `data/generated/sec_filings.json`
+- `data/generated/link_health_snapshot.json`
+- `data/link_health_history.jsonl`
 - `data/evidence_log.yml`
 - `data/thesis_changelog.yml`
 - `data/portfolio/ai_portfolio_summary.csv`
@@ -131,6 +138,8 @@ Monitor top-level fields:
   alerts: [...],
   reviewQueue: [...],
   sourceHealth: [...],
+  secFilings: {...},
+  linkHealth: {...},
   holdings: [...],
   metricCatalog: [...],
   riskOverlay: {...},
@@ -191,12 +200,14 @@ Current invariants verified locally:
 - Decision-process choice buckets: 4
 - Decision gates: 4
 - Research monitor holdings: 14
-- Research monitor source-health rows: 6
-- Research monitor review queue rows: 14
+- Research monitor source-health rows: generated from configured sources
+- Research monitor review queue rows: next actions plus human-review events
 - Capex direct risk overlay: 82% target exposure
 - Operational falsifier coverage: 14/14 holdings
 - Bear-case coverage: 14/14 holdings
 - Valuation-band coverage: 14/14 holdings
+- SEC filing feed: generated
+- Link-health snapshot: generated
 - Provenance coverage JSON: present
 - Source count: 31
 - Claim count: 15
@@ -210,7 +221,7 @@ Current invariants verified locally:
 The framework treats intelligence as increasingly abundant and trusted execution
 as the scarce economic layer.
 
-The site encodes that thesis through four categories of research objects:
+The site encodes that thesis through six categories of research objects:
 
 1. Holdings
 
@@ -243,6 +254,14 @@ The site encodes that thesis through four categories of research objects:
    The dashboard favors official/company sources and primary research where
    available. When secondary sources are used, the thesis labels the uncertainty
    explicitly.
+
+6. Free data ingestion
+
+   SEC filings and link-health snapshots are the first Tier 1.0 ingestion
+   surfaces. SEC filings create `filing_review` queue items when new relevant
+   filings are newer than the last reviewed date. Link-health distinguishes
+   broken links from weak sources; a 403 or timeout is treated as source
+   brittleness, not as a false claim.
 
 Important writing rule added after review:
 
@@ -497,6 +516,9 @@ Research limitations:
   to a historical stress test.
 - Valuation bands are policy ranges only until a repeatable valuation snapshot
   source is wired in.
+- SEC ingestion currently tracks filing events only; it does not parse XBRL
+  financial metrics yet.
+- Link-health snapshots are availability checks, not evidence validation.
 
 ## 12. Expert Review Checklist
 
@@ -520,7 +542,8 @@ Highest-value next work:
 1. Expand claim-level provenance to every material evidence bullet.
 2. Add historical alert replay tests for 2024-2026 drawdown, capex, and
    source-health scenarios.
-3. Generate the website from the tracker CSV/SQLite data instead of manually
+3. Add stable evidence bullet IDs so provenance coverage no longer depends on
+   text-level matching.
+4. Generate the website from the tracker CSV/SQLite data instead of manually
    duplicating content in `research-data.js`.
-4. Promote structured signal fields into tracker CSV/SQLite once the schema stabilizes.
-5. Add historical snapshots for link-health reports and claim provenance.
+5. Promote structured signal fields into tracker CSV/SQLite once the schema stabilizes.

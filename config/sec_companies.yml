@@ -1,0 +1,75 @@
+schema_version: 1
+
+policy:
+  purpose: Track official SEC filing events before any narrative or LLM analysis.
+  boundary: SEC filings create filing_review queue items only; they do not update evidence_state automatically.
+  user_agent_env: SEC_USER_AGENT
+  default_user_agent: ai-portfolio-framework contact@example.com
+
+companies:
+  MSFT:
+    cik: "0000789019"
+    forms: [10-K, 10-Q, 8-K]
+    review_relevant_forms: [10-K, 10-Q, 8-K]
+    last_reviewed_at: 2026-05-22
+  GOOGL:
+    cik: "0001652044"
+    forms: [10-K, 10-Q, 8-K]
+    review_relevant_forms: [10-K, 10-Q, 8-K]
+    last_reviewed_at: 2026-05-22
+  AVGO:
+    cik: "0001730168"
+    forms: [10-K, 10-Q, 8-K]
+    review_relevant_forms: [10-K, 10-Q, 8-K]
+    last_reviewed_at: 2026-05-22
+  TSM:
+    cik: "0001046179"
+    forms: [20-F, 6-K]
+    review_relevant_forms: [20-F, 6-K]
+    last_reviewed_at: 2026-05-22
+  NVDA:
+    cik: "0001045810"
+    forms: [10-K, 10-Q, 8-K]
+    review_relevant_forms: [10-K, 10-Q, 8-K]
+    last_reviewed_at: 2026-05-22
+  CEG:
+    cik: "0001868275"
+    forms: [10-K, 10-Q, 8-K]
+    review_relevant_forms: [10-K, 10-Q, 8-K]
+    last_reviewed_at: 2026-05-22
+  VRT:
+    cik: "0001674101"
+    forms: [10-K, 10-Q, 8-K]
+    review_relevant_forms: [10-K, 10-Q, 8-K]
+    last_reviewed_at: 2026-05-22
+  MSCI:
+    cik: "0001408198"
+    forms: [10-K, 10-Q, 8-K]
+    review_relevant_forms: [10-K, 10-Q, 8-K]
+    last_reviewed_at: 2026-05-22
+  MCO:
+    cik: "0001059556"
+    forms: [10-K, 10-Q, 8-K]
+    review_relevant_forms: [10-K, 10-Q, 8-K]
+    last_reviewed_at: 2026-05-22
+  SPGI:
+    cik: "0000064040"
+    forms: [10-K, 10-Q, 8-K]
+    review_relevant_forms: [10-K, 10-Q, 8-K]
+    last_reviewed_at: 2026-05-22
+  VEEV:
+    cik: "0001393052"
+    forms: [10-K, 10-Q, 8-K]
+    review_relevant_forms: [10-K, 10-Q, 8-K]
+    last_reviewed_at: 2026-05-22
+  TER:
+    cik: "0000097210"
+    forms: [10-K, 10-Q, 8-K]
+    review_relevant_forms: [10-K, 10-Q, 8-K]
+    last_reviewed_at: 2026-05-22
+
+non_sec_holdings:
+  "000660.KS":
+    reason: SK Hynix is Korea-listed and should be tracked through company IR or exchange disclosures.
+  CASH:
+    reason: Cash has no issuer filing feed.

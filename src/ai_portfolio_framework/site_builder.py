@@ -56,6 +56,8 @@ def build_site(
         portfolio_data_path=output_dir / "portfolio-data.json",
         output_path=output_dir / "research-monitor-data.json",
         research_data_path=output_dir / "research-data.js",
+        sec_filings_path=output_dir / "sec-filings.json",
+        link_health_path=output_dir / "link-health.json",
         provenance_output_path=output_dir / "provenance-coverage.json",
         generated_output_path=None,
         generated_provenance_output_path=None,

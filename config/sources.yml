@@ -19,9 +19,17 @@ sources:
     label: SEC EDGAR APIs and RSS
     tier: filings
     cadence: weekly_or_quarterly
-    update_mode: planned
+    update_mode: automated
     status_policy: primary_source
     notes: Free official source for US issuer filings and XBRL facts.
+
+  - id: source_link_health
+    label: Source link-health snapshots
+    tier: source_audit
+    cadence: weekly
+    update_mode: automated
+    status_policy: source_availability_not_claim_truth
+    notes: Checks link availability and source brittleness without treating bot-blocked pages as false claims.
 
   - id: company_ir
     label: Company IR and press releases

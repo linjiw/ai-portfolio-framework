@@ -33,6 +33,8 @@ RESEARCH_DATA_PATH = SITE_DIR / "research-data.js"
 SITE_PORTFOLIO_DATA_PATH = SITE_DIR / "portfolio-data.json"
 SITE_MONITOR_DATA_PATH = SITE_DIR / "research-monitor-data.json"
 SITE_PROVENANCE_COVERAGE_PATH = SITE_DIR / "provenance-coverage.json"
+SITE_SEC_FILINGS_PATH = SITE_DIR / "sec-filings.json"
+SITE_LINK_HEALTH_PATH = SITE_DIR / "link-health.json"
 GENERATED_MONITOR_DATA_PATH = GENERATED_DATA_DIR / "dashboard_data.json"
 GENERATED_PROVENANCE_COVERAGE_PATH = GENERATED_DATA_DIR / "provenance_coverage.json"
 
@@ -82,6 +84,8 @@ def build_research_monitor_data(
     evidence_log_path: Path = EVIDENCE_LOG_PATH,
     thesis_changelog_path: Path = THESIS_CHANGELOG_PATH,
     research_data_path: Path = RESEARCH_DATA_PATH,
+    sec_filings_path: Path = SITE_SEC_FILINGS_PATH,
+    link_health_path: Path = SITE_LINK_HEALTH_PATH,
     portfolio_data_path: Path = SITE_PORTFOLIO_DATA_PATH,
     output_path: Path = SITE_MONITOR_DATA_PATH,
     generated_output_path: Path | None = GENERATED_MONITOR_DATA_PATH,
@@ -103,6 +107,8 @@ def build_research_monitor_data(
     decision_log = load_yaml_list(decision_log_path)
     evidence_log = load_yaml_list(evidence_log_path)
     thesis_changelog = load_yaml_list(thesis_changelog_path)
+    sec_filings = load_json_optional(sec_filings_path)
+    link_health = load_json_optional(link_health_path)
     evidence_index = latest_evidence_by_metric(evidence_log)
     portfolio_data = portfolio_data or load_json(portfolio_data_path)
 
@@ -177,10 +183,17 @@ def build_research_monitor_data(
     source_health = build_source_health(
         sources_config=sources_config,
         portfolio_data=portfolio_data,
+        sec_filings=sec_filings,
+        link_health=link_health,
         as_of_date=as_of_date,
         stale_days=int(rules_by_id.get("stale_price", {}).get("threshold_days", 3)),
     )
-    review_queue = build_review_queue(monitored_holdings, alerts, as_of_date=as_of_date)
+    review_queue = build_review_queue(
+        monitored_holdings,
+        alerts,
+        sec_filings=sec_filings,
+        as_of_date=as_of_date,
+    )
     evidence_coverage = build_evidence_coverage(monitored_holdings)
     provenance_coverage = build_provenance_coverage(
         research_data_path=research_data_path,
@@ -211,10 +224,14 @@ def build_research_monitor_data(
             "provenance_coverage": provenance_coverage["summary"],
             "risk_overlay": risk_overlay["summary"],
             "decision_discipline": decision_discipline["summary"],
+            "sec_filings": sec_filings.get("summary", {}),
+            "link_health": link_health.get("summary", {}),
         },
         "alerts": alerts,
         "reviewQueue": review_queue,
         "sourceHealth": source_health,
+        "secFilings": sec_filings,
+        "linkHealth": link_health,
         "holdings": monitored_holdings,
         "metricCatalog": compact_metric_catalog(metrics_catalog, evidence_index=evidence_index),
         "riskOverlay": risk_overlay,
@@ -321,6 +338,8 @@ def build_source_health(
     *,
     sources_config: dict[str, Any],
     portfolio_data: dict[str, Any],
+    sec_filings: dict[str, Any],
+    link_health: dict[str, Any],
     as_of_date: date,
     stale_days: int,
 ) -> list[dict[str, Any]]:
@@ -344,6 +363,20 @@ def build_source_health(
             last_update = portfolio_updated.isoformat() if portfolio_updated else None
             age = (as_of_date - portfolio_updated).days if portfolio_updated else None
             status = "healthy" if age is not None and age <= 1 else "stale"
+        elif source_id == "sec_edgar":
+            last_update = parse_utc_date(sec_filings.get("generatedAtUtc"))
+            last_update_text = last_update.isoformat() if last_update else None
+            failed_count = int(sec_filings.get("summary", {}).get("failed_company_count", 0))
+            healthy_count = int(sec_filings.get("summary", {}).get("healthy_company_count", 0))
+            status = "healthy" if healthy_count and failed_count == 0 else "stale"
+            last_update = last_update_text
+        elif source_id == "source_link_health":
+            last_update = parse_utc_date(link_health.get("checkedAtUtc"))
+            last_update_text = last_update.isoformat() if last_update else None
+            broken_count = int(link_health.get("summary", {}).get("broken", 0))
+            total = int(link_health.get("summary", {}).get("total", 0))
+            status = "healthy" if total and broken_count == 0 else "stale"
+            last_update = last_update_text
         elif source.get("update_mode") == "manual":
             status = "manual_expected"
         elif source.get("update_mode") == "planned":
@@ -463,6 +496,7 @@ def build_review_queue(
     holdings: list[dict[str, Any]],
     alerts: list[dict[str, Any]],
     *,
+    sec_filings: dict[str, Any] | None = None,
     as_of_date: date,
 ) -> list[dict[str, Any]]:
     queue = []
@@ -489,6 +523,7 @@ def build_review_queue(
                 ticker=alert["ticker"],
             )
         )
+    queue.extend(build_filing_review_queue(sec_filings or {}, as_of_date=as_of_date))
     for holding in holdings:
         action = holding.get("next_action")
         if action:
@@ -517,6 +552,54 @@ def build_review_queue(
             item.get("ticker", ""),
         ),
     )
+
+
+def build_filing_review_queue(
+    sec_filings: dict[str, Any],
+    *,
+    as_of_date: date,
+) -> list[dict[str, Any]]:
+    queue = []
+    for company in sec_filings.get("companies", []):
+        if not company.get("review_required"):
+            continue
+        filing = company.get("latest_relevant_filing") or {}
+        ticker = str(company.get("ticker", ""))
+        form = filing.get("form", "filing")
+        filing_date = filing.get("filing_date")
+        item = {
+            "ticker": ticker,
+            "type": "filing_review",
+            "priority": "medium",
+            "due": filing_date or as_of_date.isoformat(),
+            "question": f"Review {ticker} {form} filed {filing_date}.",
+            "success_condition": (
+                "Human reviewer maps the filing to metric evidence, bear case movement, "
+                "or no thesis change."
+            ),
+            "source": "sec_edgar",
+            "metric_id": None,
+            "form": form,
+            "filing_date": filing_date,
+            "source_id": filing.get("source_id"),
+            "url": filing.get("url"),
+        }
+        score = score_review_item(
+            priority="medium",
+            due=filing_date,
+            metric=None,
+            as_of_date=as_of_date,
+            alert_level=None,
+            ticker=ticker,
+        )
+        score["score"] += 20
+        score["score_reasons"].extend(
+            reason
+            for reason in ("official SEC filing", company.get("reason", ""))
+            if reason
+        )
+        queue.append(item | score)
+    return queue
 
 
 def score_review_item(
@@ -953,6 +1036,10 @@ def load_json(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_json_optional(path: Path) -> dict[str, Any]:
+    return load_json(path) if path.exists() else {}
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:

@@ -44,6 +44,12 @@ jobs:
       - name: Refresh portfolio
         run: uv run python -m scripts.update_portfolio
 
+      - name: Fetch SEC filings
+        run: uv run python -m scripts.fetch_sec_filings
+
+      - name: Check source links
+        run: uv run python -m scripts.check_link_health
+
       - name: Build Pages artifact
         run: uv run python -m scripts.build_site
 
@@ -60,7 +66,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/portfolio/ai_portfolio_summary.csv data/portfolio/ai_portfolio_snapshots.csv
+          git add data/portfolio/ai_portfolio_summary.csv data/portfolio/ai_portfolio_snapshots.csv data/link_health_history.jsonl
           if git diff --cached --quiet; then
             echo "No portfolio history changes to commit."
           else

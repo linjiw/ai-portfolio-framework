@@ -53,6 +53,14 @@ def validate_site(site_dir: Path, *, require_portfolio: bool = False) -> list[st
     provenance_path = site_dir / "provenance-coverage.json"
     if require_portfolio or provenance_path.exists():
         errors.extend(validate_provenance_coverage_json(site_dir, provenance_path))
+
+    sec_path = site_dir / "sec-filings.json"
+    if require_portfolio or sec_path.exists():
+        errors.extend(validate_sec_filings_json(site_dir, sec_path))
+
+    link_health_path = site_dir / "link-health.json"
+    if require_portfolio or link_health_path.exists():
+        errors.extend(validate_link_health_json(site_dir, link_health_path))
     return errors
 
 
@@ -222,6 +230,55 @@ def validate_provenance_coverage_json(site_dir: Path, provenance_path: Path) -> 
     ratio = float(summary.get("coverageRatio", -1))
     if ratio < 0 or ratio > 1:
         errors.append(f"provenance coverage ratio must be between 0 and 1, got {ratio}")
+    return errors
+
+
+def validate_sec_filings_json(site_dir: Path, sec_path: Path) -> list[str]:
+    if not sec_path.exists():
+        return [f"sec-filings.json is required but missing in {site_dir}"]
+
+    errors: list[str] = []
+    try:
+        payload = json.loads(sec_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        return [f"sec-filings.json is invalid JSON: {exc}"]
+
+    if payload.get("schemaVersion") != 1:
+        errors.append(f"sec-filings schemaVersion must be 1, got {payload.get('schemaVersion')}")
+    summary = payload.get("summary", {})
+    if int(summary.get("company_count", 0)) <= 0:
+        errors.append("sec-filings must include at least one company")
+    for company in payload.get("companies", []):
+        if not company.get("ticker") or not company.get("cik"):
+            errors.append(f"sec-filings company missing ticker or cik: {company}")
+        if company.get("status") not in {"healthy", "stale"}:
+            errors.append(f"sec-filings company has invalid status: {company}")
+    return errors
+
+
+def validate_link_health_json(site_dir: Path, link_health_path: Path) -> list[str]:
+    if not link_health_path.exists():
+        return [f"link-health.json is required but missing in {site_dir}"]
+
+    errors: list[str] = []
+    try:
+        payload = json.loads(link_health_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        return [f"link-health.json is invalid JSON: {exc}"]
+
+    if payload.get("schemaVersion") != 1:
+        errors.append(
+            f"link-health schemaVersion must be 1, got {payload.get('schemaVersion')}"
+        )
+    valid_link_statuses = {"ok", "redirected", "timeout", "forbidden", "not_found", "error"}
+    summary = payload.get("summary", {})
+    if int(summary.get("total", 0)) <= 0:
+        errors.append("link-health must include at least one source")
+    for source in payload.get("sources", []):
+        if source.get("link_status") not in valid_link_statuses:
+            errors.append(f"link-health source has invalid status: {source}")
+        if source.get("source_quality_status") not in {"accepted", "weak_source"}:
+            errors.append(f"link-health source has invalid quality status: {source}")
     return errors
 
 

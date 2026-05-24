@@ -405,6 +405,8 @@ function renderResearchMonitor(monitor) {
   const evidenceCoverage = summary.evidence_coverage || {};
   const riskSummary = summary.risk_overlay || {};
   const disciplineSummary = summary.decision_discipline || {};
+  const secSummary = summary.sec_filings || {};
+  const linkSummary = summary.link_health || {};
   kpis.innerHTML = [
     ["Rule alert", ruleAlert, severityClass(ruleAlert)],
     ["Review queue", summary.review_queue_count ?? 0, ""],
@@ -412,6 +414,8 @@ function renderResearchMonitor(monitor) {
     ["Capex direct", `${Number(riskSummary.capex_direct_exposure_pct || 0).toFixed(0)}%`, ""],
     ["Falsifier coverage", Number(disciplineSummary.operational_falsifier_coverage || 0).toFixed(2), ""],
     ["Bear coverage", Number(disciplineSummary.bear_case_coverage || 0).toFixed(2), ""],
+    ["SEC reviews", secSummary.review_required_count ?? 0, ""],
+    ["Broken links", linkSummary.broken ?? 0, ""],
     ["Yellow alerts", alertCounts.yellow ?? 0, ""],
     ["Red alerts", alertCounts.red ?? 0, ""],
     ["Healthy sources", sourceCounts.healthy ?? 0, ""],
@@ -430,9 +434,11 @@ function renderResearchMonitor(monitor) {
   renderMonitorAlerts(monitor.alerts || []);
   renderRiskOverlay(monitor.riskOverlay || {});
   renderDecisionDiscipline(monitor.decisionDiscipline || {});
+  renderSecFilings(monitor.secFilings || {});
   renderReviewQueue(monitor.reviewQueue || []);
   renderMonitorHoldings(monitor.holdings || []);
   renderSourceHealth(monitor.sourceHealth || []);
+  renderLinkHealth(monitor.linkHealth || {});
   loadProvenanceCoverage();
 }
 
@@ -555,6 +561,74 @@ function renderDecisionDiscipline(discipline) {
   `;
 }
 
+function renderSecFilings(secFilings) {
+  const panel = document.getElementById("secPanel");
+  const companies = secFilings.companies || [];
+  if (!companies.length) {
+    panel.innerHTML = `<div class="empty-monitor">No SEC filing feed generated yet.</div>`;
+    return;
+  }
+  const summary = secFilings.summary || {};
+  const latest = companies
+    .filter((company) => company.latest_relevant_filing)
+    .sort((left, right) =>
+      String(right.latest_relevant_filing?.filing_date || "").localeCompare(
+        String(left.latest_relevant_filing?.filing_date || "")
+      )
+    )
+    .slice(0, 8);
+  panel.innerHTML = `
+    <div class="discipline-kpis">
+      <div>
+        <span>Tracked companies</span>
+        <strong>${escapeHtml(summary.company_count ?? 0)}</strong>
+      </div>
+      <div>
+        <span>Healthy feeds</span>
+        <strong>${escapeHtml(summary.healthy_company_count ?? 0)}</strong>
+      </div>
+      <div>
+        <span>Filing reviews</span>
+        <strong>${escapeHtml(summary.review_required_count ?? 0)}</strong>
+      </div>
+      <div>
+        <span>Boundary</span>
+        <strong>event</strong>
+      </div>
+    </div>
+    <div class="filing-list">
+      ${latest
+        .map((company) => {
+          const filing = company.latest_relevant_filing || {};
+          return `
+            <article>
+              <div class="card-head">
+                <div>
+                  <p class="section-label">${escapeHtml(company.ticker)} | ${escapeHtml(filing.form)}</p>
+                  <h3>${escapeHtml(filing.filing_date || "undated")}</h3>
+                </div>
+                <span class="severity ${company.review_required ? "yellow" : "green"}">${
+                  company.review_required ? "review" : "current"
+                }</span>
+              </div>
+              <p>${escapeHtml(company.reason)}</p>
+              <div class="meta-row">
+                <span>CIK: ${escapeHtml(company.cik)}</span>
+                <span>Accession: ${escapeHtml(filing.accession_number || "n/a")}</span>
+              </div>
+              ${
+                filing.url
+                  ? `<a class="source-pill" href="${safeUrl(filing.url)}" target="_blank" rel="noopener noreferrer">SEC filing</a>`
+                  : ""
+              }
+            </article>
+          `;
+        })
+        .join("")}
+    </div>
+  `;
+}
+
 function renderReviewQueue(queue) {
   const reviewQueue = document.getElementById("reviewQueue");
   if (!queue.length) {
@@ -580,6 +654,11 @@ function renderReviewQueue(queue) {
             </div>
             <p class="muted">${escapeHtml((item.score_reasons || []).join(", "))}</p>
             <p class="muted">${escapeHtml(item.success_condition)}</p>
+            ${
+              item.url
+                ? `<a class="source-pill" href="${safeUrl(item.url)}" target="_blank" rel="noopener noreferrer">Open source</a>`
+                : ""
+            }
           </div>
         </article>
       `
@@ -773,6 +852,70 @@ function renderSourceHealth(sources) {
           .join("")}
       </tbody>
     </table>
+  `;
+}
+
+function renderLinkHealth(linkHealth) {
+  const panel = document.getElementById("linkHealthPanel");
+  const sources = linkHealth.sources || [];
+  if (!sources.length) {
+    panel.innerHTML = `<div class="empty-monitor">No link-health snapshot generated yet.</div>`;
+    return;
+  }
+  const summary = linkHealth.summary || {};
+  const attention = sources
+    .filter(
+      (source) =>
+        source.link_status !== "ok" ||
+        source.source_quality_status === "weak_source" ||
+        source.primary_support_required
+    )
+    .slice(0, 8);
+  panel.innerHTML = `
+    <div class="discipline-kpis">
+      <div>
+        <span>Total sources</span>
+        <strong>${escapeHtml(summary.total ?? 0)}</strong>
+      </div>
+      <div>
+        <span>OK / redirected</span>
+        <strong>${escapeHtml((summary.ok ?? 0) + (summary.redirected ?? 0))}</strong>
+      </div>
+      <div>
+        <span>Forbidden / timeout</span>
+        <strong>${escapeHtml((summary.forbidden ?? 0) + (summary.timeout ?? 0))}</strong>
+      </div>
+      <div>
+        <span>Broken</span>
+        <strong>${escapeHtml(summary.broken ?? 0)}</strong>
+      </div>
+    </div>
+    <div class="link-health-list">
+      ${
+        attention.length
+          ? attention
+              .map(
+                (source) => `
+                  <article>
+                    <div class="card-head">
+                      <strong>${escapeHtml(source.source_id)}</strong>
+                      <span class="severity ${severityClass(source.link_status)}">${escapeHtml(
+                        source.link_status
+                      )}</span>
+                    </div>
+                    <p>${escapeHtml(source.label)}</p>
+                    <div class="meta-row">
+                      <span>Quality: ${escapeHtml(source.source_quality_status)}</span>
+                      <span>HTTP: ${escapeHtml(source.http_status || "n/a")}</span>
+                    </div>
+                    <p class="muted">${escapeHtml(source.quality_reason || "")}</p>
+                  </article>
+                `
+              )
+              .join("")
+          : `<p class="muted">No source needs link-health attention in the latest snapshot.</p>`
+      }
+    </div>
   `;
 }
 
