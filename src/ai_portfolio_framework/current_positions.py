@@ -1,4 +1,4 @@
-"""Local-only current-position analysis for the framework site."""
+"""Sanitized current-position analysis for the framework site."""
 
 from __future__ import annotations
 
@@ -6,17 +6,20 @@ import argparse
 import json
 import math
 import re
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
 import yaml
+import yfinance as yf
 
 from ai_portfolio_framework.config import CONFIG_DIR, GENERATED_DATA_DIR, MANUAL_DIR, SITE_DIR
+from ai_portfolio_framework.portfolio import fetch_latest_price
 
 DEFAULT_OUTPUT_PATH = SITE_DIR / "current-positions-data.json"
 DEFAULT_GENERATED_OUTPUT_PATH = GENERATED_DATA_DIR / "current_positions_analysis.json"
+DEFAULT_SEED_PATH = MANUAL_DIR / "current_positions_public_seed.json"
 HOLDINGS_PATH = MANUAL_DIR / "ai_framework_holdings.csv"
 WATCHLIST_RULES_PATH = CONFIG_DIR / "watchlist_rules.yml"
 
@@ -29,17 +32,47 @@ OPTION_RE = re.compile(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Build local current-position analysis JSON.")
-    parser.add_argument("--input", type=Path, required=True, help="Fidelity positions CSV export.")
+    parser = argparse.ArgumentParser(description="Build sanitized current-position analysis JSON.")
+    parser.add_argument("--input", type=Path, default=None, help="Fidelity positions CSV export.")
+    parser.add_argument(
+        "--seed",
+        type=Path,
+        default=DEFAULT_SEED_PATH,
+        help="Sanitized public current-position seed used when --input is omitted.",
+    )
+    parser.add_argument(
+        "--write-seed",
+        action="store_true",
+        help="When importing a CSV, also write a sanitized public seed JSON.",
+    )
+    parser.add_argument(
+        "--no-refresh-prices",
+        action="store_true",
+        help="Use seed marks without refreshing public market prices.",
+    )
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
     parser.add_argument("--generated-output", type=Path, default=DEFAULT_GENERATED_OUTPUT_PATH)
+    parser.add_argument(
+        "--skip-fib-momentum",
+        action="store_true",
+        help="Do not refresh the Fibonacci EMA monitor after importing positions.",
+    )
     args = parser.parse_args()
 
-    payload = build_current_positions_analysis(
-        input_path=args.input,
-        output_path=args.output,
-        generated_output_path=args.generated_output,
-    )
+    if args.input:
+        payload = build_current_positions_analysis(
+            input_path=args.input,
+            output_path=args.output,
+            generated_output_path=args.generated_output,
+            seed_output_path=args.seed if args.write_seed else None,
+        )
+    else:
+        payload = build_current_positions_from_seed(
+            seed_path=args.seed,
+            output_path=args.output,
+            generated_output_path=args.generated_output,
+            refresh_prices=not args.no_refresh_prices,
+        )
     summary = payload["summary"]
     print(
         "Built current positions analysis: "
@@ -47,6 +80,15 @@ def main() -> None:
         f"framework={summary['frameworkMappedWeightPct']:.2f}% "
         f"outside={summary['outsideFrameworkWeightPct']:.2f}%"
     )
+    if not args.skip_fib_momentum:
+        from ai_portfolio_framework.fib_momentum import build_fib_momentum_data
+
+        fib_payload = build_fib_momentum_data(current_positions_path=args.output)
+        fib_summary = fib_payload["summary"]
+        print(
+            "Refreshed Fibonacci EMA monitor: "
+            f"rows={fib_summary['scannedCount']} failures={fib_summary['failureCount']}"
+        )
 
 
 def build_current_positions_analysis(
@@ -54,9 +96,66 @@ def build_current_positions_analysis(
     input_path: Path,
     output_path: Path | None = DEFAULT_OUTPUT_PATH,
     generated_output_path: Path | None = DEFAULT_GENERATED_OUTPUT_PATH,
+    seed_output_path: Path | None = None,
     now: datetime | None = None,
 ) -> dict[str, Any]:
     rows = load_fidelity_positions(input_path)
+    payload = build_current_positions_payload(
+        rows=rows,
+        source_file=input_path.name,
+        downloaded_at=extract_downloaded_at(input_path),
+        publication_boundary="public_sanitized_no_account_identifiers",
+        output_path=output_path,
+        generated_output_path=generated_output_path,
+        now=now,
+    )
+    if seed_output_path:
+        write_json(seed_output_path, seed_from_payload(payload, seed_source=input_path.name))
+    return payload
+
+
+def build_current_positions_from_seed(
+    *,
+    seed_path: Path = DEFAULT_SEED_PATH,
+    output_path: Path | None = DEFAULT_OUTPUT_PATH,
+    generated_output_path: Path | None = DEFAULT_GENERATED_OUTPUT_PATH,
+    refresh_prices: bool = True,
+    latest_prices: dict[str, dict[str, Any]] | None = None,
+    option_prices: dict[str, dict[str, Any]] | None = None,
+    snapshot_date: date | None = None,
+    now: datetime | None = None,
+) -> dict[str, Any]:
+    if not seed_path.exists():
+        raise FileNotFoundError(f"Current-position seed not found: {seed_path}")
+    seed = json.loads(seed_path.read_text(encoding="utf-8"))
+    rows = load_seed_positions(
+        seed,
+        refresh_prices=refresh_prices,
+        latest_prices=latest_prices,
+        option_prices=option_prices,
+        snapshot_date=snapshot_date or datetime.now(UTC).date(),
+    )
+    return build_current_positions_payload(
+        rows=rows,
+        source_file=seed_path.name,
+        downloaded_at=seed.get("seededFrom", {}).get("downloadedAt"),
+        publication_boundary="public_sanitized_seed_no_account_identifiers",
+        output_path=output_path,
+        generated_output_path=generated_output_path,
+        now=now,
+    )
+
+
+def build_current_positions_payload(
+    *,
+    rows: list[dict[str, Any]],
+    source_file: str,
+    downloaded_at: str | None,
+    publication_boundary: str,
+    output_path: Path | None,
+    generated_output_path: Path | None,
+    now: datetime | None = None,
+) -> dict[str, Any]:
     framework = load_framework_map()
     watchlist = load_watchlist_map()
     positions = [enrich_position(row, framework, watchlist) for row in rows]
@@ -67,12 +166,12 @@ def build_current_positions_analysis(
         "generatedAtUtc": (now or datetime.now(UTC)).replace(microsecond=0).isoformat().replace(
             "+00:00", "Z"
         ),
-        "sourceFile": input_path.name,
-        "downloadedAt": extract_downloaded_at(input_path),
+        "sourceFile": source_file,
+        "downloadedAt": downloaded_at,
         "privacy": {
             "accountIdentifiersIncluded": False,
             "sourceAccountFieldsDropped": ["Account Number", "Account Name"],
-            "publicationBoundary": "local_only_generated_json_not_committed",
+            "publicationBoundary": publication_boundary,
         },
         "summary": summary,
         "classifications": build_classifications(grouped),
@@ -86,6 +185,39 @@ def build_current_positions_analysis(
     if generated_output_path:
         write_json(generated_output_path, payload)
     return payload
+
+
+def seed_from_payload(payload: dict[str, Any], *, seed_source: str) -> dict[str, Any]:
+    rows = []
+    for row in payload.get("positions") or []:
+        rows.append(
+            {
+                "symbol": row["symbol"],
+                "description": row["description"],
+                "quantity": row["quantity"],
+                "instrument": row["instrument"],
+                "underlying": row.get("underlying"),
+                "option": row.get("option"),
+                "seedValueUsd": row["currentValueUsd"],
+                "costBasisUsd": row["costBasisUsd"],
+                "fallbackMarkUsd": fallback_mark(row),
+            }
+        )
+    return {
+        "schemaVersion": 1,
+        "generatedAtUtc": utc_iso(),
+        "source": "sanitized_current_positions_public_seed",
+        "seededFrom": {
+            "sourceFile": seed_source,
+            "downloadedAt": payload.get("downloadedAt"),
+        },
+        "privacy": {
+            "accountIdentifiersIncluded": False,
+            "sourceAccountFieldsDropped": ["Account Number", "Account Name", "Account Type"],
+            "publicationBoundary": "public_sanitized_no_account_identifiers",
+        },
+        "positions": rows,
+    }
 
 
 def load_fidelity_positions(input_path: Path) -> list[dict[str, Any]]:
@@ -114,9 +246,109 @@ def load_fidelity_positions(input_path: Path) -> list[dict[str, Any]]:
                 "costBasisUsd": parse_money(raw.get("Cost Basis Total")),
                 "averageCostBasis": parse_money(raw.get("Average Cost Basis")),
                 "accountType": clean_string(raw.get("Type")) or "unclassified",
+                "priceDate": None,
+                "priceSource": "brokerage_csv",
+                "priceStatus": "imported",
+                "priceError": None,
             }
         )
     return rows
+
+
+def load_seed_positions(
+    seed: dict[str, Any],
+    *,
+    refresh_prices: bool,
+    latest_prices: dict[str, dict[str, Any]] | None,
+    option_prices: dict[str, dict[str, Any]] | None,
+    snapshot_date: date,
+) -> list[dict[str, Any]]:
+    rows = []
+    latest_prices = latest_prices or {}
+    option_prices = option_prices or {}
+    for item in seed.get("positions") or []:
+        rows.append(
+            refresh_seed_position(
+                item,
+                refresh_prices=refresh_prices,
+                latest_prices=latest_prices,
+                option_prices=option_prices,
+                snapshot_date=snapshot_date,
+            )
+        )
+    return rows
+
+
+def refresh_seed_position(
+    item: dict[str, Any],
+    *,
+    refresh_prices: bool,
+    latest_prices: dict[str, dict[str, Any]],
+    option_prices: dict[str, dict[str, Any]],
+    snapshot_date: date,
+) -> dict[str, Any]:
+    symbol = str(item["symbol"])
+    instrument = str(item.get("instrument") or "equity")
+    quantity = parse_number(item.get("quantity")) or 0.0
+    cost_basis = parse_money(item.get("costBasisUsd")) or 0.0
+    seed_value = parse_money(item.get("seedValueUsd")) or 0.0
+    fallback = parse_money(item.get("fallbackMarkUsd"))
+    price = fallback
+    price_date = item.get("seedPriceDate")
+    price_source = "seed_fallback"
+    price_status = "seed_mark"
+    price_error = None
+
+    if instrument in {"cash", "pending"}:
+        current_value = seed_value
+        price_status = "fixed_value"
+    elif refresh_prices:
+        try:
+            if item.get("option"):
+                quote = get_option_quote(item, option_prices=option_prices)
+            else:
+                quote = get_equity_quote(
+                    symbol,
+                    latest_prices=latest_prices,
+                    as_of_date=snapshot_date,
+                )
+            price = quote["price"]
+            price_date = quote.get("price_date")
+            price_source = quote.get("source", "yfinance")
+            price_status = "refreshed"
+            current_value = position_value(quantity=quantity, price=price, instrument=instrument)
+        except Exception as exc:  # pragma: no cover - surfaced in generated JSON
+            price_error = str(exc)
+            current_value = seed_value
+            price_status = "fallback_after_refresh_error"
+    else:
+        current_value = seed_value
+
+    if instrument not in {"cash", "pending"} and (price is None or price <= 0):
+        current_value = seed_value
+        price_status = "fallback_missing_mark"
+
+    total_gain_loss = current_value - cost_basis if cost_basis else None
+    return {
+        "symbol": symbol,
+        "description": clean_string(item.get("description")) or symbol,
+        "quantity": quantity,
+        "lastPrice": price,
+        "lastPriceChange": None,
+        "currentValueUsd": current_value,
+        "todayGainLossUsd": None,
+        "todayGainLossPct": None,
+        "totalGainLossUsd": total_gain_loss,
+        "totalGainLossPct": safe_pct(total_gain_loss or 0, cost_basis) if cost_basis else None,
+        "percentOfAccount": None,
+        "costBasisUsd": cost_basis,
+        "averageCostBasis": None,
+        "accountType": "sanitized_public_seed",
+        "priceDate": price_date,
+        "priceSource": price_source,
+        "priceStatus": price_status,
+        "priceError": price_error,
+    }
 
 
 def enrich_position(
@@ -172,7 +404,11 @@ def aggregate_positions(
                 "todayGainLossUsd": 0.0,
                 "totalGainLossUsd": 0.0,
                 "costBasisUsd": 0.0,
-                "accountTypes": set(),
+                "lastPrice": row.get("lastPrice"),
+                "priceDate": row.get("priceDate"),
+                "priceSource": row.get("priceSource"),
+                "priceStatus": row.get("priceStatus"),
+                "priceError": row.get("priceError"),
                 "frameworkStatus": row["frameworkStatus"],
                 "frameworkBucket": row["frameworkBucket"],
                 "frameworkLayers": row["frameworkLayers"],
@@ -187,7 +423,8 @@ def aggregate_positions(
         bucket["todayGainLossUsd"] += float(row["todayGainLossUsd"] or 0)
         bucket["totalGainLossUsd"] += float(row["totalGainLossUsd"] or 0)
         bucket["costBasisUsd"] += float(row["costBasisUsd"] or 0)
-        bucket["accountTypes"].add(row["accountType"])
+        for field in ("lastPrice", "priceDate", "priceSource", "priceStatus", "priceError"):
+            bucket[field] = row.get(field) or bucket.get(field)
 
     total = sum(item["currentValueUsd"] for item in grouped.values())
     rows = []
@@ -199,7 +436,6 @@ def aggregate_positions(
         rows.append(
             {
                 **item,
-                "accountTypes": sorted(item["accountTypes"]),
                 "currentWeightPct": current_weight,
                 "absoluteExposurePct": safe_pct(item["absoluteExposureUsd"], total),
                 "driftVsTargetPct": None if target is None else current_weight - float(target),
@@ -227,6 +463,10 @@ def build_summary(positions: list[dict[str, Any]]) -> dict[str, Any]:
     defensive = total_for_status(positions, "defensive_or_hedge")
     top = positions[0] if positions else {}
     top5 = sum(row["currentValueUsd"] for row in positions[:5])
+    price_status_counts: dict[str, int] = {}
+    for row in positions:
+        status = str(row.get("priceStatus") or "unknown")
+        price_status_counts[status] = price_status_counts.get(status, 0) + 1
     return {
         "totalValueUsd": total,
         "grossExposureUsd": gross,
@@ -250,6 +490,7 @@ def build_summary(positions: list[dict[str, Any]]) -> dict[str, Any]:
         "topPositionWeightPct": top.get("currentWeightPct", 0),
         "topFiveWeightPct": safe_pct(top5, total),
         "positionCount": len(positions),
+        "priceStatusCounts": price_status_counts,
         "reviewState": "review_required",
         "reviewBoundary": "analysis_only_no_trade_instruction",
     }
@@ -418,7 +659,114 @@ def build_review_queue(
                 "actionBoundary": "review_only",
             }
         )
+    stale_marks = summary.get("priceStatusCounts", {}).get("fallback_after_refresh_error", 0)
+    if stale_marks:
+        queue.append(
+            {
+                "priority": "medium",
+                "topic": "price_refresh",
+                "question": (
+                    f"{stale_marks} position marks used seed fallback after a refresh error; "
+                    "review stale option or ticker prices before relying on current weights."
+                ),
+                "actionBoundary": "review_only",
+            }
+        )
     return queue
+
+
+def get_equity_quote(
+    symbol: str,
+    *,
+    latest_prices: dict[str, dict[str, Any]],
+    as_of_date: date,
+) -> dict[str, Any]:
+    if symbol in latest_prices:
+        quote = latest_prices[symbol]
+    else:
+        quote = fetch_latest_price(symbol, as_of_date=as_of_date)
+    return {
+        "price": float(quote["price_native"]),
+        "price_date": quote.get("price_date"),
+        "source": quote.get("source", "yfinance"),
+    }
+
+
+def get_option_quote(
+    item: dict[str, Any],
+    *,
+    option_prices: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    symbol = str(item["symbol"])
+    display = symbol.lstrip(" -")
+    if symbol in option_prices:
+        return option_prices[symbol]
+    if display in option_prices:
+        return option_prices[display]
+
+    option = item.get("option") or parse_option_symbol(symbol)
+    if not option:
+        raise ValueError(f"option details missing for {symbol}")
+    underlying = option["underlying"]
+    expiration = option["expiration"]
+    right = option["right"]
+    strike = float(option["strike"])
+    chain = yf.Ticker(underlying).option_chain(expiration)
+    frame = chain.calls if right == "C" else chain.puts
+    if frame.empty:
+        raise ValueError(f"empty option chain for {underlying} {expiration}")
+    target_contract = yahoo_option_contract_symbol(option)
+    row = frame[frame["contractSymbol"] == target_contract]
+    if row.empty:
+        strike_distance = (frame["strike"].astype(float) - strike).abs()
+        row = frame.loc[[strike_distance.idxmin()]]
+        if abs(float(row.iloc[0]["strike"]) - strike) > 0.01:
+            raise ValueError(f"strike {strike} not found for {underlying} {expiration}")
+    latest = row.iloc[0]
+    bid = coerce_positive(latest.get("bid"))
+    ask = coerce_positive(latest.get("ask"))
+    last = coerce_positive(latest.get("lastPrice"))
+    if bid and ask:
+        price = (bid + ask) / 2
+        source = "yfinance_option_mid"
+    elif last:
+        price = last
+        source = "yfinance_option_last"
+    else:
+        raise ValueError(f"no usable option mark for {display}")
+    return {
+        "price": float(price),
+        "price_date": index_date_label(latest.get("lastTradeDate")),
+        "source": source,
+    }
+
+
+def yahoo_option_contract_symbol(option: dict[str, Any]) -> str:
+    expiry = str(option["expiration"]).replace("-", "")[2:]
+    strike = int(round(float(option["strike"]) * 1000))
+    return f"{option['underlying']}{expiry}{option['right']}{strike:08d}"
+
+
+def position_value(*, quantity: float, price: float, instrument: str) -> float:
+    multiplier = 100.0 if instrument.endswith("call") or instrument.endswith("put") else 1.0
+    return quantity * price * multiplier
+
+
+def fallback_mark(row: dict[str, Any]) -> float | None:
+    quantity = float(row.get("quantity") or 0)
+    value = float(row.get("currentValueUsd") or 0)
+    instrument = str(row.get("instrument") or "")
+    if quantity == 0:
+        return None
+    multiplier = 100.0 if instrument.endswith("call") or instrument.endswith("put") else 1.0
+    return abs(value / (quantity * multiplier))
+
+
+def coerce_positive(value: Any) -> float | None:
+    numeric = parse_number(value)
+    if numeric is None or numeric <= 0:
+        return None
+    return numeric
 
 
 def infer_instrument(symbol: str, row: dict[str, Any], option: dict[str, Any] | None) -> str:
@@ -653,6 +1001,23 @@ def extract_downloaded_at(path: Path) -> str | None:
         if clean.startswith("Date downloaded"):
             return clean.replace("Date downloaded", "").strip()
     return None
+
+
+def index_date_label(value: Any) -> str | None:
+    if value is None:
+        return None
+    if hasattr(value, "date"):
+        return value.date().isoformat()
+    return str(value)
+
+
+def utc_iso(now: datetime | None = None) -> str:
+    return (
+        (now or datetime.now(UTC))
+        .replace(microsecond=0)
+        .isoformat()
+        .replace("+00:00", "Z")
+    )
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:

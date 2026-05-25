@@ -65,9 +65,11 @@ It writes:
 
 - `site/research-monitor-data.json` for the website.
 - `site/provenance-coverage.json` for evidence coverage.
+- `site/fib-momentum-data.json` for Fibonacci EMA technical momentum review.
 - `site/current-positions-data.json` for local-only brokerage-position analysis.
 - `data/generated/dashboard_data.json` for audit and downstream reuse.
 - `data/generated/provenance_coverage.json` for audit and downstream reuse.
+- `data/generated/fib_momentum_scan.json` for audit and downstream reuse.
 
 The monitor now separates `rule_alert` from the framework bottleneck, classifies source health as
 `healthy`, `manual_expected`, `planned`, `stale`, or `broken`, and generates a review queue from
@@ -85,6 +87,7 @@ documents. They should produce draft evidence notes, not portfolio actions.
 uv sync --extra dev
 uv run python -m scripts.update_portfolio
 uv run python -m scripts.build_research_monitor
+uv run python -m scripts.build_fib_momentum
 uv run python -m scripts.build_current_positions --input /path/to/Portfolio_Positions.csv
 uv run python -m scripts.build_site
 uv run python -m scripts.validate_site --site-dir public --require-portfolio

@@ -65,6 +65,7 @@ function init() {
   loadPortfolioPerformance();
   loadCurrentPositions();
   loadResearchMonitor();
+  loadFibMomentum();
 }
 
 function setupTabs() {
@@ -503,15 +504,16 @@ function renderCurrentPositionsMissing() {
   if (!status) return;
   status.className = "current-status muted";
   status.innerHTML = `
-    No local current-position file is present. To generate it from the private CSV, run
-    <code>uv run python -m scripts.build_current_positions --input /path/to/Portfolio_Positions.csv</code>.
-    The generated JSON is ignored by git and should stay local unless explicitly approved.
+    No sanitized current-position file is present. Run
+    <code>uv run python -m scripts.build_current_positions</code>
+    to refresh from the public sanitized seed, or import a new brokerage CSV with
+    <code>uv run python -m scripts.build_current_positions --input /path/to/Portfolio_Positions.csv --write-seed</code>.
   `;
   document.getElementById("currentPositionsKpis").hidden = true;
   document.getElementById("currentPositionsClassifications").innerHTML =
-    `<div class="empty-monitor">Current-position analysis is local-only and not bundled with the public site.</div>`;
+    `<div class="empty-monitor">Current-position analysis is missing from this Pages artifact.</div>`;
   document.getElementById("currentPositionsReviewQueue").innerHTML =
-    `<div class="empty-monitor">No private position data loaded.</div>`;
+    `<div class="empty-monitor">No sanitized current-position data loaded.</div>`;
   document.getElementById("currentPositionsDerivative").innerHTML =
     `<div class="empty-monitor">No derivative overlay loaded.</div>`;
   document.getElementById("currentPositionsTableWrap").hidden = true;
@@ -775,6 +777,141 @@ function renderResearchMonitorMissing() {
   status.className = "monitor-status muted";
   status.textContent =
     "No research monitor data found yet. Run the portfolio refresh to generate deterministic alerts and source health.";
+}
+
+async function loadFibMomentum() {
+  try {
+    const response = await fetch("./fib-momentum-data.json", { cache: "no-store" });
+    if (!response.ok) {
+      renderFibMomentumMissing();
+      return;
+    }
+    renderFibMomentum(await response.json());
+  } catch {
+    renderFibMomentumMissing();
+  }
+}
+
+function renderFibMomentumMissing() {
+  const status = document.getElementById("fibMomentumStatus");
+  if (!status) return;
+  status.className = "fib-status muted";
+  status.innerHTML = `
+    No Fibonacci EMA monitor data found yet. Run
+    <code>uv run python -m scripts.build_fib_momentum</code>
+    after refreshing the portfolio or importing current positions.
+  `;
+  document.getElementById("fibMomentumKpis").hidden = true;
+  document.getElementById("fibMomentumTableWrap").hidden = true;
+}
+
+function renderFibMomentum(payload) {
+  const status = document.getElementById("fibMomentumStatus");
+  const summary = payload.summary || {};
+  const framework = payload.framework || {};
+  status.className = "fib-status ready";
+  status.textContent = `Generated ${escapeHtml(payload.generatedAtUtc)} for ${
+    escapeHtml(payload.period || "1y")
+  } / ${escapeHtml(payload.interval || "1d")}. Boundary: ${
+    escapeHtml(framework.actionBoundary || "review_only")
+  }.`;
+
+  renderFibMomentumKpis(summary);
+  renderFibMomentumRows(payload.rows || []);
+}
+
+function renderFibMomentumKpis(summary) {
+  const kpis = document.getElementById("fibMomentumKpis");
+  const counts = summary.signalCounts || {};
+  const bullish = Number(counts.strong_bullish || 0) + Number(counts.bullish || 0);
+  const bearish = Number(counts.strong_bearish || 0) + Number(counts.bearish || 0);
+  kpis.hidden = false;
+  kpis.innerHTML = [
+    ["Scanned", summary.scannedCount ?? 0, ""],
+    ["Avg score", formatScore(summary.averageComposite), ""],
+    ["Bullish review", bullish, "green"],
+    ["Neutral", counts.neutral || 0, "gray"],
+    ["Risk review", bearish, "yellow"],
+    ["Top setup", summary.topTicker || "n/a", signalTone("strong_bullish")],
+    ["Weakest", summary.weakestTicker || "n/a", signalTone("bearish")],
+    ["Failures", summary.failureCount || 0, Number(summary.failureCount || 0) ? "yellow" : ""]
+  ]
+    .map(
+      ([label, value, tone]) => `
+        <div class="fib-kpi">
+          <span>${escapeHtml(label)}</span>
+          <strong class="${escapeHtml(tone)}">${escapeHtml(value)}</strong>
+        </div>
+      `
+    )
+    .join("");
+}
+
+function renderFibMomentumRows(rows) {
+  const wrap = document.getElementById("fibMomentumTableWrap");
+  const body = document.getElementById("fibMomentumRows");
+  if (!rows.length) {
+    wrap.hidden = true;
+    body.innerHTML = "";
+    return;
+  }
+  wrap.hidden = false;
+  body.innerHTML = rows
+    .map((row) => {
+      const metrics = row.metrics || {};
+      const notes = (row.notes || []).slice(0, 2).join(" ");
+      return `
+        <tr>
+          <td>
+            <strong>${escapeHtml(row.ticker)}</strong>
+            <span>${escapeHtml(row.name || "")}</span>
+            <span>${escapeHtml(row.sourceLabel || "")} | ${escapeHtml(row.date || "")}</span>
+          </td>
+          <td>
+            <span class="severity ${signalTone(row.signal)}">${escapeHtml(row.signalLabel)}</span>
+            <span>${escapeHtml(row.actionBoundary)}</span>
+          </td>
+          <td>
+            <strong>${formatScore(row.compositeScore)}</strong>
+            <span>Close ${formatMaybe(row.close, "", 2)}</span>
+          </td>
+          <td>
+            ${formatScore(row.trendScore)}
+            <span>Stack: ${escapeHtml(metrics.emaStack || "n/a")}</span>
+            <span>EMA21 slope: ${formatMaybe(metrics.ema21SlopePct, "%")}</span>
+          </td>
+          <td>
+            ${formatScore(row.momentumScore)}
+            <span>MACD hist: ${formatMaybe(metrics.macdHist, "", 2)}</span>
+            <span>RSI13: ${formatMaybe(metrics.rsi13, "", 1)}</span>
+          </td>
+          <td>
+            ${formatScore(row.volatilityScore)} / ${formatScore(row.volumeScore)}
+            <span>BB pct: ${formatMaybe(metrics.bbWidthPct, "%", 0)}</span>
+            <span>Rel vol: ${formatMaybe(metrics.relVolume, "x", 1)}</span>
+          </td>
+          <td>${escapeHtml(notes)}</td>
+        </tr>
+      `;
+    })
+    .join("");
+}
+
+function signalTone(signal) {
+  if (signal === "strong_bullish" || signal === "bullish") return "green";
+  if (signal === "neutral") return "gray";
+  if (signal === "strong_bearish") return "red";
+  return "yellow";
+}
+
+function formatScore(value) {
+  if (value === null || value === undefined || value === "") return "n/a";
+  return Number(value).toFixed(1);
+}
+
+function formatMaybe(value, suffix = "", digits = 1) {
+  if (value === null || value === undefined || value === "") return "n/a";
+  return `${Number(value).toFixed(digits)}${suffix}`;
 }
 
 function renderResearchMonitor(monitor) {

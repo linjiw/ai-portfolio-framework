@@ -78,8 +78,10 @@ These generated files are included in the Pages artifact:
 ```text
 site/portfolio-data.json
 site/research-monitor-data.json
+site/fib-momentum-data.json
 site/provenance-coverage.json
 data/generated/dashboard_data.json
+data/generated/fib_momentum_scan.json
 data/generated/provenance_coverage.json
 site/portfolio/portfolio-value.png
 site/portfolio/portfolio-allocation.png
@@ -90,6 +92,7 @@ The public dashboard reads the generated JSON from the same GitHub Pages site:
 ```text
 portfolio-data.json
 research-monitor-data.json
+fib-momentum-data.json
 provenance-coverage.json
 ```
 

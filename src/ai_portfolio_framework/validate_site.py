@@ -64,6 +64,10 @@ def validate_site(site_dir: Path, *, require_portfolio: bool = False) -> list[st
     if require_portfolio or monitor_path.exists():
         errors.extend(validate_research_monitor_json(site_dir, monitor_path))
 
+    fib_path = site_dir / "fib-momentum-data.json"
+    if require_portfolio or fib_path.exists():
+        errors.extend(validate_fib_momentum_json(site_dir, fib_path))
+
     provenance_path = site_dir / "provenance-coverage.json"
     if require_portfolio or provenance_path.exists():
         errors.extend(validate_provenance_coverage_json(site_dir, provenance_path))
@@ -291,6 +295,54 @@ def validate_research_monitor_json(site_dir: Path, monitor_path: Path) -> list[s
         coverage = float(discipline_summary.get(field, -1))
         if coverage < 0 or coverage > 1:
             errors.append(f"research monitor {field} must be between 0 and 1, got {coverage}")
+    return errors
+
+
+def validate_fib_momentum_json(site_dir: Path, fib_path: Path) -> list[str]:
+    if not fib_path.exists():
+        return [f"fib-momentum-data.json is required but missing in {site_dir}"]
+
+    errors: list[str] = []
+    try:
+        payload = json.loads(fib_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        return [f"fib-momentum-data.json is invalid JSON: {exc}"]
+
+    for field in ("schemaVersion", "framework", "summary", "rows", "failures"):
+        if field not in payload:
+            errors.append(f"fib-momentum-data.json missing required field: {field}")
+    if payload.get("schemaVersion") != 1:
+        errors.append(f"fib momentum schemaVersion must be 1, got {payload.get('schemaVersion')}")
+
+    framework = payload.get("framework", {})
+    if framework.get("emaPeriods") != [5, 8, 13, 21, 34, 55, 89]:
+        errors.append("fib momentum framework must include Fibonacci EMA periods")
+    if framework.get("corePeriods") != [8, 21, 55]:
+        errors.append("fib momentum framework must include core EMA 8/21/55 periods")
+    if framework.get("actionBoundary") != "technical_review_only_no_trade_instruction":
+        errors.append("fib momentum action boundary must be review-only")
+
+    summary = payload.get("summary", {})
+    rows = payload.get("rows", [])
+    if int(summary.get("scannedCount", 0)) != len(rows):
+        errors.append("fib momentum scannedCount must match row count")
+    if not rows:
+        errors.append("fib momentum rows must not be empty")
+
+    valid_signals = {"strong_bullish", "bullish", "neutral", "bearish", "strong_bearish"}
+    for row in rows:
+        ticker = row.get("ticker")
+        if not ticker:
+            errors.append(f"fib momentum row missing ticker: {row}")
+        if row.get("signal") not in valid_signals:
+            errors.append(f"fib momentum row has invalid signal: {row}")
+        score = float(row.get("compositeScore", -1))
+        if score < 0 or score > 100:
+            errors.append(f"fib momentum compositeScore must be 0..100: {row}")
+        if row.get("actionBoundary") != "review_only_no_automatic_trade":
+            errors.append(f"fib momentum row must be review-only: {ticker}")
+        if not (row.get("sources") or []):
+            errors.append(f"fib momentum row missing sources: {ticker}")
     return errors
 
 

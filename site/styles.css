@@ -903,6 +903,10 @@ a:hover {
   padding: 18px;
 }
 
+.fib-panel {
+  padding: 18px;
+}
+
 .risk-overlay-panel,
 .discipline-panel,
 .sec-panel,
@@ -972,9 +976,35 @@ a:hover {
   background: var(--green-soft);
 }
 
+.fib-status {
+  padding: 12px 14px;
+  background: #f8faf8;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.fib-status code {
+  display: block;
+  margin-top: 8px;
+  padding: 8px;
+  overflow-x: auto;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.fib-status.ready {
+  color: var(--accent-dark);
+  background: var(--green-soft);
+}
+
 .portfolio-kpis,
 .current-kpis,
-.monitor-kpis {
+.monitor-kpis,
+.fib-kpis {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 10px;
@@ -983,7 +1013,8 @@ a:hover {
 
 .portfolio-kpi,
 .current-kpi,
-.monitor-kpi {
+.monitor-kpi,
+.fib-kpi {
   min-width: 0;
   padding: 12px;
   background: #f8faf8;
@@ -993,7 +1024,8 @@ a:hover {
 
 .portfolio-kpi span,
 .current-kpi span,
-.monitor-kpi span {
+.monitor-kpi span,
+.fib-kpi span {
   display: block;
   color: var(--muted);
   font-size: 12px;
@@ -1001,7 +1033,8 @@ a:hover {
 
 .portfolio-kpi strong,
 .current-kpi strong,
-.monitor-kpi strong {
+.monitor-kpi strong,
+.fib-kpi strong {
   display: block;
   margin-top: 6px;
   font-size: 22px;
@@ -1127,6 +1160,54 @@ a:hover {
 .current-table td .severity {
   display: inline-block;
   margin-top: 0;
+}
+
+.fib-table-wrap {
+  max-width: 100%;
+  margin-top: 14px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.fib-table {
+  width: 100%;
+  min-width: 1080px;
+  border-collapse: collapse;
+  background: var(--panel);
+  font-size: 14px;
+}
+
+.fib-table th,
+.fib-table td {
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.fib-table th {
+  color: var(--muted);
+  background: #f8faf8;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.fib-table td span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.fib-table td .severity {
+  display: inline-block;
+  margin-top: 0;
+}
+
+.fib-table td strong {
+  font-size: 18px;
 }
 
 .metric-list {
@@ -1499,6 +1580,7 @@ a:hover {
   .portfolio-kpis,
   .current-kpis,
   .monitor-kpis,
+  .fib-kpis,
   .provenance-kpis,
   .current-classification-grid,
   .current-review-queue,
@@ -1553,6 +1635,7 @@ a:hover {
   .portfolio-kpis,
   .current-kpis,
   .monitor-kpis,
+  .fib-kpis,
   .provenance-kpis,
   .current-classification-grid,
   .current-review-queue,

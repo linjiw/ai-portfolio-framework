@@ -7,4 +7,6 @@ __pycache__/
 public/
 reports/
 site/current-positions-data.json
+site/fib-momentum-data.json
 data/generated/current_positions_analysis.json
+data/generated/fib_momentum_scan.json

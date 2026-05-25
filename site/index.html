@@ -200,7 +200,7 @@
             <p class="section-label">Current positions</p>
             <h2>Brokerage import through the framework lens</h2>
           </div>
-          <p class="muted">Local-only analysis. Generated account data is ignored by git and not published by default.</p>
+          <p class="muted">Public sanitized analysis. Account identifiers are excluded; signals remain review-only.</p>
         </div>
         <section class="panel current-panel">
           <div class="current-status" id="currentPositionsStatus">Checking for local current-position data...</div>
@@ -285,6 +285,33 @@
         <section class="panel monitor-panel">
           <div class="monitor-status" id="monitorStatus">Checking research monitor data...</div>
           <div class="monitor-kpis" id="monitorKpis" hidden></div>
+        </section>
+        <div class="section-head claims-head">
+          <div>
+            <p class="section-label">Technical momentum</p>
+            <h2>Fibonacci EMA multi-factor scan</h2>
+          </div>
+          <p class="muted">EMA 8/21/55 core, Fibonacci ribbon, MACD 8/21/5, RSI, volatility, and volume. Review-only signal layer.</p>
+        </div>
+        <section class="panel fib-panel">
+          <div class="fib-status" id="fibMomentumStatus">Checking Fibonacci EMA monitor data...</div>
+          <div class="fib-kpis" id="fibMomentumKpis" hidden></div>
+          <div class="fib-table-wrap" id="fibMomentumTableWrap" hidden>
+            <table class="fib-table">
+              <thead>
+                <tr>
+                  <th>Ticker</th>
+                  <th>Signal</th>
+                  <th>Composite</th>
+                  <th>Trend</th>
+                  <th>Momentum</th>
+                  <th>Vol / volume</th>
+                  <th>Read</th>
+                </tr>
+              </thead>
+              <tbody id="fibMomentumRows"></tbody>
+            </table>
+          </div>
         </section>
         <div class="section-head claims-head">
           <div>

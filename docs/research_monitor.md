@@ -102,18 +102,40 @@ data/thesis_changelog.yml
 
 ```text
 site/research-monitor-data.json
+site/fib-momentum-data.json
 site/provenance-coverage.json
 site/sec-filings.json
 site/link-health.json
 data/generated/dashboard_data.json
+data/generated/fib_momentum_scan.json
 data/generated/provenance_coverage.json
 data/generated/sec_filings.json
 data/generated/link_health_snapshot.json
 data/link_health_history.jsonl
 ```
 
-The website reads `site/research-monitor-data.json` from the same static Pages
-artifact as the portfolio tracker.
+The website reads `site/research-monitor-data.json` and
+`site/fib-momentum-data.json` from the same static Pages artifact as the
+portfolio tracker.
+
+## Fibonacci EMA Momentum
+
+`scripts.build_fib_momentum` scans framework holdings, watchlist tickers, and
+local current-position underlyings when `site/current-positions-data.json`
+exists. The Pages build also regenerates `fib-momentum-data.json` from public
+portfolio and watchlist data only, so private local current-position symbols are
+not copied into the public artifact. It uses the EMA 8/21/55 core, the
+5/8/13/21/34/55/89 Fibonacci ribbon, MACD 8/21/5, RSI(13), Bollinger Band width
+percentile, ATR%, OBV versus OBV EMA21, and relative volume.
+
+The composite score is:
+
+```text
+Trend 40% + Momentum 30% + Volatility 15% + Volume 15%
+```
+
+The output labels are technical review states, not trade instructions:
+`strong_bullish`, `bullish`, `neutral`, `bearish`, and `strong_bearish`.
 
 ## Local Current Positions Boundary
 

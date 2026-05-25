@@ -13,6 +13,7 @@ from zoneinfo import ZoneInfo
 import pandas as pd
 
 from ai_portfolio_framework.config import MANUAL_DIR, PUBLIC_DIR, SITE_DIR, display_path
+from ai_portfolio_framework.fib_momentum import build_fib_momentum_data
 from ai_portfolio_framework.research_monitor import build_research_monitor_data
 
 
@@ -61,6 +62,12 @@ def build_site(
         provenance_output_path=output_dir / "provenance-coverage.json",
         generated_output_path=None,
         generated_provenance_output_path=None,
+    )
+    build_fib_momentum_data(
+        portfolio_data_path=output_dir / "portfolio-data.json",
+        output_path=output_dir / "fib-momentum-data.json",
+        generated_output_path=None,
+        current_positions_path=None,
     )
     write_refresh_manifest(output_dir, site_source_dir, data_date, review_date)
     (output_dir / ".nojekyll").write_text("", encoding="utf-8")
