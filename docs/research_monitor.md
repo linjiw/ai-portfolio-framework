@@ -122,9 +122,9 @@ portfolio tracker.
 
 `scripts.build_fib_momentum` scans framework holdings, watchlist tickers, and
 local current-position underlyings when `site/current-positions-data.json`
-exists. The Pages build also regenerates `fib-momentum-data.json` from public
-portfolio and watchlist data only, so private local current-position symbols are
-not copied into the public artifact. It uses the EMA 8/21/55 core, the
+exists. The Pages build regenerates `fib-momentum-data.json` from the public
+portfolio, watchlist, and sanitized current-position data, so the technical
+review universe matches the public Current tab. It uses the EMA 8/21/55 core, the
 5/8/13/21/34/55/89 Fibonacci ribbon, MACD 8/21/5, RSI(13), Bollinger Band width
 percentile, ATR%, OBV versus OBV EMA21, and relative volume.
 
@@ -137,18 +137,22 @@ Trend 40% + Momentum 30% + Volatility 15% + Volume 15%
 The output labels are technical review states, not trade instructions:
 `strong_bullish`, `bullish`, `neutral`, `bearish`, and `strong_bearish`.
 
-## Local Current Positions Boundary
+## Sanitized Current Positions Boundary
 
 `scripts.build_current_positions` can read a private brokerage CSV export and
-write:
+write a sanitized public seed:
+
+```text
+data/manual/current_positions_public_seed.json
+```
+
+The daily workflow reads that seed, refreshes public market prices where
+available, and writes:
 
 ```text
 site/current-positions-data.json
 data/generated/current_positions_analysis.json
 ```
-
-Those files are ignored by git. They are meant for local review of real current
-positions against the framework, not for public Pages deployment.
 
 The analyzer drops account number and account name fields before writing JSON.
 It classifies each row as a framework holding, framework derivative overlay,
@@ -157,6 +161,10 @@ or outside-framework name. The output creates review prompts such as MU
 promotion-gate review, TER derivative-overlay review, index-overlay review, and
 outside-framework classification review. It does not change framework holdings,
 target weights, conviction, evidence state, or portfolio actions.
+
+Option prices are refreshed from public option-chain marks when available; if a
+quote is unavailable, the analyzer keeps the seed mark and flags the fallback in
+the review queue.
 
 ## Tier 0.5 State
 

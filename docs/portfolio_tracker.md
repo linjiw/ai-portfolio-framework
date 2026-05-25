@@ -29,13 +29,16 @@ The daily website workflow runs:
 
 ```bash
 uv run python -m scripts.update_portfolio
+uv run python -m scripts.build_current_positions
 uv run python -m scripts.build_site
 uv run python -m scripts.validate_site --site-dir public --require-portfolio
 ```
 
 `scripts.update_portfolio` also refreshes the deterministic research monitor
-JSON after writing the portfolio data. `scripts.build_site` rebuilds the monitor
-inside the Pages artifact as a deploy-time safety check.
+JSON after writing the portfolio data. `scripts.build_current_positions` reads
+the sanitized public seed, refreshes position marks, and refreshes the technical
+momentum universe. `scripts.build_site` rebuilds the monitor inside the Pages
+artifact as a deploy-time safety check.
 
 Portfolio pricing uses Yahoo Finance directly in the standalone package.
 `000660.KS` is priced in KRW and converted to USD with `KRW=X`. The `CASH` row
@@ -77,6 +80,7 @@ These generated files are included in the Pages artifact:
 
 ```text
 site/portfolio-data.json
+site/current-positions-data.json
 site/research-monitor-data.json
 site/fib-momentum-data.json
 site/provenance-coverage.json
@@ -91,6 +95,7 @@ The public dashboard reads the generated JSON from the same GitHub Pages site:
 
 ```text
 portfolio-data.json
+current-positions-data.json
 research-monitor-data.json
 fib-momentum-data.json
 provenance-coverage.json

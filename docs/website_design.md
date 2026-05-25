@@ -63,7 +63,8 @@ Related framework data and reports:
 - `site/provenance-coverage.json`
 - `site/sec-filings.json`
 - `site/link-health.json`
-- `site/current-positions-data.json` local-only generated brokerage import; ignored by git.
+- `site/current-positions-data.json` public sanitized current-position analysis.
+- `data/manual/current_positions_public_seed.json`
 - `data/generated/dashboard_data.json`
 - `data/generated/provenance_coverage.json`
 - `data/generated/sec_filings.json`
@@ -90,7 +91,7 @@ The navigation has nine views:
 | View | Purpose |
 | --- | --- |
 | Portfolio | Holdings, weights, thesis, evidence, risks, watch item, source links |
-| Current positions | Local-only brokerage CSV analysis mapped to the framework without exposing account IDs |
+| Current positions | Public sanitized current-position analysis mapped to the framework without exposing account IDs |
 | Decision process | Why the allocation exists, how sizing works, and which gates can change it |
 | Monitor | Deterministic alert output, metric dictionary, and source-health boundaries |
 | Watchlist | Non-actionable research queue for candidates and existing holdings under special review |
@@ -140,13 +141,14 @@ The deterministic research monitor is generated as JSON at
 `research-data.js` so GitHub Actions can update rule outputs without rewriting
 the thesis source file.
 
-The private current-position analyzer is generated as JSON at
+The current-position analyzer is generated as JSON at
 `site/current-positions-data.json` by `scripts.build_current_positions`. It
-drops account number and account name fields, classifies imported rows into
-framework holdings, watchlist names, beta overlays, defensive or hedge assets,
-derivative overlays, cash, pending activity, and outside-framework names, then
-renders them in the Current positions view. The generated JSON is local-only and
-ignored by git.
+reads the sanitized seed at `data/manual/current_positions_public_seed.json`,
+refreshes public prices, drops account number and account name fields, classifies
+rows into framework holdings, watchlist names, beta overlays, defensive or hedge
+assets, derivative overlays, cash, pending activity, and outside-framework names,
+then renders them in the Current positions view. It does not promote watchlist
+names or change framework weights.
 
 Monitor top-level fields:
 

@@ -6,9 +6,9 @@ The project keeps the thesis, source-linked dashboard, and $1,000 public paper p
 one clean repo. It is a research and review artifact, not investment, tax, legal, or financial
 advice.
 
-The optional current-position page can analyze a private brokerage CSV locally. The generated
-current-position JSON is ignored by git and is not part of the public Pages deploy unless that
-boundary is explicitly changed.
+The optional current-position page analyzes a sanitized brokerage-position seed. Account
+identifiers are excluded; the generated current-position JSON is public on GitHub Pages and
+remains a review artifact, not a trading instruction.
 
 ## Published Site
 
@@ -66,7 +66,7 @@ It writes:
 - `site/research-monitor-data.json` for the website.
 - `site/provenance-coverage.json` for evidence coverage.
 - `site/fib-momentum-data.json` for Fibonacci EMA technical momentum review.
-- `site/current-positions-data.json` for local-only brokerage-position analysis.
+- `site/current-positions-data.json` for public sanitized current-position analysis.
 - `data/generated/dashboard_data.json` for audit and downstream reuse.
 - `data/generated/provenance_coverage.json` for audit and downstream reuse.
 - `data/generated/fib_momentum_scan.json` for audit and downstream reuse.
@@ -88,7 +88,8 @@ uv sync --extra dev
 uv run python -m scripts.update_portfolio
 uv run python -m scripts.build_research_monitor
 uv run python -m scripts.build_fib_momentum
-uv run python -m scripts.build_current_positions --input /path/to/Portfolio_Positions.csv
+uv run python -m scripts.build_current_positions
+uv run python -m scripts.build_current_positions --input /path/to/Portfolio_Positions.csv --write-seed
 uv run python -m scripts.build_site
 uv run python -m scripts.validate_site --site-dir public --require-portfolio
 uv run ruff check .

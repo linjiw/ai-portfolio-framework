@@ -65,10 +65,10 @@ The strategy process remains systematic-discretionary. The standalone repo
 tracks the live paper portfolio and static dashboard; broker execution and full
 signal generation remain out of scope.
 
-`site/current-positions-data.json` is a local-only output from a private
-brokerage CSV import and is ignored by git. It is used to analyze current
-positions against the framework without publishing account identifiers or
-turning watchlist names into holdings.
+`site/current-positions-data.json` is generated from the sanitized public seed
+at `data/manual/current_positions_public_seed.json`. It is used to analyze
+current positions against the framework without publishing account identifiers
+or turning watchlist names into holdings.
 
 ## Signal Types
 

@@ -170,7 +170,7 @@ def build_current_positions_payload(
         "downloadedAt": downloaded_at,
         "privacy": {
             "accountIdentifiersIncluded": False,
-            "sourceAccountFieldsDropped": ["Account Number", "Account Name"],
+            "sourceAccountFieldsDropped": ["Account Number", "Account Name", "Type"],
             "publicationBoundary": publication_boundary,
         },
         "summary": summary,

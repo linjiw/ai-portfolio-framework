@@ -79,6 +79,14 @@ def validate_site(site_dir: Path, *, require_portfolio: bool = False) -> list[st
     link_health_path = site_dir / "link-health.json"
     if require_portfolio or link_health_path.exists():
         errors.extend(validate_link_health_json(site_dir, link_health_path))
+
+    current_positions_path = site_dir / "current-positions-data.json"
+    if require_portfolio or current_positions_path.exists():
+        errors.extend(validate_current_positions_json(site_dir, current_positions_path))
+
+    fib_momentum_path = site_dir / "fib-momentum-data.json"
+    if require_portfolio or fib_momentum_path.exists():
+        errors.extend(validate_fib_momentum_json(site_dir, fib_momentum_path))
     return errors
 
 
@@ -298,6 +306,44 @@ def validate_research_monitor_json(site_dir: Path, monitor_path: Path) -> list[s
     return errors
 
 
+def validate_current_positions_json(site_dir: Path, current_positions_path: Path) -> list[str]:
+    if not current_positions_path.exists():
+        return [f"current-positions-data.json is required but missing in {site_dir}"]
+
+    errors: list[str] = []
+    try:
+        current = json.loads(current_positions_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        return [f"current-positions-data.json is invalid JSON: {exc}"]
+
+    for field in ("schemaVersion", "summary", "positions", "reviewQueue", "privacy"):
+        if field not in current:
+            errors.append(f"current-positions-data.json missing required field: {field}")
+    privacy = current.get("privacy", {})
+    if privacy.get("accountIdentifiersIncluded") is not False:
+        errors.append("current positions must not include account identifiers")
+    boundary = str(privacy.get("publicationBoundary") or "")
+    if not boundary.startswith("public_sanitized"):
+        errors.append(
+            "current positions publication boundary must be public_sanitized, "
+            f"got {boundary}"
+        )
+
+    raw_text = current_positions_path.read_text(encoding="utf-8")
+    for forbidden in ("Z20695967", "Individual", "Margin"):
+        if forbidden in raw_text:
+            errors.append(f"current positions leaked forbidden account text: {forbidden}")
+
+    summary = current.get("summary", {})
+    if not isinstance(summary.get("totalValueUsd"), int | float):
+        errors.append("current positions totalValueUsd must be numeric")
+    if not current.get("positions"):
+        errors.append("current positions must have at least one row")
+    if "priceStatusCounts" not in summary:
+        errors.append("current positions summary must include priceStatusCounts")
+    return errors
+
+
 def validate_fib_momentum_json(site_dir: Path, fib_path: Path) -> list[str]:
     if not fib_path.exists():
         return [f"fib-momentum-data.json is required but missing in {site_dir}"]
@@ -321,6 +367,8 @@ def validate_fib_momentum_json(site_dir: Path, fib_path: Path) -> list[str]:
         errors.append("fib momentum framework must include core EMA 8/21/55 periods")
     if framework.get("actionBoundary") != "technical_review_only_no_trade_instruction":
         errors.append("fib momentum action boundary must be review-only")
+    if re.search(r"\b(buy|sell|strong_buy|strong_sell)\b", json.dumps(payload).lower()):
+        errors.append("fib momentum JSON must not emit buy/sell language")
 
     summary = payload.get("summary", {})
     rows = payload.get("rows", [])

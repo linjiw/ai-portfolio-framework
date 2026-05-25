@@ -44,6 +44,9 @@ jobs:
       - name: Refresh portfolio
         run: uv run python -m scripts.update_portfolio
 
+      - name: Refresh current positions
+        run: uv run python -m scripts.build_current_positions
+
       - name: Fetch SEC filings
         run: uv run python -m scripts.fetch_sec_filings
 

@@ -1,0 +1,424 @@
+{
+  "generatedAtUtc": "2026-05-25T08:27:56Z",
+  "positions": [
+    {
+      "costBasisUsd": 21878.84,
+      "description": "NVIDIA CORPORATION COM",
+      "fallbackMarkUsd": 215.32994966655144,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 118.609,
+      "seedValueUsd": 25540.07,
+      "symbol": "NVDA",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 3463.67,
+      "description": "TER JAN 21 2028 $175 CALL",
+      "fallbackMarkUsd": 218.0,
+      "instrument": "long_call",
+      "option": {
+        "expiration": "2028-01-21",
+        "right": "C",
+        "strike": 175.0,
+        "underlying": "TER"
+      },
+      "quantity": 1.0,
+      "seedValueUsd": 21800.0,
+      "symbol": "-TER280121C175",
+      "underlying": "TER"
+    },
+    {
+      "costBasisUsd": 3172.33,
+      "description": "TER JAN 21 2028 $185 CALL",
+      "fallbackMarkUsd": 212.0,
+      "instrument": "short_call",
+      "option": {
+        "expiration": "2028-01-21",
+        "right": "C",
+        "strike": 185.0,
+        "underlying": "TER"
+      },
+      "quantity": -1.0,
+      "seedValueUsd": -21200.0,
+      "symbol": "-TER280121C185",
+      "underlying": "TER"
+    },
+    {
+      "costBasisUsd": 16459.62,
+      "description": "VANGUARD INDEX FUNDS S&P 500 ETF USD",
+      "fallbackMarkUsd": 685.549936365463,
+      "instrument": "etf",
+      "option": null,
+      "quantity": 29.858,
+      "seedValueUsd": 20469.149999999998,
+      "symbol": "VOO",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 14056.54,
+      "description": "ALPHABET INC CAP STK CL A",
+      "fallbackMarkUsd": 382.96994082840234,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 42.25,
+      "seedValueUsd": 16180.48,
+      "symbol": "GOOGL",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 9125.2,
+      "description": "INVESCO QQQ TR UNIT SER 1",
+      "fallbackMarkUsd": 717.539810242468,
+      "instrument": "etf",
+      "option": null,
+      "quantity": 18.023,
+      "seedValueUsd": 12932.22,
+      "symbol": "QQQ",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 4930.94,
+      "description": "INVESCO EXCH TRADED FD TR II S&P 500 MOMNTM",
+      "fallbackMarkUsd": 144.93995713321004,
+      "instrument": "etf",
+      "option": null,
+      "quantity": 34.059,
+      "seedValueUsd": 4936.51,
+      "symbol": "SPMO",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 3022.79,
+      "description": "MERCK &CO. INC COM",
+      "fallbackMarkUsd": 122.40990351872871,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 28.192,
+      "seedValueUsd": 3450.98,
+      "symbol": "MRK",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 3079.24,
+      "description": "AMAZON.COM INC",
+      "fallbackMarkUsd": 266.31948277221477,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 12.683,
+      "seedValueUsd": 3377.73,
+      "symbol": "AMZN",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 0.0,
+      "description": "HELD IN MONEY MARKET",
+      "fallbackMarkUsd": null,
+      "instrument": "cash",
+      "option": null,
+      "quantity": 0.0,
+      "seedValueUsd": 3159.08,
+      "symbol": "SPAXX**",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 2149.54,
+      "description": "APPLE INC",
+      "fallbackMarkUsd": 308.8192454632283,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 8.376,
+      "seedValueUsd": 2586.67,
+      "symbol": "AAPL",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 2084.67,
+      "description": "QQQ JUN 18 2026 $708 CALL",
+      "fallbackMarkUsd": 25.03,
+      "instrument": "long_call",
+      "option": {
+        "expiration": "2026-06-18",
+        "right": "C",
+        "strike": 708.0,
+        "underlying": "QQQ"
+      },
+      "quantity": 1.0,
+      "seedValueUsd": 2503.0,
+      "symbol": "-QQQ260618C708",
+      "underlying": "QQQ"
+    },
+    {
+      "costBasisUsd": 2091.66,
+      "description": "MICRON TECHNOLOGY INC",
+      "fallbackMarkUsd": 751.0000000000001,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 2.8,
+      "seedValueUsd": 2102.8,
+      "symbol": "MU",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 1916.29,
+      "description": "QQQ JUN 18 2026 $711 CALL",
+      "fallbackMarkUsd": 20.88,
+      "instrument": "short_call",
+      "option": {
+        "expiration": "2026-06-18",
+        "right": "C",
+        "strike": 711.0,
+        "underlying": "QQQ"
+      },
+      "quantity": -1.0,
+      "seedValueUsd": -2088.0,
+      "symbol": "-QQQ260618C711",
+      "underlying": "QQQ"
+    },
+    {
+      "costBasisUsd": 1967.48,
+      "description": "STATE STREET SPDR S&P 500 ETF UNITS",
+      "fallbackMarkUsd": 745.6370370370371,
+      "instrument": "etf",
+      "option": null,
+      "quantity": 2.6999999999999997,
+      "seedValueUsd": 2013.22,
+      "symbol": "SPY",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 1641.13,
+      "description": "ELI LILLY &CO COM",
+      "fallbackMarkUsd": 1065.0,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 1.7,
+      "seedValueUsd": 1810.5,
+      "symbol": "LLY",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 1645.82,
+      "description": "PFIZER INC",
+      "fallbackMarkUsd": 25.900000000000002,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 63.0,
+      "seedValueUsd": 1631.7,
+      "symbol": "PFE",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 1559.52,
+      "description": "TAIWAN SEMICONDUCTOR MANUFACTURING SPON ADS EACH REP 5 ORD TWD10",
+      "fallbackMarkUsd": 404.5179487179487,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 3.9,
+      "seedValueUsd": 1577.62,
+      "symbol": "TSM",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 0.0,
+      "description": "Pending activity",
+      "fallbackMarkUsd": null,
+      "instrument": "pending",
+      "option": null,
+      "quantity": 0.0,
+      "seedValueUsd": -1386.84,
+      "symbol": "Pending activity",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 1251.83,
+      "description": "LUMENTUM HLDGS INC COM",
+      "fallbackMarkUsd": 946.9,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 1.2,
+      "seedValueUsd": 1136.28,
+      "symbol": "LITE",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 1069.67,
+      "description": "QQQ JUN 12 2026 $730 CALL",
+      "fallbackMarkUsd": 8.52,
+      "instrument": "long_call",
+      "option": {
+        "expiration": "2026-06-12",
+        "right": "C",
+        "strike": 730.0,
+        "underlying": "QQQ"
+      },
+      "quantity": 1.0,
+      "seedValueUsd": 852.0,
+      "symbol": "-QQQ260612C730",
+      "underlying": "QQQ"
+    },
+    {
+      "costBasisUsd": 779.9,
+      "description": "ADVANCED MICRO DEVICES INC",
+      "fallbackMarkUsd": 467.50555555555553,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 1.8,
+      "seedValueUsd": 841.51,
+      "symbol": "AMD",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 939.17,
+      "description": "COREWEAVE INC COM CL A",
+      "fallbackMarkUsd": 105.49,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 7.0,
+      "seedValueUsd": 738.43,
+      "symbol": "CRWV",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 611.49,
+      "description": "ASML HOLDING NV EUR0.09 NY REGISTRY SHS 2012",
+      "fallbackMarkUsd": 1632.8999999999999,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 0.4,
+      "seedValueUsd": 653.16,
+      "symbol": "ASML",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 619.5,
+      "description": "ARM HOLDINGS PLC SPON ADS EACH REP 1 ORD SHS",
+      "fallbackMarkUsd": 306.51,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 2.0,
+      "seedValueUsd": 613.02,
+      "symbol": "ARM",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 580.41,
+      "description": "SPDR GOLD TR GOLD SHS",
+      "fallbackMarkUsd": 413.81428571428575,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 1.4,
+      "seedValueUsd": 579.34,
+      "symbol": "GLD",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 422.59,
+      "description": "ROCKET LAB CORP COM",
+      "fallbackMarkUsd": 135.76,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 4.0,
+      "seedValueUsd": 543.04,
+      "symbol": "RKLB",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 406.99,
+      "description": "NOVO NORDISK A/S ADR-EACH CNV INTO 1 CLASS B DKK1",
+      "fallbackMarkUsd": 44.96,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 11.0,
+      "seedValueUsd": 494.56,
+      "symbol": "NVO",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 496.35,
+      "description": "INTEL CORP COM USD0.001",
+      "fallbackMarkUsd": 119.84,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 4.0,
+      "seedValueUsd": 479.36,
+      "symbol": "INTC",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 436.85,
+      "description": "MICROSOFT CORP",
+      "fallbackMarkUsd": 418.57,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 1.0,
+      "seedValueUsd": 418.57,
+      "symbol": "MSFT",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 605.31,
+      "description": "QQQ JUN 12 2026 $745 CALL",
+      "fallbackMarkUsd": 3.84,
+      "instrument": "short_call",
+      "option": {
+        "expiration": "2026-06-12",
+        "right": "C",
+        "strike": 745.0,
+        "underlying": "QQQ"
+      },
+      "quantity": -1.0,
+      "seedValueUsd": -384.0,
+      "symbol": "-QQQ260612C745",
+      "underlying": "QQQ"
+    },
+    {
+      "costBasisUsd": 227.57,
+      "description": "PROSHARES ULTRAPRO QQQ",
+      "fallbackMarkUsd": 77.84,
+      "instrument": "etf",
+      "option": null,
+      "quantity": 3.0,
+      "seedValueUsd": 233.52,
+      "symbol": "TQQQ",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 213.02,
+      "description": "ROUNDHILL ETF TRUST MEMORY ETF",
+      "fallbackMarkUsd": 52.82,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 4.0,
+      "seedValueUsd": 211.28,
+      "symbol": "DRAM",
+      "underlying": null
+    },
+    {
+      "costBasisUsd": 114.43,
+      "description": "BROADCOM INC COM",
+      "fallbackMarkUsd": 414.1333333333333,
+      "instrument": "equity",
+      "option": null,
+      "quantity": 0.3,
+      "seedValueUsd": 124.24,
+      "symbol": "AVGO",
+      "underlying": null
+    }
+  ],
+  "privacy": {
+    "accountIdentifiersIncluded": false,
+    "publicationBoundary": "public_sanitized_no_account_identifiers",
+    "sourceAccountFieldsDropped": [
+      "Account Number",
+      "Account Name",
+      "Account Type"
+    ]
+  },
+  "schemaVersion": 1,
+  "seededFrom": {
+    "downloadedAt": "May-25-2026 3:46 a.m ET",
+    "sourceFile": "Portfolio_Positions_May-25-2026.csv"
+  },
+  "source": "sanitized_current_positions_public_seed"
+}

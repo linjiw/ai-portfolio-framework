@@ -67,7 +67,7 @@ def build_site(
         portfolio_data_path=output_dir / "portfolio-data.json",
         output_path=output_dir / "fib-momentum-data.json",
         generated_output_path=None,
-        current_positions_path=None,
+        current_positions_path=output_dir / "current-positions-data.json",
     )
     write_refresh_manifest(output_dir, site_source_dir, data_date, review_date)
     (output_dir / ".nojekyll").write_text("", encoding="utf-8")
