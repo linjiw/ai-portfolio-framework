@@ -63,6 +63,7 @@ function init() {
   renderSources();
   renderClaims();
   loadPortfolioPerformance();
+  loadCurrentPositions();
   loadResearchMonitor();
 }
 
@@ -482,6 +483,196 @@ function renderWatchlistCard(item) {
       <div class="source-links">${sources}</div>
     </article>
   `;
+}
+
+async function loadCurrentPositions() {
+  try {
+    const response = await fetch("./current-positions-data.json", { cache: "no-store" });
+    if (!response.ok) {
+      renderCurrentPositionsMissing();
+      return;
+    }
+    renderCurrentPositions(await response.json());
+  } catch {
+    renderCurrentPositionsMissing();
+  }
+}
+
+function renderCurrentPositionsMissing() {
+  const status = document.getElementById("currentPositionsStatus");
+  if (!status) return;
+  status.className = "current-status muted";
+  status.innerHTML = `
+    No local current-position file is present. To generate it from the private CSV, run
+    <code>uv run python -m scripts.build_current_positions --input /path/to/Portfolio_Positions.csv</code>.
+    The generated JSON is ignored by git and should stay local unless explicitly approved.
+  `;
+  document.getElementById("currentPositionsKpis").hidden = true;
+  document.getElementById("currentPositionsClassifications").innerHTML =
+    `<div class="empty-monitor">Current-position analysis is local-only and not bundled with the public site.</div>`;
+  document.getElementById("currentPositionsReviewQueue").innerHTML =
+    `<div class="empty-monitor">No private position data loaded.</div>`;
+  document.getElementById("currentPositionsDerivative").innerHTML =
+    `<div class="empty-monitor">No derivative overlay loaded.</div>`;
+  document.getElementById("currentPositionsTableWrap").hidden = true;
+}
+
+function renderCurrentPositions(payload) {
+  const summary = payload.summary || {};
+  const privacy = payload.privacy || {};
+  const status = document.getElementById("currentPositionsStatus");
+  status.className = "current-status ready";
+  status.textContent = `Generated ${escapeHtml(payload.generatedAtUtc)} from ${
+    escapeHtml(payload.sourceFile)
+  }. Downloaded ${escapeHtml(payload.downloadedAt || "unknown")}. Account identifiers included: ${
+    privacy.accountIdentifiersIncluded ? "yes" : "no"
+  }.`;
+
+  renderCurrentPositionKpis(summary);
+  renderCurrentClassifications(payload.classifications || []);
+  renderCurrentReviewQueue(payload.reviewQueue || []);
+  renderCurrentDerivativeOverlay(payload.derivativeOverlay || {});
+  renderCurrentPositionRows(payload.positions || []);
+}
+
+function renderCurrentPositionKpis(summary) {
+  const kpis = document.getElementById("currentPositionsKpis");
+  kpis.hidden = false;
+  kpis.innerHTML = [
+    ["Total value", formatUsd(summary.totalValueUsd), ""],
+    ["Gross exposure", formatPct(summary.grossExposurePct), ""],
+    ["Framework mapped", formatPct(summary.frameworkMappedWeightPct), ""],
+    ["Watchlist", formatPct(summary.watchlistWeightPct), "yellow"],
+    ["Index overlay", formatPct(summary.indexOverlayWeightPct), "yellow"],
+    ["Outside framework", formatPct(summary.outsideFrameworkWeightPct), "yellow"],
+    ["Cash", formatPct(summary.cashWeightPct), ""],
+    ["Options net", formatUsd(summary.optionNetUsd), signedClass(summary.optionNetUsd)]
+  ]
+    .map(
+      ([label, value, tone]) => `
+        <div class="current-kpi">
+          <span>${escapeHtml(label)}</span>
+          <strong class="${escapeHtml(tone)}">${escapeHtml(value)}</strong>
+        </div>
+      `
+    )
+    .join("");
+}
+
+function renderCurrentClassifications(classifications) {
+  const grid = document.getElementById("currentPositionsClassifications");
+  if (!classifications.length) {
+    grid.innerHTML = `<div class="empty-monitor">No position classifications generated.</div>`;
+    return;
+  }
+  grid.innerHTML = classifications
+    .map(
+      (item) => `
+        <article class="current-classification-card">
+          <div class="card-head">
+            <div>
+              <p class="section-label">${escapeHtml(item.count)} rows</p>
+              <h3>${escapeHtml(item.label)}</h3>
+            </div>
+            <span class="severity ${severityClass(item.status)}">${escapeHtml(item.status)}</span>
+          </div>
+          <strong>${formatUsd(item.valueUsd)}</strong>
+          <p>${formatPct(item.weightPct)} of net account value.</p>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function renderCurrentReviewQueue(queue) {
+  const grid = document.getElementById("currentPositionsReviewQueue");
+  if (!queue.length) {
+    grid.innerHTML = `<div class="empty-monitor">No current-position review prompts generated.</div>`;
+    return;
+  }
+  grid.innerHTML = queue
+    .map(
+      (item) => `
+        <article class="current-review-card">
+          <div class="card-head">
+            <p class="section-label">${escapeHtml(item.topic)}</p>
+            <span class="severity ${severityClass(item.priority)}">${escapeHtml(item.priority)}</span>
+          </div>
+          <h3>${escapeHtml(item.topic)}</h3>
+          <p>${escapeHtml(item.question)}</p>
+          ${
+            (item.symbols || []).length
+              ? `<p class="muted">Symbols: ${escapeHtml(item.symbols.join(", "))}</p>`
+              : ""
+          }
+          <p class="muted">Boundary: ${escapeHtml(item.actionBoundary)}</p>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function renderCurrentDerivativeOverlay(overlay) {
+  const panel = document.getElementById("currentPositionsDerivative");
+  const rows = overlay.netValueByUnderlying || [];
+  const notes = overlay.notes || [];
+  if (!rows.length) {
+    panel.innerHTML = `<div class="empty-monitor">No option positions found in the imported file.</div>`;
+    return;
+  }
+  panel.innerHTML = `
+    <div class="current-derivative-grid">
+      ${rows
+        .map(
+          (row) => `
+            <div>
+              <span>${escapeHtml(row.underlying)}</span>
+              <strong class="${signedClass(row.netValueUsd)}">${formatUsd(row.netValueUsd)}</strong>
+            </div>
+          `
+        )
+        .join("")}
+    </div>
+    <ul class="current-note-list">
+      ${notes.map((note) => `<li>${escapeHtml(note)}</li>`).join("")}
+    </ul>
+  `;
+}
+
+function renderCurrentPositionRows(positions) {
+  document.getElementById("currentPositionsTableWrap").hidden = false;
+  document.getElementById("currentPositionsRows").innerHTML = positions
+    .map(
+      (position) => `
+        <tr>
+          <td>
+            <strong>${escapeHtml(position.displaySymbol || position.symbol)}</strong>
+            <span>${escapeHtml(position.description)}</span>
+          </td>
+          <td>
+            <span class="severity ${severityClass(position.frameworkStatus)}">${escapeHtml(
+              position.frameworkStatus
+            )}</span>
+            <span>${escapeHtml(position.decisionRead)}</span>
+          </td>
+          <td>
+            ${formatPct(position.currentWeightPct)}
+            ${
+              position.targetWeightPct === null || position.targetWeightPct === undefined
+                ? `<span>Target: n/a</span>`
+                : `<span>Target: ${formatPct(position.targetWeightPct)}</span>`
+            }
+          </td>
+          <td class="${signedClass(position.currentValueUsd)}">${formatUsd(position.currentValueUsd)}</td>
+          <td class="${signedClass(position.totalGainLossUsd)}">${formatUsd(position.totalGainLossUsd)}</td>
+          <td>
+            <span class="severity ${severityClass(position.ruleState)}">${escapeHtml(position.ruleState)}</span>
+            <span>${escapeHtml(position.reviewReason)}</span>
+          </td>
+        </tr>
+      `
+    )
+    .join("");
 }
 
 function renderResearch() {

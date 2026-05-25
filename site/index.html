@@ -63,6 +63,17 @@
         </button>
         <button
           class="tab"
+          id="tab-current"
+          role="tab"
+          data-view="current"
+          aria-controls="view-current"
+          aria-selected="false"
+          tabindex="-1"
+        >
+          Current positions
+        </button>
+        <button
+          class="tab"
           id="tab-decision"
           role="tab"
           data-view="decision"
@@ -181,6 +192,66 @@
           </div>
         </div>
         <div class="holdings-grid" id="holdingsGrid"></div>
+      </section>
+
+      <section class="view" id="view-current" role="tabpanel" aria-labelledby="tab-current" hidden>
+        <div class="section-head">
+          <div>
+            <p class="section-label">Current positions</p>
+            <h2>Brokerage import through the framework lens</h2>
+          </div>
+          <p class="muted">Local-only analysis. Generated account data is ignored by git and not published by default.</p>
+        </div>
+        <section class="panel current-panel">
+          <div class="current-status" id="currentPositionsStatus">Checking for local current-position data...</div>
+          <div class="current-kpis" id="currentPositionsKpis" hidden></div>
+        </section>
+        <div class="section-head claims-head">
+          <div>
+            <p class="section-label">Classification</p>
+            <h2>What each dollar is doing</h2>
+          </div>
+          <p class="muted">Framework match, watchlist, beta overlays, hedges, derivatives, and uncategorized names.</p>
+        </div>
+        <div class="current-classification-grid" id="currentPositionsClassifications"></div>
+        <div class="section-head claims-head">
+          <div>
+            <p class="section-label">Review queue</p>
+            <h2>Position questions before decisions</h2>
+          </div>
+          <p class="muted">These are review prompts only; no trade or target-weight change is automated.</p>
+        </div>
+        <div class="current-review-queue" id="currentPositionsReviewQueue"></div>
+        <div class="section-head claims-head">
+          <div>
+            <p class="section-label">Derivative overlay</p>
+            <h2>Options shown separately from target weights</h2>
+          </div>
+          <p class="muted">Option market values are not delta-adjusted exposure.</p>
+        </div>
+        <section class="panel current-derivative-panel" id="currentPositionsDerivative"></section>
+        <div class="section-head claims-head">
+          <div>
+            <p class="section-label">Position table</p>
+            <h2>Imported rows without account identifiers</h2>
+          </div>
+          <p class="muted">Account number and account name are dropped before this payload is written.</p>
+        </div>
+        <div class="current-table-wrap" id="currentPositionsTableWrap" hidden>
+          <table class="current-table">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Framework read</th>
+                <th>Weight</th>
+                <th>Value</th>
+                <th>Total P/L</th>
+                <th>Review state</th>
+              </tr>
+            </thead>
+            <tbody id="currentPositionsRows"></tbody>
+          </table>
+        </div>
       </section>
 
       <section class="view" id="view-decision" role="tabpanel" aria-labelledby="tab-decision" hidden>

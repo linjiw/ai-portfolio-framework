@@ -516,6 +516,20 @@ a:hover {
 .severity.manual_expected,
 .severity.watchlist_not_position,
 .severity.portfolio_holding_watch,
+.severity.framework_holding,
+.severity.framework_derivative_overlay,
+.severity.index_overlay,
+.severity.defensive_or_hedge,
+.severity.outside_framework,
+.severity.watchlist,
+.severity.cash,
+.severity.pending,
+.severity.promotion_gate_required,
+.severity.classification_required,
+.severity.derivative_review,
+.severity.weight_drift_review,
+.severity.within_framework_band,
+.severity.informational,
 .severity.insufficient_evidence,
 .severity.advantage_current_holding,
 .severity.challenger_gap_closing,
@@ -530,6 +544,14 @@ a:hover {
 }
 
 .severity.healthy {
+  color: var(--accent-dark);
+  background: var(--green-soft);
+}
+
+.severity.framework_holding,
+.severity.cash,
+.severity.within_framework_band,
+.severity.informational {
   color: var(--accent-dark);
   background: var(--green-soft);
 }
@@ -873,6 +895,10 @@ a:hover {
   padding: 18px;
 }
 
+.current-panel {
+  padding: 18px;
+}
+
 .monitor-panel {
   padding: 18px;
 }
@@ -907,6 +933,31 @@ a:hover {
   background: var(--green-soft);
 }
 
+.current-status {
+  padding: 12px 14px;
+  background: #f8faf8;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.current-status code {
+  display: block;
+  margin-top: 8px;
+  padding: 8px;
+  overflow-x: auto;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.current-status.ready {
+  color: var(--accent-dark);
+  background: var(--green-soft);
+}
+
 .monitor-status {
   padding: 12px 14px;
   background: #f8faf8;
@@ -922,6 +973,7 @@ a:hover {
 }
 
 .portfolio-kpis,
+.current-kpis,
 .monitor-kpis {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -930,6 +982,7 @@ a:hover {
 }
 
 .portfolio-kpi,
+.current-kpi,
 .monitor-kpi {
   min-width: 0;
   padding: 12px;
@@ -939,6 +992,7 @@ a:hover {
 }
 
 .portfolio-kpi span,
+.current-kpi span,
 .monitor-kpi span {
   display: block;
   color: var(--muted);
@@ -946,6 +1000,7 @@ a:hover {
 }
 
 .portfolio-kpi strong,
+.current-kpi strong,
 .monitor-kpi strong {
   display: block;
   margin-top: 6px;
@@ -960,6 +1015,118 @@ a:hover {
   color: var(--muted);
   font-size: 11px;
   line-height: 1.2;
+}
+
+.current-classification-grid,
+.current-review-queue {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.current-classification-card,
+.current-review-card {
+  min-width: 0;
+  padding: 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.current-classification-card strong {
+  display: block;
+  margin-top: 12px;
+  color: var(--accent-dark);
+  font-size: 26px;
+  line-height: 1.1;
+}
+
+.current-classification-card p,
+.current-review-card p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.current-derivative-panel {
+  padding: 18px;
+}
+
+.current-derivative-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.current-derivative-grid div {
+  min-width: 0;
+  padding: 12px;
+  background: #f8faf8;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.current-derivative-grid span,
+.current-derivative-grid strong {
+  display: block;
+}
+
+.current-derivative-grid span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.current-derivative-grid strong {
+  margin-top: 6px;
+  font-size: 22px;
+}
+
+.current-note-list {
+  margin-top: 12px;
+}
+
+.current-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.current-table {
+  width: 100%;
+  min-width: 920px;
+  border-collapse: collapse;
+  background: var(--panel);
+  font-size: 14px;
+}
+
+.current-table th,
+.current-table td {
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.current-table th {
+  color: var(--muted);
+  background: #f8faf8;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.current-table td span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.current-table td .severity {
+  display: inline-block;
+  margin-top: 0;
 }
 
 .metric-list {
@@ -1330,8 +1497,12 @@ a:hover {
   .alert-list,
   .review-queue,
   .portfolio-kpis,
+  .current-kpis,
   .monitor-kpis,
   .provenance-kpis,
+  .current-classification-grid,
+  .current-review-queue,
+  .current-derivative-grid,
   .risk-factor-grid,
   .framework-gap-list,
   .threshold-list,
@@ -1380,8 +1551,12 @@ a:hover {
   .alert-list,
   .review-queue,
   .portfolio-kpis,
+  .current-kpis,
   .monitor-kpis,
   .provenance-kpis,
+  .current-classification-grid,
+  .current-review-queue,
+  .current-derivative-grid,
   .risk-factor-grid,
   .framework-gap-list,
   .threshold-list,

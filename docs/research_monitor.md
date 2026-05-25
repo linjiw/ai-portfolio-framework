@@ -115,6 +115,27 @@ data/link_health_history.jsonl
 The website reads `site/research-monitor-data.json` from the same static Pages
 artifact as the portfolio tracker.
 
+## Local Current Positions Boundary
+
+`scripts.build_current_positions` can read a private brokerage CSV export and
+write:
+
+```text
+site/current-positions-data.json
+data/generated/current_positions_analysis.json
+```
+
+Those files are ignored by git. They are meant for local review of real current
+positions against the framework, not for public Pages deployment.
+
+The analyzer drops account number and account name fields before writing JSON.
+It classifies each row as a framework holding, framework derivative overlay,
+watchlist name, index overlay, defensive or hedge asset, cash, pending activity,
+or outside-framework name. The output creates review prompts such as MU
+promotion-gate review, TER derivative-overlay review, index-overlay review, and
+outside-framework classification review. It does not change framework holdings,
+target weights, conviction, evidence state, or portfolio actions.
+
 ## Tier 0.5 State
 
 The monitor now treats source health as a taxonomy rather than a single issue

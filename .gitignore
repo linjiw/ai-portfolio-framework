@@ -6,4 +6,5 @@ __pycache__/
 *.py[cod]
 public/
 reports/
-
+site/current-positions-data.json
+data/generated/current_positions_analysis.json

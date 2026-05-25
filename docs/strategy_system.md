@@ -54,6 +54,7 @@ Outputs:
 ```bash
 public/
 site/portfolio-data.json
+site/current-positions-data.json
 site/research-monitor-data.json
 data/generated/dashboard_data.json
 data/portfolio/ai_portfolio_summary.csv
@@ -63,6 +64,11 @@ data/portfolio/ai_portfolio_snapshots.csv
 The strategy process remains systematic-discretionary. The standalone repo
 tracks the live paper portfolio and static dashboard; broker execution and full
 signal generation remain out of scope.
+
+`site/current-positions-data.json` is a local-only output from a private
+brokerage CSV import and is ignored by git. It is used to analyze current
+positions against the framework without publishing account identifiers or
+turning watchlist names into holdings.
 
 ## Signal Types
 
