@@ -27,3 +27,4 @@
 {"broken_source_ids": [], "checkedAtUtc": "2026-06-07T14:38:25Z", "summary": {"broken": 0, "error": 0, "forbidden": 2, "not_found": 0, "ok": 27, "redirected": 5, "timeout": 4, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
 {"broken_source_ids": [], "checkedAtUtc": "2026-06-08T15:11:08Z", "summary": {"broken": 0, "error": 0, "forbidden": 3, "not_found": 0, "ok": 27, "redirected": 4, "timeout": 4, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
 {"broken_source_ids": [], "checkedAtUtc": "2026-06-09T15:17:58Z", "summary": {"broken": 0, "error": 0, "forbidden": 5, "not_found": 0, "ok": 25, "redirected": 4, "timeout": 4, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
+{"broken_source_ids": [], "checkedAtUtc": "2026-06-10T15:08:16Z", "summary": {"broken": 0, "error": 0, "forbidden": 5, "not_found": 0, "ok": 25, "redirected": 4, "timeout": 4, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
