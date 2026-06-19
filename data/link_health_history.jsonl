@@ -36,3 +36,4 @@
 {"broken_source_ids": [], "checkedAtUtc": "2026-06-16T15:43:04Z", "summary": {"broken": 0, "error": 0, "forbidden": 5, "not_found": 0, "ok": 25, "redirected": 4, "timeout": 4, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
 {"broken_source_ids": [], "checkedAtUtc": "2026-06-17T15:07:53Z", "summary": {"broken": 0, "error": 0, "forbidden": 9, "not_found": 0, "ok": 21, "redirected": 4, "timeout": 4, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
 {"broken_source_ids": [], "checkedAtUtc": "2026-06-18T15:07:34Z", "summary": {"broken": 0, "error": 0, "forbidden": 5, "not_found": 0, "ok": 24, "redirected": 4, "timeout": 5, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
+{"broken_source_ids": [], "checkedAtUtc": "2026-06-19T15:04:58Z", "summary": {"broken": 0, "error": 0, "forbidden": 3, "not_found": 0, "ok": 27, "redirected": 4, "timeout": 4, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
