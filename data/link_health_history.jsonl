@@ -45,3 +45,4 @@
 {"broken_source_ids": [], "checkedAtUtc": "2026-06-25T15:01:37Z", "summary": {"broken": 0, "error": 0, "forbidden": 5, "not_found": 0, "ok": 25, "redirected": 4, "timeout": 4, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
 {"broken_source_ids": [], "checkedAtUtc": "2026-06-26T14:56:32Z", "summary": {"broken": 0, "error": 0, "forbidden": 5, "not_found": 0, "ok": 25, "redirected": 4, "timeout": 4, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
 {"broken_source_ids": [], "checkedAtUtc": "2026-06-27T14:34:07Z", "summary": {"broken": 0, "error": 0, "forbidden": 5, "not_found": 0, "ok": 25, "redirected": 4, "timeout": 4, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
+{"broken_source_ids": [], "checkedAtUtc": "2026-06-28T14:36:15Z", "summary": {"broken": 0, "error": 0, "forbidden": 5, "not_found": 0, "ok": 25, "redirected": 4, "timeout": 4, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
