@@ -50,3 +50,4 @@
 {"broken_source_ids": [], "checkedAtUtc": "2026-06-30T14:54:35Z", "summary": {"broken": 0, "error": 0, "forbidden": 5, "not_found": 0, "ok": 25, "redirected": 4, "timeout": 4, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
 {"broken_source_ids": [], "checkedAtUtc": "2026-07-01T15:02:15Z", "summary": {"broken": 0, "error": 0, "forbidden": 4, "not_found": 0, "ok": 26, "redirected": 4, "timeout": 4, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
 {"broken_source_ids": [], "checkedAtUtc": "2026-07-02T14:47:52Z", "summary": {"broken": 0, "error": 0, "forbidden": 6, "not_found": 0, "ok": 24, "redirected": 4, "timeout": 4, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
+{"broken_source_ids": [], "checkedAtUtc": "2026-07-03T15:52:15Z", "summary": {"broken": 0, "error": 0, "forbidden": 5, "not_found": 0, "ok": 25, "redirected": 4, "timeout": 4, "total": 38, "weak_source": 1}, "weak_source_ids": ["ceg-tmi-pjm"]}
